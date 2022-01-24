@@ -1,0 +1,100 @@
+@import "~antd/dist/antd.css";
+
+.App {
+  text-align: center;
+  color: #2b2e3f;
+}
+.app-container{
+    position: absolute;
+    background-color: var(--white);
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+  
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#panel-open-menu {
+  position: absolute;
+  top: 30px;
+}
+
+
+.main-header-h1 {
+  font-weight: 1000;
+  color: #2b2e3f;
+  position: relative;
+  padding-top: 25px;
+  margin-left: 2vw;
+  margin-bottom: 0;
+}
+
+
+.containers{
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  top: 70px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBCBCB;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #BCB7B7;
+}
+
+.ant-message-notice-content {
+  background: #f7f7f7 !important;
+  border-radius: 15px;
+  color: var(--blue);
+  font-weight: bold !important;
+  font-size: 16px;
+}
+.ant-message-error .anticon{
+  color: var(--purple);
+}
+.ant-btn > .anticon{
+  line-height: 0;
+}
