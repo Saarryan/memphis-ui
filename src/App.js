@@ -7,7 +7,7 @@ import Overview from "./containers/overview/overview";
 // import Visualizations from "./containers/visualizations/visualizations";
 // import Account from "./containers/account/account";
 // import NotFoundPage from "./containers/notFoundPage/notFoundPage";
-// import Users from "./containers/users/users";
+import Users from "./containers/users/users";
 import Login from "./containers/login/login";
 import pathControllers from "./router";
 import PrivateRoute from './PrivateRoute';
@@ -33,7 +33,7 @@ const App = withRouter(() => {
         <Desktop>
           <Switch>
             <Route exact path={pathControllers.login} component={Login} />
-            <Route exact path={pathControllers.overview}>
+            <Route exact path={pathControllers.users}>
               <AppWrapper content={
                 <div>
                   <Overview />
