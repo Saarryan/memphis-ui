@@ -2,6 +2,7 @@ import "./App.scss";
 import React from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import Overview from "./containers/overview/overview";
+import Settings from "./containers/settings/settings"
 //import Usecases from "./containers/usecases/usecases";
 // import UseCaseEditor from "./containers/usecases/components/useCaseEditor/useCaseEditor";
 // import Visualizations from "./containers/visualizations/visualizations";
@@ -33,10 +34,10 @@ const App = withRouter(() => {
         <Desktop>
           <Switch>
             <Route exact path={pathControllers.login} component={Login} />
-            <Route exact path={pathControllers.users}>
+            <Route exact path={pathControllers.settings}>
               <AppWrapper content={
                 <div>
-                  <Overview />
+                  <Settings />
                 </div>
               }></AppWrapper>
             </Route>

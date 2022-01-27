@@ -1,6 +1,5 @@
-import React, { createContext } from "react";
+import React from "react";
 import "./userList.scss";
-export const UserStoreContext = createContext({});
 
 function UserList() {
   const getdColors = (type) => {

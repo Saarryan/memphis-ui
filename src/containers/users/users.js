@@ -1,10 +1,9 @@
-import React, { createContext } from "react";
+import React from "react";
 import AddButton from "../../components/addButton/addButton";
 import SearchInput from "../../components/searchInput/searchInput";
 import { SearchOutlined } from "@ant-design/icons";
 import UserList from "./components/userList";
 import "./users.scss";
-export const UserStoreContext = createContext({});
 
 function Users() {
   return (
