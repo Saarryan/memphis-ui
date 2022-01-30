@@ -19,7 +19,7 @@ const Alerts = () => {
           />
         </div>
         <div className="alert-integration-type">
-          <label className="alert-integration-label-bold">Schema has changed
+          <label className="alert-label-bold">Schema has changed
           </label>
           <Switcher
             onChange={() => setSchemaAlert(!schemaAlert)}

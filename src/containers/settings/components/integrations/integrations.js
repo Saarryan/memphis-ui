@@ -23,7 +23,7 @@ const Integrations = () => {
                     {!hubIntegration && <p>Signin placeholder</p>}
                 </div>
                 <div className="alert-integration-type">
-                    <label className="alert-integration-label-bold">Slack
+                    <label className="alert-integration-label">Slack
                     </label>
                     <Switcher
                         onChange={() => setSlackIntegration(!slackIntegration)}

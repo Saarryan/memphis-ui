@@ -46,17 +46,17 @@ const ImgLoader = () => {
         </div>
     );
     return (
-        <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
-            // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"s
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
-        >
-            {imgUrl ? <img src={imgUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-        </Upload>
+            <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"s
+                beforeUpload={beforeUpload}
+                onChange={handleChange}
+            >
+                {imgUrl ? <img src={imgUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+            </Upload>
     );
 }
 

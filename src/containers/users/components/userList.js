@@ -5,13 +5,13 @@ function UserList() {
   const getdColors = (type) => {
     switch (type) {
       case "root":
-        return { backgroundColor: "rgb(238, 238, 238)", color: "black" };
+        return { backgroundColor: "rgb(238, 238, 238)", color: "#2b2e3f" };
       case "UI/CLI":
         return { backgroundColor: "rgb(251, 189, 113)", color: "#f7f7f7" };
       case "Application":
         return { backgroundColor: "#5ca6a0", color: "#f7f7f7" };
       default:
-        return "#f7f7f7";
+        return { backgroundColor: "#f7f7f7", color: "#2b2e3f" };
     }
   };
   return (
@@ -32,7 +32,7 @@ function UserList() {
         </div>
         <div className="list-item item">
           <p>goergie</p>
-          <p>
+          <p className="button">
             <label className="button" style={getdColors("UI/CLI")}>
               UI/CLI
             </label>

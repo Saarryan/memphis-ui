@@ -34,10 +34,10 @@ const App = withRouter(() => {
         <Desktop>
           <Switch>
             <Route exact path={pathControllers.login} component={Login} />
-            <Route exact path={pathControllers.settings}>
+            <Route exact path={pathControllers.users}>
               <AppWrapper content={
                 <div>
-                  <Settings />
+                  <Users />
                 </div>
               }></AppWrapper>
             </Route>
