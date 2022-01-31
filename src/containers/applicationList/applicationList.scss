@@ -1,0 +1,31 @@
+.applications-container{
+  width: 92vw;
+  min-width: 1170px;
+}
+
+.one-edge-shadow {
+  box-shadow: 0px 3px lightgray;
+  background-color: #f0f1f7;
+  height: 140px !important;
+}
+
+.applications-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-left: 2vw;
+  margin-right: 3vw;
+}
+
+.application-list{
+  height: calc(95vh - 247px);
+  position: absolute;
+  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-left: 40px;
+  overflow-y: auto;
+  //min-height: 420px;
+  margin-top: 20px;
+}
+

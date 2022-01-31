@@ -1,0 +1,147 @@
+.useCaseList-container {
+  height: calc(96vh - 215px);
+  position: absolute;
+  width: 100%;
+}
+.useCaseList {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-left: 40px;
+  overflow-y: auto;
+  position: absolute;
+  height: 95%;
+  min-height: 420px;
+  margin-top: 20px;
+}
+
+p.nodata {
+  font-size: 19px !important;
+}
+
+.useCase-card-container {
+  width: 19vw;
+  min-width: 290px;
+  margin-right: 30px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+  background-color: var(--white);
+  margin-bottom: 23px;
+  height: 30vh;
+  min-height: 220px;
+}
+.useCase-card-title {
+  background-color: var(--blue);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.useCase-card-description {
+  margin-top: 3px;
+}
+.FiberManualRecordIcon.MuiSvgIcon-root circle {
+  color: #59bd26 !important;
+}
+.MuiSvgIcon-fontSizeSmall {
+  font-size: 13px !important;
+}
+.usecase-indication {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+}
+
+.usecase-threedots-icon {
+  color: var(--white);
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.useCase-card-title .usecase-title {
+  width: 85%;
+  position: absolute;
+}
+
+.useCase-card-title h2 {
+  color: var(--white);
+  margin-left: 15px;
+  font-weight: bold;
+  padding-top: 10px;
+  height: 5vh;
+}
+.useCase-card-title label {
+  color: var(--white);
+  margin-left: 15px;
+  display: flex;
+  font-size: 12px;
+  padding-bottom: 5px;
+}
+.useCase-card-description p {
+  color: var(--blue);
+  background-color: var(--white);
+  height: 20vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 10px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.usecase-list-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.usecase-list-icon {
+  color: var(--purple);
+}
+
+.Menu.MuiPopover-paper {
+  background-color: var(--white) !important;
+  width: 230px;
+  margin-top: 25px;
+  margin-left: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+.MuiList-root.MuiMenu-list.MuiList-padding {
+  padding: 0;
+}
+
+.usecase-list-name {
+  cursor: pointer;
+  margin: 0;
+  width: 16vw;
+  height: 100%;
+}
+
+.loader-uploading {
+  position: absolute;
+  max-height: calc(74%);
+}
+
+.loader-uploading div {
+  background-color: var(--white);
+  position: fixed;
+  z-index: 3;
+  opacity: 0.5;
+  width: 92vw;
+  height: 80%;
+}
+.loader-uploading img {
+  width: 16vw;
+  min-width: 200px;
+  z-index: 3;
+  position: relative;
+  top: calc(25vh);
+  transform: translateY(40%);
+  left: 50vw;
+  transform: translateX(-90%);
+}

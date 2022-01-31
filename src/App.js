@@ -2,9 +2,8 @@ import "./App.scss";
 import React from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import Overview from "./containers/overview/overview";
-//import Usecases from "./containers/usecases/usecases";
-// import UseCaseEditor from "./containers/usecases/components/useCaseEditor/useCaseEditor";
-// import Visualizations from "./containers/visualizations/visualizations";
+import ApplicationList from "./containers/applicationList/applicationList";
+import ChannelList from "./containers/channelList/channelList";
 // import Account from "./containers/account/account";
 // import NotFoundPage from "./containers/notFoundPage/notFoundPage";
 // import Users from "./containers/users/users";
@@ -40,9 +39,22 @@ const App = withRouter(() => {
                 </div>
               }></AppWrapper>
             </Route>
+            <Route exact path={pathControllers.applicationList}>
+              <AppWrapper content={
+                <div>
+                  <ApplicationList />
+                </div>
+              }></AppWrapper>
+            </Route>
+            <Route exact path={`${pathControllers.applicationList}/:id`}>
+              <AppWrapper content={
+                <div>
+                  <ChannelList />
+                </div>
+              }></AppWrapper>
+            </Route>
             {/* <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path={pathControllers.overview} component={Overview} />
-            <PrivateRoute exact path={pathControllers.usecases} component={Usecases} />
             <PrivateRoute exact path={`${pathControllers.usecases}/:id`} component={UseCaseEditor} />
             <PrivateRoute exact path={pathControllers.users} component={Users} />
             <PrivateRoute exact path={pathControllers.account} component={Account} /> */}

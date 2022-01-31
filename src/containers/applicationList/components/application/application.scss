@@ -1,0 +1,110 @@
+.application {
+  .application-card-container {
+    width: 19vw;
+    min-width: 290px;
+    margin-right: 30px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+    background-color: var(--white);
+    margin-bottom: 23px;
+    height: 30vh;
+    min-height: 220px;
+    .application-card-title {
+      background-color: var(--blue);
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      position: relative;
+      cursor: pointer;
+      height: 7vh;
+      align-items: center;
+      label {
+        color: var(--white);
+        margin-left: 15px;
+        display: flex;
+        font-size: 12px;
+        padding-bottom: 5px;
+      }
+      h2 {
+        color: var(--white);
+        margin: 0;
+        font-weight: bold;
+        padding-top: 5px;
+        cursor: pointer;
+        width: 16vw;
+      }
+      .application-threedots-icon {
+        color: var(--white);
+        margin-top: 10px;
+        cursor: pointer;
+      }
+    }
+    .application-card-description {
+      margin-top: 3px;
+      p {
+        color: var(--blue);
+        background-color: var(--white);
+        height: 20vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        position: relative;
+        padding-top: 10px;
+        padding-left: 15px;
+        padding-right: 10px;
+        font-weight: 500;
+        overflow-wrap: anywhere;
+      }
+    }
+    .application-list-icon {
+      color: var(--purple);
+    }
+    .application-list-label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+  }
+}
+
+.FiberManualRecordIcon.MuiSvgIcon-root circle {
+  color: #59bd26 !important;
+}
+.MuiSvgIcon-fontSizeSmall {
+  font-size: 13px !important;
+}
+
+.test.MuiMenu-paper{
+  top: calc(100% + 30px) !important;
+}
+
+
+.MuiList-root.MuiMenu-list.MuiList-padding {
+  padding: 0;
+}
+
+
+
+.loader-uploading {
+  position: absolute;
+  max-height: calc(74%);
+}
+
+.loader-uploading div {
+  background-color: var(--white);
+  position: fixed;
+  z-index: 3;
+  opacity: 0.5;
+  width: 92vw;
+  height: 80%;
+}
+.loader-uploading img {
+  width: 16vw;
+  min-width: 200px;
+  z-index: 3;
+  position: relative;
+  top: calc(25vh);
+  transform: translateY(40%);
+  left: 50vw;
+  transform: translateX(-90%);
+}

@@ -63,6 +63,15 @@
   margin-bottom: 0;
 }
 
+.general-menu.MuiPopover-paper {
+  background-color: var(--white) !important;
+  width: 230px;
+  margin-top: 25px;
+  margin-left: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
 
 .containers{
   position: absolute;
