@@ -38,6 +38,13 @@ const App = withRouter(() => {
                 </div>
               }></AppWrapper>
             </Route>
+            <Route exact path={pathControllers.overview}>
+              <AppWrapper content={
+                <div>
+                  <Overview />
+                </div>
+              }></AppWrapper>
+            </Route>
             <Route exact path={pathControllers.settings}>
               <AppWrapper content={
                 <div>

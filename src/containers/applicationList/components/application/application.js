@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import Popover from "@material-ui/core/Popover";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Divider } from "@material-ui/core";
@@ -18,22 +18,12 @@ import Tooltip from "../../../../components/tooltip/tooltip";
 import OverflowTip from "../../../../components/tooltip/overflowtip";
 import loading from "../../../../assets/images/strech.gif";
 import Button from "../../../../components/button/button";
-import { makeStyles } from "@material-ui/core/styles";
-
-const ITEM_HEIGHT = 48;
-const useStyles = makeStyles(theme => ({
-  padding: {
-    paddingTop: "300px",
-    paddingBottom: "30px"
-  }
-}));
 
 const Application = (props) => {
   const [state, dispatch] = useContext(Context);
   const [modalIsOpen, modalFlip] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const classes = useStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -80,57 +70,28 @@ const Application = (props) => {
             </h2>
           </Link>
           <div>
-            <IconButton
-              aria-label="more"
-              id="long-button"
-              aria-controls={open ? 'long-menu' : undefined}
-              aria-expanded={open ? 'true' : undefined}
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            {/* <MoreVertIcon
-              className="application-threedots-icon"
-              aria-controls="action-application"
+            <MoreVertIcon
+              aria-controls="long-button"
               aria-haspopup="true"
               onClick={(e) => {
                 e.preventDefault();
                 handleClickMenu(e);
               }}
-            /> */}
+              className="threedots-menu"
+            />
+
           </div>
         </div>
 
         <div className="application-card-description">
           <p>{props.content.description || "Empty description"}</p>
         </div>
-        <Menu
+        <Popover
           id="long-menu"
-          MenuListProps={{
-            'aria-labelledby': 'long-button',
-            classes: { padding: classes.padding }
-          }}
+          classes={{ paper: "Menu" }}
           anchorEl={anchorEl}
-          open={open}
           onClose={handleClose}
-          PaperProps={{
-            style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: '20ch',
-            },
-          }}
-        >
-          <MenuItem onClick={handleClose}>
-            option
-          </MenuItem>
-        </Menu>
-        {/* <Popover
-          id="action-application"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleCloseMenu}
-          className="general-menu"
+          open={open}
         >
           <Link to={`${pathControllers.applicationList}/${props.content._id}`}>
             <MenuItem
@@ -162,7 +123,7 @@ const Application = (props) => {
               Remove
             </label>
           </MenuItem>
-        </Popover> */}
+        </Popover>
       </div>
       <Modal
         header="Remove Application"
