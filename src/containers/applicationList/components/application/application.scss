@@ -67,24 +67,6 @@
   }
 }
 
-.FiberManualRecordIcon.MuiSvgIcon-root circle {
-  color: #59bd26 !important;
-}
-.MuiSvgIcon-fontSizeSmall {
-  font-size: 13px !important;
-}
-
-.test.MuiMenu-paper{
-  top: calc(100% + 30px) !important;
-}
-
-
-.MuiList-root.MuiMenu-list.MuiList-padding {
-  padding: 0;
-}
-
-
-
 .loader-uploading {
   position: absolute;
   max-height: calc(74%);
@@ -108,3 +90,4 @@
   left: 50vw;
   transform: translateX(-90%);
 }
+

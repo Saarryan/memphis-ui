@@ -1,16 +1,16 @@
 import "./channelList.scss";
 import React, { useEffect, useContext, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { Button as ButtonDesign, message } from "antd";
+import { message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ChannelOverview from "./components/channelOverview/channelOverview";
 import { Context } from "../../hooks/store";
 import { httpRequest } from "../../services/http";
 import { ApiEndpoint } from "../../apiEndpoints.model";
-import Tooltip from "../../components/tooltip/tooltip";
 import edit from "../../assets/images/edit.svg";
-import deleteIcon from "../../assets/images/deleteIcon.svg";
+import Tooltip from "../../components/tooltip/tooltip";
 import Modal from "../../components/modal/modal";
 import Button from "../../components/button/button";
 import config from "../../config/config.json";
@@ -19,13 +19,32 @@ import pathControllers from "../../router";
 
 const ChannelList = () => {
     const [state, dispatch] = useContext(Context);
-    const [usecasePipelines, setUsecasePipelines] = useState([]);
+    const [channelList, setChannelList] = useState([
+        {
+            "_id": 1,
+            "name": "Strech",
+            "Retention": "3 days",
+            "Max_throughput": "1000 message"
+          },
+          {
+            "_id": 2,
+            "name": "Strech",
+            "Retention": "3 hours",
+            "Max_throughput": "15 Mb/s"
+          },
+          {
+            "_id": 3,
+            "name": "Strech",
+            "Retention": "channel",
+            "Max_throughput": "default"
+          }
+    ]);
     const [editName, seteditName] = useState(false);
     const [editDescription, seteditDescription] = useState(false);
     const [modalIsOpen, modalFlip] = useState(false);
     const [modalInactivation, modalInactivationFlip] = useState(false);
     const [modalActivation, modalActivationFlip] = useState(false);
-    const [useCaseDeatailes, setuseCaseDeatailes] = useState({
+    const [applicationDetails, setapplicationDetails] = useState({
         id: 1,
         name: "test",
         description: "desc"
@@ -34,22 +53,22 @@ const ChannelList = () => {
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({ type: "SET_ROUTE", payload: "applications" });
+        dispatch({ type: "SET_ROUTE", payload: "channels" });
         //GetApplicationDetails();
     }, []);
 
     const GetApplicationDetails = async () => {
         const url = window.location.href;
-        const useCaseId = url.split("usecases/")[1].split("/")[0];
-        if (useCaseId !== "newUseCase") {
+        const applicationId = url.split("applications/")[1].split("/")[0];
+        if (applicationId !== "newApplication") {
             setisLoading(true);
             try {
                 const data = await httpRequest(
                     "GET",
-                    `${ApiEndpoint.GET_USER_USECASE_BY_ID}?usecaseId=${useCaseId}`
+                    `${ApiEndpoint.GET_USER_USECASE_BY_ID}?applicationId=${applicationId}`
                 );
-                setuseCaseDeatailes({
-                    ...useCaseDeatailes,
+                setapplicationDetails({
+                    ...applicationDetails,
                     id: 1,
                     name: "data.name",
                     description: "data.description",
@@ -62,16 +81,15 @@ const ChannelList = () => {
         }
     };
 
-    const getChannels = async (useCaseId) => {
+    const getChannels = async (applicationId) => {
         try {
             const data = await httpRequest(
                 "GET",
-                `${ApiEndpoint.GET_USECASE_PIPELINES}?usecaseId=${useCaseId || state.useCaseBuilder?._id
-                }`
+                `${ApiEndpoint.GET_USECASE_PIPELINES}?applicationId=${applicationId || state.application?._id}`
             );
             // setTimeout(() => {
             setisLoading(false);
-            setUsecasePipelines(data);
+            setChannelList(data);
             // }, 1000);
         } catch (err) { }
     };
@@ -91,17 +109,17 @@ const ChannelList = () => {
             try {
                 const data = await httpRequest("PUT", ApiEndpoint.CHANGE_USECASE_NAME, {
                     name: e.target.value,
-                    usecaseId: state.useCaseBuilder?._id,
+                    applicationId: state.useCaseBuilder?._id,
                 });
                 dispatch({ type: "UPDATE_USECASES_NAME", payload: data });
-                setuseCaseDeatailes({ ...useCaseDeatailes, name: e.target.value });
+                setapplicationDetails({ ...applicationDetails, name: e.target.value });
                 seteditName(false);
             } catch (err) { }
         }
     };
 
     const handleEditNameChange = (e) => {
-        setuseCaseDeatailes({ ...useCaseDeatailes, name: e.target.value });
+        setapplicationDetails({ ...applicationDetails, name: e.target.value });
     };
 
     const handleEditDescriptionBlur = async (e) => {
@@ -112,11 +130,11 @@ const ChannelList = () => {
                 const data = await httpRequest(
                     "PUT",
                     ApiEndpoint.CHANGE_USECASE_DESCRIPTION,
-                    { description: e.target.value, usecaseId: state.useCaseBuilder?._id }
+                    { description: e.target.value, applicationId: state.useCaseBuilder?._id }
                 );
                 dispatch({ type: "UPDATE_USECASES_DESCRIPTION", payload: data });
-                setuseCaseDeatailes({
-                    ...useCaseDeatailes,
+                setapplicationDetails({
+                    ...applicationDetails,
                     description: e.target.value,
                 });
                 seteditDescription(false);
@@ -125,7 +143,7 @@ const ChannelList = () => {
     };
 
     const handleEditDescriptionChange = (e) => {
-        setuseCaseDeatailes({ ...useCaseDeatailes, description: e.target.value });
+        setapplicationDetails({ ...applicationDetails, description: e.target.value });
     };
 
     const popupMessage = (content) => {
@@ -142,77 +160,57 @@ const ChannelList = () => {
         try {
             await httpRequest(
                 "DELETE",
-                `${ApiEndpoint.REMOVE_USECASE}?usecaseId=${state.useCaseBuilder?._id}`
+                `${ApiEndpoint.REMOVE_USECASE}?applicationId=${state.application?._id}`
             );
-            dispatch({ type: "IS_USECASE_BUILDER_ACTIVE", payload: false });
-            dispatch({ type: "IS_USECASE_EDIT_ACTIVE", payload: false });
-            history.push(pathControllers.usecases);
+            history.push(pathControllers.applicationList);
         } catch (err) {
             modalFlip(true);
         }
     };
 
-    const handleEditChannel = (stepNumber) => {
-        dispatch({
-            type: "IS_USECASE_EDIT_ACTIVE",
-            payload: false,
-        });
-        dispatch({ type: "SET_WIZARD_STEP", payload: stepNumber });
-        dispatch({
-            type: "IS_USECASE_BUILDER_ACTIVE",
-            payload: !state.isUsecaseBuliderActive,
-        });
-    };
-
     const handleCreateChannel = () => {
-        dispatch({ type: "INITIAL_PIPELINE_DETAILS" });
-        dispatch({ type: "SET_WIZARD_STEP", payload: 1 });
-        dispatch({
-            type: "IS_USECASE_BUILDER_ACTIVE",
-            payload: !state.isUsecaseBuliderActive,
-        });
     };
 
     return (
-        <div className="use-case-editor-container">
-            <div className="use-case-editor-header">
-                {!editName && (
-                    <h1 className="main-header-h1">
-                        {!isLoading ? (
-                            state.useCaseBuilder?.name ||
-                            useCaseDeatailes.name ||
-                            "Inser usecase name"
-                        ) : (
-                            <CircularProgress className="circular-progress" size={18} />
-                        )}
-                        <img
-                            src={edit}
-                            width="20"
-                            height="20"
-                            alt="edit"
-                            className="edit-usecase-detailes"
-                            onClick={() => handleEditName()}
-                        />
-                    </h1>
-                )}
-                {editName && (
-                    <ClickAwayListener onClickAway={handleEditNameBlur}>
-                        <div className="edit-input-name">
-                            <input
-                                onBlur={handleEditNameBlur}
-                                onChange={handleEditNameChange}
-                                value={useCaseDeatailes?.name}
+        <div className="application-details-container">
+            <div className="application-details-header">
+                <div className="left-side">
+                    {!editName && (
+                        <h1 className="main-header-h1">
+                            {!isLoading ? (
+                                state.useCaseBuilder?.name ||
+                                applicationDetails.name ||
+                                "Inser application name"
+                            ) : (
+                                <CircularProgress className="circular-progress" size={18} />
+                            )}
+                            <img
+                                src={edit}
+                                width="20"
+                                height="20"
+                                alt="edit"
+                                className="edit-icon"
+                                onClick={() => handleEditName()}
                             />
-                        </div>
-                    </ClickAwayListener>
-                )}
-                <div className="usecase-editor-header-flex">
+                        </h1>
+                    )}
+                    {editName && (
+                        <ClickAwayListener onClickAway={handleEditNameBlur}>
+                            <div className="edit-input-name">
+                                <input
+                                    onBlur={handleEditNameBlur}
+                                    onChange={handleEditNameChange}
+                                    value={applicationDetails?.name}
+                                />
+                            </div>
+                        </ClickAwayListener>
+                    )}
                     {!editDescription && (
-                        <div className="p-header">
+                        <div className="description">
 
                             {!isLoading ? (
-                                <p>{state.useCaseBuilder?.description ||
-                                    useCaseDeatailes.description ||
+                                <p >{state.useCaseBuilder?.description ||
+                                    applicationDetails.description ||
                                     "Insert your description..."}</p>
                             ) : (
                                 <CircularProgress className="circular-progress" size={12} />
@@ -223,7 +221,7 @@ const ChannelList = () => {
                                 width="15"
                                 height="15"
                                 alt="edit"
-                                className="edit-usecase-detailes"
+                                className="edit-icon"
                                 onClick={() => handleEditDescription()}
                             />
                         </div>
@@ -234,12 +232,21 @@ const ChannelList = () => {
                                 <textarea
                                     onBlur={handleEditDescriptionBlur}
                                     onChange={handleEditDescriptionChange}
-                                    value={useCaseDeatailes.description}
+                                    value={applicationDetails.description}
                                 />
                             </div>
                         </ClickAwayListener>
                     )}
-                    <Button
+                    <div className="channels-length">
+                        <h1>Channels</h1>
+                        <div className="len-num">
+                            <p>{channelList.length}</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div className="right-side">
+                  <Button
                         className="modal-btn"
                         width="150px"
                         height="36px"
@@ -247,36 +254,12 @@ const ChannelList = () => {
                         colorType="lightPurple"
                         radiusType="circle"
                         backgroundColorType="darkPurple"
-                        fontSize="12px"
+                        fontSize="14px"
                         fontWeight="bold"
                         aria-controls="usecse-menu"
                         aria-haspopup="true"
                         onClick={() => handleCreateChannel()}
                     />
-                </div>
-            </div>
-            <div className="use-case-editor-action-button">
-                <div className="delete-usecase-button">
-                    <Tooltip text="Delete use case">
-                        <ButtonDesign
-                            onClick={() => {
-                                !state.useCaseBuilder?.enabled && modalFlip(true);
-                            }}
-                            style={{
-                                cursor: state.useCaseBuilder?.enabled
-                                    ? "no-drop"
-                                    : "pointer",
-                                opacity: state.useCaseBuilder?.enabled ? 0.5 : 1,
-                            }}
-                        >
-                            <img
-                                src={deleteIcon}
-                                width="15"
-                                height="15"
-                                alt="deleteIcon"
-                            />
-                        </ButtonDesign>
-                    </Tooltip>
                 </div>
             </div>
             <div className="use-case-editor-piplines">
@@ -286,37 +269,11 @@ const ChannelList = () => {
                         <img src={loading} alt="loading"></img>
                     </div>
                 )}
-                {/* {usecasePipelines &&
-                    usecasePipelines.length > 0 &&
-                    usecasePipelines?.map((pipline) => (
-                        <PiplineOverview
-                            key={pipline._id}
-                            piplineStatus={pipline}
-                            showPanelAction="true"
-                            handleEditPipline={(stepNumber) =>
-                                handleEditPipline(stepNumber)
-                            }
-                            handleRunPipline={(pipelineId) =>
-                                handleRunPipline(pipelineId)
-                            }
-                            handleTerminatePipline={(pipelineId) =>
-                                handleTerminatePipline(pipelineId)
-                            }
-                            handleRemovePipline={(pipelineId) =>
-                                handleRemovePipline(pipelineId)
-                            }
-                            handleEnablePipline={(pipelineId) =>
-                                handleEnablePipline(pipelineId)
-                            }
-                            handleDisablePipline={(pipelineId) =>
-                                handleDisablePipline(pipelineId)
-                            }
-                            handleDuplicatePipeline={(pipelineId) =>
-                                handleDuplicatePipeline(pipelineId)
-                            }
-                        />
-                    ))} */}
-                {!isLoading && usecasePipelines.length === 0 && (
+                {channelList?.length > 0 &&
+                    channelList?.map((channel) => (
+                        <ChannelOverview content={channel}/>
+                    ))}
+                {!isLoading && channelList.length === 0 && (
                     <div className="no-pipline-to-display">
                         <InboxOutlined
                             style={{ fontSize: "40px", color: "#5D4AEE" }}

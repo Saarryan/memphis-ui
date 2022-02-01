@@ -26,7 +26,7 @@ function ApplicationList() {
 
   const createApplication = () => {
     //Here we need to implement creation new app and return appId with empty queues
-    history.push(`${pathControllers.applicationList}/newApplicationId`);
+    history.push(`${pathControllers.applicationList}/newApplication`);
   };
 
   const openModal = () => {
@@ -50,7 +50,7 @@ function ApplicationList() {
               colorType="lightPurple"
               radiusType="circle"
               backgroundColorType="darkPurple"
-              fontSize="12px"
+              fontSize="14px"
               fontWeight="bold"
               aria-haspopup="true"
               onClick={openModal}
@@ -58,7 +58,7 @@ function ApplicationList() {
           </div>
         </div>
         <div className="application-list">
-          {applicationList.map((application, item) => {
+          {applicationList.map((application) => {
             return <Application content={application}></Application>
           })}
           {/* {isLoading && (

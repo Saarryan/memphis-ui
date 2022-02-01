@@ -1,99 +1,119 @@
-.use-case-editor-container{
+.application-details-container {
   width: 92vw;
   min-width: 1170px;
   position: relative;
+  .application-details-header {
+    background-color: #f0f1f7;
+    height: 140px;
+    display: flex;
+    justify-content: space-between;
+    .left-side {
+      .edit-icon {
+        cursor: pointer;
+        margin-left: 6px;
+        margin-top: 2px;
+      }
+      .edit-input-name input {
+        background-color: transparent;
+        border: none;
+        font-size: 28px;
+        font-weight: 1000;
+        margin-left: 2vw;
+        margin-right: 3vw;
+        color: var(--blue);
+        padding-top: 25px;
+      }
+      .description {
+        display: flex;
+        padding-top: 10px;
+        margin-left: 2vw;
+        p {
+          max-width: 25vw;
+          overflow-y: auto;
+          overflow-x: hidden;
+          height: 60px;
+          display: flex;
+          font-size: 16px;
+          padding: 0;
+          margin: 2px;
+          overflow-wrap: anywhere;
+        }
+      }
+      textarea {
+        display: flex;
+        margin-bottom: 0.5em;
+        color: rgba(0, 0, 0, 0.85);
+        font-weight: 500;
+        background-color: transparent;
+        border: none;
+        font-size: 16px;
+        overflow: auto;
+        resize: none;
+        max-width: 25vw;
+        width: 500px;
+        margin-left: 2vw;
+        padding-top: 12px;
+      }
+      
+      .channels-length{
+        display: flex;
+        margin-left: 2vw;
+        height: 3vh;
+        align-items: center;
+        h1{
+          font-weight: 1000;
+          color: var(--blue);
+          font-size: 22px;
+          margin: 0;
+        }
+        .len-num{
+          background-color: var(--purple);
+          border-radius: 15px;
+          height: 20px;
+          width: 20px;
+          text-align: center;
+          margin-left: 5px;
+        }
+      }
+    }
+    .right-side{
+      margin-right: 2vw;
+      margin-top: 2vh;
+    }
+  }
 }
 
-.use-case-editor-piplines .loader-uploading img{
+.use-case-editor-piplines .loader-uploading img {
   top: calc(20vh) !important;
 }
 
-.use-case-editor-header {
-  background-color: #f0f1f7;
-  height: 140px;
-}
-
-.use-case-editor-header .edit-usecase-detailes{
-  cursor: pointer;
-  margin-left:6px;
-  margin-top: 2px;
-}
-
-.edit-input-name input{
-  background-color: transparent;
-  border: none;
-  font-size: 28px;
-  font-weight: 1000;
-  margin-left: 2vw;
-  margin-right: 3vw;
-  color: #2b2e3f;
-  padding-top: 25px;
-}
-
-.usecase-editor-header-flex textarea{
-  display: flex;
-  margin-bottom: 0.5em;
-  color: rgba(0, 0, 0, 0.85);
-  font-weight: 500;
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  overflow: auto;
-  resize: none;
-  max-width: 25vw;
-  width: 500px;
-}
-
-.usecase-editor-header-flex{
-  display: flex;
-  justify-content: space-between;
-  margin-left: 2vw;
-  margin-right: 3vw;
-  min-height: 65px;
-
-}
-
-.usecase-editor-header-flex .p-header{
-  display: flex;
-}
-
-.usecase-editor-header-flex p{
-  max-width: 25vw;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 60px;
-  display: flex;
-  font-size: 16px;
-  padding: 0;
-  margin: 2px;
-  overflow-wrap: anywhere;
-}
-
-.use-case-editor-action-button{
+.use-case-editor-action-button {
   width: 100%;
   height: 50px;
-  border-top: 1px solid #2B2E3F;
+  border-top: 1px solid var(--blue);
   box-shadow: 0px 4px 4px 0px rgb(0 0 0 / 12%);
   display: flex;
   padding-left: 5vw;
   align-items: center;
 }
 
-.use-case-action-button Button{
+.use-case-action-button Button {
   height: 35px;
   background-color: #5ca6a0;
   border-radius: 5px;
   margin-right: 25px;
 }
 
-.use-case-action-button .ant-btn:focus, .use-case-action-button .ant-btn:hover, .use-case-action-button .ant-btn:active{
-  background-color: #5CA6A0;
-  background: #5CA6A0;
+.use-case-action-button .ant-btn:focus,
+.use-case-action-button .ant-btn:hover,
+.use-case-action-button .ant-btn:active {
+  background-color: #5ca6a0;
+  background: #5ca6a0;
   opacity: 0.8;
   border-color: #518883;
 }
 
-.use-case-editor-action-button .delete-usecase-button{
+.use-case-editor-action-button .delete-usecase-button {
   position: absolute;
   right: 50px;
 }
@@ -104,46 +124,49 @@
   border-radius: 5px;
 }
 
-.delete-usecase-button .ant-btn:focus, .delete-usecase-button .ant-btn:hover, .delete-usecase-button .ant-btn:active{
-  background-color:  var(--blue);
-  background:  var(--blue);
+.delete-usecase-button .ant-btn:focus,
+.delete-usecase-button .ant-btn:hover,
+.delete-usecase-button .ant-btn:active {
+  background-color: var(--blue);
+  background: var(--blue);
   opacity: 0.8;
-  border-color: #202331
+  border-color: #202331;
 }
 
-.delete-usecase-button img{
-  display: block; 
+.delete-usecase-button img {
+  display: block;
   margin: auto;
   margin-left: auto;
   margin-right: auto;
 }
 
-.use-case-editor-piplines{
+.use-case-editor-piplines {
   padding-top: 10px;
   height: calc(95vh - 290px);
   overflow-y: auto;
   overflow-x: hidden;
   position: absolute;
   width: 100%;
-  margin-top:10px;
+  margin-top: 10px;
   text-align: -webkit-center;
   text-align: -moz-center;
   min-height: 380px;
 }
 
-.button-usecase-action.button-usecase-action, .button-usecase-action.button-usecase-action:hover{
+.button-usecase-action.button-usecase-action,
+.button-usecase-action.button-usecase-action:hover {
   background: #5ca6a0;
   opacity: 0.5;
   border: unset;
 }
 
-.wizard-loader{
+.wizard-loader {
   position: absolute;
   left: 42%;
   top: 30%;
 }
 
-.wizard-loader-uploading{
+.wizard-loader-uploading {
   position: absolute;
   max-height: calc(74%);
 }
@@ -153,7 +176,7 @@
   z-index: 3;
   position: relative;
 }
-.no-pipline-to-display{
+.no-pipline-to-display {
   position: relative;
   top: 25%;
   display: flex;
@@ -165,6 +188,6 @@
   font-weight: bold;
   margin-bottom: 10px;
 }
-.circular-progress{
-  color: #5D4AEE;
+.circular-progress {
+  color: #5d4aee;
 }

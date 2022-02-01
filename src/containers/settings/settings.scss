@@ -1,7 +1,7 @@
 .settings-panel-body{
   margin-bottom: 30px;
   margin-left: 2vw;  
-  color: #2b2e3f;
+  color: var(--blue);
 }
 .alerts-integrations-container{
     width: 40vw;
@@ -18,7 +18,7 @@
       justify-content: space-between;
       padding: 20px;
       align-items: center;
-      color: #2b2e3f;
+      color: var(--blue);
       .alert-integration-label-bold{
         font-size: 16px;
         display: flex;

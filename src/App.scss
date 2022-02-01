@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  color: #2b2e3f;
+  color: var(--blue);
 }
 .app-container{
     position: absolute;
@@ -56,22 +56,12 @@
 
 .main-header-h1 {
   font-weight: 1000;
-  color: #2b2e3f;
+  color: var(--blue);
   position: relative;
   padding-top: 25px;
   margin-left: 2vw;
   margin-bottom: 0;
 }
-
-.general-menu.MuiPopover-paper {
-  background-color: var(--white) !important;
-  width: 230px;
-  margin-top: 25px;
-  margin-left: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
-}
-
 
 .containers{
   position: absolute;
@@ -106,4 +96,27 @@
 }
 .ant-btn > .anticon{
   line-height: 0;
+}
+
+//Threedots Menu
+.Menu.MuiPopover-paper {
+  background-color: var(--white) !important;
+  width: 230px;
+  margin-top: 25px;
+  margin-left: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+.threedots-menu{
+  color: var(--white);
+  margin-top: 10px;
+  cursor: pointer;
+}
+.menu-item-icon {
+  color: var(--purple);
+}
+.menu-item-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 10px;
 }

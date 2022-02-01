@@ -62,7 +62,7 @@ function Panel(props) {
       );
       if (data && data !== undefined) {
         dispatch({ type: "SET_USER_DATA", payload: data });
-        await getOrganizationDeatails(data.organizationId);
+        await getOrganizationDetails(data.organizationId);
         dispatch({ type: "SET_LOADER", payload: false });
         localStorage.setItem(config.LOCAL_STORAGE_SAW_SCHEMA, data.already_saw_schema_page_flag);
 
@@ -108,7 +108,7 @@ function Panel(props) {
     setAnchorEl(null);
   };
 
-  const getOrganizationDeatails = async (OrganizationId) => {
+  const getOrganizationDetails = async (OrganizationId) => {
     try {
       const organiztionDetails = await httpRequest(
         "GET",
