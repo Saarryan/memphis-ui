@@ -23,21 +23,50 @@ const ChannelList = () => {
         {
             "_id": 1,
             "name": "Strech",
-            "Retention": "3 days",
-            "Max_throughput": "1000 message"
-          },
-          {
+            "retention": "3 days",
+            "max_throughput": "1000 message",
+            "functions": [
+                {
+                    "_id": 1,
+                    "name": "sveta",
+                    "type": "blabl"
+                },
+                {
+                    "_id": 2,
+                    "name": "sveta2",
+                    "type": "blabl"
+                },
+                {
+                    "_id": 3,
+                    "name": "sveta3",
+                    "type": "blabl"
+                }
+            ]
+        },
+        {
             "_id": 2,
             "name": "Strech",
-            "Retention": "3 hours",
-            "Max_throughput": "15 Mb/s"
-          },
-          {
+            "retention": "3 hours",
+            "max_throughput": "15 Mb/s"
+        },
+        {
             "_id": 3,
             "name": "Strech",
-            "Retention": "channel",
-            "Max_throughput": "default"
-          }
+            "retention": "channel",
+            "max_throughput": "default"
+        },
+        {
+            "_id": 4,
+            "name": "Strech",
+            "retention": "channel",
+            "max_throughput": "default"
+        },
+        {
+            "_id": 5,
+            "name": "Strech",
+            "retention": "channel",
+            "max_throughput": "default"
+        }
     ]);
     const [editName, seteditName] = useState(false);
     const [editDescription, seteditDescription] = useState(false);
@@ -240,13 +269,13 @@ const ChannelList = () => {
                     <div className="channels-length">
                         <h1>Channels</h1>
                         <div className="len-num">
-                            <p>{channelList.length}</p>
+                            <p>{channelList?.length}</p>
                         </div>
 
                     </div>
                 </div>
                 <div className="right-side">
-                  <Button
+                    <Button
                         className="modal-btn"
                         width="150px"
                         height="36px"
@@ -262,7 +291,7 @@ const ChannelList = () => {
                     />
                 </div>
             </div>
-            <div className="use-case-editor-piplines">
+            <div className="channels-content">
                 {isLoading && (
                     <div className="loader-uploading">
                         <div></div>
@@ -271,10 +300,10 @@ const ChannelList = () => {
                 )}
                 {channelList?.length > 0 &&
                     channelList?.map((channel) => (
-                        <ChannelOverview content={channel}/>
+                        <ChannelOverview content={channel} />
                     ))}
                 {!isLoading && channelList.length === 0 && (
-                    <div className="no-pipline-to-display">
+                    <div className="no-channel-to-display">
                         <InboxOutlined
                             style={{ fontSize: "40px", color: "#5D4AEE" }}
                             theme="outlined"
@@ -297,67 +326,6 @@ const ChannelList = () => {
                     </div>
                 )}
             </div>
-            <Modal
-                header="Remove use case"
-                height="300px"
-                width="650px"
-                rBtnText="Confirm"
-                lBtnText="Cancel"
-                closeAction={() => modalFlip(false)}
-                clickOutside={() => modalFlip(false)}
-                lBtnClick={() => {
-                    modalFlip(false);
-                }}
-                rBtnClick={() => {
-                    modalFlip(false);
-                    removeApplication();
-                }}
-                open={modalIsOpen}
-            >
-                Are you sure you want to remove this use case? This will remove all
-                pipelines connected to this use case.
-            </Modal>
-            <Modal
-                confirm={true}
-                height="250px"
-                width="500px"
-                rBtnText="Confirm"
-                lBtnText="Cancel"
-                header="Pipeline activation"
-                closeAction={() => modalActivationFlip(false)}
-                clickOutside={() => {
-                    modalActivationFlip(false);
-                }}
-                lBtnClick={() => modalActivationFlip(false)}
-                rBtnClick={() => {
-                    modalActivationFlip(false);
-                }}
-                open={modalActivation}
-            >
-                You chose to activate this pipeline, that means that this pipeline
-                will be triggered according to its trigger.
-            </Modal>
-            <Modal
-                warning={true}
-                confirm={true}
-                height="250px"
-                width="500px"
-                rBtnText="Confirm"
-                lBtnText="Cancel"
-                header="Pipeline inactivation"
-                closeAction={() => modalInactivationFlip(false)}
-                clickOutside={() => {
-                    modalInactivationFlip(false);
-                }}
-                lBtnClick={() => modalInactivationFlip(false)}
-                rBtnClick={() => {
-                    modalInactivationFlip(false);
-                }}
-                open={modalInactivation}
-            >
-                You chose to inactivate this pipeline, that means that all future
-                executions of this pipeline will be canceled.
-            </Modal >
         </div >
     );
 };
