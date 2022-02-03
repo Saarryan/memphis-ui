@@ -34,10 +34,8 @@
         cursor: pointer;
         width: 16vw;
       }
-      .application-threedots-icon {
+      .threedots-menu{
         color: var(--white);
-        margin-top: 10px;
-        cursor: pointer;
       }
     }
     .application-card-description {
@@ -55,14 +53,6 @@
         font-weight: 500;
         overflow-wrap: anywhere;
       }
-    }
-    .application-list-icon {
-      color: var(--purple);
-    }
-    .application-list-label {
-      font-size: 13px;
-      font-weight: 600;
-      margin-left: 10px;
     }
   }
 }

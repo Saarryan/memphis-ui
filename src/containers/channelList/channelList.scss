@@ -66,20 +66,8 @@
         h1 {
           font-weight: 1000;
           color: var(--blue);
-          font-size: 20px;
+          font-size: 18px;
           margin: 0;
-        }
-        .len-num {
-          background-color: var(--purple);
-          border-radius: 15px;
-          height: 20px;
-          width: 20px;
-          text-align: center;
-          margin-left: 5px;
-          p {
-            color: white;
-            font-weight: bold;
-          }
         }
       }
     }
@@ -90,7 +78,7 @@
   }
   .channels-content{
     height: calc(100% - 20vh);
-    margin: 2vw 0vw 0vw 2vw;
+    padding: 2vw 0vw 0vw 2vw;
     position: relative;
     overflow: auto;
     .no-channel-to-display {

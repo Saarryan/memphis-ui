@@ -25,12 +25,6 @@ const Application = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const handleClickMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -89,7 +83,7 @@ const Application = (props) => {
           id="long-menu"
           classes={{ paper: "Menu" }}
           anchorEl={anchorEl}
-          onClose={handleClose}
+          onClose={handleCloseMenu}
           open={open}
         >
           <Link to={`${pathControllers.applicationList}/${props.content._id}`}>

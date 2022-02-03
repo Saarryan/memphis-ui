@@ -25,6 +25,7 @@ const ChannelList = () => {
             "name": "Strech",
             "retention": "3 days",
             "max_throughput": "1000 message",
+            "healthy": true,
             "functions": [
                 {
                     "_id": 1,
@@ -47,25 +48,29 @@ const ChannelList = () => {
             "_id": 2,
             "name": "Strech",
             "retention": "3 hours",
-            "max_throughput": "15 Mb/s"
+            "max_throughput": "15 Mb/s",
+            "healthy": false
         },
         {
             "_id": 3,
             "name": "Strech",
             "retention": "channel",
-            "max_throughput": "default"
+            "max_throughput": "default",
+            "healthy": true
         },
         {
             "_id": 4,
             "name": "Strech",
             "retention": "channel",
-            "max_throughput": "default"
+            "max_throughput": "default",
+            "healthy": false
         },
         {
             "_id": 5,
             "name": "Strech",
             "retention": "channel",
-            "max_throughput": "default"
+            "max_throughput": "default",
+            "healthy": true
         }
     ]);
     const [editName, seteditName] = useState(false);
@@ -267,11 +272,7 @@ const ChannelList = () => {
                         </ClickAwayListener>
                     )}
                     <div className="channels-length">
-                        <h1>Channels</h1>
-                        <div className="len-num">
-                            <p>{channelList?.length}</p>
-                        </div>
-
+                        <h1>Channels ({channelList?.length})</h1>
                     </div>
                 </div>
                 <div className="right-side">
@@ -300,7 +301,7 @@ const ChannelList = () => {
                 )}
                 {channelList?.length > 0 &&
                     channelList?.map((channel) => (
-                        <ChannelOverview content={channel} />
+                        <ChannelOverview channel={channel} />
                     ))}
                 {!isLoading && channelList.length === 0 && (
                     <div className="no-channel-to-display">
