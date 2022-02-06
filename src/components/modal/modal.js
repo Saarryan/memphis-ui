@@ -24,6 +24,7 @@ const TransitionsModal = (props) => {
     progress,
     isLoading,
     warning,
+    border
   } = props;
 
   const useStyles = makeStyles((theme) => ({
@@ -33,7 +34,7 @@ const TransitionsModal = (props) => {
       justifyContent: "center",
       width: width,
       height: height,
-      border: warning ? "1px solid #fbbd71" : "1px solid #5D4AEE",
+      border: border,
       borderRadius: "4px",
       minWidth: minWidth || "703px",
       minHeight: minHeight,
@@ -48,7 +49,7 @@ const TransitionsModal = (props) => {
       height: props.height ? props.height : "230px",
       minWidth: minWidth || "703px",
       minHeight: minHeight,
-      border: warning ? "1px solid #fbbd71" : "1px solid #5D4AEE",
+      border: border,
       borderRadius: "4px",
     },
     buttonLoader: {

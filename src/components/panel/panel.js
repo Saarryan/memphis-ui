@@ -144,7 +144,6 @@ function Panel(props) {
           <div
             className="panel"
             style={{
-              backgroundColor: state.route === "applications" ? "#f7f7f7" : "#f0f1f7",
               width: '92vw'
             }}
           >

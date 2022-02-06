@@ -4,8 +4,7 @@
   position: absolute;
   height: 100%;
   .application-details-header {
-    background-color: #f0f1f7;
-    height: 140px;
+    height: 180px;
     display: flex;
     justify-content: space-between;
     .left-side {
@@ -73,7 +72,7 @@
     }
     .right-side {
       margin-right: 2vw;
-      margin-top: 2vh;
+      place-self: end;
     }
   }
   .channels-content{

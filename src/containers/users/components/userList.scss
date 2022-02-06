@@ -31,10 +31,11 @@
       font-weight: 600;
     }
     .list-item.item {
-      background-color: var(--white);
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 4px 3px rgba(221, 221, 221, 0.3);
       height: 60px;
       border-radius: 15px;
-      box-shadow: 1px 2px 8px 4px #eeeeee;
       margin-bottom: 10px;
     }
   }

@@ -87,7 +87,7 @@ const ChannelList = () => {
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({ type: "SET_ROUTE", payload: "channels" });
+        dispatch({ type: "SET_ROUTE", payload: "applications" });
         //GetApplicationDetails();
     }, []);
 

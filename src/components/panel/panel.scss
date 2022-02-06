@@ -1,5 +1,4 @@
 .panel-container {
-  background-color: #f0f1f7;
   width: 92vw;
   min-width: 1170px;
   display: flex;
@@ -176,12 +175,11 @@ label {
 .panel-body{
   position: relative;
   width: 100%;
-  /* height: calc(96vh - 90px); */
   height: calc(95vh - 75px);
   min-height: 560px;
 }
 .panel-body-mobile{
-  background-color: rgb(240, 241, 247);
+  background-color: rgba(240, 241, 247, 0.3);
   width: 96vw;
   height: 96vh;
   margin-top: 2vh;
