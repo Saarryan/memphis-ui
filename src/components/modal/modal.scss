@@ -1,0 +1,52 @@
+.modal-shadow {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.btnContainer {
+  width: 290px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.modal-header {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.MuiDialog-paperWidthSm {
+  max-width: unset !important;
+}
+
+.MuiBackdrop-root {
+  opacity: 0.3 !important;
+}
+
+.dialogPaperConfirm {
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.buttonLoader {
+  color: #f7f7f7;
+  margin-top: 5px;
+}
+
+.dialogPaper {
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+}
+

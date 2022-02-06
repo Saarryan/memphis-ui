@@ -1,13 +1,9 @@
 const pathContainers = {
-    login: '/signin',
-    initialLogin: '/verifyemail',
+    login: '/login',
     overview: '/overview',
-    usecases: '/usecases',
-    visualizations: '/visualizations',
+    applicationList: '/applications',
     users: '/users',
-    marketplace: '/marketplace',
-    account: '/account',
-    recoverPassword: '/recoverPassword'
+    settings: '/settings',
 }
 
 

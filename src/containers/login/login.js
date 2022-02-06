@@ -76,7 +76,7 @@ const Login = (props) => {
       setAutoLogin(false);
   }
 
-  const getOrganizationDeatails = async (OrganizationId) => {
+  const getOrganizationDetails = async (OrganizationId) => {
     try {
       const organiztionDetails = await httpRequest('GET', ApiEndpoint.GET_ORGANIZATION_DETAILS, {}, { organizationId: OrganizationId });
       if (organiztionDetails && organiztionDetails !== undefined) {
@@ -123,7 +123,7 @@ const Login = (props) => {
         localStorage.setItem(config.LOCAL_STORAGE_CREATE_USECASE, data.already_create_usecase_flag);
 
         dispatch({ type: 'SET_AUTHENTICATION', payload: true })
-        await getOrganizationDeatails(data.organization_id);
+        await getOrganizationDetails(data.organization_id);
       }
       else {
         dispatch({ type: 'SET_LOADER', payload: false });

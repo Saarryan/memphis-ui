@@ -2,6 +2,7 @@ import React from "react";
 import "./userList.scss";
 
 function UserList() {
+
   const getdColors = (type) => {
     switch (type) {
       case "root":
