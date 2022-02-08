@@ -5,7 +5,7 @@ export function getBorderRadius(radiusType) {
     case "square":
       return "0px";
     case "semi-round":
-      return "4px";
+      return "5px";
     default:
       return "0px";
   }
@@ -22,8 +22,8 @@ export function getBorderColor(borderColorType) {
 
 export function getFontColor(colorType) {
   switch (colorType) {
-    case "purple":
-      return "";
+    case "none":
+      return "transparent";
     case "black":
       return "#5D4AEE";
     case "lightPurple":
@@ -61,7 +61,7 @@ export function getBackgroundColor(backgroundColor) {
       return "#5CA6A0";
     case "none":
       return "#fff";
-    case "transparent":
+    case "none":
       return "transparent";
     default:
       return "#F0F1F7";
