@@ -17,6 +17,7 @@ import Button from "../../components/button/button";
 import config from "../../config/config.json";
 import loading from "../../assets/images/strech.gif";
 import pathControllers from "../../router";
+import pathContainers from "../../router";
 
 const ChannelList = () => {
     const [state, dispatch] = useContext(Context);
@@ -331,7 +332,7 @@ const ChannelList = () => {
                 height="600px"
                 minWidth="550px"
                 rBtnText="Add"
-                lBtnText="Overview"
+                lBtnText="Cancel"
                 closeAction={() => modalFlip(false)}
                 lBtnClick={() => {
                     modalFlip(false);
@@ -339,6 +340,7 @@ const ChannelList = () => {
                 clickOutside={() => modalFlip(false)}
                 rBtnClick={() => {
                     modalFlip(false);
+                    history.push(`${pathContainers.applicationList}/${applicationDetails._id}/1`)
                 }}
                 open={modalIsOpen}
             >

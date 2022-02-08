@@ -7,6 +7,7 @@ import ChannelList from "./containers/channelList/channelList";
 import Settings from "./containers/settings/settings"
 import Users from "./containers/users/users";
 import Login from "./containers/login/login";
+import ChannelDashboard from "./containers/channelDashboard/channelDashboard";
 import pathControllers from "./router";
 import PrivateRoute from './PrivateRoute';
 import { useMediaQuery } from 'react-responsive';
@@ -66,6 +67,10 @@ const App = withRouter(() => {
                 </div>
               }></AppWrapper>
             </Route>
+            <Route exact path={`${pathControllers.applicationList}/:id/:id`}>
+              <ChannelDashboard />
+            </Route>
+            
             {/* <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path={pathControllers.overview} component={Overview} />
             <PrivateRoute exact path={`${pathControllers.usecases}/:id`} component={UseCaseEditor} />

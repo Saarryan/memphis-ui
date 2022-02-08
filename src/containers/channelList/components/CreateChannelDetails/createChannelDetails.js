@@ -2,7 +2,7 @@ import "./createChannelDetails.scss";
 import React, { useState } from "react";
 import Input from "../../../../components/Input/Input"
 import RadioButton from "../../../../components/radioButton/radioButton";
-import TextField from "@material-ui/core/TextField";
+import { InputNumber } from "antd";
 const CreateChannelDetails = () => {
 
     const [formFields, setFormFields] = useState({
@@ -37,14 +37,21 @@ const CreateChannelDetails = () => {
             "label": "Size"
         }
     ];
-    const handleUserNameChange = () => {
-
+    const handleUserNameChange = (e) => {
+        setFormFields({ ...formFields, name: e.target.value });
     }
+    
     const retentionTypeChange = (e) => {
         setFormFields({ ...formFields, retention_type: e.target.value });
     }
+    const handleRetentionChange = (e) => {
+        setFormFields({ ...formFields, retention_value: e.target.value });
+    }
     const throughputTypeChange = (e) => {
         setFormFields({ ...formFields, throughput_type: e.target.value });
+    }
+    const handleThroughputChange = (e) => {
+        setFormFields({ ...formFields, throughput_value: e.target.value });
     }
 
     return (
@@ -53,7 +60,7 @@ const CreateChannelDetails = () => {
                 <p>Channel name</p>
                 <Input
                     placeholder="Type channel name"
-                    type="email"
+                    type="text"
                     radiusType="semi-round"
                     colorType="black"
                     backgroundColorType="none"
@@ -72,7 +79,47 @@ const CreateChannelDetails = () => {
                     radioValue={formFields.retention_type}
                     onChange={(e) => retentionTypeChange(e)}
                 />
-                <TextField InputLabelProps={{ shrink: true }} />
+                {formFields.retention_type === 0 &&             
+                    <div className="time-value">
+                        <div className="days-section">
+                            <InputNumber bordered={false} min={0} max={100} keyboard={true} defaultValue={7} />
+                            <p>days</p>
+                        </div>
+                        <p className="separator">:</p>
+                        <div className="hours-section">
+                            <InputNumber bordered={false} min={0} max={24} keyboard={true} defaultValue={0} />
+                            <p>hours</p>
+                        </div>
+                        <p className="separator">:</p>
+                        <div className="minutes-section">
+                            <InputNumber bordered={false} min={0} max={60} keyboard={true} defaultValue={0} />
+                            <p>minutes</p>
+                        </div>
+                        <p className="separator">:</p>
+                        <div className="seconds-section">
+                            <InputNumber bordered={false} min={0} max={60} keyboard={true} defaultValue={0} />
+                            <p>seconds</p>
+                        </div>
+                    </div>
+                }
+                {formFields.retention_type === 1 &&             
+                    <div className="size-value">
+                        <Input
+                            placeholder="Type"
+                            type="number"
+                            radiusType="semi-round"
+                            colorType="black"
+                            backgroundColorType="none"
+                            borderColorType="gray"
+                            width="90px"
+                            height="38px"
+                            onBlur={handleRetentionChange}
+                            onChange={handleRetentionChange}
+                            value={formFields.retention_value}
+                        />
+                        <p>/s</p> 
+                    </div>
+                }
             </div>
             <div className="throughput">
                 <p>Max throughput</p>
@@ -81,6 +128,27 @@ const CreateChannelDetails = () => {
                     radioValue={formFields.throughput_type}
                     onChange={(e) => throughputTypeChange(e)}
                 />
+                <div className="size-value">
+                    <Input
+                        placeholder="Type"
+                        type="number"
+                        radiusType="semi-round"
+                        colorType="black"
+                        backgroundColorType="none"
+                        borderColorType="gray"
+                        width="90px"
+                        height="38px"
+                        onBlur={handleThroughputChange}
+                        onChange={handleThroughputChange}
+                        value={formFields.throughput_value}
+                    />
+                    {formFields.throughput_type === 0 && 
+                        <p>/s</p>
+                    }
+                    {formFields.throughput_type === 1 && 
+                        <p>/Mb</p>
+                    }
+                </div>
             </div>
         </div>
     )

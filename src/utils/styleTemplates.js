@@ -16,7 +16,7 @@ export function getBorderColor(borderColorType) {
     case "none":
       return "transparent";
     case "gray":
-      return "#979797";
+      return "#d8d8d8";
   }
 }
 

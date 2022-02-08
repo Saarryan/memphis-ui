@@ -62,8 +62,6 @@ const Input = (props) => {
       opacity,
       minWidth: minWidth || "100px",
       fontSize: fontSize || "16px",
-      paddingBottom: "0",
-      paddingTop: type === "textArea" ? "10px" : null,
     },
     disabled,
     value,
@@ -96,7 +94,7 @@ const Input = (props) => {
             iconComponent !== undefined && (
               <InputDesign {...fieldProps} prefix={suffix}></InputDesign>
             )}
-          {(type === "text" || type === "email") &&
+          {(type === "text" || type === "email" || type === "number") &&
             iconComponent === undefined && (
               <InputDesign {...fieldProps}></InputDesign>
             )}

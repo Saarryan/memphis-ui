@@ -9,12 +9,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckCircleSharpIcon from "@material-ui/icons/CheckCircleSharp";
 import ErrorSharpIcon from "@material-ui/icons/ErrorSharp";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { useHistory } from "react-router-dom";
+import pathContainers from "../../../../router";
 
 const ChannelOverview = (props) => {
   const [state, dispatch] = useContext(Context);
   const [modalIsOpen, modalFlip] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const history = useHistory();
+
 
   const handleClickMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,6 +27,7 @@ const ChannelOverview = (props) => {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
   return (
     <div className="channel-container">
       <div className="channel-overview-header">
@@ -42,7 +47,7 @@ const ChannelOverview = (props) => {
           </div>
         </div>
         <div className="actions-side">
-          <div className="action overview">
+          <div className="action overview" onClick={() => { history.push(`${pathContainers.applicationList}/${props.channel._id}/1`) } }>
             <p>Overview</p>
           </div>
           <div className="action edit">
@@ -97,7 +102,6 @@ const ChannelOverview = (props) => {
                   Remove
                 </label>
               </MenuItem>
-
             </Popover>
           </div>
         </div>
