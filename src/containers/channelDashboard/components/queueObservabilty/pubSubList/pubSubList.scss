@@ -1,0 +1,21 @@
+.pubSub-list-container{
+    width: 19vw;
+    height: 45vh;
+    box-shadow: 0px 0px 4px 3px rgba(204, 204, 204, 0.19);
+    border-radius: 8px;
+    padding: 20px;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        .title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .add-connector-button{
+            cursor: pointer;
+            color: var(--purple);
+            font-weight: 600;
+            font-size: 12px;
+        }
+    }
+}

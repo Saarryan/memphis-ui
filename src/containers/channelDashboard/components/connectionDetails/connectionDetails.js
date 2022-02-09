@@ -5,7 +5,7 @@ import React from "react"
 const ConnectionDetails = () => {
     return (
         <div className="connection-details-container">
-            <p>connectionDetails</p>
+            <p className="title">connectionDetails</p>
         </div>
     );
 }

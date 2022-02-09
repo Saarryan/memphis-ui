@@ -2,10 +2,13 @@ import "./pubSubList.scss"
 import React from "react"
 
 
-const PubSubList = () => {
+const PubSubList = (props) => {
     return (
         <div className="pubSub-list-container">
-            <p>pubSubList</p>
+            <div className="header">
+                <p className="title">{props.publishers ? 'Publishers' : 'Subscribers'}</p>
+                <p className="add-connector-button">{props.publishers ? 'Add publishers' : 'Add subscribers'}</p>
+            </div>
         </div>
     );
 }

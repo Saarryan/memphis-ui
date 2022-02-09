@@ -40,35 +40,6 @@
         font-weight: bold;
         cursor: pointer;
       }
-      .healthy, .unhealthy{
-        align-self: center;
-        border-radius: 15px;
-        width: 5.5vw;
-        justify-content: center;
-        width: 90px;
-        font-weight: bold;
-        font-size: 13px;
-        p{
-          margin-top: 2px;
-        }
-
-    }
-    .healthy{
-      background-color: #E6F8F5;
-      color: #00B292;
-      .healthy-icon{
-        font-size: 13px;
-        margin-right: 5px;
-      }
-    }
-    .unhealthy{
-      background-color: #fffbeb;
-      color: #FFD12F;
-      .unhealthy-icon{
-        font-size: 13px;
-        margin-right: 5px;
-      }
-    }
       .channel-menu{
         .threedots-menu{
           color: #A9A9A9;
