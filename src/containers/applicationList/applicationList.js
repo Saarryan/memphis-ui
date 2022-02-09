@@ -59,7 +59,7 @@ function ApplicationList() {
         </div>
         <div className="application-list">
           {applicationList.map((application) => {
-            return <Application content={application}></Application>
+            return <Application key={application._id} content={application}></Application>
           })}
           {/* {isLoading && (
             <div className="loader-uploading">

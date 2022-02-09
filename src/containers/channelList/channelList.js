@@ -6,6 +6,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ChannelOverview from "./components/channelOverview/channelOverview";
+import CreateChannelDetails from "./components/CreateChannelDetails/createChannelDetails"
 import { Context } from "../../hooks/store";
 import { httpRequest } from "../../services/http";
 import { ApiEndpoint } from "../../apiEndpoints.model";
@@ -16,6 +17,7 @@ import Button from "../../components/button/button";
 import config from "../../config/config.json";
 import loading from "../../assets/images/strech.gif";
 import pathControllers from "../../router";
+import pathContainers from "../../router";
 
 const ChannelList = () => {
     const [state, dispatch] = useContext(Context);
@@ -76,8 +78,6 @@ const ChannelList = () => {
     const [editName, seteditName] = useState(false);
     const [editDescription, seteditDescription] = useState(false);
     const [modalIsOpen, modalFlip] = useState(false);
-    const [modalInactivation, modalInactivationFlip] = useState(false);
-    const [modalActivation, modalActivationFlip] = useState(false);
     const [applicationDetails, setapplicationDetails] = useState({
         id: 1,
         name: "test",
@@ -288,7 +288,7 @@ const ChannelList = () => {
                         fontWeight="bold"
                         aria-controls="usecse-menu"
                         aria-haspopup="true"
-                        onClick={() => handleCreateChannel()}
+                        onClick={() => modalFlip(true)}
                     />
                 </div>
             </div>
@@ -301,7 +301,7 @@ const ChannelList = () => {
                 )}
                 {channelList?.length > 0 &&
                     channelList?.map((channel) => (
-                        <ChannelOverview channel={channel} />
+                        <ChannelOverview key={channel._id} channel={channel} />
                     ))}
                 {!isLoading && channelList.length === 0 && (
                     <div className="no-channel-to-display">
@@ -327,6 +327,25 @@ const ChannelList = () => {
                     </div>
                 )}
             </div>
+            <Modal
+                header="Your channel details"
+                height="600px"
+                minWidth="550px"
+                rBtnText="Add"
+                lBtnText="Cancel"
+                closeAction={() => modalFlip(false)}
+                lBtnClick={() => {
+                    modalFlip(false);
+                }}
+                clickOutside={() => modalFlip(false)}
+                rBtnClick={() => {
+                    modalFlip(false);
+                    history.push(`${pathContainers.applicationList}/${applicationDetails._id}/1`)
+                }}
+                open={modalIsOpen}
+            >
+                <CreateChannelDetails />
+            </Modal>
         </div >
     );
 };

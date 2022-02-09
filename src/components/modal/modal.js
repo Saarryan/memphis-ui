@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import Button from "../../components/button/button";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Button from "../../components/button/button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import WarningRoundedIcon from "@material-ui/icons/WarningRounded";
+import CloseIcon from "@material-ui/icons/Close"
 import "./modal.scss";
 
 const TransitionsModal = (props) => {
@@ -39,7 +40,7 @@ const TransitionsModal = (props) => {
       minWidth: minWidth || "703px",
       minHeight: minHeight,
       overflowX: "hidden",
-      overflowY: "scroll",
+      overflowY: "auto",
       position: "relative",
     },
     dialogPaperConfirm: {
@@ -51,6 +52,7 @@ const TransitionsModal = (props) => {
       minHeight: minHeight,
       border: border,
       borderRadius: "4px",
+      overflowY: "auto",
     },
     buttonLoader: {
       color: "#f7f7f7",
@@ -77,11 +79,7 @@ const TransitionsModal = (props) => {
           height: "100%",
         }}
       >
-        <span
-          style={{
-            display: "flex",
-          }}
-        >
+        <span className="header-container">
           {warning && (
             <WarningRoundedIcon
               style={{
@@ -92,6 +90,7 @@ const TransitionsModal = (props) => {
             />
           )}
           <p className="modal-header">{header}</p>
+          <CloseIcon onClick={() => props.clickOutside()} style={{ cursor: "pointer" }} />
         </span>
         {props.children}
       </DialogContent>
@@ -105,11 +104,11 @@ const TransitionsModal = (props) => {
         >
           <Button
             className="modal-btn"
-            width="140px"
-            height="40px"
+            width="90px"
+            height="35px"
             placeholder="Close"
             colorType="lightPurple"
-            radiusType="semi-round"
+            radiusType="circle"
             backgroundColorType={warning ? "orange" : "darkPurple"}
             fontSize="14px"
             fontWeight="bold"
@@ -137,11 +136,7 @@ const TransitionsModal = (props) => {
           height: "100%",
         }}
       >
-        <span
-          style={{
-            display: "flex",
-          }}
-        >
+        <span className="header-container">
           {warning && (
             <WarningRoundedIcon
               style={{
@@ -152,61 +147,39 @@ const TransitionsModal = (props) => {
             />
           )}
           <p className="modal-header">{header}</p>
+          <CloseIcon onClick={() => props.clickOutside()} style={{ cursor: "pointer" }} />
         </span>
         {props.children}
       </DialogContent>
       <DialogActions>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            position: "absolute",
-            bottom: "0px",
-            right: "10px",
-          }}
-        >
-          <div className="btnContainer">
-            <Button
-              className="modal-btn"
-              width="140px"
-              height="40px"
-              placeholder={lBtnText}
-              disabled={lBtnDisabled}
-              colorType="navy"
-              radiusType="semi-round"
-              backgroundColorType="lightPurple"
-              fontSize="12px"
-              fontWeight="bold"
-              onClick={() => {
-                props.lBtnClick();
-              }}
-            />
-            <Button
-              className="modal-btn"
-              width="140px"
-              height="40px"
-              placeholder={
-                progress ? (
-                  <CircularProgress
-                    size={20}
-                    className={classes.buttonLoader}
-                  />
-                ) : (
-                  rBtnText
-                )
-              }
-              disabled={rBtnDisabled}
-              colorType="lightPurple"
-              radiusType="semi-round"
-              backgroundColorType={warning ? "orange" : "darkPurple"}
-              fontSize="12px"
-              fontWeight="bold"
-              isLoading={isLoading}
-              onClick={() => {
-                props.rBtnClick();
-              }}
-            />
-          </div>
+        <hr />
+        <div className="btnContainer">
+          <button className="cancel-button" disabled={lBtnDisabled} onClick={() => props.lBtnClick()}>{lBtnText}</button>
+          <Button
+            className="modal-btn"
+            width="90px"
+            height="35px"
+            placeholder={
+              progress ? (
+                <CircularProgress
+                  size={20}
+                  className={classes.buttonLoader}
+                />
+              ) : (
+                rBtnText
+              )
+            }
+            disabled={rBtnDisabled}
+            colorType="lightPurple"
+            radiusType="circle"
+            backgroundColorType={warning ? "orange" : "darkPurple"}
+            fontSize="12px"
+            fontWeight="bold"
+            isLoading={isLoading}
+            onClick={() => {
+              props.rBtnClick();
+            }}
+          />
         </div>
       </DialogActions>
     </Dialog>
