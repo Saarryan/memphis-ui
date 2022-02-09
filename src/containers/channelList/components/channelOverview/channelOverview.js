@@ -6,11 +6,10 @@ import { InboxOutlined } from "@ant-design/icons";
 import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
 import DeleteIcon from "@material-ui/icons/Delete";
-import CheckCircleSharpIcon from "@material-ui/icons/CheckCircleSharp";
-import ErrorSharpIcon from "@material-ui/icons/ErrorSharp";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useHistory } from "react-router-dom";
 import pathContainers from "../../../../router";
+import HealthyBadge from "../../../../components/healthyBadge/healthyBadge";
 
 const ChannelOverview = (props) => {
   const [state, dispatch] = useContext(Context);
@@ -47,29 +46,15 @@ const ChannelOverview = (props) => {
           </div>
         </div>
         <div className="actions-side">
-          <div className="action overview" onClick={() => { history.push(`${pathContainers.applicationList}/${props.channel._id}/1`) } }>
+          <div className="action overview" onClick={() => { history.push(`${pathContainers.applicationList}/${props.channel._id}/1`) }}>
             <p>Overview</p>
           </div>
           <div className="action edit">
             <p>Edit functions</p>
           </div>
-          {props.channel.healthy ? (
-            <div className="action healthy">
-              <CheckCircleSharpIcon
-                className="healthy-icon"
-                theme="outlined"
-              />
-              <p>Healthy</p>
-            </div>
-          ) : (
-            <div className="action unhealthy">
-              <ErrorSharpIcon
-                className="unhealthy-icon"
-                theme="outlined"
-              />
-              <p>UnHealthy</p>
-            </div>
-          )}
+          <div className="action">
+            <HealthyBadge healthy={props.channel.healthy} />
+          </div>
           <div className="action channel-menu">
             <MoreVertIcon
               aria-controls="long-button"

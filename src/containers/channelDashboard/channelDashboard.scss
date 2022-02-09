@@ -1,8 +1,16 @@
-.channel-dashboard-container{
-    .dashboard-header{
-        height: 190px;
+.channel-dashboard-container {
+    margin:2vh 2vw 0 2vw;
+    .dashboard-header {
+        height: 20vh;
     }
-    .dashboard-top{
-        height: 400px;
+    .dashboard-top {
+        height: 45vh;
+        display: flex;
+        justify-content: space-between;
+    }
+    .dashboard-bottom{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px ;
     }
 }

@@ -8,7 +8,7 @@ const QueueObservabilty = () => {
     return (
         <div className="queue-observabilty-container">
             <div className="pub-list">
-                <PubSubList />
+                <PubSubList publishers={true} />
             </div>
             <div className="thunnel-from-sub">
 
@@ -20,7 +20,7 @@ const QueueObservabilty = () => {
 
             </div>
             <div className="sub-list">
-                <PubSubList />
+                <PubSubList publishers={false} />
             </div>
 
         </div>

@@ -32,6 +32,34 @@ const initialState = {
         profile_pic_url: "",
         sub_domain: ""
     },
+    queueDetails: {
+        name: "temporary name",
+        retention: "3 days",
+        max_throughput: "1500s",
+        healthy: true,
+        awaiting_messages: 10,
+        average_message_size: 15,
+        memory: 50,
+        cpu: 20,
+        storage: 15,
+        functions: [
+            {
+                "_id": 1,
+                "name": "sveta",
+                "type": "blabl"
+            },
+            {
+                "_id": 2,
+                "name": "sveta2",
+                "type": "blabl"
+            },
+            {
+                "_id": 3,
+                "name": "sveta3",
+                "type": "blabl"
+            }
+        ]
+    },
     loading: false,
     error: null,
     isAuthentication: false,

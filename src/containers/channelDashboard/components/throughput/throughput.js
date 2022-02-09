@@ -5,7 +5,7 @@ import React from "react"
 const Throughput = () => {
     return (
         <div className="throughput-container">
-            <p>throughput</p>
+            <p className="title">Throughput</p>
         </div>
     );
 }

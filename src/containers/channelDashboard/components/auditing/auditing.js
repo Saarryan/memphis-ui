@@ -5,7 +5,7 @@ import React from "react"
 const Auditing = () => {
     return (
         <div className="auditing-container">
-            <p>auditing</p>
+            <p className="title">Audit</p>
         </div>
     );
 }
