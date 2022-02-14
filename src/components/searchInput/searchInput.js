@@ -15,21 +15,24 @@ const SearchInput = (props) => {
     onChange,
     iconComponent,
     borderRadiusType,
-    borderBottom
+    borderBottom,
+    borderColorType,
+    border
   } = props;
 
   const handleChange = e => (onChange(e));
 
   const color = getFontColor(colorType);
   const backgroundColor = getBackgroundColor(backgroundColorType);
-  const padding = 0;
   const borderRadius = getBorderRadius(borderRadiusType)
+  const padding = 0;
+  const borderColor = getBackgroundColor(borderColorType)
 
 
   const fieldProps = {
     placeholder,
     onChange: handleChange,
-    style: { width, height, color, backgroundColor, padding, borderBottom, borderRadius },
+    style: { width, height, color, backgroundColor, padding, borderBottom, border, borderRadius, borderColor },
   };
 
   return (
