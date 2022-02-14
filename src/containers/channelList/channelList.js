@@ -11,6 +11,7 @@ import { Context } from "../../hooks/store";
 import { httpRequest } from "../../services/http";
 import { ApiEndpoint } from "../../apiEndpoints.model";
 import edit from "../../assets/images/edit.svg";
+import Functions from "../channelDetails/functions";
 import Tooltip from "../../components/tooltip/tooltip";
 import Modal from "../../components/modal/modal";
 import Button from "../../components/button/button";
@@ -207,6 +208,7 @@ const ChannelList = () => {
 
     return (
         <div className="application-details-container">
+            <Functions/>
             <div className="application-details-header">
                 <div className="left-side">
                     {!editName && (
