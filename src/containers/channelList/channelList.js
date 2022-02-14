@@ -6,12 +6,11 @@ import { InboxOutlined } from "@ant-design/icons";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ChannelOverview from "./components/channelOverview/channelOverview";
-import CreateChannelDetails from "./components/createChannelDetails/createChannelDetails"
+import CreateChannelDetails from "./components/CreateChannelDetails/createChannelDetails"
 import { Context } from "../../hooks/store";
 import { httpRequest } from "../../services/http";
 import { ApiEndpoint } from "../../apiEndpoints.model";
 import edit from "../../assets/images/edit.svg";
-import Functions from "../channelDetails/functions";
 import Tooltip from "../../components/tooltip/tooltip";
 import Modal from "../../components/modal/modal";
 import Button from "../../components/button/button";
@@ -78,6 +77,7 @@ const ChannelList = () => {
     ]);
     const [editName, seteditName] = useState(false);
     const [editDescription, seteditDescription] = useState(false);
+    // const [functionModalIsOpen, functionModalFlip] = useState(false);
     const [modalIsOpen, modalFlip] = useState(false);
     const [applicationDetails, setapplicationDetails] = useState({
         id: 1,
@@ -208,7 +208,7 @@ const ChannelList = () => {
 
     return (
         <div className="application-details-container">
-            <Functions/>
+            
             <div className="application-details-header">
                 <div className="left-side">
                     {!editName && (

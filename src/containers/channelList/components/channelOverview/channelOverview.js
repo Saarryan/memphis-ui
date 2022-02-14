@@ -2,6 +2,7 @@ import "./channelOverview.scss";
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../../../hooks/store";
 import FunctionsOverview from "../../../../components/functionsOverview/functionsOverview"
+import Functions from "../../../channelDetails/functions";
 import { InboxOutlined } from "@ant-design/icons";
 import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -14,6 +15,7 @@ import HealthyBadge from "../../../../components/healthyBadge/healthyBadge";
 const ChannelOverview = (props) => {
   const [state, dispatch] = useContext(Context);
   const [modalIsOpen, modalFlip] = useState(false);
+  const [functionModalIsOpen, functionModalFlip] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
@@ -29,6 +31,7 @@ const ChannelOverview = (props) => {
 
   return (
     <div className="channel-container">
+      <Functions open={functionModalIsOpen} closeModal={() => functionModalFlip(false)} />
       <div className="channel-overview-header">
         <div className="info-fields">
           <div className="field-wrapper">
@@ -50,7 +53,7 @@ const ChannelOverview = (props) => {
             <p>Overview</p>
           </div>
           <div className="action edit">
-            <p>Edit functions</p>
+            <p onClick={()=>functionModalFlip(true)}>Edit functions</p>
           </div>
           <div className="action">
             <HealthyBadge healthy={props.channel.healthy} />

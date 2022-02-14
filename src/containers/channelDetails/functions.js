@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function Functions() {
+function Functions(props) {
     const classes = useStyles();
     const [value, setValue] = useState(0);
     const [isOpen, flipIsOpen] = useState(true);
@@ -81,22 +81,26 @@ function Functions() {
         setValue(newValue);
     };
 
+    const handleCloseModal = () => {
+        props.closeModal(false)
+    }
+
     return (
         <Dialog
-            open={isOpen}
+            open={props.open}
             onClose={(_, reson) => {
                 if (reson === "backdropClick")
-                    flipIsOpen(false)
+                    handleCloseModal()
                 // { props.clickOutside() }
             }}
             classes={{ paper: classes.dialogPaper }}
         >
-            <ConnectToHub open={isOpenSignIn} closeModeal={e=>flipIsOpenSignIn(e)}/>
+            <ConnectToHub open={isOpenSignIn} closeModeal={e => flipIsOpenSignIn(e)} />
             <div className="functions-modal-header">
                 <label className="queue-name">Queue name</label>
                 <div>
                     <label className="visit-hub">Visit hub</label>
-                    <img src={Seperator} alt="|" width="20" height="20" className="seperator"/>
+                    <img src={Seperator} alt="|" width="20" height="20" className="seperator" />
                     {signedToHub ?
                         <>
                             <img src={Connect} alt="connect to hub" width="20" height="20" className="pointer" />
@@ -106,7 +110,7 @@ function Functions() {
                         <label className="sign-in-hub" onClick={() => flipIsOpenSignIn(true)}>Sign in to hub</label>
                     }
 
-                    <img src={Close} alt="close" width="12" height="12" style={{ cursor: "pointer" }} />
+                    <img src={Close} alt="close" width="12" height="12" style={{ cursor: "pointer" }} onClick={handleCloseModal}/>
                 </div>
 
             </div>

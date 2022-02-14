@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Button from "../../../components/button/button";
-
+import FunctionForm from "./functionForm";
 import "./functionList.scss";
 import "./functionDetails.scss"
 
 function FunctionDetails(props) {
     const [isInstalled, setInstall] = useState(false); // Placeholder -  will be received from state
+    const [openFunctionForm, setOpenFunctionForm] = useState(false);
 
     return (
         <div className="functions-details-container">
+            <FunctionForm open={openFunctionForm} chosenFunction={props.chosenFunction} closeModal={()=>setOpenFunctionForm(false)}/>
+            
             <div className="functions-details-header">
                 <p>Details</p>
             </div>
@@ -30,7 +33,7 @@ function FunctionDetails(props) {
                             height="32px"
                             placeholder={isInstalled ? "Uninstall" : "Install"}
                             colorType={isInstalled ? "darkPurple" : "lightPurple"}
-                            backgroundColorType={isInstalled ? "transparent" : "darkPurple"}
+                            backgroundColorType={isInstalled ? "none" : "darkPurple"}
                             border={isInstalled ? "darkPurple" : null}
                             radiusType="circle"
                             fontSize="14px"
@@ -50,7 +53,7 @@ function FunctionDetails(props) {
                             fontWeight="bold"
                             aria-haspopup="true"
                             disabled={!isInstalled}
-                        // onClick={openModal}
+                            onClick={() => setOpenFunctionForm(true)}
                         />
                     </div>
                 </div>

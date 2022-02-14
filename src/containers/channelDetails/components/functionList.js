@@ -50,7 +50,7 @@ function FunctionList(props) {
                     <SelectComponent
                         value="val0"
                         colorType="navy"
-                        backgroundColorType="transparent"
+                        backgroundColorType="none"
                         borderColorType="gray"
                         radiusType="circle"
                         width="10vw"
@@ -62,7 +62,7 @@ function FunctionList(props) {
                     <SearchInput
                         placeholder="Search here"
                         colorType="navy"
-                        backgroundColorType="transparent"
+                        backgroundColorType="none"
                         width="10vw"
                         height="27px"
                         borderRadiusType="circle"
