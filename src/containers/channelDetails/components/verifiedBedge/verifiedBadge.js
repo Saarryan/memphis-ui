@@ -1,5 +1,5 @@
 import React from "react";
-import VerifiedUser from "../../../../src/assets/images/verified.svg";
+import VerifiedUser from "../../../../assets/images/verified.svg";
 import "./verifiedBadge.scss"
 
 function VerifiedBedge() {

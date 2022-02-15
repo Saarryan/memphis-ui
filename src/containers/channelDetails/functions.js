@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import FunctionList from "./components/functionList"
-import FunctionDetails from "./components/functionDetails";
+import FunctionList from "./components/functionList/functionList"
+import FunctionDetails from "./components/functionDetails/functionDetails";
+import UsedFunctionsList from "./components/usedFunctionsList/usedFunctionsList"
 import ConnectToHub from "../../components/connectToHub/connectToHub"
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -11,6 +12,7 @@ import { getFontColor } from "../../utils/styleTemplates"
 import Close from "../../assets/images/close.svg"
 import Connect from "../../assets/images/connect.svg"
 import Seperator from "../../assets/images/seperator.svg"
+import Button from "../../components/button/button";
 import "./functions.scss";
 
 
@@ -72,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
 function Functions(props) {
     const classes = useStyles();
     const [value, setValue] = useState(0);
-    const [isOpen, flipIsOpen] = useState(true);
     const [chosenFunction, setChosenFunction] = useState(null);
     const [signedToHub, signInToHub] = useState(false); //placeholder - will be received from state
     const [isOpenSignIn, flipIsOpenSignIn] = useState(false);
@@ -110,7 +111,7 @@ function Functions(props) {
                         <label className="sign-in-hub" onClick={() => flipIsOpenSignIn(true)}>Sign in to hub</label>
                     }
 
-                    <img src={Close} alt="close" width="12" height="12" style={{ cursor: "pointer" }} onClick={handleCloseModal}/>
+                    <img src={Close} alt="close" width="12" height="12" style={{ cursor: "pointer" }} onClick={handleCloseModal} />
                 </div>
 
             </div>
@@ -125,6 +126,35 @@ function Functions(props) {
                     <div className="function-details-section"> <FunctionDetails chosenFunction={chosenFunction} /></div>
                     {/* {value === 0 && <h1>Private</h1>}
                     {value === 1 && <h1>Public</h1>} */}
+                </div>
+                <UsedFunctionsList/>
+                <div className="func-btn-footer">
+                    <Button
+                        className="modal-btn"
+                        width="90px"
+                        height="32px"
+                        placeholder={"Cancel"}
+                        colorType="darkPurple"
+                        radiusType="circle"
+                        backgroundColorType={"none"}
+                        fontSize="14px"
+                        fontWeight="bold"
+                        aria-haspopup="true"
+                    // onClick={() => setOpenFunctionForm(true)}
+                    />
+                    <Button
+                        className="modal-btn"
+                        width="90px"
+                        height="32px"
+                        placeholder={"Add"}
+                        colorType="lightPurple"
+                        radiusType="circle"
+                        backgroundColorType={"darkPurple"}
+                        fontSize="14px"
+                        fontWeight="bold"
+                        aria-haspopup="true"
+                    // onClick={() => setOpenFunctionForm(true)}
+                    />
                 </div>
             </DialogContent>
         </Dialog>);
