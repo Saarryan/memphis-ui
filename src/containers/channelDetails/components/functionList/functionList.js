@@ -10,7 +10,7 @@ import "./functionList.scss";
 const funcList = [{
     id: 1,
     funcName: "Sentiment analysis very long test and more",
-    funcDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat commodo mauris, eget imperdiet nisl interdum vel.",
+    funcDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat commodo mauris, eget imperdiet nisl interdum vel.nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat commodo mauris, eget imperdiet nisl interdum vel.",
     inputDataType: "JSON",
     outputDataType: "JSON",
     isVerified: true,
@@ -76,8 +76,8 @@ function FunctionList(props) {
                         width="10vw"
                         height="27px"
                         borderRadiusType="circle"
-                        // borderColorType="gray"
-                        border="solid 1px #D8D8D8"
+                        borderColorType="gray"
+                        boxShadowsType="gray"
                         iconComponent={<SearchOutlined />}
                     //   onChange={handleSearch}
                     //   value={searchInput}

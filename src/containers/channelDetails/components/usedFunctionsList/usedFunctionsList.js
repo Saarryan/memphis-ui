@@ -1,8 +1,9 @@
 import React from "react";
+import OverflowTip from "../../../../components/tooltip/overflowtip"
 import ArrowFunction from "../../../../assets/images/arrowFunction.svg"
 import "./usedFunctionsList.scss";
 
-const functions = ["Sentiment analysis", "Sentiment analysis", "Sentiment analysis",
+const functions = ["Sentiment analysis ddddddddddsssss", "Sentiment analysis", "Sentiment analysis",
     //  "Sentiment analysis","Sentiment analysis", "Sentiment analysis", "Sentiment analysis", "Sentiment analysis",
     "Sentiment analysis", "Sentiment analysis", "Sentiment analysis", "Sentiment analysis"]
 
@@ -14,7 +15,14 @@ function UsedFunctionsList() {
                 {functions?.map((func, index) => {
                     return <React.Fragment key={index}>
                         <div className="function-item" onClick={() => console.log(`edit ${index}`)}>
-                            <p>{func}</p>
+                            <OverflowTip
+                                text="Sentiment analysis ddddddddddsssss"
+                                width={"170px"}
+                                // color="white"
+                                cursor="pointer"
+                            >
+                                {func}
+                            </OverflowTip>
                         </div>
                         <img
                             src={ArrowFunction}

@@ -30,11 +30,12 @@ function Users() {
         <SearchInput
           placeholder="Search here"
           colorType="navy"
-          backgroundColorType="transparent"
+          backgroundColorType="none"
           width="10vw"
           height="27px"
-          borderRadiusType="square"
-          borderBottom="1px solid rgba(43, 46 , 63, 0.2)"
+          borderRadiusType="circle"
+          borderColorType="gray"
+          boxShadowsType="gray"
           iconComponent={<SearchOutlined />}
         //   onChange={handleSearch}
         //   value={searchInput}
