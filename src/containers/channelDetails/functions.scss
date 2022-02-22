@@ -49,3 +49,13 @@
         cursor: pointer;
     }
 }
+.func-btn-footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 190px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}

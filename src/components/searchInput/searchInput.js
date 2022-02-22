@@ -1,6 +1,6 @@
 import './searchInput.scss';
 import React from 'react';
-import { getFontColor, getBackgroundColor, getBorderRadius } from '../../utils/styleTemplates'
+import { getFontColor, getBackgroundColor, getBorderRadius, getBorderColor,getBoxShadows } from '../../utils/styleTemplates'
 import { Input } from 'antd'
 
 
@@ -17,7 +17,7 @@ const SearchInput = (props) => {
     borderRadiusType,
     borderBottom,
     borderColorType,
-    border
+    boxShadowsType
   } = props;
 
   const handleChange = e => (onChange(e));
@@ -26,13 +26,14 @@ const SearchInput = (props) => {
   const backgroundColor = getBackgroundColor(backgroundColorType);
   const borderRadius = getBorderRadius(borderRadiusType)
   const padding = 0;
-  const borderColor = getBackgroundColor(borderColorType)
+  const borderColor = getBorderColor(borderColorType)
+  const boxShadow = getBoxShadows(boxShadowsType)
 
 
   const fieldProps = {
     placeholder,
     onChange: handleChange,
-    style: { width, height, color, backgroundColor, padding, borderBottom, border, borderRadius, borderColor },
+    style: { width, height, color, backgroundColor, padding, borderBottom, borderRadius, borderColor, boxShadow },
   };
 
   return (

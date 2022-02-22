@@ -3,10 +3,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import { makeStyles } from "@material-ui/core/styles";
 import { Divider } from 'antd';
-import Close from "../../../assets/images/close.svg"
-import Input from "../../../components/Input/Input"
-import SelectComponent from "../../../components/select/select";
-import Button from "../../../components/button/button"
+import Close from "../../../../assets/images/close.svg"
+import Input from "../../../../components/Input/Input"
+import SelectComponent from "../../../../components/select/select";
+import Button from "../../../../components/button/button"
 import "./functionForm.scss";
 
 
