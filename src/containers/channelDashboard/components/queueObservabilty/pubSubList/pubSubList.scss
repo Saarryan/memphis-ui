@@ -1,6 +1,8 @@
 .pubSub-list-container{
     width: 19vw;
     height: 45vh;
+    min-height: 310px;
+    min-width: 250px;
     box-shadow: 0px 0px 4px 3px rgba(204, 204, 204, 0.19);
     border-radius: 8px;
     padding: 20px;
@@ -16,6 +18,39 @@
             color: var(--purple);
             font-weight: 600;
             font-size: 12px;
+        }
+    }
+    .pub-sub-table {
+        .ant-table-container{
+            height: 37vh !important;
+            min-height: 230px;
+            position: absolute;
+        }
+        ::-webkit-scrollbar {
+            width: 5px !important;
+        }
+        .ant-table {
+            background: transparent;
+        }
+        .ant-table-body {
+            max-height: unset !important;
+            height: 90% !important;
+            position: relative;
+        }
+        .ant-table-tbody {
+            background-color: #fbfbfb;
+            > tr > td {
+                border-bottom: none;
+            }
+            .odd {
+                background-color: #f8f7f7;
+            }
+        }
+        .ant-table-thead th {
+            color: #979797;
+        }
+        .column_table::before {
+            width: 0px !important;
         }
     }
 }

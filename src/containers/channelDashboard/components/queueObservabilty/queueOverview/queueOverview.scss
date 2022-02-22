@@ -1,10 +1,9 @@
 .queue-overview-container{
     width: 23vw;
     height: 45vh;
+    min-height: 310px;
     box-shadow: 0px 0px 4px 3px rgba(204, 204, 204, 0.19);
     border-radius: 8px;
-    margin-left: 9vw;
-    margin-right: 9vw;
     padding: 20px;
     .header {
         display: flex;

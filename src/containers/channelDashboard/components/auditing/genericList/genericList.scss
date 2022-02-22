@@ -1,0 +1,30 @@
+.audit-table {
+    .ant-table-container{
+        height: 20vh !important;
+        width: 30vw !important;
+        position: absolute;
+    }
+    ::-webkit-scrollbar {
+        width: 5px !important;
+    }
+    .ant-table {
+        background: transparent;
+    }
+    .ant-table-body {
+        max-height: unset !important;
+        height: 90% !important;
+        position: relative;
+    }
+    .ant-table-tbody {
+        background-color: #fbfbfb;
+        > tr > td {
+            border-bottom: none;
+        }
+    }
+    .ant-table-thead th {
+        color: #979797;
+    }
+    .column_table::before {
+        width: 0px !important;
+    }
+}
