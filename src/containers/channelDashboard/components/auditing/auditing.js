@@ -36,13 +36,14 @@ const auditColumns = [
         ),
     },
 ];
+
 const messagesColumns = [
     {
         title: 'Publisher',
         dataIndex: 'publisher',
         className: 'column_table',
         render: (text, record) => (
-            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '40px' }}>
+            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '200px' }}>
                 {text}
             </div>
         ),
@@ -53,7 +54,7 @@ const messagesColumns = [
         className: 'column_table',
         ellipsis: true,
         render: (text, record) => (
-            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '60px' }}>
+            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '200px' }}>
                 {text}
             </div>
         ),
@@ -63,7 +64,7 @@ const messagesColumns = [
         dataIndex: 'date',
         className: 'column_table',
         render: (text, record) => (
-            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '60px' }}>
+            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
                 {text}
             </div>
         ),

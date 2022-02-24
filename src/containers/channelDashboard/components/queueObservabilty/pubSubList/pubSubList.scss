@@ -52,5 +52,8 @@
         .column_table::before {
             width: 0px !important;
         }
+        .ant-table-cell-row-hover {
+            background-color: unset !important;
+        }
     }
 }

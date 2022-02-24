@@ -1,8 +1,23 @@
+.generic-list-wrapper {
+    display: flex;
+    .list {
+        position: relative;
+        width: 30vw;
+    }
+    .row-data{
+        width: 25vw;
+        height: 22vh;
+        overflow-wrap: anywhere;
+        margin: 1vh;
+    }
+}
 .audit-table {
     .ant-table-container{
-        height: 20vh !important;
+        height: 21vh !important;
         width: 30vw !important;
         position: absolute;
+        border-right: 1px solid #E9E9E9;
+        margin-top: 1vh;
     }
     ::-webkit-scrollbar {
         width: 5px !important;
@@ -12,7 +27,7 @@
     }
     .ant-table-body {
         max-height: unset !important;
-        height: 90% !important;
+        height: 83% !important;
         position: relative;
     }
     .ant-table-tbody {
@@ -26,5 +41,11 @@
     }
     .column_table::before {
         width: 0px !important;
+    }
+    .ant-table-cell-row-hover {
+        background-color: rgba(90, 79, 229, 0.04) !important;
+    }
+    .selected-row{
+        background-color: rgba(90, 79, 229, 0.04);
     }
 }
