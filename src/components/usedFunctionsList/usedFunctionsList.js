@@ -1,16 +1,16 @@
 import React from "react";
-import OverflowTip from "../../../../components/tooltip/overflowtip"
-import ArrowFunction from "../../../../assets/images/arrowFunction.svg"
+import OverflowTip from "../tooltip/overflowtip"
+import ArrowFunction from "../../assets/images/arrowFunction.svg"
 import "./usedFunctionsList.scss";
 
 const functions = ["Sentiment analysis ddddddddddsssss", "Sentiment analysis", "Sentiment analysis",
-    //  "Sentiment analysis","Sentiment analysis", "Sentiment analysis", "Sentiment analysis", "Sentiment analysis",
+     "Sentiment analysis","Sentiment analysis", "Sentiment analysis", "Sentiment analysis", "Sentiment analysis",
     "Sentiment analysis", "Sentiment analysis", "Sentiment analysis", "Sentiment analysis"]
 
 function UsedFunctionsList() {
     return (
         <div className="functions-used-container">
-            <p className="factory-name">My factory</p>
+            {/* <p className="factory-name">My factory</p> */}
             <div className="functions-list">
                 {functions?.map((func, index) => {
                     return <React.Fragment key={index}>

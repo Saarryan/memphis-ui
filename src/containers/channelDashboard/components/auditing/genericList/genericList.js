@@ -26,12 +26,13 @@ const GenericList = (props) => {
                     pagination={false}
                     tableLayout='auto'
                     scroll={{ y: 200 }}
+                    
                     onRow={(record, rowIndex) => {
                         if (selectedRowIndex === rowIndex) {
                             return { className: "selected-row" }
                         }
                         return {
-                            onClick: () => onSelectedRow(rowIndex), // click row
+                            onClick: () => onSelectedRow(rowIndex)
                         };
                     }}
                 />

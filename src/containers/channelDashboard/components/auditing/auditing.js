@@ -6,10 +6,10 @@ import GenericList from './genericList/genericList';
 const auditColumns = [
     {
         title: 'Log message',
-        dataIndex: 'log',
+        dataIndex: 'data',
         className: 'column_table',
         render: (text, record) => (
-            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '200px' }}>
+            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {text}
             </div>
         ),
@@ -74,38 +74,33 @@ const messagesColumns = [
 const auditRows = [
     {
         key: '1',
-        log: 'Avraham created a queue',
+        data: 'Avraham created a project with three factories',
         date: '12/02/22',
-        source: 'Logeer',
-        data: 'Avraham created a queue'
+        source: 'Logeer'
     },
     {
         key: '2',
-        log: 'Avraham created a queue',
+        data: 'Avraham updated a factory, id:"123456" ',
         date: '12/02/22',
-        source: 'Logeer',
-        data: 'Avraham created a queue'
+        source: 'Logeer'
     },
     {
         key: '3',
-        log: 'Avraham created a queue',
+        data: 'Idan created a factory',
         date: '12/02/22',
-        source: 'Logeer',
-        data: 'Avraham created a queue'
+        source: 'Logeer'
     },
     {
         key: '4',
-        log: 'Avraham created a queue',
+        data: 'Sveta created a factory',
         date: '12/02/22',
-        source: 'Logeer',
-        data: 'Avraham created a queue'
+        source: 'Logeer'
     },
     {
         key: '5',
-        log: 'Avraham created a queue',
+        data: 'Yaniv created a factory',
         date: '12/02/22',
-        source: 'Logeer',
-        data: 'Avraham created a queue'
+        source: 'Logeer'
     },
 ];
 
@@ -122,28 +117,28 @@ const messagesRows = [
         publisher: 'kafka connector',
         subscriber: 'kafka connector',
         date: '12/02/22',
-        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001","message":{"type":"message","user":"U2147483697","text":"Hello, world!","ts":"1355517523.000005","edited":{"user":"U2147483697","ts":"1358878755.000001"}}}'
+        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001","message":{"type":"message","user":"U2147483697","text":"Hello, world!","ts":"1355517523.000005"}}'
     },
     {
         key: '3',
         publisher: 'SalesForce connector',
         subscriber: 'external apllication',
         date: '12/02/22',
-        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001","message":{"type":"message","user":"U2147483697","text":"Hello, world!","ts":"1355517523.000005","edited":{"user":"U2147483697","ts":"1358878755.000001"}}}'
+        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001","message":{"type":"message","user":"U2147483697"}}'
     },
     {
         key: '4',
         publisher: 'external apllication',
         subscriber: 'kafka connector',
         date: '12/02/22',
-        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001","message":{"type":"message","user":"U2147483697","text":"Hello, world!","ts":"1355517523.000005","edited":{"user":"U2147483697","ts":"1358878755.000001"}}}'
+        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001"}'
     },
     {
         key: '5',
         publisher: 'external apllication',
         subscriber: 'kafka connector',
         date: '12/02/22',
-        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001","message":{"type":"message","user":"U2147483697","text":"Hello, world!","ts":"1355517523.000005","edited":{"user":"U2147483697","ts":"1358878755.000001"}}}'
+        data: '{"type":"message","subtype":"message_changed","hidden":true,"channel":"C2147483705","ts":"1358878755.000001"}'
     },
 ];
 

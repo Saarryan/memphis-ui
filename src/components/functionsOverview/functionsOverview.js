@@ -4,6 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowRightAltSharpIcon from "@material-ui/icons/ArrowRightAltSharp";
 import removeFunctionIcon from "../../assets/images/removeFunctionIcon.svg"
 import arrowFunction from "../../assets/images/arrowFunction.svg"
+import OverflowTip from "../tooltip/overflowtip";
 const FunctionsOverview = (props) => {
 
     const {
@@ -16,6 +17,7 @@ const FunctionsOverview = (props) => {
     };
     const handleEditFunction = (funcIndex, func) => {
     };
+
     return (
         <div className="function-overview-container">
             {functions.map((func, index) => {
@@ -45,8 +47,14 @@ const FunctionsOverview = (props) => {
                                     className="circular-progress"
                                 />
                     ) : ( */}
-                                <p>{func.name}</p>
-                                {/* )} */}
+                            <OverflowTip
+                                text={func.name}
+                                width={"170px"}
+                                cursor="pointer"
+                            >
+                                {func.name}
+                            </OverflowTip>
+                                
                             </div>
                         </div>
                         {index < functions?.length - 1 && (

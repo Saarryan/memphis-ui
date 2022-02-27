@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FunctionList from "./components/functionList/functionList"
 import FunctionDetails from "./components/functionDetails/functionDetails";
-import UsedFunctionsList from "./components/usedFunctionsList/usedFunctionsList"
+import UsedFunctionsList from "../../components/usedFunctionsList/usedFunctionsList"
 import ConnectToHub from "../../components/connectToHub/connectToHub"
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -14,6 +14,7 @@ import Connect from "../../assets/images/connect.svg"
 import Seperator from "../../assets/images/seperator.svg"
 import Button from "../../components/button/button";
 import "./functions.scss";
+import FunctionsOverview from "../../components/functionsOverview/functionsOverview";
 
 
 const AntTabs = withStyles({
@@ -25,6 +26,24 @@ const AntTabs = withStyles({
 
     },
 })(Tabs);
+
+const functions = [
+    {
+        "_id": 1,
+        "name": "sveta sveta sveta sveta sveta sveta sveta sveta",
+        "type": "blabl"
+    },
+    {
+        "_id": 2,
+        "name": "sveta2",
+        "type": "blabl"
+    },
+    {
+        "_id": 3,
+        "name": "sveta3",
+        "type": "blabl"
+    }
+]
 
 const AntTab = withStyles((theme) => ({
     root: {
@@ -127,7 +146,7 @@ function Functions(props) {
                     {/* {value === 0 && <h1>Private</h1>}
                     {value === 1 && <h1>Public</h1>} */}
                 </div>
-                <UsedFunctionsList/>
+                <FunctionsOverview functions={functions} horizontal={true} editable={true} />
                 <div className="func-btn-footer">
                     <Button
                         className="modal-btn"

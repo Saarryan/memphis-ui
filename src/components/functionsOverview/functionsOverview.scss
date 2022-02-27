@@ -2,7 +2,7 @@
     display: flex;
     min-width:700px;
     overflow-x: auto;
-    height: 12vh;
+    height: 8vh;
     margin-left: 10px;
     .function-list-container{
         display: flex;
@@ -27,32 +27,27 @@
             padding: 5px;
             overflow-x: hidden;
             overflow-y: hidden;
-            width: 9vw;
+            width: 8vw;
             min-width: 90px;
-            height: 9vh;
+            height: 5vh;
             background-color: white;
             border-radius: 10px;
-            box-shadow:  0px 5px 14px rgba(197, 194, 255, 0.7);
+            box-shadow: 0px 8px 11px rgba(197, 194, 255, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 10px;
             flex-flow: column;  
             .function-name{
-                p{
-                    color: var(--blue);
-                    font-weight: 600;
-                    font-size: 14px;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-transform: capitalize;
-                    margin: 0;
-                }
+                text-align: center;
+                align-items: center;
+                text-transform: capitalize;
+               font-size: 14px;
+               font-weight: 600;
             }
         }
         img{
-            width: 4vw;
+            width: 2vw;
         }
     } 
 }
