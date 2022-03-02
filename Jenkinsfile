@@ -4,7 +4,7 @@ def gitURL = "git@github.com:STRECH-LTD/strech-ui.git"
 def gitBranch = "staging"
 unique_Id = UUID.randomUUID().toString()
 def DOCKER_HUB_CREDS = credentials('docker-hub')
-def namespace = strech
+def namespace = "strech"
 
 node {
   try{
