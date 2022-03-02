@@ -1,9 +1,7 @@
 .sidebar {
-  width: 90px; /* Set the width of the sidebar */
-  height: 100%;
+  width: 90px;
+  height: 100vh;
   position: absolute;
-  z-index: 1; /* Stay on top */
-  left: 0;
   text-align: center;
 }
 
@@ -39,7 +37,7 @@
 .sidebar-logoimg {
   width: 47px;
   height: 47px;
-  margin-top: 3vh;
+  margin-top: 1vh;
   margin-bottom: 5vh;
 }
 

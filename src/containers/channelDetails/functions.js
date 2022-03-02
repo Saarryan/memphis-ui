@@ -146,7 +146,9 @@ function Functions(props) {
                     {/* {value === 0 && <h1>Private</h1>}
                     {value === 1 && <h1>Public</h1>} */}
                 </div>
-                <FunctionsOverview functions={functions} horizontal={true} editable={true} />
+                <div className="chosen-func-container">
+                    <FunctionsOverview functions={functions} horizontal={true} editable={true} />
+                </div>
                 <div className="func-btn-footer">
                     <Button
                         className="modal-btn"

@@ -2,7 +2,7 @@
     width: 15vw;
     height: 45vh;
     min-height: 390px;
-    min-width: 200px;
+    min-width: 210px;
     box-shadow: 0px 0px 4px 3px rgba(204, 204, 204, 0.19);
     border-radius: 8px;
     padding: 20px;
@@ -21,6 +21,15 @@
             font-weight: 500;
             margin-left: 5px;
             overflow-wrap: anywhere;
+            overflow: auto;
+            min-height: 75px;
+            width: 100%;
+        }
+        p {
+            height: 16vh;
+        }
+        a {
+            height: 9vh;
         }
         .sdk-btn{
             text-align: -webkit-center;

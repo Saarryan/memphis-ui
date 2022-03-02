@@ -1,6 +1,6 @@
 .channel-dashboard-container {
-    margin:2vh 2vw 0 2vw;
-    width: 97vw;
+    margin: 2vh 0vw 0px 4vw;
+    width: 95vw;
     height: 97vh;
     .dashboard-header {
         //height: 20vh;
@@ -14,7 +14,7 @@
         }
     }
     .dashboard-bottom{
-        width: 97vw;
+        width: 95vw;
         display: flex;
         justify-content: space-between;
         margin-top: 2vw;

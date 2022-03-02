@@ -16,6 +16,14 @@
         overflow-y: scroll;
     }
 }
+
+.chosen-func-container {
+    background: #F8F9FD;
+    margin: 30px;
+    border: 1px solid #E9E9E9;
+    border-radius: 5px;
+}
+
 .functions-modal-header {
     display: flex;
     justify-content: space-between;
@@ -49,6 +57,7 @@
         cursor: pointer;
     }
 }
+
 .func-btn-footer{
     position: absolute;
     right: 0;

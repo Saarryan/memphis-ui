@@ -30,7 +30,7 @@ const auditColumns = [
         dataIndex: 'source',
         className: 'column_table',
         render: (text, record) => (
-            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '80px' }}>
                 {text}
             </div>
         ),
@@ -64,7 +64,7 @@ const messagesColumns = [
         dataIndex: 'date',
         className: 'column_table',
         render: (text, record) => (
-            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '80px' }}>
                 {text}
             </div>
         ),

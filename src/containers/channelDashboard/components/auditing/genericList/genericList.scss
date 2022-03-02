@@ -5,9 +5,10 @@
         width: 30vw;
     }
     .row-data{
-        width: 25vw;
-        height: 22vh;
+        width: 20vw;
+        height: 16vh;
         overflow-wrap: anywhere;
+        overflow: auto;
         margin: 1vh;
         margin-top: 55px;
     }
@@ -15,6 +16,7 @@
 .audit-table {
     .ant-table-container{
         height: 21vh !important;
+        min-height: 180px;
         width: 30vw !important;
         position: absolute;
         border-right: 1px solid #E9E9E9;

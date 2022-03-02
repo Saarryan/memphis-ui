@@ -68,9 +68,13 @@ const App = withRouter(() => {
               }></AppWrapper>
             </Route>
             <Route exact path={`${pathControllers.applicationList}/:id/:id`}>
-              <ChannelDashboard />
+              <AppWrapper content={
+                <div>
+                  <ChannelDashboard />
+                </div>
+              }></AppWrapper>
             </Route>
-            
+
             {/* <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path={pathControllers.overview} component={Overview} />
             <PrivateRoute exact path={`${pathControllers.usecases}/:id`} component={UseCaseEditor} />

@@ -3,14 +3,27 @@ import React, { useContext } from "react";
 import { Progress } from 'antd';
 import { Context } from "../../../../hooks/store";
 import HealthyBadge from "../../../../components/healthyBadge/healthyBadge";
+import CloseIcon from "@material-ui/icons/Close"
+import { useHistory } from "react-router-dom";
 
 
-const ChannelDashboardHeader = () => {
+const ChannelDashboardHeader = (props) => {
     const [state, dispatch] = useContext(Context);
+
+    const history = useHistory();
+
+
+    const ccc = () => {
+        const referer = '/applications/1';
+        history.push(referer);
+    }
 
     return (
         <div className="channel-Dashboard-header">
-            <h1 className="channel-name">Overview - {state.queueDetails.name}</h1>
+            <div className="title-wrapper">
+                <h1 className="channel-name">Overview - {state.queueDetails.name}</h1>
+                <CloseIcon onClick={() => ccc()} style={{ cursor: "pointer" }} />
+            </div>
             <div className="details">
                 <div className="main-details">
                     <p><b>Retention:</b> {state.queueDetails.retention}</p>
