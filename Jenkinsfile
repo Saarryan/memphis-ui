@@ -4,7 +4,7 @@ def gitURL = "git@github.com:STRECH-LTD/strech-ui.git"
 def gitBranch = "staging"
 unique_Id = UUID.randomUUID().toString()
 def DOCKER_HUB_CREDS = credentials('docker-hub')
-def namespace = "strech"
+def k8sNamespace = "strech"
 
 node {
   try{
@@ -27,8 +27,8 @@ node {
     }
     
     stage('Push image to kubernetes') {
-	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" apply -f \"k8s-template.yaml\" --record -n ${namespace}"
-  	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" set image deployment/${imageName} ${imageName}=${dockerImagesRepo}/${imageName}:${unique_Id} -n ${namespace}"
+	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" apply -f \"k8s-template.yaml\" --record -n ${k8sNamespace}"
+  	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" set image deployment/${imageName} ${imageName}=${dockerImagesRepo}/${imageName}:${unique_Id} -n ${k8sNamespace}"
     }
     notifySuccessful()
 
