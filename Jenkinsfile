@@ -27,7 +27,7 @@ node {
     }
     
     stage('Push image to kubernetes') {
-	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" apply -f \"k8s-template.yaml\" --record -n ${k8sNamespace}"
+	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" apply -f \"k8s-template.yaml\" -n ${k8sNamespace}"
   	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" set image deployment/${imageName} ${imageName}=${dockerImagesRepo}/${imageName}:${unique_Id} -n ${k8sNamespace}"
     }
     notifySuccessful()
