@@ -2,7 +2,7 @@ apiVersion: /v1
 kind: Service
 metadata:
   name: strech-ui
-  namespace: hub
+  namespace: strech
 spec:
   type: ClusterIP
   ports:
@@ -16,7 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: strech-ui
-  namespace: hub
+  namespace: strech
   labels:
     app: strech-ui
 spec:
