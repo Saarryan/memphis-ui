@@ -1,54 +1,66 @@
-.sidebar {
+.sidebar-container {
   width: 90px;
   height: 100vh;
-  position: absolute;
-  text-align: center;
-}
-
-.sidebar-circle-icon {
-  width: 57px;
-  height: 57px;
-  border-radius: 50%;
   position: relative;
-  box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px transparent solid;
+  text-align: center;
+  background: #FCFCFC;
 
-}
-
-@keyframes blink { 50% { background-color:transparent ; }  }
-
-
-.sidebar-icon-checked {
-  background: #5ca6a0;
-  color: var(--white);
-}
-.sidebar-icon {
-  background: var(--white);
-  color: #bfbdd4;
-}
-.sidebar-icon-support {
-  background: var(--purple);
-  color: var(--white);
-}
-
-.sidebar-logoimg {
-  width: 47px;
-  height: 47px;
-  margin-top: 1vh;
-  margin-bottom: 5vh;
-}
-
-.sidebar-icons{
-  height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.sidebar-supprt{
-  position: absolute;
-  bottom: 1.5vh;
+  .upper-icons{
+    .logoimg {
+      width: 47px;
+      height: 47px;
+      margin-top: 1vh;
+      margin-bottom: 5vh;
+    }
+    .item-wrapper{
+      p{
+        font-size: 10px;
+        color: #D8D8D8;
+        font-weight: 600;
+      }
+      .name-checked{
+        color: var(--purple);
+      }
+    }
+  }
+  
+  .bottom-icons{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    svg{
+      width: 40px;
+      height: 40px;
+      color: #D8D8D8;
+    }
+  }
+  
+  .circle-nav-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px transparent solid;
+    background: #E9E9E9;
+    color: #bfbdd4;
+    img {
+      width: 18px;
+    }
+  }
+  
+  .checked {
+    background: var(--purple);
+    color: var(--white);
+  }
+  
+  .support {
+    background: var(--purple);
+    color: var(--white);
+  }
+  
+  
 }

@@ -1,6 +1,7 @@
 .applications-container{
   width: 92vw;
   min-width: 1170px;
+  position: relative;
 }
 
 .one-edge-shadow {
@@ -16,7 +17,7 @@
   margin-right: 3vw;
 }
 
-.application-list{
+.application-list {
   height: calc(95vh - 247px);
   position: absolute;
   width: 100%;
