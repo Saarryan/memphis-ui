@@ -5,7 +5,7 @@ const SysComponents = () => {
 
 
     return (
-        <div className='sys-components-container'>
+        <div className='dashboard-wrapper sys-components-container'>
             <p>sys Components</p>
         </div>
     );
