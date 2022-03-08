@@ -62,5 +62,6 @@
 }
 .horizontal {
     display: flex;
-    height: 8vh;
+    height: 9vh;
+    min-height: 40px;
 }

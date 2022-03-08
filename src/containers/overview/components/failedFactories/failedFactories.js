@@ -5,7 +5,7 @@ const FailedFactories = () => {
 
 
     return (
-        <div className='factories-container'>
+        <div className='dashboard-wrapper factories-container'>
             <p>failedFactories</p>
         </div>
     );
