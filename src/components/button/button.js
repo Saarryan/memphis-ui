@@ -35,7 +35,7 @@ const Button = (props) => {
    const borderRadius = getBorderRadius(radiusType);
    const color = getFontColor(colorType);
    const backgroundColor = getBackgroundColor(backgroundColorType);
-   const borderColor =  border? getBackgroundColor(border) : backgroundColor
+   const borderColor =  border ? getBackgroundColor(border) : backgroundColor
    const opacity = disabled? '0.5':'1'
    const boxShadow = getBoxShadows(boxShadowStyle)
 

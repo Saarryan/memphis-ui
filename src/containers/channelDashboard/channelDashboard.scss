@@ -1,16 +1,25 @@
 .channel-dashboard-container {
-    margin:2vh 2vw 0 2vw;
+    width: calc(100% - 60px);
+    position: absolute;
+    padding: 1vw;
+    height: 100%;
     .dashboard-header {
-        height: 20vh;
+        margin-bottom: 15px;
     }
     .dashboard-top {
-        height: 45vh;
         display: flex;
         justify-content: space-between;
+        width: 95vw;
+        .queue-observability {
+            margin-right: 2vw;
+        }
     }
     .dashboard-bottom{
+        width: 95vw;
         display: flex;
         justify-content: space-between;
-        margin-top: 15px ;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        position: relative;
     }
 }

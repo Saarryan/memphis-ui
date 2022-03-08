@@ -1,0 +1,5 @@
+.virtual-table{
+    .column_table::before{
+        width: 0px !important;
+    }
+}

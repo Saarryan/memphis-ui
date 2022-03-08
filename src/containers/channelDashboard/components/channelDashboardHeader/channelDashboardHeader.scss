@@ -1,8 +1,12 @@
 .channel-Dashboard-header{
-    .channel-name{
-        font-size: 24px;
-        font-weight: 600;
-        line-height: 29px;
+    .title-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .channel-name {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 29px;
+        }
     }
     .details {
         margin-top: 20px;
@@ -29,7 +33,7 @@
             .more-details {
                 margin-left: 10px;
                 color: #a8a8a8;
-                width: 6vw;
+                width: 8vw;
                 p{
                     margin: 0;
                 }

@@ -1,15 +1,10 @@
-import Panel from '../panel/panel'
 import SideBar from '../sideBar/sideBar'
 
 function AppWrapper(props) {
     return (
-        <div className="sidebar-and-panel">
+        <div className="sidebar-and-containers">
             <SideBar />
-            <Panel content={
-                <div>
-                    {props.content}
-                </div>
-            } />
+            {props.content}
         </div>
     )
 }

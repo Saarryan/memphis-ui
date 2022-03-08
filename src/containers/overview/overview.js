@@ -3,6 +3,11 @@ import React, { useEffect, useContext } from "react";
 import { Context } from "../../hooks/store";
 import { Divider } from "@material-ui/core";
 import { useMediaQuery } from 'react-responsive'
+import GenericDetails from "./components/genericDetails/genericDetails";
+import Throughput from "./components/throughput/throughput";
+import FailedFactories from "./components/failedFactories/failedFactories";
+import Resources from "./components/resources/resources";
+import SysComponents from "./components/sysComponents/sysComponents";
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -25,35 +30,37 @@ function OverView() {
   }, []);
 
   return (
-    <React.Fragment>
-      <div className="overview-container">
-        <Desktop>
-          <h1 className="main-header-h1">
-            Overview
-          </h1>
-          <div className="overview">
-            <div id="overview-panel-container-up">
-              <div id="overview-monthly-usage" className="overview-panels">
-                <p className="overview-bold-light">
-                  Total usage{" "}
-                </p>
-              </div>
+    <div className="overview-container">
+      <Desktop>
+        <div className="overview-wrapper">
+          <div className="header">
+            <p>Welcome Back, Alex</p>
+          </div>
+          <div className="overview-components">
+            <div className="left-side">
+              <GenericDetails />
+              <Throughput />
+              <FailedFactories />
             </div>
-          </div >
-        </Desktop >
-        <Mobile>
-          <div className="overview-mobile">
-            <div id="overview-panel-container-up-mobile">
-              <div id="overview-monthly-usage-mobile" className="overview-panels">
-                <p className="overview-bold-light">
-                  Total usage{" "}
-                </p>
-              </div>
+            <div className="right-side">
+              <Resources />
+              <SysComponents />
             </div>
-          </div >
-        </Mobile >
-      </div >
-    </React.Fragment >
+          </div>
+        </div>
+      </Desktop>
+      <Mobile>
+        <div className="overview-mobile">
+          <div id="overview-panel-container-up-mobile">
+            <div id="overview-monthly-usage-mobile" className="overview-panels">
+              <p className="overview-bold-light">
+                Total usage{" "}
+              </p>
+            </div>
+          </div>
+        </div >
+      </Mobile >
+    </div >
   );
 }
 

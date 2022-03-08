@@ -1,5 +1,7 @@
 .applications-container{
-  width: 92vw;
+  width: calc(100% - 60px);
+  position: absolute;
+  padding: 1vw;
   min-width: 1170px;
 }
 
@@ -12,19 +14,16 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-left: 2vw;
   margin-right: 3vw;
 }
 
-.application-list{
+.application-list {
   height: calc(95vh - 247px);
   position: absolute;
-  width: 100%;
   display: inline-flex;
   flex-wrap: wrap;
-  padding-left: 40px;
   overflow-y: auto;
-  //min-height: 420px;
+  padding-left:2px;
   margin-top: 20px;
 }
 

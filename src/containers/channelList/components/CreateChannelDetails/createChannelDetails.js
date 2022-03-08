@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Input from "../../../../components/Input/Input"
 import RadioButton from "../../../../components/radioButton/radioButton";
 import { InputNumber } from "antd";
+
 const CreateChannelDetails = () => {
 
     const [formFields, setFormFields] = useState({
@@ -40,7 +41,7 @@ const CreateChannelDetails = () => {
     const handleUserNameChange = (e) => {
         setFormFields({ ...formFields, name: e.target.value });
     }
-    
+
     const retentionTypeChange = (e) => {
         setFormFields({ ...formFields, retention_type: e.target.value });
     }
@@ -79,7 +80,7 @@ const CreateChannelDetails = () => {
                     radioValue={formFields.retention_type}
                     onChange={(e) => retentionTypeChange(e)}
                 />
-                {formFields.retention_type === 0 &&             
+                {formFields.retention_type === 0 &&
                     <div className="time-value">
                         <div className="days-section">
                             <InputNumber bordered={false} min={0} max={100} keyboard={true} defaultValue={7} />
@@ -102,7 +103,7 @@ const CreateChannelDetails = () => {
                         </div>
                     </div>
                 }
-                {formFields.retention_type === 1 &&             
+                {formFields.retention_type === 1 &&
                     <div className="size-value">
                         <Input
                             placeholder="Type"
@@ -117,7 +118,7 @@ const CreateChannelDetails = () => {
                             onChange={handleRetentionChange}
                             value={formFields.retention_value}
                         />
-                        <p>/s</p> 
+                        <p>/s</p>
                     </div>
                 }
             </div>
@@ -142,10 +143,10 @@ const CreateChannelDetails = () => {
                         onChange={handleThroughputChange}
                         value={formFields.throughput_value}
                     />
-                    {formFields.throughput_type === 0 && 
+                    {formFields.throughput_type === 0 &&
                         <p>/s</p>
                     }
-                    {formFields.throughput_type === 1 && 
+                    {formFields.throughput_type === 1 &&
                         <p>/Mb</p>
                     }
                 </div>
