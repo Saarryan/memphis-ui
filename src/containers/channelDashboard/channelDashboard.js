@@ -1,13 +1,20 @@
 import "./channelDashboard.scss"
-import React from "react"
+import React, { useEffect, useContext } from "react"
 import ChannelDashboardHeader from "./components/channelDashboardHeader/channelDashboardHeader";
 import QueueObservabilty from "./components/queueObservabilty/queueObservabilty";
 import ConnectionDetails from "./components/connectionDetails/connectionDetails";
 import Auditing from "./components/auditing/auditing";
 import Throughput from "./components/throughput/throughput";
+import { Context } from "../../hooks/store";
 
 
 const ChannelDashboard = () => {
+    const [state, dispatch] = useContext(Context);
+
+    useEffect(() => {
+        dispatch({ type: "SET_ROUTE", payload: "applications" });
+    }, []);
+
     return (
         <div className="channel-dashboard-container">
             <div className="dashboard-header">

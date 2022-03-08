@@ -14,7 +14,7 @@ function Users() {
     //GetApplicationDetails();
   }, []);
   return (
-    <React.Fragment>
+    <div className="users-container">
       <h1 className="main-header-h1">Users</h1>
       <div className="add-search-user">
         <AddButton
@@ -42,7 +42,7 @@ function Users() {
         />
       </div>
       <UserList />
-    </React.Fragment>
+    </div>
   );
 }
 export default Users;

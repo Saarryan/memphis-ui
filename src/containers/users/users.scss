@@ -1,4 +1,9 @@
-.add-search-user {
-  display: flex;
-  margin-left: 2vw;
+.users-container{
+  width: calc(100% - 60px);
+  position: absolute;
+  padding: 1vw;
+  .add-search-user {
+    display: flex;
+
+  }
 }

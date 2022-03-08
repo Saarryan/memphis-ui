@@ -5,10 +5,11 @@
   color: var(--blue);
 }
 .app-container{
-    position: absolute;
+    position: relative;
     width: 100vw;
     height: 100vh;
     overflow: auto;
+    background: #F8F8F8;
 }
 
 .App-logo {
@@ -57,17 +58,15 @@
   font-weight: 1000;
   color: var(--blue);
   position: relative;
-  padding-top: 25px;
-  margin-left: 2vw;
   margin-bottom: 0;
 }
 
-.containers{
-  position: absolute;
-  width: 90%;
-  height: 90%;
-  top: 70px;
-}
+// .containers{
+//   position: absolute;
+//   width: 90%;
+//   height: 90%;
+//   top: 70px;
+// }
 
 ::-webkit-scrollbar {
   width: 3px;
@@ -122,6 +121,7 @@
   margin-left: 10px;
 }
 .sidebar-and-containers{
-  position: relative;
+  position: absolute;
   display: flex;
+  width: 100%;
 }

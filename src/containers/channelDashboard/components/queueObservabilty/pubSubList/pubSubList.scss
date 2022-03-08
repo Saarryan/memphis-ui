@@ -38,7 +38,7 @@
             position: relative;
         }
         .ant-table-tbody {
-            background-color: #fbfbfb;
+            background-color: #FbFbFb;
             > tr > td {
                 border-bottom: none;
             }
@@ -48,6 +48,7 @@
         }
         .ant-table-thead th {
             color: #979797;
+            background: #F8F8F8;
         }
         .column_table::before {
             width: 0px !important;

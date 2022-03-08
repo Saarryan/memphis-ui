@@ -16,7 +16,7 @@ function Users() {
         setValue(newValue);
     };
     return (
-        <div>
+        <div className="settings-container">
             <h1 className="main-header-h1">Settings</h1>
             <div className="settings-panel-body">
                 <div style={{ width: "fit-content" }}>

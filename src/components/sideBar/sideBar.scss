@@ -1,5 +1,5 @@
 .sidebar-container {
-  width: 90px;
+  width: 60px;
   height: 100vh;
   position: relative;
   text-align: center;
@@ -7,8 +7,6 @@
 
   .upper-icons{
     .logoimg {
-      width: 47px;
-      height: 47px;
       margin-top: 1vh;
       margin-bottom: 5vh;
     }
@@ -26,18 +24,40 @@
   
   .bottom-icons{
     position: absolute;
-    bottom: 0px;
+    bottom: 1vh;
     width: 100%;
     svg{
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       color: #D8D8D8;
     }
+    
+    .ant-menu-vertical{
+      background: transparent !important;
+      border: unset !important;
+    }
+    .app-menu {
+      i{
+        display: none;
+      }
+      .ant-menu-submenu-title{
+        text-overflow: unset;
+        padding: 0;
+      }
+      .ant-menu-item-icon{
+        width: 60px;
+        position: absolute;
+        display: flex;
+        place-content: center;
+      }
+    }
+    
   }
+ 
   
   .circle-nav-item {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     position: relative;
     box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
@@ -48,7 +68,11 @@
     background: #E9E9E9;
     color: #bfbdd4;
     img {
-      width: 18px;
+      width: 20px;
+    }
+    svg {
+      width: 20px;
+      height: 20px;
     }
   }
   
@@ -62,5 +86,69 @@
     color: var(--white);
   }
   
+}
+.header-menu {
+  border-bottom: 0.5px solid #E9E9E9;
+  display: flex;
+  height: 45px;
+  align-items: center;
+  padding-left: 15px;
+  p{
+    margin: 0;
+    font-size: 12px;
+  }
+  .company-logo {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #D8D8D8;
+    border-radius: 20px;
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+  }
+}
+.item-wrapp{
+  display: flex;
+  align-items: center;
+  img {
+    margin-right: 10px;
+  }
+  p{
+    margin: 0;
+    font-size: 12px;
+  }
+}
   
+  
+
+.ant-menu-submenu > .ant-menu{
+  border-radius: 8px;
+  border: 1px solid #D8D8D8;
+  width: 16vw;
+  min-width: 220px;
+}
+
+.ant-menu-item-group-list .ant-menu-item{
+  padding: 0 16px 0 21px;
+}
+
+.ant-menu-item-group-title{
+  padding: 8px 0px;
+}
+
+.ant-menu-vertical .ant-menu-item{
+  line-height: unset !important;
+}
+
+.ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active {
+  color: var(--purple);
+}
+
+.ant-menu-item-selected{
+  color: black;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: unset;
 }
