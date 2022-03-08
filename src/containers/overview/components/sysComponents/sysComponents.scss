@@ -1,3 +1,17 @@
-.sys-components-container{
+.sys-components-container {
     height: 50%;
+    p {
+        margin-bottom: 0px;
+    }
+    .sys-components-header {
+        color: #979797;
+    }
+    .sys-components {
+        // background-color: aqua;
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
 }
