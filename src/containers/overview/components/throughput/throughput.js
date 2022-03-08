@@ -5,7 +5,7 @@ const Throughput = () => {
 
 
     return (
-        <div className='throughput-dashboard-container'>
+        <div className='dashboard-wrapper throughput-dashboard-container'>
             <p>throughput</p>
         </div>
     );

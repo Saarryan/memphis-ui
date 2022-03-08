@@ -5,7 +5,7 @@ const Resources = () => {
 
 
     return (
-        <div className='resources-container'>
+        <div className='dashboard-wrapper resources-container'>
             <p>resources</p>
         </div>
     );
