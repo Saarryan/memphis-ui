@@ -1,24 +1,18 @@
 @font-face {
-  font-family: "Avenir-Next";
-  src: local("AvenirNextLTPro-Regular"),
-    url("./assets/fonts/Avenir-Next/AvenirNextLTPro-Regular.otf") format("truetype");
+  font-family: "Inter";
+  src: local("Inter-Regular"),
+    url("./assets/fonts/Inter/Inter-Regular.ttf") format("truetype");
   font-weight: regular;
 }
 @font-face {
-  font-family: "AvenirNextBold";
-  src: local("AvenirNextLTPro-Bold"),
-    url("./assets/fonts/Avenir-Next/AvenirNextLTPro-Bold.otf") format("truetype");
+  font-family: "InterBold";
+  src: local("Inter-Bold"),
+    url("./assets/fonts/Inter/Inter-Bold.ttf") format("truetype");
   font-weight: bold;
-}
-@font-face {
-  font-family: "AvenirNextDemi";
-  src: local("AvenirNextLTPro-Demi"),
-    url("./assets/fonts/Avenir-Next/AvenirNextLTPro-Demi.otf") format("truetype");
-  font-weight:600;
 }
 
 * {
-  font-family: Avenir-Next;
+  font-family: Inter;
 }
 
 body {

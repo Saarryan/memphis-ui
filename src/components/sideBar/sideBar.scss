@@ -26,10 +26,17 @@
     position: absolute;
     bottom: 1vh;
     width: 100%;
-    svg{
+    .sub-icon-wrapper{
       width: 35px;
       height: 35px;
-      color: #D8D8D8;
+      background: #E9E9E9;
+      box-shadow: 0px 0px 2px rgb(148 148 148 / 25%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      img {
+        margin-bottom: 5px;
+      }
     }
     
     .ant-menu-vertical{
@@ -43,6 +50,9 @@
       .ant-menu-submenu-title{
         text-overflow: unset;
         padding: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
       }
       .ant-menu-item-icon{
         width: 60px;
@@ -120,8 +130,6 @@
     font-size: 12px;
   }
 }
-  
-  
 
 .ant-menu-submenu > .ant-menu{
   border-radius: 8px;

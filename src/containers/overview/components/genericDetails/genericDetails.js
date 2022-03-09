@@ -10,24 +10,24 @@ const GenericDetails = () => {
     return (
         <div className='generic-container'>
             <div className='dashboard-wrapper data-box'>
-                <img src={liveMessagesIcon} width={25} height={25} alt="liveMessagesIcon" />
+                <img src={liveMessagesIcon} width={45} height={45} alt="liveMessagesIcon" />
                 <div className='data-wrapper'>
-                    <p>Live messages</p>
+                    <b>Live messages</b>
                     <p>100</p>
                 </div>
             </div>
             <div className='dashboard-wrapper data-box'>
-                <img src={factoryActionIcon} width={25} height={25} alt="liveMessagesIcon" />
+                <img src={factoryActionIcon} width={45} height={45} alt="liveMessagesIcon" />
                 <div className='data-wrapper'>
-                    <p>Live messages</p>
-                    <p>100</p>
+                    <b>Live messages</b>
+                    <p>90 <span>in action</span></p>
                 </div>
             </div>
             <div className='dashboard-wrapper data-box'>
-                <img src={factoryIdleIcon} width={25} height={25} alt="liveMessagesIcon" />
+                <img src={factoryIdleIcon} width={45} height={45} alt="liveMessagesIcon" />
                 <div className='data-wrapper'>
-                    <p>Live messages</p>
-                    <p>100</p>
+                    <b>Live messages</b>
+                    <p>3 <span>on idle</span></p>
                 </div>
             </div>
         </div>
