@@ -13,7 +13,7 @@ node {
         git credentialsId: 'main-github', url: gitURL, branch: gitBranch
     }
     stage('Build docker image') {
-        sh "docker build -t ${dockerImagesRepo}/${imageName} ."
+        sh "docker build -t ${repoUrlPrefix}/${imageName} ."
     }
 
     stage('Push docker image') {
