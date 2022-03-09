@@ -1,3 +1,14 @@
-.resources-container{
+.resources-container {
     height: 50%;
+    padding: 15px;
+    p {
+        margin-bottom: 0;
+    }
+    .resource {
+        display: flex;
+        align-items: center;
+       .chart div {
+           width: 150px;
+       }
+    }
 }

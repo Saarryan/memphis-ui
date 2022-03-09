@@ -9,7 +9,9 @@ import ApexChart from './areaChart'
 
 const AntTabs = withStyles({
     root: {
-        paddingLeft: "30px",
+        position:"absolute",
+        top:"5px",
+        left:"40%",
     },
     indicator: {
         backgroundColor: getFontColor("black"),
@@ -20,7 +22,7 @@ const AntTabs = withStyles({
 const AntTab = withStyles((theme) => ({
     root: {
         textTransform: "none",
-        fontSize: "16px",
+        fontSize: "14px",
         minWidth: 12,
         maxWidth: 100,
         fontWeight: theme.typography.fontWeightBold,
@@ -72,11 +74,11 @@ const Throughput = () => {
 
     return (
         <div className='dashboard-wrapper throughput-dashboard-container'>
-            {/* <p>throughput</p> */}
             <AntTabs value={value} onChange={handleChangeMenuItem}  >
                 <AntTab label="Subscribers" />
                 <AntTab label="Publishers" />
             </AntTabs>
+            <p className='dashboard-header'>Throughput</p>
             <ApexChart />
         </div>
     );
