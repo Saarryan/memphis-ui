@@ -25,7 +25,7 @@ const AntTab = withStyles((theme) => ({
         maxWidth: 100,
         fontWeight: theme.typography.fontWeightBold,
         marginRight: theme.spacing(3),
-        fontFamily: ["Avenir-Next"].join(","),
+        fontFamily: ["Inter"].join(","),
         "&:hover": {
             color: getFontColor("navy"),
             opacity: 1,

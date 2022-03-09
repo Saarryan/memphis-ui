@@ -1,7 +1,6 @@
 import "./overview.scss";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../../hooks/store";
-import { Divider } from "@material-ui/core";
 import { useMediaQuery } from 'react-responsive'
 import GenericDetails from "./components/genericDetails/genericDetails";
 import Throughput from "./components/throughput/throughput";
@@ -20,21 +19,31 @@ const Mobile = ({ children }) => {
 
 function OverView() {
   const [state, dispatch] = useContext(Context);
+  const botId = 1;
+  const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'))
   useEffect(() => {
     dispatch({ type: "SET_ROUTE", payload: "overview" });
-    dispatch({ type: "SHOW_PANEL", payload: true });
-    dispatch({
-      type: "IS_USECASE_BUILDER_ACTIVE",
-      payload: false,
-    });
+    setBotImage(botId);
   }, []);
+
+  const setBotImage = (botId) => {
+    SetBotUrl(require(`../../assets/images/bots/${botId}.svg`))
+  }
+
+
 
   return (
     <div className="overview-container">
       <Desktop>
         <div className="overview-wrapper">
           <div className="header">
-            <p>Welcome Back, Alex</p>
+            <div className="bot-wrapper">
+              <img src={botUrl} width={30} height={30} alt="bot"></img>
+            </div>
+            <div className="dynamic-sentences">
+              <h1>Welcome Back, Alex</h1>
+              <p className="ok-status">You’re a memphis superhero! All looking good!</p>
+            </div>
           </div>
           <div className="overview-components">
             <div className="left-side">

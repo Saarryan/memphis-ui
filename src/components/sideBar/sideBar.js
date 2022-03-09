@@ -31,6 +31,16 @@ const Desktop = ({ children }) => {
 function SideBar() {
   const [state, dispatch] = useContext(Context);
   const history = useHistory();
+  const botId = 1;
+  const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'))
+
+  useEffect(() => {
+    setBotImage(botId);
+  }, []);
+
+  const setBotImage = (botId) => {
+    SetBotUrl(require(`../../assets/images/bots/${botId}.svg`))
+  }
 
   const handleClick = (e) => {
     switch (e.key) {
@@ -143,7 +153,7 @@ function SideBar() {
           <Menu onClick={handleClick} className="app-menu" mode="vertical" triggerSubMenuAction="click">
             <SubMenu
               key="subMenu"
-              icon={<AccountCircle />}
+              icon={<div className="sub-icon-wrapper"><img src={botUrl} width={25} height={25} alt="bot"></img></div>}
             >
               <Menu.ItemGroup title={
                 <div className="header-menu">
