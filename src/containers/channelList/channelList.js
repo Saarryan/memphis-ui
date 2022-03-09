@@ -6,7 +6,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ChannelOverview from "./components/channelOverview/channelOverview";
-import CreateChannelDetails from "./components/createChannelDetails/createChannelDetails"
+import CreateChannelDetails from "./components/CreateChannelDetails/createChannelDetails"
 import { Context } from "../../hooks/store";
 import { httpRequest } from "../../services/http";
 import { ApiEndpoint } from "../../apiEndpoints.model";
