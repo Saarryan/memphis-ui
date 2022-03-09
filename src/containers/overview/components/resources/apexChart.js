@@ -44,8 +44,8 @@ export default function ApexChart(props) {
 
 
     return (
-        <div className="chart" style={{ display:"flex", justifyContent:"flex-end"}}>
-            <ReactApexChart options={options} series={series} type="radialBar" width={180} />
+        <div className="chart-pie">
+            <ReactApexChart options={options} series={series} type="radialBar" width={160} />
         </div>
     );
 }
