@@ -15,20 +15,20 @@ const SysComponents = () => {
 
     return (
         <div className='dashboard-wrapper sys-components-container'>
-            <p>sys Components</p>
+            <p className='dashboard-header'>System components</p>
             <div className='sys-components sys-components-header'>
                 <p>Pod name</p>
                 <p>Pods</p>
                 <p>Status</p>
             </div>
             {!sysComponents && <Divider />}
-            {sysComponents && sysComponents.map(comp => {
-                return <div key={comp.podName}>
+            {sysComponents && sysComponents.map((comp, i) => {
+                return <div key={`${comp.podName}${i}`}>
                     <Divider />
                     <div className='sys-components'>
                         <p>{comp.podName}</p>
                         <p>{comp.pods}</p>
-                        <p><HealthyBadge healthy={comp.status==="healthy"}/></p>
+                        <HealthyBadge healthy={comp.status==="healthy"}/>
                     </div>
                     
                 </div>
