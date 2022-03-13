@@ -13,10 +13,11 @@
         grid-template-columns: 40% 20% 40%;
         padding-left: 10px;
         padding-bottom: 10px;
+        height: 30px;
     }
     .component-list {
        overflow-y: scroll;
-       height: 80%;
+       height: calc(100% - 70px);
         .sys-components {
             display: grid;
             grid-template-columns: 40% 20% 40%;

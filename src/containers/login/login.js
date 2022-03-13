@@ -40,8 +40,11 @@ const Login = (props) => {
     email: "", password: ""
   });
 
-  useEffect(() => {
+  useEffect(async () => {
     refreshTokenIfKeepMeSigninOnAn();
+    const url = window.location.href.split('/')[2];
+    const data = await httpRequest('GET', `https://${url}/api-gw/usermgmt/adduser`);
+    console.log(data);
   }, [])
 
   const handleUserNameChange = e => {

@@ -53,10 +53,10 @@ const ChannelOverview = (props) => {
             <p>Overview</p>
           </div>
           <div className="action edit">
-            <p onClick={()=>functionModalFlip(true)}>Edit functions</p>
+            <p onClick={() => functionModalFlip(true)}>Edit functions</p>
           </div>
           <div className="action">
-            <HealthyBadge healthy={props.channel.healthy} />
+            <HealthyBadge status={props.channel.healthy} />
           </div>
           <div className="action channel-menu">
             <MoreVertIcon

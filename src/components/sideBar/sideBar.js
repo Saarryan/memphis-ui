@@ -2,11 +2,10 @@ import "./sideBar.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../hooks/store";
 import { Link } from "react-router-dom";
-import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
-import IconButton from "@material-ui/core/IconButton";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useMediaQuery } from "react-responsive";
 import Logo from "../../assets/images/logo.png";
+import dashboardIcon from "../../assets/images/dashboardIcon.svg";
+import dashboardIconWhite from "../../assets/images/dashboardIconWhite.svg";
 import usersIcon from "../../assets/images/usersIcon.svg";
 import usersIconWhite from "../../assets/images/usersIconWhite.svg";
 import useCaseIcon from "../../assets/images/useCaseIcon.svg";
@@ -65,7 +64,7 @@ function SideBar() {
           </Link>
           <div className="item-wrapper">
             <Link to={pathControllers.overview}>
-              <IconButton className="icon">
+              <div className="icon">
                 <div
                   className={
                     state.route === "overview"
@@ -73,9 +72,23 @@ function SideBar() {
                       : "circle-nav-item"
                   }
                 >
-                  <DashboardRoundedIcon />
+                  {state.route === "overview" ? (
+                    <img
+                      src={dashboardIcon}
+                      alt="dashboardIconIconWhite"
+                      width="20"
+                      height="20"
+                    ></img>
+                  ) : (
+                    <img
+                      src={dashboardIconWhite}
+                      alt="dashboardIconIcon"
+                      width="20"
+                      height="20"
+                    ></img>
+                  )}
                 </div>
-              </IconButton>
+              </div>
             </Link>
             <p className={state.route === "overview" ? "name-checked" : "name"}>
               Dashboard
@@ -83,7 +96,7 @@ function SideBar() {
           </div>
           <div className="item-wrapper">
             <Link to={pathControllers.applicationList}>
-              <IconButton className="icon">
+              <div className="icon">
                 <div
                   className={
                     state.route === "applications"
@@ -93,14 +106,14 @@ function SideBar() {
                 >
                   {state.route === "applications" ? (
                     <img
-                      src={useCaseIconWhite}
+                      src={useCaseIcon}
                       alt="useCaseIconWhite"
                       width="20"
                       height="20"
                     ></img>
                   ) : (
                     <img
-                      src={useCaseIcon}
+                      src={useCaseIconWhite}
                       alt="useCaseIcon"
                       width="20"
                       height="20"
@@ -108,7 +121,7 @@ function SideBar() {
                   )}
 
                 </div>
-              </IconButton>
+              </div>
             </Link>
             <p className={state.route === "applications" ? "name-checked" : "name"}>
               Boxes
@@ -117,7 +130,7 @@ function SideBar() {
 
           <div className="item-wrapper">
             <Link to={pathControllers.users}>
-              <IconButton className="icon">
+              <div className="icon">
                 <div
                   className={
                     state.route === "users"
@@ -127,21 +140,21 @@ function SideBar() {
                 >
                   {state.route === "users" ? (
                     <img
-                      src={usersIconWhite}
+                      src={usersIcon}
                       alt="usersIconWhite"
                       width="20"
                       height="20"
                     ></img>
                   ) : (
                     <img
-                      src={usersIcon}
+                      src={usersIconWhite}
                       alt="usersIcon"
                       width="20"
                       height="20"
                     ></img>
                   )}
                 </div>
-              </IconButton>
+              </div>
             </Link>
             <p className={state.route === "users" ? "name-checked" : "name"}>
               Users
@@ -163,7 +176,7 @@ function SideBar() {
                   <p>Tali Pink</p>
                 </div>
               }>
-                <Menu.Item key={1}>
+                <Menu.Item key={1} className="customclass">
                   <div className="item-wrapp">
                     <img src={accountIcon} width="15" height="15" alt="accountIcon" />
                     <p>My account</p>
