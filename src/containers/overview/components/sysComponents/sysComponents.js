@@ -23,8 +23,8 @@ const SysComponents = () => {
 
     return (
         <div className='dashboard-wrapper sys-components-container'>
-            <p className='dashboard-header'>System components</p>
-            <div className='sys-components-header'>
+           <p className='dashboard-components-header'>System components</p>
+            <div className='sys-components sys-components-header'>
                 <p>Pod name</p>
                 <p>Pods</p>
                 <p>Status</p>
@@ -37,7 +37,7 @@ const SysComponents = () => {
                         <div className='sys-components'>
                             <p>{comp.podName}</p>
                             <p>{comp.pods}</p>
-                            <HealthyBadge healthy={comp.status === "healthy"} />
+                            <HealthyBadge healthy={comp.status==="healthy"}/>
                         </div>
 
                     </div>
