@@ -53,9 +53,9 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        background: transparent;
       }
       .ant-menu-item-icon {
-        width: 40px;
         position: absolute;
         display: flex;
         place-content: center;
@@ -66,17 +66,6 @@
  
   
   .circle-nav-item {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    position: relative;
-    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px transparent solid;
-    background: #E9E9E9;
-    color: #bfbdd4;
     img {
       width: 20px;
     }
@@ -87,7 +76,6 @@
   }
   
   .checked {
-    background: var(--purple);
     color: var(--white);
   }
   
@@ -100,12 +88,13 @@
 .header-menu {
   border-bottom: 0.5px solid #E9E9E9;
   display: flex;
-  height: 45px;
+  height: 55px;
   align-items: center;
   padding-left: 15px;
   p{
     margin: 0;
     font-size: 12px;
+    color: #000000;
   }
   .company-logo {
     width: 30px;
@@ -128,13 +117,14 @@
   p{
     margin: 0;
     font-size: 12px;
+    color: #000000;
   }
 }
 
 .ant-menu-submenu > .ant-menu{
   border-radius: 8px;
   border: 1px solid #D8D8D8;
-  width: 16vw;
+  width: 12vw;
   min-width: 220px;
 }
 
@@ -143,11 +133,15 @@
 }
 
 .ant-menu-item-group-title{
-  padding: 8px 0px;
+  padding: 0px 0px;
 }
 
 .ant-menu-vertical .ant-menu-item{
   line-height: unset !important;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  background: transparent;
 }
 
 .ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active {
@@ -159,4 +153,12 @@
 }
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
   background-color: unset;
+}
+
+.ant-menu-item-group-list{
+  height: 120px;
+  padding-top: 10px !important;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected.customclass {
+  background-color: green; /*Overriden property*/
 }

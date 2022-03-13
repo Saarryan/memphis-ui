@@ -13,13 +13,13 @@ const data = [
         key: '2',
         name: 'xxx',
         appName: 'Kafka connector',
-        status: 1
+        status: 2
     },
     {
         key: '3',
         name: 'xxx',
         appName: 'SalesForce connector',
-        status: 1
+        status: 2
     },
     {
         key: '4',
@@ -68,7 +68,7 @@ const FailedFactories = () => {
 
     return (
         <div className='dashboard-wrapper factories-container'>
-            <p className='dashboard-components-header'>Factories</p>
+            <p className='dashboard-components-header'>Un-Healthy factories</p>
             <div className='factories-err-message'>
                 <ErrorSharpIcon
                     className="err-icon"
@@ -78,10 +78,33 @@ const FailedFactories = () => {
             </div>
             <div className='err-factories-list'>
                 <div className='coulmns-table'>
-                    <span>Name</span>
-                    <span>Application name</span>
-                    <span>Status</span>
-                    <span></span>
+                    <span style={{ 'width': '200px' }}>Name</span>
+                    <span style={{ 'width': '200px' }}>Application name</span>
+                    <span style={{ 'width': '100px' }}>Status</span>
+                    <span style={{ 'width': '100px' }}></span>
+                </div>
+                <div className='rows-wrapper'>
+                    {data.map((factory, index) => {
+                        return (
+                            <div className='factory-row' key={index}>
+                                <span style={{ 'width': '200px' }}>{factory.name}</span>
+                                <span style={{ 'width': '200px' }}>{factory.appName}</span>
+                                {factory.status === 1 &&
+                                    <span style={{ 'width': '100px' }}>
+                                        <div className='dot green'></div>
+                                        In action
+                                    </span>
+                                }
+                                {factory.status === 2 &&
+                                    <span style={{ 'width': '100px' }}>
+                                        <div className='dot yellow'></div>
+                                        On idle
+                                    </span>
+                                }
+                                <span className='link-row' style={{ 'width': '100px' }}>Go to queue</span>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </div>
