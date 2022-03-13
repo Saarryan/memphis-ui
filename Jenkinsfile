@@ -1,10 +1,10 @@
-def dockerImagesRepo = "strechinc"
+def dockerImagesRepo = "strech-image-repo"
 def imageName = "strech-ui-staging"
-def shortImageName = "strech-ui"
+def containerName = "strech-ui"
 def gitURL = "git@github.com:STRECH-LTD/strech-ui.git"
 def gitBranch = "staging"
+def repoUrlPrefix = "221323242847.dkr.ecr.eu-central-1.amazonaws.com"
 unique_Id = UUID.randomUUID().toString()
-def DOCKER_HUB_CREDS = credentials('docker-hub')
 def k8sNamespace = "strech"
 
 node {
@@ -13,23 +13,22 @@ node {
         git credentialsId: 'main-github', url: gitURL, branch: gitBranch
     }
     stage('Build docker image') {
-        sh "docker build -t ${dockerImagesRepo}/${imageName} ."
+        sh "docker build -t ${repoUrlPrefix}/${imageName} ."
     }
 
     stage('Push docker image') {
-	withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_HUB_CREDS_USR', passwordVariable: 'DOCKER_HUB_CREDS_PSW')]) {
-		sh "docker login -u $DOCKER_HUB_CREDS_USR -p $DOCKER_HUB_CREDS_PSW"
-	        sh "docker tag ${dockerImagesRepo}/${imageName} ${dockerImagesRepo}/${imageName}:${unique_Id}"
-		sh "docker push ${dockerImagesRepo}/${imageName}:${unique_Id}"
-		sh "docker push ${dockerImagesRepo}/${imageName}:latest"
-		sh "docker image rm ${dockerImagesRepo}/${imageName}:latest"
-		sh "docker image rm ${dockerImagesRepo}/${imageName}:${unique_Id}"
-	}
+	sh "aws ecr describe-repositories --repository-names ${imageName} --region eu-central-1 || aws ecr create-repository --repository-name ${imageName} --region eu-central-1 && aws ecr put-lifecycle-policy --repository-name ${imageName} --region eu-central-1 --lifecycle-policy-text 'file:///var/lib/jenkins/utils/ecr-lifecycle-policy.json'"
+        sh "docker tag ${repoUrlPrefix}/${imageName} ${repoUrlPrefix}/${imageName}:${unique_Id}"
+        sh "aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 221323242847.dkr.ecr.eu-central-1.amazonaws.com"
+        sh "docker push ${repoUrlPrefix}/${imageName}:${unique_Id}"
+        sh "docker push ${repoUrlPrefix}/${imageName}:latest"
+        sh "docker image rm ${repoUrlPrefix}/${imageName}:latest"
+        sh "docker image rm ${repoUrlPrefix}/${imageName}:${unique_Id}"
     }
     
     stage('Push image to kubernetes') {
 	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" apply -f \"k8s-template.yaml\" -n ${k8sNamespace}"
-  	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" set image deployment/${shortImageName} ${imageName}=${dockerImagesRepo}/${imageName}:${unique_Id} -n ${k8sNamespace}"
+  	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" set image deployment/${containerName} ${containerName}=${repoUrlPrefix}/${imageName}:${unique_Id} -n ${k8sNamespace}"
     }
     notifySuccessful()
 
