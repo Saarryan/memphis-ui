@@ -36,7 +36,7 @@ const initialState = {
         name: "temporary name",
         retention: "3 days",
         max_throughput: "1500s",
-        healthy: true,
+        status: "healthy",
         awaiting_messages: 10,
         average_message_size: 15,
         memory: 50,

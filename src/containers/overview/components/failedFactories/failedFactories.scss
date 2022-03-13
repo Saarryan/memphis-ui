@@ -1,3 +1,38 @@
 .factories-container{
     height: 38%;
+    min-width: 620px;
+    min-height: 161px;
+    padding: 15px;
+    position: relative;
+    .factories-err-message{
+        display: flex;
+        width: 100%;
+        height: 35px;
+        background: rgba(90, 79, 229, 0.1);
+        border: 1px solid var(--purple);
+        box-sizing: border-box;
+        border-radius: 8px;
+        color: var(--purple);
+        align-items: center;
+        .err-icon {
+            font-size: 18px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .err-factories-list{
+        position: relative;
+        height: 75%;
+        font-size: 12px;
+        .coulmns-table{
+            border-bottom: 1px solid #E9E9E9;
+            width: 100%;
+            display: flex;
+            align-content: space-between;
+            color: #979797;
+        }
+    }
 }

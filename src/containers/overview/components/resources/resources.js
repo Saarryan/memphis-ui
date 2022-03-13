@@ -12,7 +12,7 @@ const Resources = () => {
 
     return (
         <div className='dashboard-wrapper resources-container'>
-            <p className='dashboard-header'>Resources</p>
+            <p className='dashboard-components-header'>Resources</p>
             {resourcesTotal && resourcesTotal.map(res => {
                 return <div className='resource' key={res.resource}>
                     <ApexChart data={res} />

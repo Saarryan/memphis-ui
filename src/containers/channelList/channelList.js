@@ -27,7 +27,7 @@ const ChannelList = () => {
             "name": "Strech",
             "retention": "3 days",
             "max_throughput": "1000 message",
-            "healthy": true,
+            "status": "healthy",
             "functions": [
                 {
                     "_id": 1,
@@ -51,28 +51,28 @@ const ChannelList = () => {
             "name": "Strech",
             "retention": "3 hours",
             "max_throughput": "15 Mb/s",
-            "healthy": false
+            "status": "unhealthy"
         },
         {
             "_id": 3,
             "name": "Strech",
             "retention": "channel",
             "max_throughput": "default",
-            "healthy": true
+            "status": "healthy"
         },
         {
             "_id": 4,
             "name": "Strech",
             "retention": "channel",
             "max_throughput": "default",
-            "healthy": false
+            "status": "unhealthy"
         },
         {
             "_id": 5,
             "name": "Strech",
             "retention": "channel",
             "max_throughput": "default",
-            "healthy": true
+            "status": "healthy"
         }
     ]);
     const [editName, seteditName] = useState(false);

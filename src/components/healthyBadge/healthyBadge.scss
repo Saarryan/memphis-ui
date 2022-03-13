@@ -1,33 +1,33 @@
 .healthy-badge-container
 {
-    .healthy, .unhealthy{
+    .healthy, .unhealthy, .risky{
         display: flex;
         align-items: center;
         border-radius: 15px;
         width: 5.5vw;
         justify-content: center;
         width: 90px;
-        font-weight: bold;
-        font-size: 13px;
+        font-weight: normal;
+        font-size: 12px;
         p{
             margin-top: 2px;
             margin: 0;
         }
     }
     .healthy{
-        background-color: #E6F8F5;
-        color: #00B292;
-        .healthy-icon{
-          font-size: 13px;
-          margin-right: 5px;
-        }
-      }
-      .unhealthy{
-        background-color: #fffbeb;
-        color: #FFD12F;
-        .unhealthy-icon{
-          font-size: 13px;
-          margin-right: 5px;
-        }
-      }
+      background-color: rgba(46, 212, 122, 0.1);
+      color: #2ED47A;
+    }
+    .unhealthy{
+      background-color: rgba(247, 104, 91, 0.1);;
+      color: #F7685B;
+    }
+    .risky{
+      background-color: #fffbeb;
+      color: #FFB946;
+    }
+    .badge-icon{
+      font-size: 13px;
+      margin-right: 5px;
+    }
 }

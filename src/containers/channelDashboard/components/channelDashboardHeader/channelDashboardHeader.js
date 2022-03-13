@@ -28,7 +28,7 @@ const ChannelDashboardHeader = (props) => {
                 <div className="main-details">
                     <p><b>Retention:</b> {state.queueDetails.retention}</p>
                     <p><b>Max throughput:</b> {state.queueDetails.max_throughput}</p>
-                    <HealthyBadge healthy={state.queueDetails.healthy} />
+                    <HealthyBadge status={state.queueDetails.healthy} />
                 </div>
                 <div className="details-wrapper awaiting-messages">
                     <div className="icon">

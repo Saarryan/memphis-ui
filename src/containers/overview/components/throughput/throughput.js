@@ -9,9 +9,9 @@ import ApexChart from './areaChart'
 
 const AntTabs = withStyles({
     root: {
-        position:"absolute",
-        top:"5px",
-        left:"40%",
+        position: "absolute",
+        top: "5px",
+        left: "40%",
     },
     indicator: {
         backgroundColor: getFontColor("black"),
@@ -78,7 +78,7 @@ const Throughput = () => {
                 <AntTab label="Subscribers" />
                 <AntTab label="Publishers" />
             </AntTabs>
-            <p className='dashboard-header'>Throughput</p>
+            <p className='dashboard-components-header'>Throughput</p>
             <ApexChart />
         </div>
     );
