@@ -29,7 +29,7 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
       data: { method, endPointUrl, data }
     };
   try {
-    const url = `${SERVER_URL}${endPointUrl}`;
+    const url = endPointUrl;
     const res = await HTTP({
       method,
       url,
