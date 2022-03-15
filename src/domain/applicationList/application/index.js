@@ -16,7 +16,7 @@ import Tooltip from '../../../components/tooltip/tooltip';
 import loading from '../../../assets/images/strech.gif';
 import Button from '../../../components/button';
 import { httpRequest } from '../../../services/http';
-import { ApiEndpoint } from '../../../apiEndpoints';
+import { ApiEndpoints } from '../../../apiEndpoints';
 import Modal from '../../../components/modal';
 import { Context } from '../../../hooks/store';
 import pathControllers from '../../../router';
@@ -37,7 +37,7 @@ const Application = (props) => {
 
     const removeApplication = async () => {
         try {
-            await httpRequest('DELETE', `${ApiEndpoint.REMOVE_USECASE}?usecaseId=${props.content._id}`);
+            await httpRequest('DELETE', `${ApiEndpoints.REMOVE_USECASE}?usecaseId=${props.content._id}`);
             //setUsecases(usecases.filter((item) => item._id !== chosenUsecaseId));
         } catch (err) {
             modalFlip(true);

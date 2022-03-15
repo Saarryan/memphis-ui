@@ -5,22 +5,19 @@ import LocalStorageService from '../services/auth';
 import config from '../config/config.json';
 
 let { SERVER_URL_STAGING } = config;
-const SERVER_URL_PRODUCTION = window.location.href.split('//')[1].split('/')[0];
+const SERVER_URL_PRODUCTION = `${window.location.href.split('//')[1].split('/')[0]}/api-gw`;
 const SERVER_URL = process.env.REACT_APP_ENV === 'production' ? SERVER_URL_PRODUCTION : SERVER_URL_STAGING;
 
-export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, timeout = 0) {
-    const url = window.location.href;
-    if (url.indexOf('verifyemail') === -1 || url.indexOf('signin') === -1) {
-        LocalStorageService.handleRefreshToken();
+export async function httpRequest(method, endPointUrl, authNeeded = true, data = {}, headers = {}, queryParams = {}, timeout = 0) {
+    if (authNeeded) {
+        const token = localStorage.getItem(config.LOCAL_STORAGE_TOKEN);
+        headers['Authorization'] = 'Bearer ' + token;
     }
-    const token = localStorage.getItem(config.LOCAL_STORAGE_TOKEN);
     const HTTP = axios.create({
         withCredentials: true,
         headers: {
-            Authorization: 'Bearer ' + token,
             'Access-Control-Expose-Headers': 'X-My-Custom-Header X-Another-Custom-Header',
-            'Access-Control-Allow-Origin': '*',
-            'Accept-Language': localStorage.getItem(config.LOCAL_STORAGE_LANGUAGE)
+            'Access-Control-Allow-Origin': '*'
         }
     });
     if (method !== 'GET' && method !== 'POST' && method !== 'PUT' && method !== 'DELETE')
@@ -51,25 +48,6 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
                 onClick: () => message.destroy('strechErrorMessage')
             });
         }
-        throw err.response;
-    }
-}
-
-export async function handleRefreshTokenRequest(endPointUrl, UserId) {
-    const HTTP = axios.create({
-        withCredentials: true,
-        headers: {
-            'Access-Control-Expose-Headers': 'X-My-Custom-Header X-Another-Custom-Header'
-        }
-    });
-    try {
-        const url = `${SERVER_URL}${endPointUrl}`;
-        const method = 'POST';
-        const data = { userId: UserId };
-        const res = await HTTP({ method, url, data });
-        const results = res.data;
-        return results;
-    } catch (err) {
         throw err.response;
     }
 }

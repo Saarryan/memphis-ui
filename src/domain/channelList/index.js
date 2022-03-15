@@ -11,7 +11,7 @@ import CreateChannelDetails from './createChannelDetails';
 import Tooltip from '../../components/tooltip/tooltip';
 import loading from '../../assets/images/strech.gif';
 import { httpRequest } from '../../services/http';
-import { ApiEndpoint } from '../../apiEndpoints';
+import { ApiEndpoints } from '../../apiEndpoints';
 import ChannelOverview from './channelOverview';
 import edit from '../../assets/images/edit.svg';
 import config from '../../config/config.json';
@@ -99,7 +99,7 @@ const ChannelList = () => {
         if (applicationId !== 'newApplication') {
             setisLoading(true);
             try {
-                const data = await httpRequest('GET', `${ApiEndpoint.GET_USER_USECASE_BY_ID}?applicationId=${applicationId}`);
+                const data = await httpRequest('GET', `${ApiEndpoints.GET_USER_USECASE_BY_ID}?applicationId=${applicationId}`);
                 setapplicationDetails({
                     ...applicationDetails,
                     id: 1,
@@ -116,7 +116,7 @@ const ChannelList = () => {
 
     const getChannels = async (applicationId) => {
         try {
-            const data = await httpRequest('GET', `${ApiEndpoint.GET_USECASE_PIPELINES}?applicationId=${applicationId || state.application?._id}`);
+            const data = await httpRequest('GET', `${ApiEndpoints.GET_USECASE_PIPELINES}?applicationId=${applicationId || state.application?._id}`);
             // setTimeout(() => {
             setisLoading(false);
             setChannelList(data);
@@ -137,7 +137,7 @@ const ChannelList = () => {
             seteditName(false);
         } else {
             try {
-                const data = await httpRequest('PUT', ApiEndpoint.CHANGE_USECASE_NAME, {
+                const data = await httpRequest('PUT', ApiEndpoints.CHANGE_USECASE_NAME, {
                     name: e.target.value,
                     applicationId: state.useCaseBuilder?._id
                 });
@@ -157,7 +157,7 @@ const ChannelList = () => {
             seteditDescription(false);
         } else {
             try {
-                const data = await httpRequest('PUT', ApiEndpoint.CHANGE_USECASE_DESCRIPTION, { description: e.target.value, applicationId: state.useCaseBuilder?._id });
+                const data = await httpRequest('PUT', ApiEndpoints.CHANGE_USECASE_DESCRIPTION, { description: e.target.value, applicationId: state.useCaseBuilder?._id });
                 dispatch({ type: 'UPDATE_USECASES_DESCRIPTION', payload: data });
                 setapplicationDetails({
                     ...applicationDetails,
@@ -184,7 +184,7 @@ const ChannelList = () => {
 
     const removeApplication = async () => {
         try {
-            await httpRequest('DELETE', `${ApiEndpoint.REMOVE_USECASE}?applicationId=${state.application?._id}`);
+            await httpRequest('DELETE', `${ApiEndpoints.REMOVE_USECASE}?applicationId=${state.application?._id}`);
             history.push(pathContainers.applicationList);
         } catch (err) {
             modalFlip(true);

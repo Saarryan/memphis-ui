@@ -29,7 +29,12 @@ const Mobile = ({ children }) => {
 
 const Login = (props) => {
     const [state, dispatch] = useContext(Context);
+    const [isLoggedIn, setLoggedIn] = useState(false); //if true redirect to referer page
+    const [isError, setIsError] = useState(false);
+    const [autoLogin, setAutoLogin] = useState(true);
     const [isKeepMeSignin, setisKeepMeSignin] = useState(true);
+    const [timerForRetry, settimerForRetry] = useState('');
+    const referer = props?.location?.state?.referer || '/overview';
     const history = useHistory();
     const [loginForm] = Form.useForm(); // form controller
     const [formFields, setFormFields] = useState({
@@ -47,7 +52,9 @@ const Login = (props) => {
     //     localStorage.setItem(LOCAL_STORAGE_REGISTER_DATE, register_date);
     // };
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        refreshTokenIfKeepMeSigninOnAn();
+    }, []);
 
     const handleUserNameChange = (e) => {
         setFormFields({ ...formFields, email: e.target.value });
@@ -57,16 +64,98 @@ const Login = (props) => {
         setFormFields({ ...formFields, password: e.target.value });
     };
 
-    const handleKeepMeSignin = (e) => {
-        setisKeepMeSignin(e.target.checked);
+    const refreshTokenIfKeepMeSigninOnAn = () => {
+        const checkIfKeepMeSigninOn = localStorage.getItem(config.LOCAL_STORAGE_KEEP_ME_SIGN_IN);
+        if (checkIfKeepMeSigninOn === 'true') {
+            const handleRefreshTokenResponse = LocalStorageService.handleRefreshToken();
+            if (handleRefreshTokenResponse) {
+                if (referer === '/signin' || referer === '/verifyemail') {
+                    referer = '/overview';
+                    history.push(referer);
+                } else {
+                    history.push(referer);
+                }
+                setAutoLogin(false);
+                dispatch({ type: 'SET_AUTHENTICATION', payload: true });
+            } else {
+                history.push('/signin');
+                setAutoLogin(false);
+            }
+        } else setAutoLogin(false);
     };
+
+    const getOrganizationDetails = async (OrganizationId) => {
+        try {
+            const organiztionDetails = await httpRequest('GET', ApiEndpoints.GET_ORGANIZATION_DETAILS, {}, { organizationId: OrganizationId });
+            if (organiztionDetails && organiztionDetails !== undefined) {
+                dispatch({
+                    type: 'SET_ORGANIZATION_DATA',
+                    payload: organiztionDetails
+                });
+                localStorage.setItem(config.LOCAL_STORAGE_ROOT_USER_ID, organiztionDetails.root_user_id);
+                dispatch({ type: 'SET_LOADER', payload: false });
+                setLoggedIn(true);
+            } else {
+                dispatch({ type: 'SET_LOADER', payload: false });
+                setIsError(true);
+                alert('something occured... getOrganizationData didnt complete'); //replact to show unsuccess message
+            }
+        } catch (err) {
+            dispatch({ type: 'SET_LOADER', payload: false });
+            setIsError(true);
+        }
+    };
+
+    const millisToMinutesAndSeconds = (second) => {
+        var minutes = Math.floor(second / 60);
+        var seconds = (second % 60).toFixed(0);
+        if (minutes > 0) return minutes + ' minutes';
+        else return (seconds < 10 ? '0' : '') + seconds + 'seconds';
+    };
+
+    const handleLoginSubmit = async () => {
+        dispatch({ type: 'SET_LOADER', payload: true });
+        const bodyRequest = formFields;
+        try {
+            const data = await httpRequest('POST', ApiEndpoints.SIGN_IN, bodyRequest);
+            if (data && data !== undefined) {
+                LocalStorageService.saveTokenDataInLocalStorage(data.token, data.expiresIn);
+                localStorage.setItem(config.LOCAL_STORAGE_USER_ID, data.id);
+                localStorage.setItem(config.LOCAL_STORAGE_KEEP_ME_SIGN_IN, isKeepMeSignin);
+                localStorage.setItem(config.LOCAL_STORAGE_ORGANIZATION_ID, data.organization_id);
+                localStorage.setItem(config.LOCAL_STORAGE_ORGANIZATION_LOGO_URL, data.profile_pic_url);
+                localStorage.setItem(config.LOCAL_STORAGE_USER_MAIL, data.mail);
+                localStorage.setItem(config.LOCAL_STORAGE_USER_NAME, data.first_name + ' ' + data.last_name);
+                localStorage.setItem(config.LOCAL_STORAGE_CREATE_USECASE, data.already_create_usecase_flag);
+
+                dispatch({ type: 'SET_AUTHENTICATION', payload: true });
+                await getOrganizationDetails(data.organization_id);
+            } else {
+                dispatch({ type: 'SET_LOADER', payload: false });
+                setIsError(true);
+                alert('something occured... login didnt complete'); //replact to show unsuccess message
+            }
+        } catch (err) {
+            dispatch({ type: 'SET_LOADER', payload: false });
+            if (err?.status === 429) {
+                settimerForRetry(millisToMinutesAndSeconds(err.data.retryAfter));
+            } else {
+                setIsError(true);
+                settimerForRetry('');
+            }
+        }
+    };
+
+    if (isLoggedIn) {
+        return <Redirect to={referer} />;
+    }
 
     const handleSubmit = async () => {
         const values = await loginForm.validateFields();
         if (values?.errorFields) {
             return;
         } else {
-            //handleLoginSubmit();
+            handleLoginSubmit();
         }
     };
 
@@ -176,7 +265,7 @@ const Login = (props) => {
                                         backgroundColorType="loginPurple"
                                         fontSize="16px"
                                         fontWeight="bold"
-                                        onClick={() => handleSubmit}
+                                        onClick={() => history.push('/overview')}
                                     />
                                 </Form.Item>
                                 {/* 
@@ -272,7 +361,7 @@ const Login = (props) => {
                                         onClick={handleSubmit}
                                     />
                                 </Form.Item>
-                                {/* {isError && timerForRetry.length === 0 && (
+                                {isError && timerForRetry.length === 0 && (
                                     <div className="error-message">
                                         <p>An account with that sign-in information does not exist. Try again or create a new account.</p>
                                     </div>
@@ -281,7 +370,7 @@ const Login = (props) => {
                                     <div className="error-message">
                                         <p>Your acount was blocked, please try again in {timerForRetry}</p>
                                     </div>
-                                )} */}
+                                )}
                             </Form>
                         </div>
                     </div>

@@ -1,19 +1,14 @@
 {
     "SERVER_URL_STAGING": "https://strech-server-staging.strech.io/api-gw",
-    "LOCAL_STORAGE_TOKEN": "authToken",
-    "LOCAL_STORAGE_EXPIRED_TOKEN": "expiry",
-    "LOCAL_STORAGE_USER_ID": "userid",
+    "LOCAL_STORAGE_ALREADY_LIGGED_IN": "already_logged_in",
+    "LOCAL_STORAGE_AVATAR_ID": "avatar_id",
+    "LOCAL_STORAGE_CREATION_DATE": "creation_date",
+    "LOCAL_STORAGE_EXPIRED_TOKEN": "expires_in",
+    "LOCAL_STORAGE_TOKEN": "jwt",
+    "LOCAL_STORAGE_USER_ID": "user_id",
+    "LOCAL_STORAGE_USER_NAME": "user_Name",
+    "LOCAL_STORAGE_USER_TYPE": "user_type",
     "LOCAL_STORAGE_KEEP_ME_SIGN_IN": "keepMeSignin",
-    "LOCAL_STORAGE_USER_NAME": "userName",
-    "LOCAL_STORAGE_USER_MAIL": "mail",
-    "LOCAL_STORAGE_USER_ROLE": "userRole",
-    "LOCAL_STORAGE_ORGANIZATION_ID": "organizationId",
-    "LOCAL_STORAGE_ROOT_USER_ID": "rootUserid",
-    "LOCAL_STORAGE_ORGANIZATION_LOGO_URL": "organizationLogoUrl",
-    "LOCAL_STORAGE_LANGUAGE": "language",
-    "LOCAL_STORAGE_SAW_SCHEMA": "false",
-    "LOCAL_STORAGE_CREATE_USECASE": "false",
     "INTERVAL": 7000,
-    "SHOWABLE_ERROR_STATUS_CODE": 666,
-    "INITIAL_OBJECTS_GIVEN": 500
+    "SHOWABLE_ERROR_STATUS_CODE": 666
 }
