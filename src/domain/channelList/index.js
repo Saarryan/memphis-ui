@@ -1,22 +1,23 @@
 import './style.scss';
+
 import React, { useEffect, useContext, useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
-import { message } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ChannelOverview from './channelOverview/';
+import { InboxOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
+
 import CreateChannelDetails from './createChannelDetails';
-import { Context } from '../../hooks/store';
+import Tooltip from '../../components/tooltip/tooltip';
+import loading from '../../assets/images/strech.gif';
 import { httpRequest } from '../../services/http';
 import { ApiEndpoint } from '../../apiEndpoints';
+import ChannelOverview from './channelOverview';
 import edit from '../../assets/images/edit.svg';
-import Tooltip from '../../components/tooltip/tooltip';
-import Modal from '../../components/modal/modal';
-import Button from '../../components/button/button';
 import config from '../../config/config.json';
-import loading from '../../assets/images/strech.gif';
-import pathControllers from '../../router';
+import Button from '../../components/button';
+import { Context } from '../../hooks/store';
+import Modal from '../../components/modal';
 import pathContainers from '../../router';
 
 const ChannelList = () => {
@@ -184,7 +185,7 @@ const ChannelList = () => {
     const removeApplication = async () => {
         try {
             await httpRequest('DELETE', `${ApiEndpoint.REMOVE_USECASE}?applicationId=${state.application?._id}`);
-            history.push(pathControllers.applicationList);
+            history.push(pathContainers.applicationList);
         } catch (err) {
             modalFlip(true);
         }

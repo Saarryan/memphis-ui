@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+
 import LocalStorageService from './services/auth';
 import { Context } from './hooks/store';
 

@@ -1,8 +1,10 @@
 import './style.scss';
+
 import React, { useState } from 'react';
-import Input from '../../../components/Input/Input';
-import RadioButton from '../../../components/radioButton/radioButton';
 import { InputNumber } from 'antd';
+
+import RadioButton from '../../../components/radioButton';
+import Input from '../../../components/Input';
 
 const CreateChannelDetails = () => {
     const [formFields, setFormFields] = useState({

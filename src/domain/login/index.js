@@ -1,19 +1,21 @@
 import './style.scss';
+
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import config from '../../config/config.json';
-import { Form, Checkbox } from 'antd';
+import { Redirect, useHistory } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
+import { useMediaQuery } from 'react-responsive';
 import LockIcon from '@material-ui/icons/Lock';
+import { Form, Checkbox } from 'antd';
+
 import logoGrayText from '../../assets/images/logoGrayText.png';
-import Input from '../../components/Input/Input';
-import Button from '../../components/button/button';
-import Loader from '../../components/loader/loader';
-import { Context } from '../../hooks/store';
+import LocalStorageService from '../../services/auth';
 import { httpRequest } from '../../services/http';
 import { ApiEndpoint } from '../../apiEndpoints';
-import LocalStorageService from '../../services/auth';
-import { Redirect, useHistory } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
+import config from '../../config/config.json';
+import Button from '../../components/button';
+import Loader from '../../components/loader';
+import { Context } from '../../hooks/store';
+import Input from '../../components/Input';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -39,6 +41,16 @@ const Login = (props) => {
         email: '',
         password: ''
     });
+
+    // const saveToLocalStorage = (jwt_token, user_id, keepSingedIn, username, creation_date, already_logged_in, avatar_id, user_type) => {
+    //     localStorage.setItem(LOCAL_STORAGE_TOKEN, jwt_token);
+    //     localStorage.setItem(LOCAL_STORAGE_USER_ID, user_id);
+    //     localStorage.setItem(LOCAL_STORAGE_KEEP_ME_SIGN_IN, keepSingedIn);
+    //     localStorage.setItem(LOCAL_STORAGE_USER_NAME, full_name);
+    //     localStorage.setItem(LOCAL_STORAGE_USER_EMAIL, email);
+    //     localStorage.setItem(LOCAL_STORAGE_IMAGE_URL, image_url);
+    //     localStorage.setItem(LOCAL_STORAGE_REGISTER_DATE, register_date);
+    // };
 
     useEffect(() => {
         refreshTokenIfKeepMeSigninOnAn();
@@ -113,7 +125,6 @@ const Login = (props) => {
                 localStorage.setItem(config.LOCAL_STORAGE_ORGANIZATION_ID, data.organization_id);
                 localStorage.setItem(config.LOCAL_STORAGE_ORGANIZATION_LOGO_URL, data.profile_pic_url);
                 localStorage.setItem(config.LOCAL_STORAGE_USER_MAIL, data.mail);
-                localStorage.setItem(config.LOCAL_STORAGE_USER_ROLE, data.role);
                 localStorage.setItem(config.LOCAL_STORAGE_USER_NAME, data.first_name + ' ' + data.last_name);
                 localStorage.setItem(config.LOCAL_STORAGE_CREATE_USECASE, data.already_create_usecase_flag);
 

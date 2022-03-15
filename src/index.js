@@ -1,11 +1,13 @@
-import './index.scss';
-import App from './App';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import './style.scss';
+
 import { BrowserRouter } from 'react-router-dom';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom';
+import React from 'react';
+
 import * as serviceWorker from './serviceWorker';
+import reportWebVitals from './reportWebVitals';
 import Store from './hooks/store';
+import App from './App';
 
 function StrechApp() {
     return (

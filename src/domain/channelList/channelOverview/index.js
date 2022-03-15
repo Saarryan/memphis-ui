@@ -1,15 +1,17 @@
 import './style.scss';
+
 import React, { useState, useContext, useEffect } from 'react';
-import Popover from '@material-ui/core/Popover';
-import MenuItem from '@material-ui/core/MenuItem';
-import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteIcon from '@material-ui/icons/Delete';
+import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
 import { useHistory } from 'react-router-dom';
+
+import FunctionsOverview from '../../../components/functionsOverview';
+import HealthyBadge from '../../../components/healthyBadge';
+import Functions from '../../channelDetails';
 import { Context } from '../../../hooks/store';
-import FunctionsOverview from '../../../components/functionsOverview/functionsOverview';
-import Functions from '../../channelDetails/functions';
 import pathContainers from '../../../router';
-import HealthyBadge from '../../../components/healthyBadge/healthyBadge';
 
 const ChannelOverview = (props) => {
     const [state, dispatch] = useContext(Context);

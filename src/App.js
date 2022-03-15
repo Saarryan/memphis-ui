@@ -1,17 +1,19 @@
 import './App.scss';
-import React from 'react';
+
 import { Switch, Route, withRouter } from 'react-router-dom';
-import Overview from './domain/overview/overview';
-import ApplicationList from './domain/applicationList/applicationList';
-import ChannelList from './domain/channelList';
-import Settings from './domain/settings/settings';
-import Users from './domain/users/users';
-import Login from './domain/login';
-import ChannelDashboard from './domain/channelDashboard/channelDashboard';
-import pathControllers from './router';
-import PrivateRoute from './PrivateRoute';
 import { useMediaQuery } from 'react-responsive';
-import AppWrapper from './components/appWrapper/appWrapper';
+import React from 'react';
+
+import ChannelDashboard from './domain/channelDashboard';
+import ApplicationList from './domain/applicationList';
+import AppWrapper from './components/appWrapper';
+import ChannelList from './domain/channelList';
+import PrivateRoute from './PrivateRoute';
+import Overview from './domain/overview';
+import Settings from './domain/settings';
+import pathControllers from './router';
+import Users from './domain/users';
+import Login from './domain/login';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
