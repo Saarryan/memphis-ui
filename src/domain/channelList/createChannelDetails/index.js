@@ -1,59 +1,62 @@
-import "./createChannelDetails.scss";
-import React, { useState } from "react";
-import Input from "../../../../components/Input/Input"
-import RadioButton from "../../../../components/radioButton/radioButton";
-import { InputNumber } from "antd";
+import './style.scss';
+import React, { useState } from 'react';
+import Input from '../../../components/Input/Input';
+import RadioButton from '../../../components/radioButton/radioButton';
+import { InputNumber } from 'antd';
 
 const CreateChannelDetails = () => {
-
     const [formFields, setFormFields] = useState({
-        name: "", retention_type: 0, retention_value: "", throughput_type: 0, throughput_value: ""
+        name: '',
+        retention_type: 0,
+        retention_value: '',
+        throughput_type: 0,
+        throughput_value: ''
     });
     const retanionOptions = [
         {
-            "id": 1,
-            "value": 0,
-            "label": "Time"
+            id: 1,
+            value: 0,
+            label: 'Time'
         },
         {
-            "id": 2,
-            "value": 1,
-            "label": "Size"
+            id: 2,
+            value: 1,
+            label: 'Size'
         },
         {
-            "id": 3,
-            "value": 2,
-            "label": "Queue"
+            id: 3,
+            value: 2,
+            label: 'Queue'
         }
     ];
     const throughputOptions = [
         {
-            "id": 1,
-            "value": 0,
-            "label": "Messages"
+            id: 1,
+            value: 0,
+            label: 'Messages'
         },
         {
-            "id": 2,
-            "value": 1,
-            "label": "Size"
+            id: 2,
+            value: 1,
+            label: 'Size'
         }
     ];
     const handleUserNameChange = (e) => {
         setFormFields({ ...formFields, name: e.target.value });
-    }
+    };
 
     const retentionTypeChange = (e) => {
         setFormFields({ ...formFields, retention_type: e.target.value });
-    }
+    };
     const handleRetentionChange = (e) => {
         setFormFields({ ...formFields, retention_value: e.target.value });
-    }
+    };
     const throughputTypeChange = (e) => {
         setFormFields({ ...formFields, throughput_type: e.target.value });
-    }
+    };
     const handleThroughputChange = (e) => {
         setFormFields({ ...formFields, throughput_value: e.target.value });
-    }
+    };
 
     return (
         <div className="create-channel-form">
@@ -75,12 +78,8 @@ const CreateChannelDetails = () => {
             </div>
             <div className="retention">
                 <p>Retention</p>
-                <RadioButton
-                    options={retanionOptions}
-                    radioValue={formFields.retention_type}
-                    onChange={(e) => retentionTypeChange(e)}
-                />
-                {formFields.retention_type === 0 &&
+                <RadioButton options={retanionOptions} radioValue={formFields.retention_type} onChange={(e) => retentionTypeChange(e)} />
+                {formFields.retention_type === 0 && (
                     <div className="time-value">
                         <div className="days-section">
                             <InputNumber bordered={false} min={0} max={100} keyboard={true} defaultValue={7} />
@@ -102,8 +101,8 @@ const CreateChannelDetails = () => {
                             <p>seconds</p>
                         </div>
                     </div>
-                }
-                {formFields.retention_type === 1 &&
+                )}
+                {formFields.retention_type === 1 && (
                     <div className="size-value">
                         <Input
                             placeholder="Type"
@@ -120,15 +119,11 @@ const CreateChannelDetails = () => {
                         />
                         <p>/s</p>
                     </div>
-                }
+                )}
             </div>
             <div className="throughput">
                 <p>Max throughput</p>
-                <RadioButton
-                    options={throughputOptions}
-                    radioValue={formFields.throughput_type}
-                    onChange={(e) => throughputTypeChange(e)}
-                />
+                <RadioButton options={throughputOptions} radioValue={formFields.throughput_type} onChange={(e) => throughputTypeChange(e)} />
                 <div className="size-value">
                     <Input
                         placeholder="Type"
@@ -143,16 +138,12 @@ const CreateChannelDetails = () => {
                         onChange={handleThroughputChange}
                         value={formFields.throughput_value}
                     />
-                    {formFields.throughput_type === 0 &&
-                        <p>/s</p>
-                    }
-                    {formFields.throughput_type === 1 &&
-                        <p>/Mb</p>
-                    }
+                    {formFields.throughput_type === 0 && <p>/s</p>}
+                    {formFields.throughput_type === 1 && <p>/Mb</p>}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default CreateChannelDetails;

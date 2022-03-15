@@ -3,8 +3,7 @@ const pathContainers = {
     overview: '/overview',
     applicationList: '/applications',
     users: '/users',
-    settings: '/settings',
-}
+    settings: '/settings'
+};
 
-
-export default pathContainers
+export default pathContainers;

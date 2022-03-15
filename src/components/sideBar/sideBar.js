@@ -16,7 +16,7 @@ import accountIcon from "../../assets/images/accountIcon.svg"
 import pathControllers from "../../router";
 import { useHistory } from "react-router-dom";
 import config from "../../config/config.json"
-import { ApiEndpoint } from "../../apiEndpoints.model";
+import { ApiEndpoint } from "../../apiEndpoints";
 import { httpRequest } from "../../services/http";
 import { Menu } from 'antd';
 

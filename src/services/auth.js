@@ -1,7 +1,7 @@
 
 import config from '../config/config.json'
 import { handleRefreshTokenRequest } from './http'
-import { ApiEndpoint } from '../apiEndpoints.model'
+import { ApiEndpoint } from '../apiEndpoints'
 
 
 const LocalStorageService = (function () {

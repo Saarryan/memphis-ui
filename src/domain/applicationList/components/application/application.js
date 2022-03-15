@@ -12,7 +12,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { Context } from "../../../../hooks/store";
 import pathControllers from "../../../../router";
 import { httpRequest } from "../../../../services/http";
-import { ApiEndpoint } from "../../../../apiEndpoints.model";
+import { ApiEndpoint } from "../../../../apiEndpoints";
 import Modal from "../../../../components/modal/modal";
 import Tooltip from "../../../../components/tooltip/tooltip";
 import OverflowTip from "../../../../components/tooltip/overflowtip";

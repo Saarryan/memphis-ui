@@ -1,18 +1,17 @@
-import "./channelDashboard.scss"
-import React, { useEffect, useContext } from "react"
-import ChannelDashboardHeader from "./components/channelDashboardHeader/channelDashboardHeader";
-import QueueObservabilty from "./components/queueObservabilty/queueObservabilty";
-import ConnectionDetails from "./components/connectionDetails/connectionDetails";
-import Auditing from "./components/auditing/auditing";
-import Throughput from "./components/throughput/throughput";
-import { Context } from "../../hooks/store";
-
+import './channelDashboard.scss';
+import React, { useEffect, useContext } from 'react';
+import ChannelDashboardHeader from './components/channelDashboardHeader/channelDashboardHeader';
+import QueueObservabilty from './components/queueObservabilty/queueObservabilty';
+import ConnectionDetails from './components/connectionDetails/connectionDetails';
+import Auditing from './components/auditing/auditing';
+import Throughput from './components/throughput/throughput';
+import { Context } from '../../hooks/store';
 
 const ChannelDashboard = () => {
     const [state, dispatch] = useContext(Context);
 
     useEffect(() => {
-        dispatch({ type: "SET_ROUTE", payload: "applications" });
+        dispatch({ type: 'SET_ROUTE', payload: 'applications' });
     }, []);
 
     return (
@@ -38,6 +37,6 @@ const ChannelDashboard = () => {
             </div>
         </div>
     );
-}
+};
 
 export default ChannelDashboard;

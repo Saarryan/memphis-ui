@@ -3,7 +3,8 @@ import config from '../config/config.json'
 import LocalStorageService from "../services/auth";
 import { message } from "antd";
 
-let { SERVER_URL_STAGING, SERVER_URL_PRODUCTION } = config;
+let { SERVER_URL_STAGING } = config;
+const SERVER_URL_PRODUCTION = window.location.href.split('//')[1].split('/')[0];
 const SERVER_URL = process.env.REACT_APP_ENV === 'production' ? SERVER_URL_PRODUCTION : SERVER_URL_STAGING;
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, timeout = 0) {
@@ -29,7 +30,7 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
       data: { method, endPointUrl, data }
     };
   try {
-    const url = endPointUrl;
+    const url = `${SERVER_URL}${endPointUrl}`;
     const res = await HTTP({
       method,
       url,

@@ -1,46 +1,49 @@
-.create-channel-form{
-    .channel-name{
-
+.create-channel-form {
+    .channel-name {
     }
-    .retention, .throughput{
+    .retention,
+    .throughput {
         margin-top: 25px;
-        p{
+        p {
             font-weight: bold;
         }
     }
-    .retention{
+    .retention {
         height: 140px;
     }
-    .time-value{
+    .time-value {
         display: flex;
         margin-top: 15px;
-        .days-section, .hours-section, .minutes-section, .seconds-section{
+        .days-section,
+        .hours-section,
+        .minutes-section,
+        .seconds-section {
             text-align: center;
-            .ant-input-number{
+            .ant-input-number {
                 width: 60px;
                 height: 38px;
                 border-radius: 4px;
-                border: 1px solid #D8D8D8;
+                border: 1px solid #d8d8d8;
             }
-            .ant-input-number-input{
+            .ant-input-number-input {
                 height: 38px;
             }
-            .ant-input-number-focused{
+            .ant-input-number-focused {
                 box-shadow: unset;
             }
-            .ant-input-number-handler{
+            .ant-input-number-handler {
                 border-left: none;
             }
             .ant-input-number-handler-wrap {
                 opacity: 1;
             }
-            p{
+            p {
                 font-size: 11px;
                 font-weight: 400;
                 line-height: 23px;
             }
         }
-        .separator{
+        .separator {
             margin: 3px 5px 0px 5px;
             font-size: 14px;
             font-weight: bold;
@@ -48,11 +51,11 @@
             color: #d8d8d8;
         }
     }
-    .size-value{
+    .size-value {
         display: flex;
         margin-top: 15px;
         align-items: center;
-        p{
+        p {
             font-weight: 400;
             font-size: 14px;
             margin-left: 5px;

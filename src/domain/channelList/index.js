@@ -1,78 +1,78 @@
-import "./channelList.scss";
-import React, { useEffect, useContext, useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
-import { message } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import ChannelOverview from "./components/channelOverview/channelOverview";
-import CreateChannelDetails from "./components/createChannelDetails/createChannelDetails"
-import { Context } from "../../hooks/store";
-import { httpRequest } from "../../services/http";
-import { ApiEndpoint } from "../../apiEndpoints.model";
-import edit from "../../assets/images/edit.svg";
-import Tooltip from "../../components/tooltip/tooltip";
-import Modal from "../../components/modal/modal";
-import Button from "../../components/button/button";
-import config from "../../config/config.json";
-import loading from "../../assets/images/strech.gif";
-import pathControllers from "../../router";
-import pathContainers from "../../router";
+import './style.scss';
+import React, { useEffect, useContext, useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ChannelOverview from './channelOverview/';
+import CreateChannelDetails from './createChannelDetails';
+import { Context } from '../../hooks/store';
+import { httpRequest } from '../../services/http';
+import { ApiEndpoint } from '../../apiEndpoints';
+import edit from '../../assets/images/edit.svg';
+import Tooltip from '../../components/tooltip/tooltip';
+import Modal from '../../components/modal/modal';
+import Button from '../../components/button/button';
+import config from '../../config/config.json';
+import loading from '../../assets/images/strech.gif';
+import pathControllers from '../../router';
+import pathContainers from '../../router';
 
 const ChannelList = () => {
     const [state, dispatch] = useContext(Context);
     const [channelList, setChannelList] = useState([
         {
-            "_id": 1,
-            "name": "Strech",
-            "retention": "3 days",
-            "max_throughput": "1000 message",
-            "status": "healthy",
-            "functions": [
+            _id: 1,
+            name: 'Strech',
+            retention: '3 days',
+            max_throughput: '1000 message',
+            status: 'healthy',
+            functions: [
                 {
-                    "_id": 1,
-                    "name": "sveta",
-                    "type": "blabl"
+                    _id: 1,
+                    name: 'sveta',
+                    type: 'blabl'
                 },
                 {
-                    "_id": 2,
-                    "name": "sveta2",
-                    "type": "blabl"
+                    _id: 2,
+                    name: 'sveta2',
+                    type: 'blabl'
                 },
                 {
-                    "_id": 3,
-                    "name": "sveta3",
-                    "type": "blabl"
+                    _id: 3,
+                    name: 'sveta3',
+                    type: 'blabl'
                 }
             ]
         },
         {
-            "_id": 2,
-            "name": "Strech",
-            "retention": "3 hours",
-            "max_throughput": "15 Mb/s",
-            "status": "unhealthy"
+            _id: 2,
+            name: 'Strech',
+            retention: '3 hours',
+            max_throughput: '15 Mb/s',
+            status: 'unhealthy'
         },
         {
-            "_id": 3,
-            "name": "Strech",
-            "retention": "channel",
-            "max_throughput": "default",
-            "status": "healthy"
+            _id: 3,
+            name: 'Strech',
+            retention: 'channel',
+            max_throughput: 'default',
+            status: 'healthy'
         },
         {
-            "_id": 4,
-            "name": "Strech",
-            "retention": "channel",
-            "max_throughput": "default",
-            "status": "unhealthy"
+            _id: 4,
+            name: 'Strech',
+            retention: 'channel',
+            max_throughput: 'default',
+            status: 'unhealthy'
         },
         {
-            "_id": 5,
-            "name": "Strech",
-            "retention": "channel",
-            "max_throughput": "default",
-            "status": "healthy"
+            _id: 5,
+            name: 'Strech',
+            retention: 'channel',
+            max_throughput: 'default',
+            status: 'healthy'
         }
     ]);
     const [editName, seteditName] = useState(false);
@@ -81,34 +81,31 @@ const ChannelList = () => {
     const [modalIsOpen, modalFlip] = useState(false);
     const [applicationDetails, setapplicationDetails] = useState({
         id: 1,
-        name: "test",
-        description: "desc"
+        name: 'test',
+        description: 'desc'
     });
     const [isLoading, setisLoading] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({ type: "SET_ROUTE", payload: "applications" });
+        dispatch({ type: 'SET_ROUTE', payload: 'applications' });
         //GetApplicationDetails();
     }, []);
 
     const GetApplicationDetails = async () => {
         const url = window.location.href;
-        const applicationId = url.split("applications/")[1].split("/")[0];
-        if (applicationId !== "newApplication") {
+        const applicationId = url.split('applications/')[1].split('/')[0];
+        if (applicationId !== 'newApplication') {
             setisLoading(true);
             try {
-                const data = await httpRequest(
-                    "GET",
-                    `${ApiEndpoint.GET_USER_USECASE_BY_ID}?applicationId=${applicationId}`
-                );
+                const data = await httpRequest('GET', `${ApiEndpoint.GET_USER_USECASE_BY_ID}?applicationId=${applicationId}`);
                 setapplicationDetails({
                     ...applicationDetails,
                     id: 1,
-                    name: "data.name",
-                    description: "data.description",
+                    name: 'data.name',
+                    description: 'data.description'
                 });
-                dispatch({ type: "UPDATE_USECASES_NAME", payload: data });
+                dispatch({ type: 'UPDATE_USECASES_NAME', payload: data });
                 getChannels(data._id);
             } catch (err) {
                 return;
@@ -118,15 +115,12 @@ const ChannelList = () => {
 
     const getChannels = async (applicationId) => {
         try {
-            const data = await httpRequest(
-                "GET",
-                `${ApiEndpoint.GET_USECASE_PIPELINES}?applicationId=${applicationId || state.application?._id}`
-            );
+            const data = await httpRequest('GET', `${ApiEndpoint.GET_USECASE_PIPELINES}?applicationId=${applicationId || state.application?._id}`);
             // setTimeout(() => {
             setisLoading(false);
             setChannelList(data);
             // }, 1000);
-        } catch (err) { }
+        } catch (err) {}
     };
 
     const handleEditName = () => {
@@ -142,14 +136,14 @@ const ChannelList = () => {
             seteditName(false);
         } else {
             try {
-                const data = await httpRequest("PUT", ApiEndpoint.CHANGE_USECASE_NAME, {
+                const data = await httpRequest('PUT', ApiEndpoint.CHANGE_USECASE_NAME, {
                     name: e.target.value,
-                    applicationId: state.useCaseBuilder?._id,
+                    applicationId: state.useCaseBuilder?._id
                 });
-                dispatch({ type: "UPDATE_USECASES_NAME", payload: data });
+                dispatch({ type: 'UPDATE_USECASES_NAME', payload: data });
                 setapplicationDetails({ ...applicationDetails, name: e.target.value });
                 seteditName(false);
-            } catch (err) { }
+            } catch (err) {}
         }
     };
 
@@ -162,18 +156,14 @@ const ChannelList = () => {
             seteditDescription(false);
         } else {
             try {
-                const data = await httpRequest(
-                    "PUT",
-                    ApiEndpoint.CHANGE_USECASE_DESCRIPTION,
-                    { description: e.target.value, applicationId: state.useCaseBuilder?._id }
-                );
-                dispatch({ type: "UPDATE_USECASES_DESCRIPTION", payload: data });
+                const data = await httpRequest('PUT', ApiEndpoint.CHANGE_USECASE_DESCRIPTION, { description: e.target.value, applicationId: state.useCaseBuilder?._id });
+                dispatch({ type: 'UPDATE_USECASES_DESCRIPTION', payload: data });
                 setapplicationDetails({
                     ...applicationDetails,
-                    description: e.target.value,
+                    description: e.target.value
                 });
                 seteditDescription(false);
-            } catch (err) { }
+            } catch (err) {}
         }
     };
 
@@ -183,93 +173,61 @@ const ChannelList = () => {
 
     const popupMessage = (content) => {
         message.success({
-            key: "strechSuccessMessage",
+            key: 'strechSuccessMessage',
             content: content,
             duration: 3,
-            style: { cursor: "pointer" },
-            onClick: () => message.destroy("strechSuccessMessage"),
+            style: { cursor: 'pointer' },
+            onClick: () => message.destroy('strechSuccessMessage')
         });
     };
 
     const removeApplication = async () => {
         try {
-            await httpRequest(
-                "DELETE",
-                `${ApiEndpoint.REMOVE_USECASE}?applicationId=${state.application?._id}`
-            );
+            await httpRequest('DELETE', `${ApiEndpoint.REMOVE_USECASE}?applicationId=${state.application?._id}`);
             history.push(pathControllers.applicationList);
         } catch (err) {
             modalFlip(true);
         }
     };
 
-    const handleCreateChannel = () => {
-    };
+    const handleCreateChannel = () => {};
 
     return (
         <div className="application-details-container">
-
             <div className="application-details-header">
                 <div className="left-side">
                     {!editName && (
                         <h1 className="main-header-h1">
                             {!isLoading ? (
-                                state.useCaseBuilder?.name ||
-                                applicationDetails.name ||
-                                "Inser application name"
+                                state.useCaseBuilder?.name || applicationDetails.name || 'Inser application name'
                             ) : (
                                 <CircularProgress className="circular-progress" size={18} />
                             )}
-                            <img
-                                src={edit}
-                                width="20"
-                                height="20"
-                                alt="edit"
-                                className="edit-icon"
-                                onClick={() => handleEditName()}
-                            />
+                            <img src={edit} width="20" height="20" alt="edit" className="edit-icon" onClick={() => handleEditName()} />
                         </h1>
                     )}
                     {editName && (
                         <ClickAwayListener onClickAway={handleEditNameBlur}>
                             <div className="edit-input-name">
-                                <input
-                                    onBlur={handleEditNameBlur}
-                                    onChange={handleEditNameChange}
-                                    value={applicationDetails?.name}
-                                />
+                                <input onBlur={handleEditNameBlur} onChange={handleEditNameChange} value={applicationDetails?.name} />
                             </div>
                         </ClickAwayListener>
                     )}
                     {!editDescription && (
                         <div className="description">
-
                             {!isLoading ? (
-                                <p >{state.useCaseBuilder?.description ||
-                                    applicationDetails.description ||
-                                    "Insert your description..."}</p>
+                                <p>{state.useCaseBuilder?.description || applicationDetails.description || 'Insert your description...'}</p>
                             ) : (
                                 <CircularProgress className="circular-progress" size={12} />
                             )}
 
-                            <img
-                                src={edit}
-                                width="15"
-                                height="15"
-                                alt="edit"
-                                className="edit-icon"
-                                onClick={() => handleEditDescription()}
-                            />
+                            <img src={edit} width="15" height="15" alt="edit" className="edit-icon" onClick={() => handleEditDescription()} />
                         </div>
                     )}
                     {editDescription && (
                         <ClickAwayListener onClickAway={handleEditDescriptionBlur}>
                             <div>
-                                <textarea
-                                    onBlur={handleEditDescriptionBlur}
-                                    onChange={handleEditDescriptionChange}
-                                    value={applicationDetails.description}
-                                />
+                                <textarea onBlur={handleEditDescriptionBlur} onChange={handleEditDescriptionChange} value={applicationDetails.description} />
                             </div>
                         </ClickAwayListener>
                     )}
@@ -301,16 +259,10 @@ const ChannelList = () => {
                         <img src={loading} alt="loading"></img>
                     </div>
                 )}
-                {channelList?.length > 0 &&
-                    channelList?.map((channel) => (
-                        <ChannelOverview key={channel._id} channel={channel} />
-                    ))}
+                {channelList?.length > 0 && channelList?.map((channel) => <ChannelOverview key={channel._id} channel={channel} />)}
                 {!isLoading && channelList.length === 0 && (
                     <div className="no-channel-to-display">
-                        <InboxOutlined
-                            style={{ fontSize: "40px", color: "#5D4AEE" }}
-                            theme="outlined"
-                        />
+                        <InboxOutlined style={{ fontSize: '40px', color: '#5D4AEE' }} theme="outlined" />
                         <p className="nodata">No Channels to display</p>
                         <Button
                             className="modal-btn"
@@ -342,13 +294,13 @@ const ChannelList = () => {
                 clickOutside={() => modalFlip(false)}
                 rBtnClick={() => {
                     modalFlip(false);
-                    history.push(`${pathContainers.applicationList}/${applicationDetails._id}/1`)
+                    history.push(`${pathContainers.applicationList}/${applicationDetails._id}/1`);
                 }}
                 open={modalIsOpen}
             >
                 <CreateChannelDetails />
             </Modal>
-        </div >
+        </div>
     );
 };
 
