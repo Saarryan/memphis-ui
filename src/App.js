@@ -2,7 +2,7 @@ import './App.scss';
 
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ChannelDashboard from './domain/channelDashboard';
 import ApplicationList from './domain/applicationList';
@@ -14,6 +14,9 @@ import Settings from './domain/settings';
 import pathControllers from './router';
 import Users from './domain/users';
 import Login from './domain/login';
+import useAuth from './hooks/useAuth';
+import { LOCAL_STORAGE_KEEP_ME_SIGN_IN } from './const/localStorageConsts';
+import { handleRefreshToken } from './services/auth';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -26,13 +29,22 @@ const Mobile = ({ children }) => {
 };
 
 const App = withRouter(() => {
+    const { isValidToken } = useAuth();
+
+    useEffect(async () => {
+        const isKeepMeSignin = localStorage.getItem(LOCAL_STORAGE_KEEP_ME_SIGN_IN);
+        if (!isValidToken() && isKeepMeSignin === 'true') {
+            await handleRefreshToken();
+        }
+    }, []);
+
     return (
         <div className="app-container">
             <div>
                 <Desktop>
                     <Switch>
                         <Route exact path={pathControllers.login} component={Login} />
-                        <Route exact path={pathControllers.users}>
+                        <PrivateRoute exact path={pathControllers.users}>
                             <AppWrapper
                                 content={
                                     <div>
@@ -40,8 +52,8 @@ const App = withRouter(() => {
                                     </div>
                                 }
                             ></AppWrapper>
-                        </Route>
-                        <Route exact path={pathControllers.overview}>
+                        </PrivateRoute>
+                        <PrivateRoute exact path={pathControllers.overview}>
                             <AppWrapper
                                 content={
                                     <div>
@@ -49,8 +61,8 @@ const App = withRouter(() => {
                                     </div>
                                 }
                             ></AppWrapper>
-                        </Route>
-                        <Route exact path={pathControllers.settings}>
+                        </PrivateRoute>
+                        <PrivateRoute exact path={pathControllers.settings}>
                             <AppWrapper
                                 content={
                                     <div>
@@ -58,8 +70,8 @@ const App = withRouter(() => {
                                     </div>
                                 }
                             ></AppWrapper>
-                        </Route>
-                        <Route exact path={pathControllers.applicationList}>
+                        </PrivateRoute>
+                        <PrivateRoute exact path={pathControllers.applicationList}>
                             <AppWrapper
                                 content={
                                     <div>
@@ -67,8 +79,8 @@ const App = withRouter(() => {
                                     </div>
                                 }
                             ></AppWrapper>
-                        </Route>
-                        <Route exact path={`${pathControllers.applicationList}/:id`}>
+                        </PrivateRoute>
+                        <PrivateRoute exact path={`${pathControllers.applicationList}/:id`}>
                             <AppWrapper
                                 content={
                                     <div>
@@ -76,8 +88,8 @@ const App = withRouter(() => {
                                     </div>
                                 }
                             ></AppWrapper>
-                        </Route>
-                        <Route exact path={`${pathControllers.applicationList}/:id/:id`}>
+                        </PrivateRoute>
+                        <PrivateRoute exact path={`${pathControllers.applicationList}/:id/:id`}>
                             <AppWrapper
                                 content={
                                     <div>
@@ -85,7 +97,7 @@ const App = withRouter(() => {
                                     </div>
                                 }
                             ></AppWrapper>
-                        </Route>
+                        </PrivateRoute>
 
                         {/* <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path={pathControllers.overview} component={Overview} />

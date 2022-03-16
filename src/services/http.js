@@ -5,17 +5,12 @@ import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
-    debugger;
     if (authNeeded) {
         const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
         headers['Authorization'] = 'Bearer ' + token;
     }
     const HTTP = axios.create({
-        withCredentials: true,
-        headers: {
-            'Access-Control-Expose-Headers': 'X-My-Custom-Header X-Another-Custom-Header',
-            'Access-Control-Allow-Origin': '*'
-        }
+        withCredentials: true
     });
     if (method !== 'GET' && method !== 'POST' && method !== 'PUT' && method !== 'DELETE')
         throw {

@@ -10,11 +10,6 @@ const Reducer = (state, action) => {
                 ...state,
                 organizationDetails: action.payload
             };
-        case 'SET_AUTHENTICATION':
-            return {
-                ...state,
-                isAuthentication: action.payload
-            };
         case 'SET_LOADER':
             return {
                 ...state,

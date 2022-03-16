@@ -15,16 +15,6 @@ import Loader from '../../components/loader';
 import { Context } from '../../hooks/store';
 import Input from '../../components/Input';
 import useAuth from '../../hooks/useAuth';
-import {
-    LOCAL_STORAGE_ALREADY_LIGGED_IN,
-    LOCAL_STORAGE_AVATAR_ID,
-    LOCAL_STORAGE_CREATION_DATE,
-    LOCAL_STORAGE_TOKEN,
-    LOCAL_STORAGE_EXPIRED_TOKEN,
-    LOCAL_STORAGE_USER_ID,
-    LOCAL_STORAGE_USER_NAME,
-    LOCAL_STORAGE_USER_TYPE
-} from '../../const/localStorageConsts';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -46,19 +36,13 @@ const Login = (props) => {
         password: ''
     });
     const { loginUser, error } = useAuth();
+    const { isValidToken } = useAuth();
 
-    const saveToLocalStorage = (userData) => {
-        localStorage.setItem(LOCAL_STORAGE_ALREADY_LIGGED_IN, userData.already_logged_in);
-        localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
-        localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
-        localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
-        localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, userData.expires_in);
-        localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
-        localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.user_Name);
-        localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
-    };
-
-    useEffect(() => {}, []);
+    useEffect(() => {
+        if (isValidToken()) {
+            history.push('/overview');
+        }
+    }, []);
 
     const handleUserNameChange = (e) => {
         setFormFields({ ...formFields, username: e.target.value });
@@ -79,7 +63,8 @@ const Login = (props) => {
             return;
         } else {
             const bodyRequest = formFields;
-            await loginUser(bodyRequest, isKeepMeSignin);
+            const data = await loginUser(bodyRequest, isKeepMeSignin);
+            dispatch({ type: 'SET_USER_DATA', payload: data });
         }
     };
 
