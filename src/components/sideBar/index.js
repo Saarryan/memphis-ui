@@ -16,9 +16,8 @@ import accountIcon from '../../assets/images/accountIcon.svg';
 import logoutIcon from '../../assets/images/logoutIcon.svg';
 import usersIcon from '../../assets/images/usersIcon.svg';
 import { httpRequest } from '../../services/http';
-import { ApiEndpoints } from '../../apiEndpoints';
+import { ApiEndpoints } from '../../const/apiEndpoints';
 import Logo from '../../assets/images/logo.png';
-import config from '../../config/config.json';
 import { Context } from '../../hooks/store';
 import pathControllers from '../../router';
 

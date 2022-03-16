@@ -8,9 +8,9 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Form, Checkbox } from 'antd';
 
 import logoGrayText from '../../assets/images/logoGrayText.png';
-import LocalStorageService from '../../services/auth';
+// import LocalStorageService from '../../services/auth';
 import { httpRequest } from '../../services/http';
-import { ApiEndpoints } from '../../apiEndpoints';
+import { ApiEndpoints } from '../../constconst/apiEndpoints';
 import config from '../../config/config.json';
 import Button from '../../components/button';
 import Loader from '../../components/loader';
@@ -119,7 +119,7 @@ const Login = (props) => {
         try {
             const data = await httpRequest('POST', ApiEndpoints.SIGN_IN, bodyRequest);
             if (data && data !== undefined) {
-                LocalStorageService.saveTokenDataInLocalStorage(data.token, data.expiresIn);
+                // LocalStorageService.saveTokenDataInLocalStorage(data.token, data.expiresIn);
                 localStorage.setItem(config.LOCAL_STORAGE_USER_ID, data.id);
                 localStorage.setItem(config.LOCAL_STORAGE_KEEP_ME_SIGN_IN, isKeepMeSignin);
                 localStorage.setItem(config.LOCAL_STORAGE_ORGANIZATION_ID, data.organization_id);

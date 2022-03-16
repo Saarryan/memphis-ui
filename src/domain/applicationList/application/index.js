@@ -16,7 +16,7 @@ import Tooltip from '../../../components/tooltip/tooltip';
 import loading from '../../../assets/images/strech.gif';
 import Button from '../../../components/button';
 import { httpRequest } from '../../../services/http';
-import { ApiEndpoints } from '../../../apiEndpoints';
+import { ApiEndpoints } from '../../../const/apiEndpoints';
 import Modal from '../../../components/modal';
 import { Context } from '../../../hooks/store';
 import pathControllers from '../../../router';

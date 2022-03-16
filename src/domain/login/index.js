@@ -8,14 +8,23 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Form, Checkbox } from 'antd';
 
 import logoGrayText from '../../assets/images/logoGrayText.png';
-import LocalStorageService from '../../services/auth';
 import { httpRequest } from '../../services/http';
-import { ApiEndpoints } from '../../apiEndpoints';
-import config from '../../config/config.json';
+import { ApiEndpoints } from '../../const/apiEndpoints';
 import Button from '../../components/button';
 import Loader from '../../components/loader';
 import { Context } from '../../hooks/store';
 import Input from '../../components/Input';
+import useAuth from '../../hooks/useAuth';
+import {
+    LOCAL_STORAGE_ALREADY_LIGGED_IN,
+    LOCAL_STORAGE_AVATAR_ID,
+    LOCAL_STORAGE_CREATION_DATE,
+    LOCAL_STORAGE_TOKEN,
+    LOCAL_STORAGE_EXPIRED_TOKEN,
+    LOCAL_STORAGE_USER_ID,
+    LOCAL_STORAGE_USER_NAME,
+    LOCAL_STORAGE_USER_TYPE
+} from '../../const/localStorageConsts';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -33,24 +42,26 @@ const Login = (props) => {
     const history = useHistory();
     const [loginForm] = Form.useForm(); // form controller
     const [formFields, setFormFields] = useState({
-        email: '',
+        username: '',
         password: ''
     });
+    const { loginUser, error } = useAuth();
 
-    // const saveToLocalStorage = (jwt_token, user_id, keepSingedIn, username, creation_date, already_logged_in, avatar_id, user_type) => {
-    //     localStorage.setItem(LOCAL_STORAGE_TOKEN, jwt_token);
-    //     localStorage.setItem(LOCAL_STORAGE_USER_ID, user_id);
-    //     localStorage.setItem(LOCAL_STORAGE_KEEP_ME_SIGN_IN, keepSingedIn);
-    //     localStorage.setItem(LOCAL_STORAGE_USER_NAME, full_name);
-    //     localStorage.setItem(LOCAL_STORAGE_USER_EMAIL, email);
-    //     localStorage.setItem(LOCAL_STORAGE_IMAGE_URL, image_url);
-    //     localStorage.setItem(LOCAL_STORAGE_REGISTER_DATE, register_date);
-    // };
+    const saveToLocalStorage = (userData) => {
+        localStorage.setItem(LOCAL_STORAGE_ALREADY_LIGGED_IN, userData.already_logged_in);
+        localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
+        localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
+        localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
+        localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, userData.expires_in);
+        localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
+        localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.user_Name);
+        localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
+    };
 
     useEffect(() => {}, []);
 
     const handleUserNameChange = (e) => {
-        setFormFields({ ...formFields, email: e.target.value });
+        setFormFields({ ...formFields, username: e.target.value });
     };
 
     const handlePasswordChange = (e) => {
@@ -61,12 +72,14 @@ const Login = (props) => {
         setisKeepMeSignin(e.target.checked);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         const values = await loginForm.validateFields();
         if (values?.errorFields) {
             return;
         } else {
-            //handleLoginSubmit();
+            const bodyRequest = formFields;
+            await loginUser(bodyRequest, isKeepMeSignin);
         }
     };
 
@@ -120,7 +133,7 @@ const Login = (props) => {
                                 >
                                     <Input
                                         placeholder="Username"
-                                        type="email"
+                                        type="text"
                                         radiusType="circle"
                                         colorType="black"
                                         backgroundColorType="white-login"
@@ -176,16 +189,16 @@ const Login = (props) => {
                                         backgroundColorType="loginPurple"
                                         fontSize="16px"
                                         fontWeight="bold"
-                                        onClick={() => handleSubmit}
+                                        onClick={handleSubmit}
                                     />
                                 </Form.Item>
-                                {/* 
-                                {isError && timerForRetry.length === 0 && (
+
+                                {error && (
                                     <div className="error-message">
                                         <p>An account with that sign-in information does not exist. Try again or create a new account.</p>
                                     </div>
                                 )}
-                                {timerForRetry.length !== 0 && (
+                                {/* {timerForRetry.length !== 0 && (
                                     <div className="error-message">
                                         <p>Your acount was blocked, please try again in {timerForRetry}</p>
                                     </div>

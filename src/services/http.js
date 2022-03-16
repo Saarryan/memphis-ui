@@ -1,16 +1,13 @@
 import { message } from 'antd';
 import axios from 'axios';
 
-import LocalStorageService from '../services/auth';
-import config from '../config/config.json';
+import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
+import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 
-let { SERVER_URL_STAGING } = config;
-const SERVER_URL_PRODUCTION = `${window.location.href.split('//')[1].split('/')[0]}/api-gw`;
-const SERVER_URL = process.env.REACT_APP_ENV === 'production' ? SERVER_URL_PRODUCTION : SERVER_URL_STAGING;
-
-export async function httpRequest(method, endPointUrl, authNeeded = true, data = {}, headers = {}, queryParams = {}, timeout = 0) {
+export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
+    debugger;
     if (authNeeded) {
-        const token = localStorage.getItem(config.LOCAL_STORAGE_TOKEN);
+        const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
         headers['Authorization'] = 'Bearer ' + token;
     }
     const HTTP = axios.create({
@@ -39,7 +36,7 @@ export async function httpRequest(method, endPointUrl, authNeeded = true, data =
         const results = res.data;
         return results;
     } catch (err) {
-        if (err?.response?.data?.message !== undefined && err?.response?.status === config.SHOWABLE_ERROR_STATUS_CODE) {
+        if (err?.response?.data?.message !== undefined && err?.response?.status === SHOWABLE_ERROR_STATUS_CODE) {
             message.error({
                 key: 'strechErrorMessage',
                 content: err?.response?.data?.message,
