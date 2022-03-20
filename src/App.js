@@ -4,10 +4,10 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React, { useEffect } from 'react';
 
-import ChannelDashboard from './domain/channelDashboard';
-import ApplicationList from './domain/applicationList';
+import FactoryDashboard from './domain/factoryDashboard';
+import ApplicationsList from './domain/applicationsList';
 import AppWrapper from './components/appWrapper';
-import ChannelList from './domain/channelList';
+import FactoriesList from './domain/factoriesList';
 import PrivateRoute from './PrivateRoute';
 import Overview from './domain/overview';
 import Settings from './domain/settings';
@@ -17,6 +17,8 @@ import Login from './domain/login';
 import useAuth from './hooks/useAuth';
 import { LOCAL_STORAGE_KEEP_ME_SIGN_IN } from './const/localStorageConsts';
 import { handleRefreshToken } from './services/auth';
+import { useHistory } from 'react-router-dom';
+import pathContainers from './router';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -30,11 +32,15 @@ const Mobile = ({ children }) => {
 
 const App = withRouter(() => {
     const { isValidToken } = useAuth();
+    const history = useHistory();
 
     useEffect(async () => {
         const isKeepMeSignin = localStorage.getItem(LOCAL_STORAGE_KEEP_ME_SIGN_IN);
         if (!isValidToken() && isKeepMeSignin === 'true') {
-            await handleRefreshToken();
+            const refreshSucsess = await handleRefreshToken();
+            if (!refreshSucsess) {
+                history.push(pathContainers.login);
+            }
         }
     }, []);
 
@@ -71,29 +77,29 @@ const App = withRouter(() => {
                                 }
                             ></AppWrapper>
                         </PrivateRoute>
-                        <PrivateRoute exact path={pathControllers.applicationList}>
+                        <PrivateRoute exact path={pathControllers.applicationsList}>
                             <AppWrapper
                                 content={
                                     <div>
-                                        <ApplicationList />
+                                        <ApplicationsList />
                                     </div>
                                 }
                             ></AppWrapper>
                         </PrivateRoute>
-                        <PrivateRoute exact path={`${pathControllers.applicationList}/:id`}>
+                        <PrivateRoute exact path={`${pathControllers.applicationsList}/:id`}>
                             <AppWrapper
                                 content={
                                     <div>
-                                        <ChannelList />
+                                        <FactoriesList />
                                     </div>
                                 }
                             ></AppWrapper>
                         </PrivateRoute>
-                        <PrivateRoute exact path={`${pathControllers.applicationList}/:id/:id`}>
+                        <PrivateRoute exact path={`${pathControllers.applicationsList}/:id/:id`}>
                             <AppWrapper
                                 content={
                                     <div>
-                                        <ChannelDashboard />
+                                        <FactoryDashboard />
                                     </div>
                                 }
                             ></AppWrapper>
