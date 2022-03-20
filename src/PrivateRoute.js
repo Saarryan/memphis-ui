@@ -1,35 +1,17 @@
-import React, { useContext } from "react";
-import { Route, Redirect } from "react-router-dom";
-import LocalStorageService from "./services/auth";
-import { Context } from './hooks/store'
+import React, { useContext } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-function PrivateRoute({ component: Component, ...rest }) {
-    const [state] = useContext(Context)
+import useAuth from './hooks/useAuth';
 
-    const shouldRenderPrivateRoute = () => {
-        const isValid = LocalStorageService.isValidToken();
-        if (!isValid) {
-            const handleRefreshToken = LocalStorageService.handleRefreshToken();
-            return handleRefreshToken;
-        }
-        else {
-            return true;
-        }
+function PrivateRoute(props) {
+    const { isValidToken } = useAuth();
+    const { component: Component, ...rest } = props;
+
+    if (isValidToken()) {
+        return <Route {...rest} render={(props) => <Component {...props} />} />;
     }
-
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                state.isAuthentication || shouldRenderPrivateRoute() ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect to={{ pathname: "/signin", state: { referer: props.location } }} />
-                )
-            }
-        />
-
-    );
+    //redirect if there is no user
+    return <Redirect to={{ pathname: '/login', state: { referer: props.location } }} />;
 }
 
 export default PrivateRoute;

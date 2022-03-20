@@ -1,23 +1,24 @@
-import './index.scss';
-import App from './App';
-import React from 'react';
+import './style.scss';
+
+import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
-import reportWebVitals from './reportWebVitals';
+import React from 'react';
+
 import * as serviceWorker from './serviceWorker';
-import Store from "./hooks/store";
+import reportWebVitals from './reportWebVitals';
+import Store from './hooks/store';
+import App from './App';
 
 function StrechApp() {
-
-  return (
-    <Store>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Store>
-  )
+    return (
+        <Store>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Store>
+    );
 }
 ReactDOM.render(<StrechApp />, document.getElementById('root'));
 
-reportWebVitals()
+reportWebVitals();
 serviceWorker.unregister();

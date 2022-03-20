@@ -1,0 +1,81 @@
+.application {
+    .application-card-container {
+        width: 16vw;
+        min-width: 220px;
+        height: 16vw;
+        min-height: 220px;
+        margin-right: 30px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+        background-color: var(--white);
+        margin-bottom: 23px;
+        .application-card-title {
+            background-color: var(--blue);
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            position: relative;
+            cursor: pointer;
+            height: 7vh;
+            align-items: center;
+            label {
+                color: var(--white);
+                margin-left: 15px;
+                display: flex;
+                font-size: 12px;
+                padding-bottom: 5px;
+            }
+            h2 {
+                color: var(--white);
+                margin: 0;
+                font-weight: bold;
+                padding-top: 5px;
+                cursor: pointer;
+                width: 16vw;
+            }
+            .threedots-menu {
+                color: var(--white);
+            }
+        }
+        .application-card-description {
+            margin-top: 3px;
+            p {
+                color: var(--blue);
+                background-color: var(--white);
+                height: 20vh;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                position: relative;
+                padding-top: 10px;
+                padding-left: 15px;
+                padding-right: 10px;
+                font-weight: 500;
+                overflow-wrap: anywhere;
+            }
+        }
+    }
+}
+
+.loader-uploading {
+    position: absolute;
+    max-height: calc(74%);
+    div {
+        background-color: var(--white);
+        position: fixed;
+        z-index: 3;
+        opacity: 0.5;
+        width: 92vw;
+        height: 80%;
+    }
+    img {
+        width: 16vw;
+        min-width: 200px;
+        z-index: 3;
+        position: relative;
+        top: calc(25vh);
+        transform: translateY(40%);
+        left: 50vw;
+        transform: translateX(-90%);
+    }
+}
