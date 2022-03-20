@@ -15,6 +15,7 @@ import {
     LOCAL_STORAGE_KEEP_ME_SIGN_IN
 } from '../const/localStorageConsts';
 import { handleRefreshToken } from '../services/auth';
+import pathContainers from '../router';
 
 export default function useAuth() {
     let history = useHistory();
@@ -23,7 +24,10 @@ export default function useAuth() {
     const keepTokenFresh = (expires_in) => {
         const safety_seconds = 20000; // 20 seconds
         setTimeout(async () => {
-            await handleRefreshToken();
+            const refreshSucsess = await handleRefreshToken();
+            if (!refreshSucsess) {
+                history.push(pathContainers.login);
+            }
             keepTokenFresh(expires_in);
         }, expires_in - safety_seconds);
     };

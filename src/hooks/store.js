@@ -10,7 +10,7 @@ const initialState = {
         user_type: '',
         avatar_id: 1
     },
-    queueDetails: {
+    factoryDetails: {
         name: 'temporary name',
         retention: '3 days',
         max_throughput: '1500s',

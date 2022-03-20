@@ -1,0 +1,8 @@
+.factory-observabilty-container {
+    display: flex;
+    justify-content: space-between;
+    .thunnel-from-sub,
+    .thunnel-to-pub {
+        width: 9vw;
+    }
+}

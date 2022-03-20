@@ -20,6 +20,7 @@ import { ApiEndpoints } from '../../const/apiEndpoints';
 import Logo from '../../assets/images/logo.png';
 import { Context } from '../../hooks/store';
 import pathControllers from '../../router';
+import { logout } from '../../services/auth';
 
 const { SubMenu } = Menu;
 
@@ -42,7 +43,7 @@ function SideBar() {
         SetBotUrl(require(`../../assets/images/bots/${botId}.svg`));
     };
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         switch (e.key) {
             case '1':
                 history.push(pathControllers.settings);
@@ -50,6 +51,8 @@ function SideBar() {
             case '2':
                 break;
             case '3':
+                await logout();
+                history.push(pathControllers.login);
                 break;
             default:
                 break;
@@ -89,7 +92,7 @@ function SideBar() {
                                 </div>
                             </div>
                         </Link>
-                        <p className={state.route === 'applications' ? 'name-checked' : 'name'}>Boxes</p>
+                        <p className={state.route === 'applications' ? 'name-checked' : 'name'}>Apps</p>
                     </div>
 
                     <div className="item-wrapper">

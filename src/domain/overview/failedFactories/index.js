@@ -99,7 +99,7 @@ const FailedFactories = () => {
                                     </span>
                                 )}
                                 <span className="link-row" style={{ width: '100px' }}>
-                                    Go to queue
+                                    Go to factory
                                 </span>
                             </div>
                         );

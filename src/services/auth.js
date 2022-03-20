@@ -11,6 +11,7 @@ import {
     LOCAL_STORAGE_USER_NAME,
     LOCAL_STORAGE_USER_TYPE
 } from '../const/localStorageConsts';
+import pathContainers from '../router';
 import { httpRequest } from './http';
 
 export const handleRefreshToken = async () => {
@@ -32,7 +33,6 @@ export const handleRefreshToken = async () => {
         }
     } catch (ex) {
         await logout();
-        await useHistory.pushState('/signin');
     }
     return false;
 };
