@@ -17,6 +17,9 @@ import Login from './domain/login';
 import useAuth from './hooks/useAuth';
 import { LOCAL_STORAGE_KEEP_ME_SIGN_IN } from './const/localStorageConsts';
 import { handleRefreshToken } from './services/auth';
+import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import pathContainers from './router';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -30,11 +33,15 @@ const Mobile = ({ children }) => {
 
 const App = withRouter(() => {
     const { isValidToken } = useAuth();
+    const history = useHistory();
 
     useEffect(async () => {
         const isKeepMeSignin = localStorage.getItem(LOCAL_STORAGE_KEEP_ME_SIGN_IN);
-        if (!isValidToken() && isKeepMeSignin === 'true') {
+        if (isKeepMeSignin === 'true') {
             await handleRefreshToken();
+        } else {
+            localStorage.clear();
+            history.push(pathContainers.login);
         }
     }, []);
 
@@ -44,20 +51,23 @@ const App = withRouter(() => {
                 <Desktop>
                     <Switch>
                         <Route exact path={pathControllers.login} component={Login} />
-                        <PrivateRoute exact path={pathControllers.users}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <Users />
-                                    </div>
-                                }
-                            ></AppWrapper>
+                        <PrivateRoute exact path="/">
+                            <Redirect to={pathControllers.overview} />
                         </PrivateRoute>
                         <PrivateRoute exact path={pathControllers.overview}>
                             <AppWrapper
                                 content={
                                     <div>
                                         <Overview />
+                                    </div>
+                                }
+                            ></AppWrapper>
+                        </PrivateRoute>
+                        <PrivateRoute exact path={pathControllers.users}>
+                            <AppWrapper
+                                content={
+                                    <div>
+                                        <Users />
                                     </div>
                                 }
                             ></AppWrapper>
@@ -98,6 +108,9 @@ const App = withRouter(() => {
                                 }
                             ></AppWrapper>
                         </PrivateRoute>
+                        <Route>
+                            <Redirect to={pathControllers.overview} />
+                        </Route>
 
                         {/* <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path={pathControllers.overview} component={Overview} />
