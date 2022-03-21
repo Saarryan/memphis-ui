@@ -36,7 +36,9 @@ export const handleRefreshToken = async () => {
 };
 
 export const logout = async () => {
-    await httpRequest('POST', ApiEndpoints.LOGOUT);
-    await localStorage.clear();
+    if (localStorage.LOCAL_STORAGE_TOKEN) {
+        await httpRequest('POST', ApiEndpoints.LOGOUT);
+    }
+    localStorage.clear();
     window.location.replace(pathContainers.login);
 };

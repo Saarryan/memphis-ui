@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
+import pathContainers from '../router';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
     if (authNeeded) {
@@ -31,6 +32,10 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
         const results = res.data;
         return results;
     } catch (err) {
+        if (err?.response?.status === 401) {
+            localStorage.clear();
+            window.location.replace(pathContainers.login);
+        }
         if (err?.response?.data?.message !== undefined && err?.response?.status === SHOWABLE_ERROR_STATUS_CODE) {
             message.error({
                 key: 'strechErrorMessage',
