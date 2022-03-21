@@ -26,7 +26,6 @@ export default function useAuth() {
         setTimeout(async () => {
             if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
                 await handleRefreshToken();
-                keepTokenFresh(expires_in);
             }
         }, expires_in - safety_seconds);
     };
