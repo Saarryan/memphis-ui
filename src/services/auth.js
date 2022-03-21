@@ -13,16 +13,9 @@ import {
 } from '../const/localStorageConsts';
 import pathContainers from '../router';
 import { httpRequest } from './http';
+import { keepTokenFresh } from './keepTokenFresh';
 
 export const handleRefreshToken = async () => {
-    const keepTokenFresh = (expires_in) => {
-        const safety_seconds = 20000; // 20 seconds
-        setTimeout(async () => {
-            if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
-                await handleRefreshToken();
-            }
-        }, expires_in - safety_seconds);
-    };
     try {
         const userData = await httpRequest('POST', ApiEndpoints.REFRESH_TOCKEN, {}, {}, false);
         if (userData) {
@@ -37,7 +30,7 @@ export const handleRefreshToken = async () => {
             localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.user_Name);
             localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
             localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiry_token);
-            keepTokenFresh(userData.expires_in);
+            await keepTokenFresh(userData.expires_in);
         }
     } catch (ex) {
         await logout();

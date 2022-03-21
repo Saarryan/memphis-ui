@@ -91,7 +91,7 @@ function SideBar() {
                                 </div>
                             </div>
                         </Link>
-                        <p className={state.route === 'applications' ? 'name-checked' : 'name'}>Apps</p>
+                        <p className={state.route === 'applications' ? 'name-checked' : 'name'}>Applications</p>
                     </div>
 
                     <div className="item-wrapper">

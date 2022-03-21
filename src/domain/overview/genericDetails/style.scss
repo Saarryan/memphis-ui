@@ -7,9 +7,10 @@
         display: flex;
         width: 32%;
         min-width: 180px;
-        min-height: 60px;
+        min-height: 85px;
         align-items: center;
         justify-content: center;
+        flex-direction: inherit;
         img {
             margin-right: 20px;
         }

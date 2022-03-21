@@ -14,21 +14,11 @@ import {
     LOCAL_STORAGE_USER_TYPE,
     LOCAL_STORAGE_KEEP_ME_SIGN_IN
 } from '../const/localStorageConsts';
-import { handleRefreshToken } from '../services/auth';
-import pathContainers from '../router';
+import { keepTokenFresh } from '../services/keepTokenFresh';
 
 export default function useAuth() {
     let history = useHistory();
     const [error, setError] = useState(null);
-
-    const keepTokenFresh = (expires_in) => {
-        const safety_seconds = 20000; // 20 seconds
-        setTimeout(async () => {
-            if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
-                await handleRefreshToken();
-            }
-        }, expires_in - safety_seconds);
-    };
 
     const saveToLocalStorage = (userData, isKeepMeSignin) => {
         const now = new Date();
