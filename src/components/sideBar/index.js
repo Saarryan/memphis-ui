@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 
-import dashboardIconWhite from '../../assets/images/dashboardIconWhite.svg';
+import overviewIconWhite from '../../assets/images/overviewIconWhite.svg';
 import useCaseIconWhite from '../../assets/images/useCaseIconWhite.svg';
 import usersIconWhite from '../../assets/images/usersIconWhite.svg';
-import dashboardIcon from '../../assets/images/dashboardIcon.svg';
+import overviewIcon from '../../assets/images/overviewIcon.svg';
 import useCaseIcon from '../../assets/images/useCaseIcon.svg';
 import supportIcon from '../../assets/images/supportIcon.svg';
 import accountIcon from '../../assets/images/accountIcon.svg';
@@ -52,7 +52,6 @@ function SideBar() {
                 break;
             case '3':
                 await logout();
-                history.push(pathControllers.login);
                 break;
             default:
                 break;
@@ -71,17 +70,17 @@ function SideBar() {
                             <div className="icon">
                                 <div className={state.route === 'overview' ? 'circle-nav-item checked' : 'circle-nav-item'}>
                                     {state.route === 'overview' ? (
-                                        <img src={dashboardIcon} alt="dashboardIconIconWhite" width="20" height="20"></img>
+                                        <img src={overviewIcon} alt="overviewIconIconWhite" width="20" height="20"></img>
                                     ) : (
-                                        <img src={dashboardIconWhite} alt="dashboardIconIcon" width="20" height="20"></img>
+                                        <img src={overviewIconWhite} alt="overviewIconIcon" width="20" height="20"></img>
                                     )}
                                 </div>
                             </div>
                         </Link>
-                        <p className={state.route === 'overview' ? 'name-checked' : 'name'}>Dashboard</p>
+                        <p className={state.route === 'overview' ? 'name-checked' : 'name'}>Overview</p>
                     </div>
                     <div className="item-wrapper">
-                        <Link to={pathControllers.applicationList}>
+                        <Link to={pathControllers.applicationsList}>
                             <div className="icon">
                                 <div className={state.route === 'applications' ? 'circle-nav-item checked' : 'circle-nav-item'}>
                                     {state.route === 'applications' ? (

@@ -9,14 +9,14 @@ import factoryIdleIcon from '../../../assets/images/factoryIdleIcon.svg';
 const GenericDetails = () => {
     return (
         <div className="generic-container">
-            <div className="dashboard-wrapper data-box">
+            <div className="overview-wrapper data-box">
                 <img src={liveMessagesIcon} width={45} height={45} alt="liveMessagesIcon" />
                 <div className="data-wrapper">
                     <b>Live messages</b>
                     <p>100</p>
                 </div>
             </div>
-            <div className="dashboard-wrapper data-box">
+            <div className="overview-wrapper data-box">
                 <img src={factoryActionIcon} width={45} height={45} alt="liveMessagesIcon" />
                 <div className="data-wrapper">
                     <b>Live messages</b>
@@ -25,7 +25,7 @@ const GenericDetails = () => {
                     </p>
                 </div>
             </div>
-            <div className="dashboard-wrapper data-box">
+            <div className="overview-wrapper data-box">
                 <img src={factoryIdleIcon} width={45} height={45} alt="liveMessagesIcon" />
                 <div className="data-wrapper">
                     <b>Live messages</b>

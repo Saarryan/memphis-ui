@@ -8,7 +8,7 @@ import { Progress } from 'antd';
 import HealthyBadge from '../../../components/healthyBadge';
 import { Context } from '../../../hooks/store';
 
-const FactoryDashboardHeader = (props) => {
+const FactoryOverviewHeader = (props) => {
     const [state, dispatch] = useContext(Context);
 
     const history = useHistory();
@@ -19,7 +19,7 @@ const FactoryDashboardHeader = (props) => {
     };
 
     return (
-        <div className="factory-Dashboard-header">
+        <div className="factory-overview-header">
             <div className="title-wrapper">
                 <h1 className="factory-name">Overview - {state.factoryDetails.name}</h1>
                 <CloseIcon onClick={() => ccc()} style={{ cursor: 'pointer' }} />
@@ -104,4 +104,4 @@ const FactoryDashboardHeader = (props) => {
     );
 };
 
-export default FactoryDashboardHeader;
+export default FactoryOverviewHeader;

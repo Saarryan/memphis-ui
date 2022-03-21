@@ -23,8 +23,8 @@ const SysComponents = () => {
     // const [sysComponents, setSysComponents] = useState(null)
 
     return (
-        <div className="dashboard-wrapper sys-components-container">
-            <p className="dashboard-components-header">System components</p>
+        <div className="overview-wrapper sys-components-container">
+            <p className="overview-components-header">System components</p>
             <div className="sys-components sys-components-header">
                 <p>Pod name</p>
                 <p>Pods</p>

@@ -11,8 +11,8 @@ const Resources = () => {
     ]);
 
     return (
-        <div className="dashboard-wrapper resources-container">
-            <p className="dashboard-components-header">Resources</p>
+        <div className="overview-wrapper resources-container">
+            <p className="overview-components-header">Resources</p>
             {resourcesTotal &&
                 resourcesTotal.map((res) => {
                     return (

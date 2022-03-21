@@ -2,14 +2,14 @@ import './style.scss';
 
 import React, { useEffect, useContext } from 'react';
 
-import FactoryDashboardHeader from './factoryDashboardHeader';
+import FactoryOverviewHeader from './factoryOverviewHeader';
 import FactoryObservabilty from './factoryObservabilty';
 import ConnectionDetails from './connectionDetails';
 import Throughput from './throughput';
 import Auditing from './auditing';
 import { Context } from '../../hooks/store';
 
-const FactoryDashboard = () => {
+const FactoryOverview = () => {
     const [state, dispatch] = useContext(Context);
 
     useEffect(() => {
@@ -17,11 +17,11 @@ const FactoryDashboard = () => {
     }, []);
 
     return (
-        <div className="factory-dashboard-container">
-            <div className="dashboard-header">
-                <FactoryDashboardHeader />
+        <div className="factory-overview-container">
+            <div className="overview-header">
+                <FactoryOverviewHeader />
             </div>
-            <div className="dashboard-top">
+            <div className="overview-top">
                 <div className="factory-observability">
                     <FactoryObservabilty />
                 </div>
@@ -29,7 +29,7 @@ const FactoryDashboard = () => {
                     <ConnectionDetails />
                 </div>
             </div>
-            <div className="dashboard-bottom">
+            <div className="overview-bottom">
                 <div className="auditing">
                     <Auditing />
                 </div>
@@ -41,4 +41,4 @@ const FactoryDashboard = () => {
     );
 };
 
-export default FactoryDashboard;
+export default FactoryOverview;

@@ -67,8 +67,8 @@ const data = [
 ];
 const FailedFactories = () => {
     return (
-        <div className="dashboard-wrapper factories-container">
-            <p className="dashboard-components-header">Un-Healthy factories</p>
+        <div className="overview-wrapper factories-container">
+            <p className="overview-components-header">Un-Healthy factories</p>
             <div className="factories-err-message">
                 <ErrorSharpIcon className="err-icon" theme="outlined" />
                 <p>For 5/23 factories, there may be a problem</p>

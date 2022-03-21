@@ -1,12 +1,12 @@
-.factory-dashboard-container {
+.factory-overview-container {
     width: calc(100% - 60px);
     position: absolute;
     padding: 1vw;
     height: 100%;
-    .dashboard-header {
+    .overview-header {
         margin-bottom: 15px;
     }
-    .dashboard-top {
+    .overview-top {
         display: flex;
         justify-content: space-between;
         width: 95vw;
@@ -14,7 +14,7 @@
             margin-right: 2vw;
         }
     }
-    .dashboard-bottom {
+    .overview-bottom {
         width: 95vw;
         display: flex;
         justify-content: space-between;

@@ -4,7 +4,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React, { useEffect } from 'react';
 
-import FactoryDashboard from './domain/factoryDashboard';
+import FactoryOverview from './domain/factoryOverview';
 import ApplicationsList from './domain/applicationsList';
 import AppWrapper from './components/appWrapper';
 import FactoriesList from './domain/factoriesList';
@@ -37,10 +37,7 @@ const App = withRouter(() => {
     useEffect(async () => {
         const isKeepMeSignin = localStorage.getItem(LOCAL_STORAGE_KEEP_ME_SIGN_IN);
         if (!isValidToken() && isKeepMeSignin === 'true') {
-            const refreshSucsess = await handleRefreshToken();
-            if (!refreshSucsess) {
-                history.push(pathContainers.login);
-            }
+            await handleRefreshToken();
         }
     }, []);
 
@@ -99,7 +96,7 @@ const App = withRouter(() => {
                             <AppWrapper
                                 content={
                                     <div>
-                                        <FactoryDashboard />
+                                        <FactoryOverview />
                                     </div>
                                 }
                             ></AppWrapper>

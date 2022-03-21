@@ -29,15 +29,14 @@ export const handleRefreshToken = async () => {
             localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.user_Name);
             localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
             localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiry_token);
-            return true;
         }
     } catch (ex) {
         await logout();
     }
-    return false;
 };
 
 export const logout = async () => {
     await httpRequest('POST', ApiEndpoints.LOGOUT);
-    localStorage.clear();
+    await localStorage.clear();
+    window.location.replace(pathContainers.login);
 };
