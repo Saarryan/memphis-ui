@@ -24,11 +24,10 @@ export default function useAuth() {
     const keepTokenFresh = (expires_in) => {
         const safety_seconds = 20000; // 20 seconds
         setTimeout(async () => {
-            const refreshSucsess = await handleRefreshToken();
-            if (!refreshSucsess) {
-                history.push(pathContainers.login);
+            if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
+                await handleRefreshToken();
+                keepTokenFresh(expires_in);
             }
-            keepTokenFresh(expires_in);
         }, expires_in - safety_seconds);
     };
 

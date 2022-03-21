@@ -71,12 +71,12 @@ const Throughput = () => {
     };
 
     return (
-        <div className="dashboard-wrapper throughput-dashboard-container">
+        <div className="overview-wrapper throughput-overview-container">
             <AntTabs value={value} onChange={handleChangeMenuItem}>
                 <AntTab label="Subscribers" />
                 <AntTab label="Publishers" />
             </AntTabs>
-            <p className="dashboard-components-header">Throughput</p>
+            <p className="overview-components-header">Throughput</p>
             <ApexChart />
         </div>
     );
