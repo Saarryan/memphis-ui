@@ -1,4 +1,4 @@
-const environment = process.env.REACT_APP_ENV ? process.env.REACT_APP_ENV : 'DEV';
+const environment = process.env.NODE_ENV ? process.env.NODE_ENV : 'DEV';
 const SERVER_URL_PRODUCTION = `${window.location.href.split('//')[1].split('/')[0]}/api-gw`;
 
 export const SERVER_URL = environment === 'production' ? SERVER_URL_PRODUCTION : 'http://localhost:5555';
