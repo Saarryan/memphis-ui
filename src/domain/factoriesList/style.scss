@@ -1,13 +1,14 @@
 .application-details-container {
-    width: calc(100% - 60px);
+    width: calc(100% - 70px);
     position: absolute;
     padding: 1vw;
     min-width: 1170px;
     height: 100%;
     .application-details-header {
-        height: 180px;
+        height: 135px;
         display: flex;
         justify-content: space-between;
+        margin-bottom: 30px;
         .left-side {
             .edit-icon {
                 cursor: pointer;
@@ -62,9 +63,9 @@
                 height: 3vh;
                 align-items: center;
                 h1 {
-                    font-weight: 1000;
+                    font-weight: 600;
                     color: var(--blue);
-                    font-size: 18px;
+                    font-size: 16px;
                     margin: 0;
                 }
             }

@@ -27,7 +27,8 @@
             background-color: transparent;
             border: none;
             color: var(--purple);
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 12px;
         }
     }
 }
@@ -42,7 +43,7 @@
 
 .modal-header {
     font-weight: 700;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 .MuiDialog-paperWidthSm {

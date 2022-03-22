@@ -1,13 +1,16 @@
 import './style.scss';
 
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
-import Application from './application';
 import Button from '../../components/button';
 import { Context } from '../../hooks/store';
+import Modal from '../../components/modal';
 import pathControllers from '../../router';
+import Application from './application';
+import CreateApplicationDetails from './createApplicationDetails';
+import pathContainers from '../../router';
 
 function ApplicationsList() {
     const [state, dispatch] = useContext(Context);
@@ -19,15 +22,17 @@ function ApplicationsList() {
             description: 'bla bla'
         }
     ]);
+    const [modalIsOpen, modalFlip] = useState(false);
+    const createApplicationRef = useRef(null);
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'applications' });
     }, []);
 
-    const createApplication = () => {
-        //Here we need to implement creation new app and return appId with empty queues
-        history.push(`${pathControllers.applicationsList}/newApplication`);
-    };
+    // const createApplication = () => {
+    //     //Here we need to implement creation new app and return appId with empty queues
+    //     history.push(`${pathControllers.applicationsList}/newApplication`);
+    // };
 
     const openModal = () => {
         //Here we need a new modal with name and description fields
@@ -51,7 +56,7 @@ function ApplicationsList() {
                             fontSize="14px"
                             fontWeight="bold"
                             aria-haspopup="true"
-                            onClick={openModal}
+                            onClick={() => modalFlip(true)}
                         />
                     </div>
                 </div>
@@ -88,13 +93,27 @@ function ApplicationsList() {
             </div>
           )} */}
                 </div>
-                {/* <Application
-          createNewUsecase={() => {
-            handleCloseMenu();
-            handleCreateUseCaseClicked();
-          }}
-        /> */}
             </div>
+            <Modal
+                header="Your factory details"
+                height="600px"
+                minWidth="550px"
+                rBtnText="Add"
+                lBtnText="Cancel"
+                closeAction={() => modalFlip(false)}
+                lBtnClick={() => {
+                    modalFlip(false);
+                }}
+                clickOutside={() => modalFlip(false)}
+                rBtnClick={() => {
+                    createApplicationRef.current();
+                    // modalFlip(false);
+                    //history.push(`${pathContainers.applicationsList}/1`);
+                }}
+                open={modalIsOpen}
+            >
+                <CreateApplicationDetails createApplicationRef={createApplicationRef} />
+            </Modal>
         </div>
     );
 }

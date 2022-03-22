@@ -77,7 +77,6 @@ const FactoriesList = () => {
     ]);
     const [editName, seteditName] = useState(false);
     const [editDescription, seteditDescription] = useState(false);
-    // const [functionModalIsOpen, functionModalFlip] = useState(false);
     const [modalIsOpen, modalFlip] = useState(false);
     const [applicationDetails, setapplicationDetails] = useState({
         id: 1,
@@ -89,7 +88,7 @@ const FactoriesList = () => {
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'applications' });
-        //etApplicationDetails();
+        //getApplicationDetails();
     }, []);
 
     const getApplicationDetails = async () => {
@@ -232,7 +231,7 @@ const FactoriesList = () => {
                         </ClickAwayListener>
                     )}
                     <div className="factories-length">
-                        <h1>factories ({factoriesList?.length})</h1>
+                        <h1>Factories ({factoriesList?.length})</h1>
                     </div>
                 </div>
                 <div className="right-side">

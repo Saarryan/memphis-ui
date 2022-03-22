@@ -47,7 +47,7 @@ const Application = (props) => {
     return (
         <div className="application">
             <div className="application-card-container" key={props.content._id}>
-                <Link to={`${pathControllers.applicationList}/${props.content._id}`}>
+                <Link to={`${pathControllers.applicationsList}/${props.content._id}`}>
                     <div className="application-card-title">
                         <h2>
                             <OverflowTip text={props.content.name} width={'220px'} color="white" cursor="pointer">
