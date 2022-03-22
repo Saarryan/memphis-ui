@@ -93,14 +93,14 @@ const TransitionsModal = (props) => {
                 >
                     <Button
                         className="modal-btn"
-                        width="90px"
-                        height="35px"
+                        width="83px"
+                        height="32px"
                         placeholder="Close"
                         colorType="lightPurple"
                         radiusType="circle"
                         backgroundColorType={warning ? 'orange' : 'darkPurple'}
-                        fontSize="14px"
-                        fontWeight="bold"
+                        fontSize="12px"
+                        fontWeight="600"
                         onClick={() => {
                             props.rBtnClick();
                             setOpen(false);
@@ -150,15 +150,15 @@ const TransitionsModal = (props) => {
                     </button>
                     <Button
                         className="modal-btn"
-                        width="90px"
-                        height="35px"
+                        width="83px"
+                        height="32px"
                         placeholder={progress ? <CircularProgress size={20} className={classes.buttonLoader} /> : rBtnText}
                         disabled={rBtnDisabled}
                         colorType="lightPurple"
                         radiusType="circle"
                         backgroundColorType={warning ? 'orange' : 'darkPurple'}
                         fontSize="12px"
-                        fontWeight="bold"
+                        fontWeight="600"
                         isLoading={isLoading}
                         onClick={() => {
                             props.rBtnClick();

@@ -43,7 +43,7 @@ const CreateFactoryDetails = () => {
             label: 'Size'
         }
     ];
-    const handleUserNameChange = (e) => {
+    const handleFactoryNameChange = (e) => {
         setFormFields({ ...formFields, name: e.target.value });
     };
 
@@ -73,8 +73,8 @@ const CreateFactoryDetails = () => {
                     borderColorType="gray"
                     width="500px"
                     height="40px"
-                    onBlur={handleUserNameChange}
-                    onChange={handleUserNameChange}
+                    onBlur={handleFactoryNameChange}
+                    onChange={handleFactoryNameChange}
                     value={formFields.name}
                 />
             </div>

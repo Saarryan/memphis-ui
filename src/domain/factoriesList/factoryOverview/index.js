@@ -34,34 +34,6 @@ const FactoryOverview = (props) => {
             <HubMarketplace open={functionModalIsOpen} closeModal={() => functionModalFlip(false)} />
             <div className="factory-overview-header">
                 <div className="info-fields">
-                    <div className="field-wrapper">
-                        <h3>Name: </h3>
-                        <p>{props.factory.name}</p>
-                    </div>
-                    <div className="field-wrapper">
-                        <h3>Retention: </h3>
-                        <p>{props.factory.retention}</p>
-                    </div>
-                    <div className="field-wrapper">
-                        <h3>Max throughput: </h3>
-                        <p>{props.factory.max_throughput}</p>
-                    </div>
-                </div>
-                <div className="actions-side">
-                    <div
-                        className="action overview"
-                        onClick={() => {
-                            history.push(`${pathContainers.applicationList}/${props.factory._id}/1`);
-                        }}
-                    >
-                        <p>Overview</p>
-                    </div>
-                    <div className="action edit">
-                        <p onClick={() => functionModalFlip(true)}>Edit functions</p>
-                    </div>
-                    <div className="action">
-                        <HealthyBadge status={props.factory.healthy} />
-                    </div>
                     <div className="action factory-menu">
                         <MoreVertIcon
                             aria-controls="long-button"
@@ -83,6 +55,34 @@ const FactoryOverview = (props) => {
                                 <label className="menu-item-label">Remove</label>
                             </MenuItem>
                         </Popover>
+                    </div>
+                    <div className="field-wrapper">
+                        <h3>Name: </h3>
+                        <p>{props.factory.name}</p>
+                    </div>
+                    <div className="field-wrapper">
+                        <h3>Retention: </h3>
+                        <p>{props.factory.retention}</p>
+                    </div>
+                    <div className="field-wrapper">
+                        <h3>Max throughput: </h3>
+                        <p>{props.factory.max_throughput}</p>
+                    </div>
+                </div>
+                <div className="actions-side">
+                    <div
+                        className="action overview"
+                        onClick={() => {
+                            history.push(`${pathContainers.applicationsList}/${props.factory._id}/1`);
+                        }}
+                    >
+                        <p>Overview </p>
+                    </div>
+                    <div className="action edit">
+                        <p onClick={() => functionModalFlip(true)}>Edit functions</p>
+                    </div>
+                    <div className="action">
+                        <HealthyBadge status={props.factory.status} />
                     </div>
                 </div>
             </div>

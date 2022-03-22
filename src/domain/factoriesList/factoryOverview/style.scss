@@ -16,21 +16,30 @@
         }
         .info-fields {
             display: flex;
+            align-items: center;
             .field-wrapper {
                 padding-right: 15px;
                 display: flex;
                 align-items: center;
                 h3 {
-                    font-weight: bold;
+                    font-weight: 600;
                     padding-right: 3px;
                 }
                 p {
-                    font-weight: 600;
+                    font-weight: 400;
+                }
+            }
+            .factory-menu {
+                padding-right: 15px;
+                .threedots-menu {
+                    color: #a9a9a9;
+                    margin-top: 0px;
                 }
             }
         }
         .actions-side {
             display: flex;
+            margin-right: 20px;
             .action {
                 display: flex;
                 align-items: center;
@@ -39,14 +48,9 @@
             .overview,
             .edit {
                 color: var(--purple);
-                font-weight: bold;
+                font-weight: 600;
+                font-size: 12px;
                 cursor: pointer;
-            }
-            .factory-menu {
-                .threedots-menu {
-                    color: #a9a9a9;
-                    margin-top: 0px;
-                }
             }
         }
     }
