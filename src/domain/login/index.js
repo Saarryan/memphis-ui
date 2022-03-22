@@ -35,8 +35,7 @@ const Login = (props) => {
         username: '',
         password: ''
     });
-    const { loginUser, error } = useAuth();
-    const { isValidToken } = useAuth();
+    const { loginUser, isValidToken, error } = useAuth();
 
     useEffect(() => {
         if (isValidToken()) {

@@ -4,17 +4,19 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'antd';
 
 import Input from '../../../components/Input';
+import { httpRequest } from '../../../services/http';
+import { ApiEndpoints } from '../../../const/apiEndpoints';
 
 const CreateApplicationDetails = ({ createApplicationRef }) => {
     const [creationForm] = Form.useForm();
-    useEffect(() => {
-        createApplicationRef.current = onFinish;
-    }, []);
-
     const [formFields, setFormFields] = useState({
         name: '',
         description: ''
     });
+
+    useEffect(() => {
+        createApplicationRef.current = onFinish;
+    }, []);
     const handleApplicationNameChange = (e) => {
         setFormFields({ ...formFields, name: e.target.value });
     };
@@ -22,11 +24,20 @@ const CreateApplicationDetails = ({ createApplicationRef }) => {
         setFormFields({ ...formFields, description: e.target.value });
     };
 
-    const onFinish = () => {
-        const isFieldsValidating = creationForm.isFieldsValidating();
-        if (!isFieldsValidating) {
+    const onFinish = async () => {
+        debugger;
+        creationForm.submit();
+        const fieldsError = creationForm.getFieldsError();
+        if (fieldsError?.length > 0) {
             return;
         } else {
+            const bodyRequest = formFields;
+            try {
+                const data = await httpRequest('POST', ApiEndpoints.CREATE_APPLICATION, bodyRequest);
+                if (data) {
+                    debugger;
+                }
+            } catch (error) {}
         }
         // console.log('Success:', values);
     };
@@ -35,11 +46,11 @@ const CreateApplicationDetails = ({ createApplicationRef }) => {
         <div className="create-application-form">
             <Form name="form" form={creationForm} autoComplete="off">
                 <Form.Item
-                    name="username"
+                    name="name"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!'
+                            message: 'Please input application name!'
                         }
                     ]}
                 >
