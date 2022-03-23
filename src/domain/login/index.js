@@ -1,11 +1,11 @@
 import './style.scss';
 
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import { useMediaQuery } from 'react-responsive';
 import LockIcon from '@material-ui/icons/Lock';
-import { Form, Checkbox } from 'antd';
+import { Form } from 'antd';
 
 import logoGrayText from '../../assets/images/logoGrayText.png';
 import { httpRequest } from '../../services/http';
@@ -27,7 +27,7 @@ const Mobile = ({ children }) => {
     return isMobile ? children : null;
 };
 
-const Login = (props) => {
+const Login = () => {
     const [state, dispatch] = useContext(Context);
     const history = useHistory();
     const [loginForm] = Form.useForm(); // form controller
