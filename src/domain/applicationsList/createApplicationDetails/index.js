@@ -29,13 +29,12 @@ const CreateApplicationDetails = ({ createApplicationRef }) => {
     };
 
     const onFinish = async () => {
-        await creationForm.submit();
         const fieldsError = await creationForm.validateFields();
         if (fieldsError?.errorFields) {
             return;
         } else {
-            const bodyRequest = formFields;
             try {
+                const bodyRequest = creationForm.getFieldsValue();
                 const data = await httpRequest('POST', ApiEndpoints.CREATE_APPLICATION, bodyRequest);
                 if (data) {
                     history.push(`${pathContainers.applicationsList}/${data.name}`);
@@ -74,23 +73,25 @@ const CreateApplicationDetails = ({ createApplicationRef }) => {
                         />
                     </div>
                 </Form.Item>
-                <div className="field description">
-                    <p>Description</p>
-                    <Input
-                        placeholder="Type application name"
-                        type="textArea"
-                        radiusType="semi-round"
-                        colorType="black"
-                        backgroundColorType="none"
-                        borderColorType="gray"
-                        width="500px"
-                        numberOfRows="5"
-                        fontSize="12px"
-                        onBlur={handleDescriptionNameChange}
-                        onChange={handleDescriptionNameChange}
-                        value={formFields.description}
-                    />
-                </div>
+                <Form.Item name="description">
+                    <div className="field description">
+                        <p>Description</p>
+                        <Input
+                            placeholder="Type application name"
+                            type="textArea"
+                            radiusType="semi-round"
+                            colorType="black"
+                            backgroundColorType="none"
+                            borderColorType="gray"
+                            width="500px"
+                            numberOfRows="5"
+                            fontSize="12px"
+                            onBlur={handleDescriptionNameChange}
+                            onChange={handleDescriptionNameChange}
+                            value={formFields.description}
+                        />
+                    </div>
+                </Form.Item>
             </Form>
         </div>
     );

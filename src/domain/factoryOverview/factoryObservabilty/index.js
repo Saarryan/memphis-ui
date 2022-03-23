@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import lottie from 'lottie-web';
 
 import animationData from '../../../assets/lotties/thunnel-many.json';
-import FactoryOverview from './factoryOverview';
+import FunctionsBox from './functionsBox';
 import PubSubList from './pubSubList';
 
 const FactoryObservabilty = () => {
@@ -36,8 +36,8 @@ const FactoryObservabilty = () => {
             <div className="thunnel-from-sub">
                 <div style={{ height: '9vw', width: '9vw' }} ref={anime}></div>
             </div>
-            <div className="qeueu-overview">
-                <FactoryOverview />
+            <div className="functions-box-overview">
+                <FunctionsBox />
             </div>
             <div className="thunnel-to-pub">
                 <div style={{ height: '9vw', width: '9vw' }} ref={anime1}></div>
