@@ -1,11 +1,11 @@
 import './style.scss';
 
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import { useMediaQuery } from 'react-responsive';
 import LockIcon from '@material-ui/icons/Lock';
-import { Form, Checkbox } from 'antd';
+import { Form } from 'antd';
 
 import logoGrayText from '../../assets/images/logoGrayText.png';
 import { httpRequest } from '../../services/http';
@@ -14,7 +14,8 @@ import Button from '../../components/button';
 import Loader from '../../components/loader';
 import { Context } from '../../hooks/store';
 import Input from '../../components/Input';
-import useAuth from '../../hooks/useAuth';
+import { isValidToken, saveToLocalStorage } from '../../services/auth';
+import { keepTokenFresh } from '../../services/keepTokenFresh';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -26,17 +27,15 @@ const Mobile = ({ children }) => {
     return isMobile ? children : null;
 };
 
-const Login = (props) => {
+const Login = () => {
     const [state, dispatch] = useContext(Context);
-    const [isKeepMeSignin, setisKeepMeSignin] = useState(true);
     const history = useHistory();
     const [loginForm] = Form.useForm(); // form controller
     const [formFields, setFormFields] = useState({
         username: '',
         password: ''
     });
-    const { loginUser, error } = useAuth();
-    const { isValidToken } = useAuth();
+    const [error, setError] = useState('');
 
     useEffect(() => {
         if (isValidToken()) {
@@ -52,19 +51,26 @@ const Login = (props) => {
         setFormFields({ ...formFields, password: e.target.value });
     };
 
-    const handleKeepMeSignin = (e) => {
-        setisKeepMeSignin(e.target.checked);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const values = await loginForm.validateFields();
         if (values?.errorFields) {
             return;
         } else {
-            const bodyRequest = formFields;
-            const data = await loginUser(bodyRequest, isKeepMeSignin);
-            dispatch({ type: 'SET_USER_DATA', payload: data });
+            try {
+                const { username, password } = formFields;
+                const data = await httpRequest('POST', ApiEndpoints.LOGIN, { username, password }, {}, {}, false);
+                if (data) {
+                    saveToLocalStorage(data);
+                    history.push('/overview');
+                    await keepTokenFresh(data.expires_in);
+                    return data;
+                }
+                dispatch({ type: 'SET_USER_DATA', payload: data });
+            } catch (err) {
+                debugger;
+                setError(err);
+            }
         }
     };
 
@@ -157,13 +163,6 @@ const Login = (props) => {
                                         value={formFields.password}
                                     />
                                 </Form.Item>
-                                <div className="checkBox">
-                                    <div>
-                                        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                                            <Checkbox onChange={handleKeepMeSignin}>Keep me signed in</Checkbox>
-                                        </Form.Item>
-                                    </div>
-                                </div>
                                 <Form.Item {...tailLayout} className="button-container">
                                     <Button
                                         width="19vw"
@@ -253,9 +252,6 @@ const Login = (props) => {
                                         onBlur={handlePasswordChange}
                                         value={formFields.password}
                                     />
-                                </Form.Item>
-                                <Form.Item className="checkbox-container" name="remember" valuePropName="checked">
-                                    <Checkbox onChange={handleKeepMeSignin}>Keep me signed in</Checkbox>
                                 </Form.Item>
                                 <Form.Item className="button-container">
                                     <Button

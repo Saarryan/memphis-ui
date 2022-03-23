@@ -15,21 +15,25 @@ import pathContainers from '../router';
 import { httpRequest } from './http';
 import { keepTokenFresh } from './keepTokenFresh';
 
+export const saveToLocalStorage = (userData) => {
+    const now = new Date();
+    const expiry_token = now.getTime() + userData.expires_in;
+
+    localStorage.setItem(LOCAL_STORAGE_ALREADY_LIGGED_IN, userData.already_logged_in);
+    localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
+    localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
+    localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
+    localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
+    localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.user_Name);
+    localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
+    localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiry_token);
+};
+
 export const handleRefreshToken = async () => {
     try {
         const userData = await httpRequest('POST', ApiEndpoints.REFRESH_TOCKEN, {}, {}, false);
         if (userData) {
-            const now = new Date();
-            const expiry_token = now.getTime() + userData.expires_in;
-
-            localStorage.setItem(LOCAL_STORAGE_ALREADY_LIGGED_IN, userData.already_logged_in);
-            localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
-            localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
-            localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
-            localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
-            localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.user_Name);
-            localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
-            localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiry_token);
+            saveToLocalStorage(userData);
             await keepTokenFresh(userData.expires_in);
         }
     } catch (ex) {
@@ -38,9 +42,18 @@ export const handleRefreshToken = async () => {
 };
 
 export const logout = async () => {
-    if (localStorage.LOCAL_STORAGE_TOKEN) {
+    if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
         await httpRequest('POST', ApiEndpoints.LOGOUT);
     }
     localStorage.clear();
     window.location.replace(pathContainers.login);
+};
+
+export const isValidToken = () => {
+    const tokenExpiryTime = localStorage.getItem(LOCAL_STORAGE_EXPIRED_TOKEN);
+    if (Date.now() <= tokenExpiryTime) {
+        return true;
+    } else {
+        return false;
+    }
 };

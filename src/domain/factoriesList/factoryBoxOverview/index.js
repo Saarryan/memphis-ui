@@ -13,7 +13,7 @@ import HubMarketplace from '../../hubMarketplace';
 import { Context } from '../../../hooks/store';
 import pathContainers from '../../../router';
 
-const FactoryOverview = (props) => {
+const FactoryBoxOverview = (props) => {
     const [state, dispatch] = useContext(Context);
     const [modalIsOpen, modalFlip] = useState(false);
     const [functionModalIsOpen, functionModalFlip] = useState(false);
@@ -30,7 +30,7 @@ const FactoryOverview = (props) => {
     };
 
     return (
-        <div className="factory-container">
+        <div className="factory-box-container">
             <HubMarketplace open={functionModalIsOpen} closeModal={() => functionModalFlip(false)} />
             <div className="factory-overview-header">
                 <div className="info-fields">
@@ -95,4 +95,4 @@ const FactoryOverview = (props) => {
     );
 };
 
-export default FactoryOverview;
+export default FactoryBoxOverview;

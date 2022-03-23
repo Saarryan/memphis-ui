@@ -13,7 +13,7 @@ import Tooltip from '../../components/tooltip/tooltip';
 import loading from '../../assets/images/strech.gif';
 import { httpRequest } from '../../services/http';
 import edit from '../../assets/images/edit.svg';
-import FactoryOverview from './factoryOverview';
+import FactoryBoxOverview from './factoryBoxOverview';
 import Button from '../../components/button';
 import { Context } from '../../hooks/store';
 import Modal from '../../components/modal';
@@ -94,21 +94,19 @@ const FactoriesList = () => {
     const getApplicationDetails = async () => {
         const url = window.location.href;
         const applicationId = url.split('applications/')[1].split('/')[0];
-        if (applicationId !== 'newApplication') {
-            setisLoading(true);
-            try {
-                const data = await httpRequest('GET', `${ApiEndpoints.GET_USER_USECASE_BY_ID}?applicationId=${applicationId}`);
-                setapplicationDetails({
-                    ...applicationDetails,
-                    id: 1,
-                    name: 'data.name',
-                    description: 'data.description'
-                });
-                dispatch({ type: 'UPDATE_USECASES_NAME', payload: data });
-                getfactories(data._id);
-            } catch (err) {
-                return;
-            }
+        setisLoading(true);
+        try {
+            const data = await httpRequest('GET', `${ApiEndpoints.GET_USER_USECASE_BY_ID}?applicationId=${applicationId}`);
+            setapplicationDetails({
+                ...applicationDetails,
+                id: 1,
+                name: 'data.name',
+                description: 'data.description'
+            });
+            dispatch({ type: 'UPDATE_USECASES_NAME', payload: data });
+            getfactories(data._id);
+        } catch (err) {
+            return;
         }
     };
 
@@ -258,7 +256,7 @@ const FactoriesList = () => {
                         <img src={loading} alt="loading"></img>
                     </div>
                 )}
-                {factoriesList?.length > 0 && factoriesList?.map((factory) => <FactoryOverview key={factory._id} factory={factory} />)}
+                {factoriesList?.length > 0 && factoriesList?.map((factory) => <FactoryBoxOverview key={factory._id} factory={factory} />)}
                 {!isLoading && factoriesList.length === 0 && (
                     <div className="no-factory-to-display">
                         <InboxOutlined style={{ fontSize: '40px', color: '#5D4AEE' }} theme="outlined" />

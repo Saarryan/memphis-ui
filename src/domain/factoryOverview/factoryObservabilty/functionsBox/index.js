@@ -42,9 +42,9 @@ const functions = [
     }
 ];
 
-const FactoryOverview = () => {
+const FunctionsBox = () => {
     return (
-        <div className="factory-overview-container">
+        <div className="functions-box-container">
             <div className="header">
                 <p className="title">Factory</p>
                 <p className="add-functions-button">Add functions</p>
@@ -56,4 +56,4 @@ const FactoryOverview = () => {
     );
 };
 
-export default FactoryOverview;
+export default FunctionsBox;

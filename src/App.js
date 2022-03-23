@@ -14,12 +14,7 @@ import Settings from './domain/settings';
 import pathControllers from './router';
 import Users from './domain/users';
 import Login from './domain/login';
-import useAuth from './hooks/useAuth';
-import { LOCAL_STORAGE_KEEP_ME_SIGN_IN } from './const/localStorageConsts';
-import { handleRefreshToken } from './services/auth';
 import { Redirect } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import pathContainers from './router';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -32,19 +27,7 @@ const Mobile = ({ children }) => {
 };
 
 const App = withRouter(() => {
-    const { isValidToken } = useAuth();
-    const history = useHistory();
-
-    useEffect(async () => {
-        const isKeepMeSignin = localStorage.getItem(LOCAL_STORAGE_KEEP_ME_SIGN_IN);
-        if (isKeepMeSignin === 'true') {
-            await handleRefreshToken();
-        } else {
-            localStorage.clear();
-            history.push(pathContainers.login);
-        }
-    }, []);
-
+    useEffect(() => {});
     return (
         <div className="app-container">
             <div>
