@@ -4,8 +4,13 @@ import axios from 'axios';
 import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 import pathContainers from '../router';
+import { handleRefreshToken, isValidToken } from './auth';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
+    const url = window.location.href;
+    if (url.indexOf('login') === -1 && !isValidToken()) {
+        handleRefreshToken();
+    }
     if (authNeeded) {
         const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
         headers['Authorization'] = 'Bearer ' + token;

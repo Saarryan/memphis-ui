@@ -37,17 +37,17 @@ const Application = (props) => {
 
     const removeApplication = async () => {
         try {
-            await httpRequest('DELETE', `${ApiEndpoints.REMOVE_USECASE}?usecaseId=${props.content._id}`);
-            //setUsecases(usecases.filter((item) => item._id !== chosenUsecaseId));
-        } catch (err) {
-            modalFlip(true);
-        }
+            await httpRequest('DELETE', ApiEndpoints.REMOVE_APPLICATION, {
+                application_name: props.content.name
+            });
+            props.removeApplication();
+        } catch (err) {}
     };
 
     return (
         <div className="application">
-            <div className="application-card-container" key={props.content._id}>
-                <Link to={`${pathControllers.applicationsList}/${props.content._id}`}>
+            <div className="application-card-container" key={props.content.id}>
+                <Link to={`${pathControllers.applicationsList}/${props.content.name}`}>
                     <div className="application-card-title">
                         <h2>
                             <OverflowTip text={props.content.name} width={'220px'} color="white" cursor="pointer">

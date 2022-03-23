@@ -6,6 +6,8 @@ import { Form } from 'antd';
 import Input from '../../../components/Input';
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
+import { useHistory } from 'react-router-dom';
+import pathContainers from '../../../router';
 
 const CreateApplicationDetails = ({ createApplicationRef }) => {
     const [creationForm] = Form.useForm();
@@ -13,10 +15,12 @@ const CreateApplicationDetails = ({ createApplicationRef }) => {
         name: '',
         description: ''
     });
+    const history = useHistory();
 
     useEffect(() => {
         createApplicationRef.current = onFinish;
     }, []);
+
     const handleApplicationNameChange = (e) => {
         setFormFields({ ...formFields, name: e.target.value });
     };
@@ -25,21 +29,19 @@ const CreateApplicationDetails = ({ createApplicationRef }) => {
     };
 
     const onFinish = async () => {
-        debugger;
-        creationForm.submit();
-        const fieldsError = creationForm.getFieldsError();
-        if (fieldsError?.length > 0) {
+        await creationForm.submit();
+        const fieldsError = await creationForm.validateFields();
+        if (fieldsError?.errorFields) {
             return;
         } else {
             const bodyRequest = formFields;
             try {
                 const data = await httpRequest('POST', ApiEndpoints.CREATE_APPLICATION, bodyRequest);
                 if (data) {
-                    debugger;
+                    history.push(`${pathContainers.applicationsList}/${data.name}`);
                 }
             } catch (error) {}
         }
-        // console.log('Success:', values);
     };
 
     return (

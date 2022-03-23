@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import useAuth from './hooks/useAuth';
+import { isValidToken } from './services/auth';
 
 function PrivateRoute(props) {
-    const { isValidToken } = useAuth();
     const { component: Component, ...rest } = props;
 
     if (isValidToken()) {

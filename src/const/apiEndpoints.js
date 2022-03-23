@@ -5,5 +5,7 @@ export const ApiEndpoints = {
     LOGOUT: '/usermgmt/logout',
 
     //Application
-    CREATE_APPLICATION: 'applications/createApplication'
+    CREATE_APPLICATION: '/applications/createApplication',
+    GEL_ALL_APPLICATION: '/applications/getAllApplications',
+    REMOVE_APPLICATION: '/applications/removeApplication'
 };

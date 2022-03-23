@@ -11,31 +11,32 @@ import pathControllers from '../../router';
 import Application from './application';
 import CreateApplicationDetails from './createApplicationDetails';
 import pathContainers from '../../router';
+import { ApiEndpoints } from '../../const/apiEndpoints';
+import { httpRequest } from '../../services/http';
 
 function ApplicationsList() {
     const [state, dispatch] = useContext(Context);
     const history = useHistory();
-    const [applicationsList, setApplicationsList] = useState([
-        {
-            _id: 1,
-            name: 'Strech',
-            description: 'bla bla'
-        }
-    ]);
+    const [applicationsList, setApplicationsList] = useState([]);
     const [modalIsOpen, modalFlip] = useState(false);
     const createApplicationRef = useRef(null);
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'applications' });
+        getAllApplication();
     }, []);
 
-    // const createApplication = () => {
-    //     //Here we need to implement creation new app and return appId with empty queues
-    //     history.push(`${pathControllers.applicationsList}/newApplication`);
-    // };
+    const getAllApplication = async () => {
+        try {
+            const data = await httpRequest('GET', ApiEndpoints.GEL_ALL_APPLICATION);
+            if (data) {
+                setApplicationsList(data);
+            }
+        } catch (error) {}
+    };
 
-    const openModal = () => {
-        //Here we need a new modal with name and description fields
+    const removeApplication = (id) => {
+        setApplicationsList(applicationsList.filter((item) => item.id !== id));
     };
 
     return (
@@ -54,7 +55,7 @@ function ApplicationsList() {
                             radiusType="circle"
                             backgroundColorType="darkPurple"
                             fontSize="14px"
-                            fontWeight="bold"
+                            fontWeight="600"
                             aria-haspopup="true"
                             onClick={() => modalFlip(true)}
                         />
@@ -62,7 +63,7 @@ function ApplicationsList() {
                 </div>
                 <div className="application-list">
                     {applicationsList.map((application) => {
-                        return <Application key={application._id} content={application}></Application>;
+                        return <Application key={application.id} content={application} removeApplication={() => removeApplication(application.id)}></Application>;
                     })}
                     {/* {isLoading && (
             <div className="loader-uploading">
@@ -108,7 +109,6 @@ function ApplicationsList() {
                 rBtnClick={() => {
                     createApplicationRef.current();
                     // modalFlip(false);
-                    //history.push(`${pathContainers.applicationsList}/1`);
                 }}
                 open={modalIsOpen}
             >
