@@ -1,5 +1,3 @@
-import { useHistory } from 'react-router-dom';
-
 import { ApiEndpoints } from '../const/apiEndpoints';
 import {
     LOCAL_STORAGE_ALREADY_LIGGED_IN,
@@ -13,20 +11,19 @@ import {
 } from '../const/localStorageConsts';
 import pathContainers from '../router';
 import { httpRequest } from './http';
-import { keepTokenFresh } from './keepTokenFresh';
 
 export const saveToLocalStorage = (userData) => {
     const now = new Date();
-    const expiry_token = now.getTime() + userData.expires_in;
+    const expiryToken = now.getTime() + userData.expires_in;
 
     localStorage.setItem(LOCAL_STORAGE_ALREADY_LIGGED_IN, userData.already_logged_in);
     localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
     localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
     localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
     localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
-    localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.user_Name);
+    localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.username);
     localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
-    localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiry_token);
+    localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiryToken);
 };
 
 export const handleRefreshToken = async () => {
@@ -34,7 +31,6 @@ export const handleRefreshToken = async () => {
         const userData = await httpRequest('POST', ApiEndpoints.REFRESH_TOCKEN, {}, {}, false);
         if (userData) {
             saveToLocalStorage(userData);
-            await keepTokenFresh(userData.expires_in);
         }
     } catch (ex) {
         await logout();
@@ -46,7 +42,7 @@ export const logout = async () => {
         await httpRequest('POST', ApiEndpoints.LOGOUT);
     }
     localStorage.clear();
-    window.location.replace(pathContainers.login);
+    window.location.assign(pathContainers.login);
 };
 
 export const isValidToken = () => {

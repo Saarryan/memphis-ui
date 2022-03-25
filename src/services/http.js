@@ -4,12 +4,12 @@ import axios from 'axios';
 import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 import pathContainers from '../router';
-import { handleRefreshToken, isValidToken } from './auth';
+import { handleRefreshToken, isValidToken, logout } from './auth';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
     const url = window.location.href;
     if (url.indexOf('login') === -1 && !isValidToken()) {
-        handleRefreshToken();
+        await handleRefreshToken();
     }
     if (authNeeded) {
         const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
@@ -38,8 +38,7 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
         return results;
     } catch (err) {
         if (err?.response?.status === 401) {
-            localStorage.clear();
-            window.location.replace(pathContainers.login);
+            logout();
         }
         if (err?.response?.data?.message !== undefined && err?.response?.status === SHOWABLE_ERROR_STATUS_CODE) {
             message.error({
