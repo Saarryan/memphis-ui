@@ -9,8 +9,8 @@ function PrivateRoute(props) {
     if (isValidToken()) {
         return <Route {...rest} render={(props) => <Component {...props} />} />;
     } else {
-        localStorage.clear();
-        return <Redirect to={{ pathname: '/login', state: { referer: props.location } }} />;
+        handleRefreshToken();
+        return <Route {...rest} render={(props) => <Component {...props} />} />;
     }
 }
 

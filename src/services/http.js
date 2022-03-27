@@ -1,10 +1,12 @@
 import { message } from 'antd';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
+import { ApiEndpoints } from '../const/apiEndpoints';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 import pathContainers from '../router';
-import { handleRefreshToken, isValidToken, logout } from './auth';
+import { handleRefreshToken, isValidToken } from './auth';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
     const url = window.location.href;
@@ -37,9 +39,6 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
         const results = res.data;
         return results;
     } catch (err) {
-        if (err?.response?.status === 401) {
-            logout();
-        }
         if (err?.response?.data?.message !== undefined && err?.response?.status === SHOWABLE_ERROR_STATUS_CODE) {
             message.error({
                 key: 'strechErrorMessage',
@@ -50,5 +49,20 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
             });
         }
         throw err.response;
+    }
+}
+
+export async function handleRefreshTokenRequest() {
+    const HTTP = axios.create({
+        withCredentials: true
+    });
+    try {
+        const url = `${SERVER_URL}${ApiEndpoints.REFRESH_TOCKEN}`;
+        const res = await HTTP({ method: 'POST', url });
+        const results = res.data;
+        return results;
+    } catch (err) {
+        localStorage.clear();
+        window.location.assign(pathContainers.login);
     }
 }

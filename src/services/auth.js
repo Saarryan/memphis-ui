@@ -10,7 +10,7 @@ import {
     LOCAL_STORAGE_USER_TYPE
 } from '../const/localStorageConsts';
 import pathContainers from '../router';
-import { httpRequest } from './http';
+import { httpRequest, handleRefreshTokenRequest } from './http';
 
 export const saveToLocalStorage = (userData) => {
     const now = new Date();
@@ -28,12 +28,12 @@ export const saveToLocalStorage = (userData) => {
 
 export const handleRefreshToken = async () => {
     try {
-        const userData = await httpRequest('POST', ApiEndpoints.REFRESH_TOCKEN, {}, {}, false);
+        const userData = await handleRefreshTokenRequest();
         if (userData) {
             saveToLocalStorage(userData);
         }
     } catch (ex) {
-        await logout();
+        throw ex;
     }
 };
 
