@@ -21,11 +21,22 @@ import Modal from '../../../components/modal';
 import { Context } from '../../../hooks/store';
 import pathControllers from '../../../router';
 
-const Application = (props) => {
+const Factory = (props) => {
     const [state, dispatch] = useContext(Context);
     const [modalIsOpen, modalFlip] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const [botUrl, SetBotUrl] = useState('');
+    const botId = 1;
+    const parseDate = new Date(props.content.creation_date).toLocaleDateString();
+
+    useEffect(() => {
+        setBotImage(botId);
+    }, []);
+
+    const setBotImage = (botId) => {
+        SetBotUrl(require(`../../../assets/images/bots/${botId}.svg`));
+    };
 
     const handleClickMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -35,20 +46,20 @@ const Application = (props) => {
         setAnchorEl(null);
     };
 
-    const removeApplication = async () => {
+    const removeFactory = async () => {
         try {
-            await httpRequest('DELETE', ApiEndpoints.REMOVE_APPLICATION, {
-                application_name: props.content.name
+            await httpRequest('DELETE', ApiEndpoints.REMOVE_FACTORY, {
+                factory_name: props.content.name
             });
-            props.removeApplication();
+            props.removeFactory();
         } catch (err) {}
     };
 
     return (
-        <div className="application">
-            <div className="application-card-container" key={props.content.id}>
-                <Link to={`${pathControllers.applicationsList}/${props.content.name}`}>
-                    <div className="application-card-title">
+        <div className="factory">
+            <div className="factory-card-container" key={props.content.id}>
+                <Link style={{ cursor: 'pointer' }} to={`${pathControllers.factoriesList}/${props.content.name}`}>
+                    <div className="factory-card-title">
                         <h2>
                             <OverflowTip text={props.content.name} width={'220px'} color="white" cursor="pointer">
                                 {props.content.name}
@@ -66,13 +77,21 @@ const Application = (props) => {
                             />
                         </div>
                     </div>
+                    <div className="factory-card-description">
+                        <p>{props.content.description || 'Empty description'}</p>
+                    </div>
                 </Link>
-
-                <div className="application-card-description">
-                    <p>{props.content.description || 'Empty description'}</p>
+                <div className="factory-owner">
+                    <div className="user-avatar">
+                        <img src={botUrl} width={25} height={25} alt="bot"></img>
+                    </div>
+                    <div className="user-details">
+                        <p>{props.content.created_by_user}</p>
+                        <span>{parseDate}</span>
+                    </div>
                 </div>
                 <Popover id="long-menu" classes={{ paper: 'Menu' }} anchorEl={anchorEl} onClose={handleCloseMenu} open={open}>
-                    <Link to={`${pathControllers.applicationList}/${props.content._id}`}>
+                    <Link to={`${pathControllers.factoriesList}/${props.content._id}`}>
                         <MenuItem
                             onClick={() => {
                                 handleCloseMenu();
@@ -95,7 +114,7 @@ const Application = (props) => {
                 </Popover>
             </div>
             <Modal
-                header="Remove Application"
+                header="Remove Factory"
                 height="300px"
                 width="650px"
                 rBtnText="Confirm"
@@ -107,14 +126,14 @@ const Application = (props) => {
                 clickOutside={() => modalFlip(false)}
                 rBtnClick={() => {
                     modalFlip(false);
-                    removeApplication();
+                    removeFactory();
                 }}
                 open={modalIsOpen}
             >
-                Are you sure you want to remove this application? This will remove all factories in this application.
+                Are you sure you want to remove this factory? This will remove all factories in this factory.
             </Modal>
         </div>
     );
 };
 
-export default Application;
+export default Factory;

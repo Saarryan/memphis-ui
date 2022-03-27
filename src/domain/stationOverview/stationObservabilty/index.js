@@ -7,7 +7,7 @@ import animationData from '../../../assets/lotties/thunnel-many.json';
 import FunctionsBox from './functionsBox';
 import PubSubList from './pubSubList';
 
-const FactoryObservabilty = () => {
+const StationObservabilty = () => {
     const anime = useRef(null);
     const anime1 = useRef(null);
 
@@ -29,7 +29,7 @@ const FactoryObservabilty = () => {
     }, []);
 
     return (
-        <div className="factory-observabilty-container">
+        <div className="station-observabilty-container">
             <div className="pub-list">
                 <PubSubList publishers={true} />
             </div>
@@ -49,4 +49,4 @@ const FactoryObservabilty = () => {
     );
 };
 
-export default FactoryObservabilty;
+export default StationObservabilty;

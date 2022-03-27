@@ -13,7 +13,7 @@ import HubMarketplace from '../../hubMarketplace';
 import { Context } from '../../../hooks/store';
 import pathContainers from '../../../router';
 
-const FactoryBoxOverview = (props) => {
+const StationBoxOverview = (props) => {
     const [state, dispatch] = useContext(Context);
     const [modalIsOpen, modalFlip] = useState(false);
     const [functionModalIsOpen, functionModalFlip] = useState(false);
@@ -30,11 +30,11 @@ const FactoryBoxOverview = (props) => {
     };
 
     return (
-        <div className="factory-box-container">
+        <div className="station-box-container">
             <HubMarketplace open={functionModalIsOpen} closeModal={() => functionModalFlip(false)} />
-            <div className="factory-overview-header">
+            <div className="station-overview-header">
                 <div className="info-fields">
-                    <div className="action factory-menu">
+                    <div className="action station-menu">
                         <MoreVertIcon
                             aria-controls="long-button"
                             aria-haspopup="true"
@@ -58,22 +58,22 @@ const FactoryBoxOverview = (props) => {
                     </div>
                     <div className="field-wrapper">
                         <h3>Name: </h3>
-                        <p>{props.factory.name}</p>
+                        <p>{props.station.name}</p>
                     </div>
                     <div className="field-wrapper">
                         <h3>Retention: </h3>
-                        <p>{props.factory.retention}</p>
+                        <p>{props.station.retention}</p>
                     </div>
                     <div className="field-wrapper">
                         <h3>Max throughput: </h3>
-                        <p>{props.factory.max_throughput}</p>
+                        <p>{props.station.max_throughput}</p>
                     </div>
                 </div>
                 <div className="actions-side">
                     <div
                         className="action overview"
                         onClick={() => {
-                            history.push(`${pathContainers.applicationsList}/${props.factory._id}/1`);
+                            history.push(`${pathContainers.factoriesList}/${props.station._id}/1`);
                         }}
                     >
                         <p>Overview </p>
@@ -82,17 +82,17 @@ const FactoryBoxOverview = (props) => {
                         <p onClick={() => functionModalFlip(true)}>Edit functions</p>
                     </div>
                     <div className="action">
-                        <HealthyBadge status={props.factory.status} />
+                        <HealthyBadge status={props.station.status} />
                     </div>
                 </div>
             </div>
-            {props.factory.functions && (
+            {props.station.functions && (
                 <div className="functions-overview">
-                    <FunctionsOverview functions={props.factory.functions} horizontal={true} editable={false}></FunctionsOverview>
+                    <FunctionsOverview functions={props.station.functions} horizontal={true} editable={false}></FunctionsOverview>
                 </div>
             )}
         </div>
     );
 };
 
-export default FactoryBoxOverview;
+export default StationBoxOverview;

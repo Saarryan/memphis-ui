@@ -15,8 +15,6 @@ import supportIcon from '../../assets/images/supportIcon.svg';
 import accountIcon from '../../assets/images/accountIcon.svg';
 import logoutIcon from '../../assets/images/logoutIcon.svg';
 import usersIcon from '../../assets/images/usersIcon.svg';
-import { httpRequest } from '../../services/http';
-import { ApiEndpoints } from '../../const/apiEndpoints';
 import Logo from '../../assets/images/logo.png';
 import { Context } from '../../hooks/store';
 import pathControllers from '../../router';
@@ -80,10 +78,10 @@ function SideBar() {
                         <p className={state.route === 'overview' ? 'name-checked' : 'name'}>Overview</p>
                     </div>
                     <div className="item-wrapper">
-                        <Link to={pathControllers.applicationsList}>
+                        <Link to={pathControllers.factoriesList}>
                             <div className="icon">
-                                <div className={state.route === 'applications' ? 'circle-nav-item checked' : 'circle-nav-item'}>
-                                    {state.route === 'applications' ? (
+                                <div className={state.route === 'factories' ? 'circle-nav-item checked' : 'circle-nav-item'}>
+                                    {state.route === 'factories' ? (
                                         <img src={useCaseIcon} alt="useCaseIconWhite" width="20" height="20"></img>
                                     ) : (
                                         <img src={useCaseIconWhite} alt="useCaseIcon" width="20" height="20"></img>
@@ -91,7 +89,7 @@ function SideBar() {
                                 </div>
                             </div>
                         </Link>
-                        <p className={state.route === 'applications' ? 'name-checked' : 'name'}>Applications</p>
+                        <p className={state.route === 'factories' ? 'name-checked' : 'name'}>Factories</p>
                     </div>
 
                     <div className="item-wrapper">

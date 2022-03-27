@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-import { handleRefreshToken, isValidToken } from './services/auth';
+import { isValidToken } from './services/auth';
+import { handleRefreshTokenRequest } from './services/http';
 
 function PrivateRoute(props) {
     const { component: Component, ...rest } = props;
@@ -9,7 +10,7 @@ function PrivateRoute(props) {
     if (isValidToken()) {
         return <Route {...rest} render={(props) => <Component {...props} />} />;
     } else {
-        handleRefreshToken();
+        handleRefreshTokenRequest();
         return <Route {...rest} render={(props) => <Component {...props} />} />;
     }
 }

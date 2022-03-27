@@ -8,38 +8,38 @@ import { Progress } from 'antd';
 import HealthyBadge from '../../../components/healthyBadge';
 import { Context } from '../../../hooks/store';
 
-const FactoryOverviewHeader = (props) => {
+const StationOverviewHeader = (props) => {
     const [state, dispatch] = useContext(Context);
 
     const history = useHistory();
 
     const ccc = () => {
-        const referer = '/applications/1';
+        const referer = '/factories/1';
         history.push(referer);
     };
 
     return (
-        <div className="factory-overview-header">
+        <div className="station-overview-header">
             <div className="title-wrapper">
-                <h1 className="factory-name">Overview - {state.factoryDetails.name}</h1>
+                <h1 className="station-name">Overview - {state.stationDetails.name}</h1>
                 <CloseIcon onClick={() => ccc()} style={{ cursor: 'pointer' }} />
             </div>
             <div className="details">
                 <div className="main-details">
                     <p>
-                        <b>Retention:</b> {state.factoryDetails.retention}
+                        <b>Retention:</b> {state.stationDetails.retention}
                     </p>
                     <p>
-                        <b>Max throughput:</b> {state.factoryDetails.max_throughput}
+                        <b>Max throughput:</b> {state.stationDetails.max_throughput}
                     </p>
-                    <HealthyBadge status={state.factoryDetails.healthy} />
+                    <HealthyBadge status={state.stationDetails.healthy} />
                 </div>
                 <div className="details-wrapper awaiting-messages">
                     <div className="icon">
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.factoryDetails.awaiting_messages}</p>
+                        <p className="number">{state.stationDetails.awaiting_messages}</p>
                         <span>&nbsp;</span>
                         <p className="title">Awaiting messages</p>
                     </div>
@@ -49,7 +49,7 @@ const FactoryOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.factoryDetails.average_message_size}Mb</p>
+                        <p className="number">{state.stationDetails.average_message_size}Mb</p>
                         <span>&nbsp;</span>
                         <p className="title">Av. message size</p>
                     </div>
@@ -59,11 +59,11 @@ const FactoryOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.factoryDetails.memory}Mb/80Mb</p>
+                        <p className="number">{state.stationDetails.memory}Mb/80Mb</p>
                         <Progress
                             showInfo={false}
-                            status={(state.factoryDetails.memory / 80) * 100 > 60 ? 'exception' : 'success'}
-                            percent={(state.factoryDetails.memory / 80) * 100}
+                            status={(state.stationDetails.memory / 80) * 100 > 60 ? 'exception' : 'success'}
+                            percent={(state.stationDetails.memory / 80) * 100}
                             size="small"
                         />
                         <p className="title">Mem</p>
@@ -74,11 +74,11 @@ const FactoryOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.factoryDetails.cpu}%</p>
+                        <p className="number">{state.stationDetails.cpu}%</p>
                         <Progress
                             showInfo={false}
-                            status={(state.factoryDetails.cpu / 100) * 100 > 60 ? 'exception' : 'success'}
-                            percent={(state.factoryDetails.cpu / 100) * 100}
+                            status={(state.stationDetails.cpu / 100) * 100 > 60 ? 'exception' : 'success'}
+                            percent={(state.stationDetails.cpu / 100) * 100}
                             size="small"
                         />
                         <p className="title">CPU</p>
@@ -89,11 +89,11 @@ const FactoryOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.factoryDetails.storage}Mb/100Mb</p>
+                        <p className="number">{state.stationDetails.storage}Mb/100Mb</p>
                         <Progress
                             showInfo={false}
-                            status={(state.factoryDetails.storage / 100) * 100 > 60 ? 'exception' : 'success'}
-                            percent={(state.factoryDetails.storage / 100) * 100}
+                            status={(state.stationDetails.storage / 100) * 100 > 60 ? 'exception' : 'success'}
+                            percent={(state.stationDetails.storage / 100) * 100}
                             size="small"
                         />
                         <p className="title">Storage</p>
@@ -104,4 +104,4 @@ const FactoryOverviewHeader = (props) => {
     );
 };
 
-export default FactoryOverviewHeader;
+export default StationOverviewHeader;

@@ -4,8 +4,8 @@ export const ApiEndpoints = {
     REFRESH_TOCKEN: '/usermgmt/refreshToken',
     LOGOUT: '/usermgmt/logout',
 
-    //Application
-    CREATE_APPLICATION: '/applications/createApplication',
-    GEL_ALL_APPLICATION: '/applications/getAllApplications',
-    REMOVE_APPLICATION: '/applications/removeApplication'
+    //Factory
+    CREATE_FACTORY: '/factories/createFactory',
+    GEL_ALL_FACTORIES: '/factories/getAllFactories',
+    REMOVE_FACTORY: '/factories/removeFactory'
 };

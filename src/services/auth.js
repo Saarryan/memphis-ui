@@ -10,7 +10,7 @@ import {
     LOCAL_STORAGE_USER_TYPE
 } from '../const/localStorageConsts';
 import pathContainers from '../router';
-import { httpRequest, handleRefreshTokenRequest } from './http';
+import { httpRequest } from './http';
 
 export const saveToLocalStorage = (userData) => {
     const now = new Date();
@@ -24,17 +24,6 @@ export const saveToLocalStorage = (userData) => {
     localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.username);
     localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
     localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiryToken);
-};
-
-export const handleRefreshToken = async () => {
-    try {
-        const userData = await handleRefreshTokenRequest();
-        if (userData) {
-            saveToLocalStorage(userData);
-        }
-    } catch (ex) {
-        throw ex;
-    }
 };
 
 export const logout = async () => {

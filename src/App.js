@@ -4,10 +4,10 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React, { useEffect } from 'react';
 
-import FactoryOverview from './domain/factoryOverview';
-import ApplicationsList from './domain/applicationsList';
-import AppWrapper from './components/appWrapper';
+import StationOverview from './domain/stationOverview';
 import FactoriesList from './domain/factoriesList';
+import AppWrapper from './components/appWrapper';
+import StationsList from './domain/stationsList';
 import PrivateRoute from './PrivateRoute';
 import Overview from './domain/overview';
 import Settings from './domain/settings';
@@ -64,16 +64,7 @@ const App = withRouter(() => {
                                 }
                             ></AppWrapper>
                         </PrivateRoute>
-                        <PrivateRoute exact path={pathControllers.applicationsList}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <ApplicationsList />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
-                        <PrivateRoute exact path={`${pathControllers.applicationsList}/:id`}>
+                        <PrivateRoute exact path={pathControllers.factoriesList}>
                             <AppWrapper
                                 content={
                                     <div>
@@ -82,11 +73,20 @@ const App = withRouter(() => {
                                 }
                             ></AppWrapper>
                         </PrivateRoute>
-                        <PrivateRoute exact path={`${pathControllers.applicationsList}/:id/:id`}>
+                        <PrivateRoute exact path={`${pathControllers.factoriesList}/:id`}>
                             <AppWrapper
                                 content={
                                     <div>
-                                        <FactoryOverview />
+                                        <StationsList />
+                                    </div>
+                                }
+                            ></AppWrapper>
+                        </PrivateRoute>
+                        <PrivateRoute exact path={`${pathControllers.factoriesList}/:id/:id`}>
+                            <AppWrapper
+                                content={
+                                    <div>
+                                        <StationOverview />
                                     </div>
                                 }
                             ></AppWrapper>

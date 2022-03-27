@@ -25,7 +25,7 @@ export function getFontColor(colorType) {
         case 'none':
             return 'transparent';
         case 'black':
-            return '#5D4AEE';
+            return '#2b2e3f';
         case 'lightPurple':
             return '#F0F1F7';
         case 'navy':

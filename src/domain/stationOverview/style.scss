@@ -1,4 +1,4 @@
-.factory-overview-container {
+.station-overview-container {
     width: calc(100% - 70px);
     position: absolute;
     padding: 1vw;
@@ -10,7 +10,7 @@
         display: flex;
         justify-content: space-between;
         width: 95vw;
-        .factory-observability {
+        .station-observability {
             margin-right: 2vw;
         }
     }
