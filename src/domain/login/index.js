@@ -15,7 +15,6 @@ import Loader from '../../components/loader';
 import { Context } from '../../hooks/store';
 import Input from '../../components/Input';
 import { isValidToken, saveToLocalStorage } from '../../services/auth';
-import { keepTokenFresh } from '../../services/keepTokenFresh';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -63,7 +62,6 @@ const Login = () => {
                 if (data) {
                     saveToLocalStorage(data);
                     history.push('/overview');
-                    await keepTokenFresh(data.expires_in);
                     return data;
                 }
                 dispatch({ type: 'SET_USER_DATA', payload: data });

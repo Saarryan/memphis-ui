@@ -13,7 +13,7 @@ const columns = [
         render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '40px' }}>{text}</div>
     },
     {
-        title: 'Application type',
+        title: 'Factory type',
         dataIndex: 'type',
         className: 'column_table',
         ellipsis: true,
@@ -37,7 +37,7 @@ const data = [
     {
         key: '1',
         name: 'xxx',
-        type: 'Externl application'
+        type: 'Externl factory'
     },
     {
         key: '2',
@@ -52,7 +52,7 @@ const data = [
     {
         key: '4',
         name: 'xxx',
-        type: 'Externl application'
+        type: 'Externl factory'
     },
     {
         key: '5',
@@ -62,12 +62,12 @@ const data = [
     {
         key: '6',
         name: 'xxx',
-        type: 'Externl application'
+        type: 'Externl factory'
     },
     {
         key: '7',
         name: 'xxx',
-        type: 'Externl application'
+        type: 'Externl factory'
     },
     {
         key: '8',
@@ -77,12 +77,12 @@ const data = [
     {
         key: '9',
         name: 'xxx',
-        type: 'Externl application'
+        type: 'Externl factory'
     },
     {
         key: '10',
         name: 'xxx',
-        type: 'Externl application'
+        type: 'Externl factory'
     }
 ];
 

@@ -2,14 +2,15 @@ import { message } from 'antd';
 import axios from 'axios';
 
 import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
+import { ApiEndpoints } from '../const/apiEndpoints';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 import pathContainers from '../router';
-import { handleRefreshToken, isValidToken } from './auth';
+import { isValidToken, saveToLocalStorage } from './auth';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
     const url = window.location.href;
     if (url.indexOf('login') === -1 && !isValidToken()) {
-        handleRefreshToken();
+        await handleRefreshTokenRequest();
     }
     if (authNeeded) {
         const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
@@ -37,10 +38,6 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
         const results = res.data;
         return results;
     } catch (err) {
-        if (err?.response?.status === 401) {
-            localStorage.clear();
-            window.location.replace(pathContainers.login);
-        }
         if (err?.response?.data?.message !== undefined && err?.response?.status === SHOWABLE_ERROR_STATUS_CODE) {
             message.error({
                 key: 'strechErrorMessage',
@@ -51,5 +48,20 @@ export async function httpRequest(method, endPointUrl, data = {}, headers = {}, 
             });
         }
         throw err.response;
+    }
+}
+
+export async function handleRefreshTokenRequest() {
+    const HTTP = axios.create({
+        withCredentials: true
+    });
+    try {
+        const url = `${SERVER_URL}${ApiEndpoints.REFRESH_TOCKEN}`;
+        const res = await HTTP({ method: 'POST', url });
+        const results = res.data;
+        saveToLocalStorage(results);
+    } catch (err) {
+        localStorage.clear();
+        window.location.assign(pathContainers.login);
     }
 }

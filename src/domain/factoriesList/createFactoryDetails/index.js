@@ -1,149 +1,98 @@
 import './style.scss';
 
-import React, { useState } from 'react';
-import { InputNumber } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form } from 'antd';
 
-import RadioButton from '../../../components/radioButton';
 import Input from '../../../components/Input';
+import { httpRequest } from '../../../services/http';
+import { ApiEndpoints } from '../../../const/apiEndpoints';
+import { useHistory } from 'react-router-dom';
+import pathContainers from '../../../router';
 
-const CreateFactoryDetails = () => {
+const CreateFactoryDetails = ({ createFactoryRef }) => {
+    const [creationForm] = Form.useForm();
     const [formFields, setFormFields] = useState({
         name: '',
-        retention_type: 0,
-        retention_value: '',
-        throughput_type: 0,
-        throughput_value: ''
+        description: ''
     });
-    const retanionOptions = [
-        {
-            id: 1,
-            value: 0,
-            label: 'Time'
-        },
-        {
-            id: 2,
-            value: 1,
-            label: 'Size'
-        },
-        {
-            id: 3,
-            value: 2,
-            label: 'Factory'
-        }
-    ];
-    const throughputOptions = [
-        {
-            id: 1,
-            value: 0,
-            label: 'Messages'
-        },
-        {
-            id: 2,
-            value: 1,
-            label: 'Size'
-        }
-    ];
+    const history = useHistory();
+
+    useEffect(() => {
+        createFactoryRef.current = onFinish;
+    }, []);
+
     const handleFactoryNameChange = (e) => {
         setFormFields({ ...formFields, name: e.target.value });
     };
+    const handleDescriptionNameChange = (e) => {
+        setFormFields({ ...formFields, description: e.target.value });
+    };
 
-    const retentionTypeChange = (e) => {
-        setFormFields({ ...formFields, retention_type: e.target.value });
-    };
-    const handleRetentionChange = (e) => {
-        setFormFields({ ...formFields, retention_value: e.target.value });
-    };
-    const throughputTypeChange = (e) => {
-        setFormFields({ ...formFields, throughput_type: e.target.value });
-    };
-    const handleThroughputChange = (e) => {
-        setFormFields({ ...formFields, throughput_value: e.target.value });
+    const onFinish = async () => {
+        const fieldsError = await creationForm.validateFields();
+        if (fieldsError?.errorFields) {
+            return;
+        } else {
+            try {
+                const bodyRequest = creationForm.getFieldsValue();
+                const data = await httpRequest('POST', ApiEndpoints.CREATE_FACTORY, bodyRequest);
+                if (data) {
+                    history.push(`${pathContainers.factoriesList}/${data.name}`);
+                }
+            } catch (error) {}
+        }
     };
 
     return (
         <div className="create-factory-form">
-            <div className="factory-name">
-                <p>Factory name</p>
-                <Input
-                    placeholder="Type factory name"
-                    type="text"
-                    radiusType="semi-round"
-                    colorType="black"
-                    backgroundColorType="none"
-                    borderColorType="gray"
-                    width="500px"
-                    height="40px"
-                    onBlur={handleFactoryNameChange}
-                    onChange={handleFactoryNameChange}
-                    value={formFields.name}
-                />
-            </div>
-            <div className="retention">
-                <p>Retention</p>
-                <RadioButton options={retanionOptions} radioValue={formFields.retention_type} onChange={(e) => retentionTypeChange(e)} />
-                {formFields.retention_type === 0 && (
-                    <div className="time-value">
-                        <div className="days-section">
-                            <InputNumber bordered={false} min={0} max={100} keyboard={true} defaultValue={7} />
-                            <p>days</p>
-                        </div>
-                        <p className="separator">:</p>
-                        <div className="hours-section">
-                            <InputNumber bordered={false} min={0} max={24} keyboard={true} defaultValue={0} />
-                            <p>hours</p>
-                        </div>
-                        <p className="separator">:</p>
-                        <div className="minutes-section">
-                            <InputNumber bordered={false} min={0} max={60} keyboard={true} defaultValue={0} />
-                            <p>minutes</p>
-                        </div>
-                        <p className="separator">:</p>
-                        <div className="seconds-section">
-                            <InputNumber bordered={false} min={0} max={60} keyboard={true} defaultValue={0} />
-                            <p>seconds</p>
-                        </div>
-                    </div>
-                )}
-                {formFields.retention_type === 1 && (
-                    <div className="size-value">
+            <Form name="form" form={creationForm} autoComplete="off">
+                <Form.Item
+                    name="name"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input factory name!'
+                        }
+                    ]}
+                >
+                    <div className="field name">
+                        <p>Factory name</p>
                         <Input
-                            placeholder="Type"
-                            type="number"
+                            placeholder="Type factory name"
+                            type="text"
                             radiusType="semi-round"
                             colorType="black"
                             backgroundColorType="none"
                             borderColorType="gray"
-                            width="90px"
-                            height="38px"
-                            onBlur={handleRetentionChange}
-                            onChange={handleRetentionChange}
-                            value={formFields.retention_value}
+                            width="395px"
+                            height="40px"
+                            fontSize="12px"
+                            onBlur={handleFactoryNameChange}
+                            onChange={handleFactoryNameChange}
+                            value={formFields.name}
                         />
-                        <p>/s</p>
                     </div>
-                )}
-            </div>
-            <div className="throughput">
-                <p>Max throughput</p>
-                <RadioButton options={throughputOptions} radioValue={formFields.throughput_type} onChange={(e) => throughputTypeChange(e)} />
-                <div className="size-value">
-                    <Input
-                        placeholder="Type"
-                        type="number"
-                        radiusType="semi-round"
-                        colorType="black"
-                        backgroundColorType="none"
-                        borderColorType="gray"
-                        width="90px"
-                        height="38px"
-                        onBlur={handleThroughputChange}
-                        onChange={handleThroughputChange}
-                        value={formFields.throughput_value}
-                    />
-                    {formFields.throughput_type === 0 && <p>/s</p>}
-                    {formFields.throughput_type === 1 && <p>/Mb</p>}
-                </div>
-            </div>
+                </Form.Item>
+                <Form.Item name="description">
+                    <div className="field description">
+                        <p>Factory description</p>
+                        <Input
+                            placeholder="Type factory name"
+                            type="textArea"
+                            radiusType="semi-round"
+                            colorType="black"
+                            backgroundColorType="none"
+                            borderColorType="gray"
+                            width="400px"
+                            numberOfRows="5"
+                            fontSize="12px"
+                            onBlur={handleDescriptionNameChange}
+                            onChange={handleDescriptionNameChange}
+                            value={formFields.description}
+                        />
+                    </div>
+                </Form.Item>
+            </Form>
         </div>
     );
 };

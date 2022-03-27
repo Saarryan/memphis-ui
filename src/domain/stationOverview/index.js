@@ -2,28 +2,28 @@ import './style.scss';
 
 import React, { useEffect, useContext } from 'react';
 
-import FactoryOverviewHeader from './factoryOverviewHeader';
-import FactoryObservabilty from './factoryObservabilty';
+import StationOverviewHeader from './stationOverviewHeader';
+import StationObservabilty from './stationObservabilty';
 import ConnectionDetails from './connectionDetails';
 import Throughput from './throughput';
 import Auditing from './auditing';
 import { Context } from '../../hooks/store';
 
-const FactoryOverview = () => {
+const StationOverview = () => {
     const [state, dispatch] = useContext(Context);
 
     useEffect(() => {
-        dispatch({ type: 'SET_ROUTE', payload: 'applications' });
+        dispatch({ type: 'SET_ROUTE', payload: 'factories' });
     }, []);
 
     return (
-        <div className="factory-overview-container">
+        <div className="station-overview-container">
             <div className="overview-header">
-                <FactoryOverviewHeader />
+                <StationOverviewHeader />
             </div>
             <div className="overview-top">
-                <div className="factory-observability">
-                    <FactoryObservabilty />
+                <div className="station-observability">
+                    <StationObservabilty />
                 </div>
                 <div className="connection-details">
                     <ConnectionDetails />
@@ -41,4 +41,4 @@ const FactoryOverview = () => {
     );
 };
 
-export default FactoryOverview;
+export default StationOverview;

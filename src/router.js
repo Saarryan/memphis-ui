@@ -1,7 +1,7 @@
 const pathContainers = {
     login: '/login',
     overview: '/overview',
-    applicationsList: '/applications',
+    factoriesList: '/factories',
     users: '/users',
     settings: '/settings'
 };
