@@ -56,7 +56,7 @@ export async function handleRefreshTokenRequest() {
         withCredentials: true
     });
     try {
-        const url = `${SERVER_URL}${ApiEndpoints.REFRESH_TOCKEN}`;
+        const url = `${SERVER_URL}${ApiEndpoints.REFRESH_TOKEN}`;
         const res = await HTTP({ method: 'POST', url });
         const results = res.data;
         saveToLocalStorage(results);

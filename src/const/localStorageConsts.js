@@ -1,4 +1,4 @@
-export const LOCAL_STORAGE_ALREADY_LIGGED_IN = 'already_logged_in';
+export const LOCAL_STORAGE_ALREADY_LOGGED_IN = 'already_logged_in';
 export const LOCAL_STORAGE_AVATAR_ID = 'avatar_id';
 export const LOCAL_STORAGE_CREATION_DATE = 'creation_date';
 export const LOCAL_STORAGE_EXPIRED_TOKEN = 'expires_in';
