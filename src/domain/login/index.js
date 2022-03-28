@@ -8,13 +8,14 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Form } from 'antd';
 
 import logoGrayText from '../../assets/images/logoGrayText.png';
-import { httpRequest } from '../../services/http';
+import { handleRefreshTokenRequest, httpRequest } from '../../services/http';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import Button from '../../components/button';
 import Loader from '../../components/loader';
 import { Context } from '../../hooks/store';
 import Input from '../../components/Input';
 import { isValidToken, saveToLocalStorage } from '../../services/auth';
+import { LOCAL_STORAGE_TOKEN } from '../../const/localStorageConsts';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -36,8 +37,11 @@ const Login = () => {
     });
     const [error, setError] = useState('');
 
-    useEffect(() => {
+    useEffect(async () => {
         if (isValidToken()) {
+            history.push('/overview');
+        } else if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
+            await handleRefreshTokenRequest();
             history.push('/overview');
         }
     }, []);
@@ -66,7 +70,6 @@ const Login = () => {
                 }
                 dispatch({ type: 'SET_USER_DATA', payload: data });
             } catch (err) {
-                debugger;
                 setError(err);
             }
         }
