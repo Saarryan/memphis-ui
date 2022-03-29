@@ -1,6 +1,6 @@
 import { ApiEndpoints } from '../const/apiEndpoints';
 import {
-    LOCAL_STORAGE_ALREADY_LIGGED_IN,
+    LOCAL_STORAGE_ALREADY_LOGGED_IN,
     LOCAL_STORAGE_AVATAR_ID,
     LOCAL_STORAGE_CREATION_DATE,
     LOCAL_STORAGE_TOKEN,
@@ -16,7 +16,7 @@ export const saveToLocalStorage = (userData) => {
     const now = new Date();
     const expiryToken = now.getTime() + userData.expires_in;
 
-    localStorage.setItem(LOCAL_STORAGE_ALREADY_LIGGED_IN, userData.already_logged_in);
+    localStorage.setItem(LOCAL_STORAGE_ALREADY_LOGGED_IN, userData.already_logged_in);
     localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
     localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
     localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);

@@ -38,7 +38,7 @@ function OverView() {
                 <div className="overview-wrapper">
                     <div className="header">
                         <div className="bot-wrapper">
-                            <img src={botUrl} width={30} height={30} alt="bot"></img>
+                            <img src={botUrl} width={40} height={40} alt="bot"></img>
                         </div>
                         <div className="dynamic-sentences">
                             <h1>Welcome Back, Alex</h1>

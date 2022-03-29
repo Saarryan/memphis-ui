@@ -4,5 +4,27 @@
     padding: 1vw;
     .add-search-user {
         display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 32px;
+    }
+    .users-list-container {
+        margin-top: 32px;
+        .users-list-header {
+            display: flex;
+            position: relative;
+            height: 20px;
+            p {
+                position: absolute;
+                font-weight: 600;
+                font-size: 14px;
+            }
+            .user-name-title {
+                padding-left: 45px;
+            }
+            .type-title {
+                padding-left: 350px;
+            }
+        }
     }
 }

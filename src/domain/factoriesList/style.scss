@@ -12,7 +12,6 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        margin-right: 3vw;
         margin-top: 10px;
         h3 {
             font-weight: 400;
@@ -21,12 +20,14 @@
     }
 
     .factories-list {
-        height: calc(95vh - 247px);
+        height: calc(95vh - 110px);
         position: absolute;
         display: inline-flex;
         flex-wrap: wrap;
         overflow-y: auto;
-        padding-left: 2px;
+        margin-right: 1vw;
         margin-top: 20px;
+        gap: 16px;
+        padding: 3px;
     }
 }

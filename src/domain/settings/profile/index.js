@@ -7,7 +7,7 @@ import ImgLoader from './imgLoader';
 
 function Profile() {
     return (
-        <React.Fragment>
+        <div className="profile-container">
             {/* <div className="profile-border-logo"> */}
             <ImgLoader />
             {/* </div> */}
@@ -28,7 +28,7 @@ function Profile() {
                     onChange={() => {}}
                 />
             </div>
-        </React.Fragment>
+        </div>
     );
 }
 

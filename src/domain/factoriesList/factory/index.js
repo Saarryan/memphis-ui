@@ -31,7 +31,7 @@ const Factory = (props) => {
     const parseDate = new Date(props.content.creation_date).toLocaleDateString();
 
     useEffect(() => {
-        setBotImage(botId);
+        setBotImage(props.content?.user_avatar_id || botId);
     }, []);
 
     const setBotImage = (botId) => {

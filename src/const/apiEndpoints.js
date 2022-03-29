@@ -1,8 +1,9 @@
 export const ApiEndpoints = {
     //Auth
     LOGIN: '/usermgmt/login',
-    REFRESH_TOCKEN: '/usermgmt/refreshToken',
+    REFRESH_TOKEN: '/usermgmt/refreshToken',
     LOGOUT: '/usermgmt/logout',
+    GET_ALL_USERS: '/usermgmt/getAllUsers',
 
     //Factory
     CREATE_FACTORY: '/factories/createFactory',
