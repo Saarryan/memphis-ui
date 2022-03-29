@@ -48,11 +48,16 @@
         position: absolute;
         right: 0;
         p {
+            cursor: pointer;
             margin: 0;
             padding-right: 50px;
-            color: var(--purple);
+            color: transparent;
             font-weight: 600;
             font-size: 12px;
         }
     }
+}
+.users-item:hover .user-actions p {
+    display: block;
+    color: var(--purple);
 }
