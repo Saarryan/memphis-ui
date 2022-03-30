@@ -3,11 +3,11 @@ export const ApiEndpoints = {
     LOGIN: '/usermgmt/login',
     REFRESH_TOKEN: '/usermgmt/refreshToken',
     LOGOUT: '/usermgmt/logout',
+    ADD_USER: '/usermgmt/addUser',
     GET_ALL_USERS: '/usermgmt/getAllUsers',
     REMOVE_MY_UER: '/usermgmt/removeMyUser',
     EDIT_AVATAR: '/usermgmt/editAvatar',
     EDIT_COMPANY_LOGO: '/usermgmt/editCompanyLogo',
-    
 
     //Factory
     CREATE_FACTORY: '/factories/createFactory',

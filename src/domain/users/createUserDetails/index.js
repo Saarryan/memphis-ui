@@ -16,14 +16,14 @@ const CreateUserDetails = ({ createUserRef, props }) => {
     const [formFields, setFormFields] = useState({
         username: '',
         password: '',
-        user_type: 'Managment'
+        user_type: 'managment'
     });
     const [passwordType, setPasswordType] = useState(0);
     const [copySuccess, setCopySuccess] = useState('');
     const [fadeProp, setFadeProp] = useState({ fade: 'fade-in-modal' });
     let generatePassword = '123456';
 
-    const userTypeOptions = ['Managment', 'Application'];
+    const userTypeOptions = ['managment', 'application'];
 
     const passwordOptions = [
         {
@@ -64,7 +64,6 @@ const CreateUserDetails = ({ createUserRef, props }) => {
             return;
         } else {
             try {
-                debugger;
                 const bodyRequest = creationForm.getFieldsValue();
                 const data = await httpRequest('POST', ApiEndpoints.ADD_USER, bodyRequest);
                 if (data) {
@@ -117,7 +116,7 @@ const CreateUserDetails = ({ createUserRef, props }) => {
                         />
                     </div>
                 </Form.Item>
-                <Form.Item name="user_type">
+                <Form.Item name="user_type" initialValue={formFields.user_type}>
                     <div className="field user-type">
                         <p>Type</p>
                         <SelectComponent
@@ -139,8 +138,8 @@ const CreateUserDetails = ({ createUserRef, props }) => {
                     <RadioButton options={passwordOptions} radioValue={passwordType} onChange={(e) => passwordTypeChange(e)} />
 
                     {passwordType === 0 && (
-                        <Form.Item name="password">
-                            {/* <div className="field password">
+                        <Form.Item name="password" initialValue={generatePassword}>
+                            <div className="field password">
                                 <Input
                                     type="text"
                                     disabled
@@ -153,29 +152,7 @@ const CreateUserDetails = ({ createUserRef, props }) => {
                                     fontSize="12px"
                                     value={generatePassword}
                                 />
-                            </div> */}
-                            <div className="api-key-url-container">
-                                <div className="AK-url">
-                                    <span className="api-key">{generatePassword}</span>
-                                    <div className="copy-button">
-                                        <Button
-                                            className="copy-button"
-                                            width="4vh"
-                                            height="4vh"
-                                            placeholder={<CopyOutlined className="copy-button-icon" />}
-                                            radiusType="semi-round"
-                                            backgroundColorType="none"
-                                            fontSize="14px"
-                                            minWidth="30px"
-                                            minHeight="30px"
-                                            fontWeight="bold"
-                                            marginBottom="unset"
-                                            boxShadowStyle="gray"
-                                            onClick={copyToClipboard}
-                                        ></Button>
-                                    </div>
-                                </div>
-                                <span className={fadeProp.fade}>{copySuccess}</span>
+                                <p>Generate again</p>
                             </div>
                         </Form.Item>
                     )}

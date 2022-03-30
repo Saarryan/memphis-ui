@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import UserType from './userType';
 
 function UserItem(props) {
-    const botId = 1;
-    const [botUrl, SetBotUrl] = useState();
+    const defaultBotId = 1;
+    const [botUrl, SetBotUrl] = useState(1);
 
     useEffect(() => {
-        setBotImage(props.content?.avatar_id || botId);
+        setBotImage(props.content?.avatar_id || defaultBotId);
     }, []);
 
     const setBotImage = (botId) => {

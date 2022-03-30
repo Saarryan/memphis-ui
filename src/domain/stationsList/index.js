@@ -255,7 +255,7 @@ const StationsList = () => {
                 {stationsList?.length > 0 && stationsList?.map((station) => <StationBoxOverview key={station._id} station={station} />)}
                 {!isLoading && stationsList.length === 0 && (
                     <div className="no-station-to-display">
-                        <InboxOutlined style={{ fontSize: '40px', color: '#5D4AEE' }} theme="outlined" />
+                        <InboxOutlined style={{ fontSize: '40px', color: '#6557FF' }} theme="outlined" />
                         <p className="nodata">No factories to display</p>
                         <Button
                             className="modal-btn"
