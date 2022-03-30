@@ -4,6 +4,10 @@ import React, { useState } from 'react';
 import { Upload, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
+import { httpRequest } from '../../../../services/http';
+import { ApiEndpoints } from '../../../../const/apiEndpoints';
+
+
 const ImgLoader = () => {
     const [loading, setLoading] = useState(false);
     const [imgUrl, setImgUrl] = useState(null);
@@ -12,11 +16,11 @@ const ImgLoader = () => {
         let dataImg = new FormData();
         dataImg.append("organizationPicture", file);
         try {
-            const data = await httpRequest("PUT", ApiEndpoint.EDIT_COMPANY_LOGO, dataImg);
+            const data = await httpRequest("PUT", ApiEndpoints.EDIT_COMPANY_LOGO, dataImg);
             //Do something
-            onSuccess("ok");
+            // onSuccess("ok");
         } catch (err) {
-            onSuccess("error");
+            // onSuccess("error");
         }
     };
 
