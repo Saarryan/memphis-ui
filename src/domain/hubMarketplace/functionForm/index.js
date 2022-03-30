@@ -109,7 +109,7 @@ function FunctionForm(props) {
                                     options={['op1', 'op2']}
                                     boxShadowsType="gray"
                                     onChange={(e) => handelChangeOutputField(e)}
-                                    dropdownClassName="pipline-field"
+                                    dropdownClassName="functions-field"
                                 />
                             </div>
                         </div>

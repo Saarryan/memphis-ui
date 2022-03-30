@@ -7,10 +7,10 @@
         border-radius: 8px;
         box-shadow: 0px 0px 4px 3px rgba(221, 221, 221, 0.3);
         background-color: white;
-        padding: 15px 20px 20px 20px;
+        padding: 15px 20px 0px 20px;
         position: relative;
         display: grid;
-        grid-template-rows: 80% 20%;
+        grid-template-rows: 75% 25%;
         .factory-card-title {
             display: flex;
             justify-content: space-between;
@@ -43,8 +43,8 @@
         }
         .factory-owner {
             border-top: 1px solid #d8d8d8;
-            padding-top: 20px;
             display: flex;
+            align-items: center;
             .user-avatar {
                 width: 35px;
                 height: 35px;

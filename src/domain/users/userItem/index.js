@@ -27,7 +27,7 @@ function UserItem(props) {
             </div>
             {props.content?.user_type !== 'root' && (
                 <div className="user-actions">
-                    <p>Generate password</p>
+                    {/* <p>Generate password</p> */}
                     <p>Delete user</p>
                 </div>
             )}
