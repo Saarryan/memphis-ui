@@ -145,7 +145,10 @@ const TransitionsModal = (props) => {
             <DialogActions>
                 <hr />
                 <div className="btnContainer">
-                    <button className="cancel-button" disabled={lBtnDisabled} onClick={() => props.lBtnClick()}>
+                    <button className="cancel-button" 
+                    disabled={lBtnDisabled}
+                    
+                     onClick={() => props.lBtnClick()}>
                         {lBtnText}
                     </button>
                     <Button

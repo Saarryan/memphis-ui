@@ -7,6 +7,21 @@ import { Upload, message } from 'antd';
 const ImgLoader = () => {
     const [loading, setLoading] = useState(false);
     const [imgUrl, setImgUrl] = useState(null);
+    const [fileList, updateFileList] = useState([{}]);
+
+
+    // const changeLogo = async ({ file, onSuccess }) => {
+    //     let dataImg = new FormData();
+    //     dataImg.append("organizationPicture", file);
+    //     try {
+    //         const data = await httpRequest("PUT", ApiEndpoint.CHANGE_LOGO, dataImg);
+    //         dispatch({ type: "UPDATE_IMAGE", payload: data.profile_pic_url });
+    //         localStorage.setItem(config.LOCAL_STORAGE_ORGANIZATION_LOGO_URL, data.profile_pic_url);
+    //         onSuccess("ok");
+    //     } catch (err) {
+    //         onSuccess("error");
+    //     }
+    // };
 
     function getBase64(img, callback) {
         const reader = new FileReader();
@@ -42,8 +57,9 @@ const ImgLoader = () => {
 
     const uploadButton = (
         <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
-            <div style={{ marginTop: 8 }}>Upload</div>
+            {loading && <LoadingOutlined />}
+            <div style={{ marginTop: 8, color: "#A9A9A9" }}>Drag &#38; drop to upload </div>
+            <div style={{ color: "#6557FF" }}>or browse </div>
         </div>
     );
     return (
