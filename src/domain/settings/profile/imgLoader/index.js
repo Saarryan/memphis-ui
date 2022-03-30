@@ -1,27 +1,26 @@
 import './style.scss';
 
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Upload, message } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const ImgLoader = () => {
     const [loading, setLoading] = useState(false);
     const [imgUrl, setImgUrl] = useState(null);
-    const [fileList, updateFileList] = useState([{}]);
+
+    const changeLogo = async (file) => {
+        let dataImg = new FormData();
+        dataImg.append("organizationPicture", file);
+        try {
+            const data = await httpRequest("PUT", ApiEndpoint.EDIT_COMPANY_LOGO, dataImg);
+            //Do something
+            onSuccess("ok");
+        } catch (err) {
+            onSuccess("error");
+        }
+    };
 
 
-    // const changeLogo = async ({ file, onSuccess }) => {
-    //     let dataImg = new FormData();
-    //     dataImg.append("organizationPicture", file);
-    //     try {
-    //         const data = await httpRequest("PUT", ApiEndpoint.CHANGE_LOGO, dataImg);
-    //         dispatch({ type: "UPDATE_IMAGE", payload: data.profile_pic_url });
-    //         localStorage.setItem(config.LOCAL_STORAGE_ORGANIZATION_LOGO_URL, data.profile_pic_url);
-    //         onSuccess("ok");
-    //     } catch (err) {
-    //         onSuccess("error");
-    //     }
-    // };
 
     function getBase64(img, callback) {
         const reader = new FileReader();
@@ -41,6 +40,7 @@ const ImgLoader = () => {
         return isJpgOrPng && isLt2M;
     }
 
+      
     const handleChange = (info) => {
         if (info.file.status === 'uploading') {
             setLoading(true);
@@ -68,7 +68,7 @@ const ImgLoader = () => {
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
-            // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"s
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             beforeUpload={beforeUpload}
             onChange={handleChange}
         >
