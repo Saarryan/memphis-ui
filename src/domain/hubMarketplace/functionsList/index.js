@@ -74,7 +74,7 @@ function FunctionsList(props) {
                         options={['op1', 'op2']}
                         boxShadowsType="gray"
                         onChange={(e) => console.log(e)}
-                        dropdownClassName="pipline-field"
+                        dropdownClassName="select-optionsld"
                     />
                     <SearchInput
                         placeholder="Search here"

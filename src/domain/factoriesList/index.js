@@ -73,7 +73,7 @@ function FactoriesList() {
           {!isLoading && usecases.length === 0 && (
             <div className="no-pipline-to-display">
               <InboxOutlined
-                style={{ fontSize: "40px", color: "#5D4AEE" }}
+                style={{ fontSize: "40px", color: "#6557FF" }}
                 theme="outlined"
               />
               <p className="nodata">No use cases to display</p>

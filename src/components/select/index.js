@@ -33,7 +33,7 @@ const SelectComponent = (props) => {
 
     const color = getFontColor(colorType);
     const backgroundColor = getBackgroundColor(backgroundColorType);
-    const border = getBorderColor(borderColorType);
+    const borderColor = getBorderColor(borderColorType);
     const boxShadow = getBoxShadows(boxShadowsType);
     const borderRadius = getBorderRadius(radiusType);
 
@@ -45,7 +45,7 @@ const SelectComponent = (props) => {
             color,
             backgroundColor,
             boxShadow,
-            border,
+            borderColor,
             borderRadius,
             height: height || '40px'
         }

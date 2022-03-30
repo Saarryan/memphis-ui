@@ -35,7 +35,7 @@ export function getFontColor(colorType) {
         case 'white':
             return '#f7f7f7';
         default:
-            return '#5D4AEE';
+            return '#6557FF';
     }
 }
 
@@ -50,7 +50,7 @@ export function getBackgroundColor(backgroundColor) {
         case 'white-login':
             return '#F9F9F9';
         case 'darkPurple':
-            return '#5D4AEE';
+            return '#6557FF';
         case 'orange':
             return '#fbbd71';
         case 'red':

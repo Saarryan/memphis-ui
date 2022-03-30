@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 
 import SearchInput from '../../components/searchInput';
@@ -9,10 +9,16 @@ import UserItem from './userItem';
 import Button from '../../components/button';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import { httpRequest } from '../../services/http';
+import Modal from '../../components/modal';
+import CreateUserDetails from './createUserDetails';
 
 function Users() {
     const [state, dispatch] = useContext(Context);
     const [userList, setUsersList] = useState([]);
+    const [copyOfUserList, setCopyOfUserList] = useState([]);
+    const [addUserModalIsOpen, addUserModalFlip] = useState(false);
+    const createUserRef = useRef(null);
+    const [searchInput, setSearchInput] = useState('');
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'users' });
@@ -25,12 +31,38 @@ function Users() {
             if (data) {
                 data.sort((a, b) => new Date(a.creation_date) - new Date(b.creation_date));
                 setUsersList(data);
+                setCopyOfUserList(data);
             }
         } catch (error) {}
     };
 
-    const removeUser = (id) => {
-        setUsersList(userList.filter((item) => item.id !== id));
+    useEffect(() => {
+        if (searchInput.length > 2) {
+            const results = userList.filter(
+                (userData) => userData?.username?.toLowerCase().includes(searchInput) || userData?.user_type?.toLowerCase().includes(searchInput)
+            );
+            setUsersList(results);
+        } else {
+            setUsersList(copyOfUserList);
+        }
+    }, [searchInput.length > 2]);
+
+    const handleSearch = (e) => {
+        setSearchInput(e.target.value);
+    };
+
+    const removeUser = async (username) => {
+        const updatedUserList = userList.filter((item) => item.username !== username);
+        setUsersList(updatedUserList);
+        setCopyOfUserList(updatedUserList);
+    };
+
+    const closeModal = (userData) => {
+        let newUserList = userList;
+        newUserList.push(userData);
+        setUsersList(newUserList);
+        setCopyOfUserList(newUserList);
+        addUserModalFlip(false);
     };
 
     return (
@@ -47,8 +79,8 @@ function Users() {
                     borderColorType="gray"
                     boxShadowsType="gray"
                     iconComponent={<SearchOutlined />}
-                    //   onChange={handleSearch}
-                    //   value={searchInput}
+                    onChange={handleSearch}
+                    value={searchInput}
                 />
                 <Button
                     className="modal-btn"
@@ -61,7 +93,7 @@ function Users() {
                     fontSize="14px"
                     fontWeight="600"
                     aria-haspopup="true"
-                    //onClick={() => modalFlip(true)}
+                    onClick={() => addUserModalFlip(true)}
                 />
             </div>
             <div className="users-list-container">
@@ -71,10 +103,28 @@ function Users() {
                 </div>
                 <div className="users-list">
                     {userList.map((user) => {
-                        return <UserItem key={user.id} content={user} removeUser={() => removeUser(user.id)} />;
+                        return <UserItem key={user.id} content={user} removeUser={() => removeUser(user.username)} />;
                     })}
                 </div>
             </div>
+            <Modal
+                header="Add new user"
+                height="700px"
+                minWidth="564px"
+                rBtnText="Add"
+                lBtnText="Cancel"
+                closeAction={() => addUserModalFlip(false)}
+                lBtnClick={() => {
+                    addUserModalFlip(false);
+                }}
+                clickOutside={() => addUserModalFlip(false)}
+                rBtnClick={() => {
+                    createUserRef.current();
+                }}
+                open={addUserModalIsOpen}
+            >
+                <CreateUserDetails createUserRef={createUserRef} closeModal={(userData) => closeModal(userData)} />
+            </Modal>
         </div>
     );
 }
