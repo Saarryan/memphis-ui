@@ -1,10 +1,14 @@
 import './style.scss';
 
 import React, { useState } from 'react';
+
+import { Divider } from 'antd';
+
 import Integrations from './integrations';
 import CustomTabs from '../../components/Tabs';
 import Profile from './profile';
 import Alerts from './alerts';
+
 function Users() {
     const [value, setValue] = useState(0);
     // const tabs = ['Profile', 'Integrations', 'Alerts'];
@@ -19,6 +23,7 @@ function Users() {
             <div className="settings-panel-body">
                 <div style={{ width: 'fit-content' }}>
                     <CustomTabs value={value} onChange={handleChangeMenuItem} tabs={tabs}></CustomTabs>
+                    <Divider/>
                 </div>
             </div>
             <div className="settings-panel-body">

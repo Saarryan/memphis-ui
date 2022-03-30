@@ -4,9 +4,12 @@
     padding: 1vw;
 }
 .settings-panel-body {
-    margin-bottom: 30px;
-    margin-left: 2vw;
+    padding-left: 2vw;
     color: var(--blue);
+    .ant-divider{
+        margin-top: 0;
+        width: 100vw;
+    }
 }
 .alerts-integrations-container {
     width: 40vw;
