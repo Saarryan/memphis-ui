@@ -28,7 +28,7 @@ function UserItem(props) {
             {props.content?.user_type !== 'root' && (
                 <div className="user-actions">
                     {/* <p>Generate password</p> */}
-                    <p>Delete user</p>
+                    <p onClick={() => props.removeUser()}>Delete user</p>
                 </div>
             )}
         </div>

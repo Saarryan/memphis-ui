@@ -33,8 +33,20 @@ function Users() {
         } catch (error) {}
     };
 
-    const removeUser = (id) => {
-        setUsersList(userList.filter((item) => item.id !== id));
+    const removeUser = async (username) => {
+        try {
+            await httpRequest('DELETE', ApiEndpoints.REMOVE_UER, {
+                username: username
+            });
+            setUsersList(userList.filter((item) => item.username !== username));
+        } catch (error) {}
+    };
+
+    const closeModal = (userData) => {
+        let newUserList = userList;
+        newUserList.push(userData);
+        setUsersList(newUserList);
+        addUserModalFlip(false);
     };
 
     return (
@@ -75,7 +87,7 @@ function Users() {
                 </div>
                 <div className="users-list">
                     {userList.map((user) => {
-                        return <UserItem key={user.id} content={user} removeUser={() => removeUser(user.id)} />;
+                        return <UserItem key={user.id} content={user} removeUser={() => removeUser(user.username)} />;
                     })}
                 </div>
             </div>
@@ -92,11 +104,10 @@ function Users() {
                 clickOutside={() => addUserModalFlip(false)}
                 rBtnClick={() => {
                     createUserRef.current();
-                    //addUserModalFlip(false);
                 }}
                 open={addUserModalIsOpen}
             >
-                <CreateUserDetails createUserRef={createUserRef} closeModal={() => addUserModalFlip(false)} />
+                <CreateUserDetails createUserRef={createUserRef} closeModal={(userData) => closeModal(userData)} />
             </Modal>
         </div>
     );

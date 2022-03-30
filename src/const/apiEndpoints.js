@@ -5,6 +5,7 @@ export const ApiEndpoints = {
     LOGOUT: '/usermgmt/logout',
     ADD_USER: '/usermgmt/addUser',
     GET_ALL_USERS: '/usermgmt/getAllUsers',
+    REMOVE_UER: '/usermgmt/removeUser',
     REMOVE_MY_UER: '/usermgmt/removeMyUser',
     EDIT_AVATAR: '/usermgmt/editAvatar',
     EDIT_COMPANY_LOGO: '/usermgmt/editCompanyLogo',

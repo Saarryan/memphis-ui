@@ -2,28 +2,26 @@ import './style.scss';
 
 import React, { useEffect, useState } from 'react';
 import { Form } from 'antd';
-import { CopyOutlined } from '@ant-design/icons';
 
 import Input from '../../../components/Input';
 import RadioButton from '../../../components/radioButton';
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
 import SelectComponent from '../../../components/select';
-import Button from '../../../components/button';
 
-const CreateUserDetails = ({ createUserRef, props }) => {
+const string = 'abcdefghijklmnopqrstuvwxyz';
+const numeric = '0123456789';
+
+const CreateUserDetails = ({ createUserRef, closeModal }) => {
     const [creationForm] = Form.useForm();
     const [formFields, setFormFields] = useState({
         username: '',
         password: '',
-        user_type: 'managment'
+        user_type: 'management'
     });
     const [passwordType, setPasswordType] = useState(0);
-    const [copySuccess, setCopySuccess] = useState('');
-    const [fadeProp, setFadeProp] = useState({ fade: 'fade-in-modal' });
-    let generatePassword = '123456';
 
-    const userTypeOptions = ['managment', 'application'];
+    const userTypeOptions = ['management', 'application'];
 
     const passwordOptions = [
         {
@@ -38,8 +36,36 @@ const CreateUserDetails = ({ createUserRef, props }) => {
         }
     ];
 
+    const [length, setLength] = useState(9);
+    const [generatedPassword, setGeneratedPassword] = useState('');
+
+    const generatePassword = () => {
+        const formValid = +length > 0;
+        if (!formValid) {
+            return;
+        }
+        let character = '';
+        let password = '';
+        while (password.length < length) {
+            const entity1 = Math.ceil(string.length * Math.random() * Math.random());
+            const entity2 = Math.ceil(numeric.length * Math.random() * Math.random());
+            let hold = string.charAt(entity1);
+            character += hold;
+            character += numeric.charAt(entity2);
+            password = character;
+        }
+        password = password
+            .split('')
+            .sort(() => {
+                return 0.5 - Math.random();
+            })
+            .join('');
+        setGeneratedPassword(password.substr(0, length));
+    };
+
     useEffect(() => {
         createUserRef.current = onFinish;
+        generatePassword();
     }, []);
 
     const passwordTypeChange = (e) => {
@@ -55,7 +81,7 @@ const CreateUserDetails = ({ createUserRef, props }) => {
     };
 
     const handleSelectUserType = (e) => {
-        setFormFields({ ...formFields, user_type: e.target.value });
+        setFormFields({ ...formFields, user_type: e });
     };
 
     const onFinish = async () => {
@@ -67,23 +93,10 @@ const CreateUserDetails = ({ createUserRef, props }) => {
                 const bodyRequest = creationForm.getFieldsValue();
                 const data = await httpRequest('POST', ApiEndpoints.ADD_USER, bodyRequest);
                 if (data) {
-                    props.closeModal();
+                    closeModal(data);
                 }
             } catch (error) {}
         }
-    };
-
-    const copyToClipboard = (e) => {
-        setFadeProp({
-            fade: 'fade-in-modal'
-        });
-        navigator.clipboard.writeText(generatePassword);
-        setCopySuccess('Copied!');
-        setTimeout(() => {
-            setFadeProp({
-                fade: 'fade-out-modal'
-            });
-        }, 3000);
     };
 
     return (
@@ -129,7 +142,7 @@ const CreateUserDetails = ({ createUserRef, props }) => {
                             height="40px"
                             options={userTypeOptions}
                             onChange={(e) => handleSelectUserType(e)}
-                            dropdownClassName="functions-field"
+                            dropdownClassName="select-options"
                         />
                     </div>
                 </Form.Item>
@@ -138,7 +151,7 @@ const CreateUserDetails = ({ createUserRef, props }) => {
                     <RadioButton options={passwordOptions} radioValue={passwordType} onChange={(e) => passwordTypeChange(e)} />
 
                     {passwordType === 0 && (
-                        <Form.Item name="password" initialValue={generatePassword}>
+                        <Form.Item name="password" initialValue={generatedPassword}>
                             <div className="field password">
                                 <Input
                                     type="text"
@@ -150,9 +163,9 @@ const CreateUserDetails = ({ createUserRef, props }) => {
                                     width="508px"
                                     height="40px"
                                     fontSize="12px"
-                                    value={generatePassword}
+                                    value={generatedPassword}
                                 />
-                                <p>Generate again</p>
+                                <p onClick={() => generatePassword()}>Generate again</p>
                             </div>
                         </Form.Item>
                     )}
