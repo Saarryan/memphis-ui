@@ -15,8 +15,10 @@ import CreateUserDetails from './createUserDetails';
 function Users() {
     const [state, dispatch] = useContext(Context);
     const [userList, setUsersList] = useState([]);
+    const [copyOfUserList, setCopyOfUserList] = useState([]);
     const [addUserModalIsOpen, addUserModalFlip] = useState(false);
     const createUserRef = useRef(null);
+    const [searchInput, setSearchInput] = useState('');
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'users' });
@@ -29,18 +31,37 @@ function Users() {
             if (data) {
                 data.sort((a, b) => new Date(a.creation_date) - new Date(b.creation_date));
                 setUsersList(data);
+                setCopyOfUserList(data);
             }
         } catch (error) {}
     };
 
+    useEffect(() => {
+        if (searchInput.length > 2) {
+            const results = userList.filter(
+                (userData) => userData?.username?.toLowerCase().includes(searchInput) || userData?.user_type?.toLowerCase().includes(searchInput)
+            );
+            setUsersList(results);
+        } else {
+            setUsersList(copyOfUserList);
+        }
+    }, [searchInput.length > 2]);
+
+    const handleSearch = (e) => {
+        setSearchInput(e.target.value);
+    };
+
     const removeUser = async (username) => {
-        setUsersList(userList.filter((item) => item.username !== username));
+        const updatedUserList = userList.filter((item) => item.username !== username);
+        setUsersList(updatedUserList);
+        setCopyOfUserList(updatedUserList);
     };
 
     const closeModal = (userData) => {
         let newUserList = userList;
         newUserList.push(userData);
         setUsersList(newUserList);
+        setCopyOfUserList(newUserList);
         addUserModalFlip(false);
     };
 
@@ -58,8 +79,8 @@ function Users() {
                     borderColorType="gray"
                     boxShadowsType="gray"
                     iconComponent={<SearchOutlined />}
-                    //   onChange={handleSearch}
-                    //   value={searchInput}
+                    onChange={handleSearch}
+                    value={searchInput}
                 />
                 <Button
                     className="modal-btn"
