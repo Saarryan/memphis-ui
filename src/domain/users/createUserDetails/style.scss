@@ -11,4 +11,63 @@
     .password-section {
         margin-top: 50px;
     }
+    .api-key-url-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 2vw;
+        align-items: center;
+        position: relative;
+        .AK-url {
+            display: flex;
+            width: 25vw;
+            height: 4vh;
+            align-items: center;
+            color: var(--blue);
+            background: transparent;
+            border-radius: 4px;
+            position: relative;
+            font-weight: bold;
+            font-size: 0.9vw;
+            box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+            min-height: 30px;
+            justify-content: center;
+            .api-key {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-left: 5px;
+                font-size: 12px;
+            }
+            .copy-button {
+                position: absolute;
+                right: 0px;
+                display: contents;
+                .copy-button-icon {
+                    position: absolute;
+                    width: 100%;
+                    display: grid;
+                    left: 0;
+                    justify-items: center;
+                    top: 0;
+                    height: 100%;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+.fade-in-modal {
+    position: absolute;
+    right: 6px;
+    font-size: 12px;
+    transition: opacity 1s ease;
+    font-weight: 100 !important;
+}
+.fade-out-modal {
+    opacity: 0;
+    transition: opacity 1s ease;
+    position: absolute;
+    right: 6px;
+    font-size: 12px;
+    font-weight: 100 !important;
 }

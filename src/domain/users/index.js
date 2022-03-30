@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 
 import SearchInput from '../../components/searchInput';
@@ -9,10 +9,14 @@ import UserItem from './userItem';
 import Button from '../../components/button';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import { httpRequest } from '../../services/http';
+import Modal from '../../components/modal';
+import CreateUserDetails from './createUserDetails';
 
 function Users() {
     const [state, dispatch] = useContext(Context);
     const [userList, setUsersList] = useState([]);
+    const [addUserModalIsOpen, addUserModalFlip] = useState(false);
+    const createUserRef = useRef(null);
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'users' });
@@ -61,7 +65,7 @@ function Users() {
                     fontSize="14px"
                     fontWeight="600"
                     aria-haspopup="true"
-                    //onClick={() => modalFlip(true)}
+                    onClick={() => addUserModalFlip(true)}
                 />
             </div>
             <div className="users-list-container">
@@ -75,6 +79,25 @@ function Users() {
                     })}
                 </div>
             </div>
+            <Modal
+                header="Add new user"
+                height="700px"
+                minWidth="564px"
+                rBtnText="Add"
+                lBtnText="Cancel"
+                closeAction={() => addUserModalFlip(false)}
+                lBtnClick={() => {
+                    addUserModalFlip(false);
+                }}
+                clickOutside={() => addUserModalFlip(false)}
+                rBtnClick={() => {
+                    createUserRef.current();
+                    //addUserModalFlip(false);
+                }}
+                open={addUserModalIsOpen}
+            >
+                <CreateUserDetails createUserRef={createUserRef} closeModal={() => addUserModalFlip(false)} />
+            </Modal>
         </div>
     );
 }

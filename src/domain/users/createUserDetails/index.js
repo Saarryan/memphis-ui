@@ -2,17 +2,16 @@ import './style.scss';
 
 import React, { useEffect, useState } from 'react';
 import { Form } from 'antd';
+import { CopyOutlined } from '@ant-design/icons';
 
 import Input from '../../../components/Input';
 import RadioButton from '../../../components/radioButton';
-
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
-import pathContainers from '../../../router';
 import SelectComponent from '../../../components/select';
-import { generate } from 'generate-password';
+import Button from '../../../components/button';
 
-const CreateUserDetails = ({ createUserRef }) => {
+const CreateUserDetails = ({ createUserRef, props }) => {
     const [creationForm] = Form.useForm();
     const [formFields, setFormFields] = useState({
         username: '',
@@ -20,11 +19,9 @@ const CreateUserDetails = ({ createUserRef }) => {
         user_type: 'Managment'
     });
     const [passwordType, setPasswordType] = useState(0);
-
-    let generatePassword = generate({
-        length: 6,
-        numbers: true
-    });
+    const [copySuccess, setCopySuccess] = useState('');
+    const [fadeProp, setFadeProp] = useState({ fade: 'fade-in-modal' });
+    let generatePassword = '123456';
 
     const userTypeOptions = ['Managment', 'Application'];
 
@@ -67,12 +64,27 @@ const CreateUserDetails = ({ createUserRef }) => {
             return;
         } else {
             try {
+                debugger;
                 const bodyRequest = creationForm.getFieldsValue();
                 const data = await httpRequest('POST', ApiEndpoints.ADD_USER, bodyRequest);
                 if (data) {
+                    props.closeModal();
                 }
             } catch (error) {}
         }
+    };
+
+    const copyToClipboard = (e) => {
+        setFadeProp({
+            fade: 'fade-in-modal'
+        });
+        navigator.clipboard.writeText(generatePassword);
+        setCopySuccess('Copied!');
+        setTimeout(() => {
+            setFadeProp({
+                fade: 'fade-out-modal'
+            });
+        }, 3000);
     };
 
     return (
@@ -128,7 +140,7 @@ const CreateUserDetails = ({ createUserRef }) => {
 
                     {passwordType === 0 && (
                         <Form.Item name="password">
-                            <div className="field password">
+                            {/* <div className="field password">
                                 <Input
                                     type="text"
                                     disabled
@@ -141,6 +153,29 @@ const CreateUserDetails = ({ createUserRef }) => {
                                     fontSize="12px"
                                     value={generatePassword}
                                 />
+                            </div> */}
+                            <div className="api-key-url-container">
+                                <div className="AK-url">
+                                    <span className="api-key">{generatePassword}</span>
+                                    <div className="copy-button">
+                                        <Button
+                                            className="copy-button"
+                                            width="4vh"
+                                            height="4vh"
+                                            placeholder={<CopyOutlined className="copy-button-icon" />}
+                                            radiusType="semi-round"
+                                            backgroundColorType="none"
+                                            fontSize="14px"
+                                            minWidth="30px"
+                                            minHeight="30px"
+                                            fontWeight="bold"
+                                            marginBottom="unset"
+                                            boxShadowStyle="gray"
+                                            onClick={copyToClipboard}
+                                        ></Button>
+                                    </div>
+                                </div>
+                                <span className={fadeProp.fade}>{copySuccess}</span>
                             </div>
                         </Form.Item>
                     )}
