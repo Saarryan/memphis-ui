@@ -1,12 +1,30 @@
 import './style.scss';
 
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Upload, message } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+
+import { httpRequest } from '../../../../services/http';
+import { ApiEndpoints } from '../../../../const/apiEndpoints';
+
 
 const ImgLoader = () => {
     const [loading, setLoading] = useState(false);
     const [imgUrl, setImgUrl] = useState(null);
+
+    const changeLogo = async (file) => {
+        let dataImg = new FormData();
+        dataImg.append("organizationPicture", file);
+        try {
+            const data = await httpRequest("PUT", ApiEndpoints.EDIT_COMPANY_LOGO, dataImg);
+            //Do something
+            // onSuccess("ok");
+        } catch (err) {
+            // onSuccess("error");
+        }
+    };
+
+
 
     function getBase64(img, callback) {
         const reader = new FileReader();
@@ -26,6 +44,7 @@ const ImgLoader = () => {
         return isJpgOrPng && isLt2M;
     }
 
+      
     const handleChange = (info) => {
         if (info.file.status === 'uploading') {
             setLoading(true);
@@ -42,8 +61,9 @@ const ImgLoader = () => {
 
     const uploadButton = (
         <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
-            <div style={{ marginTop: 8 }}>Upload</div>
+            {loading && <LoadingOutlined />}
+            <div style={{ marginTop: 8, color: "#A9A9A9" }}>Drag &#38; drop to upload </div>
+            <div style={{ color: "#6557FF" }}>or browse </div>
         </div>
     );
     return (
@@ -52,7 +72,7 @@ const ImgLoader = () => {
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
-            // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"s
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             beforeUpload={beforeUpload}
             onChange={handleChange}
         >
