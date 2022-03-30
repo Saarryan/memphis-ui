@@ -8,9 +8,7 @@ import RadioButton from '../../../components/radioButton';
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
 import SelectComponent from '../../../components/select';
-
-const string = 'abcdefghijklmnopqrstuvwxyz';
-const numeric = '0123456789';
+import { generator } from '../../../services/generator';
 
 const CreateUserDetails = ({ createUserRef, closeModal }) => {
     const [creationForm] = Form.useForm();
@@ -36,36 +34,11 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
         }
     ];
 
-    const [length, setLength] = useState(9);
     const [generatedPassword, setGeneratedPassword] = useState('');
-
-    const generatePassword = () => {
-        const formValid = +length > 0;
-        if (!formValid) {
-            return;
-        }
-        let character = '';
-        let password = '';
-        while (password.length < length) {
-            const entity1 = Math.ceil(string.length * Math.random() * Math.random());
-            const entity2 = Math.ceil(numeric.length * Math.random() * Math.random());
-            let hold = string.charAt(entity1);
-            character += hold;
-            character += numeric.charAt(entity2);
-            password = character;
-        }
-        password = password
-            .split('')
-            .sort(() => {
-                return 0.5 - Math.random();
-            })
-            .join('');
-        setGeneratedPassword(password.substr(0, length));
-    };
 
     useEffect(() => {
         createUserRef.current = onFinish;
-        generatePassword();
+        setGeneratedPassword(generator());
     }, []);
 
     const passwordTypeChange = (e) => {
@@ -165,7 +138,7 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
                                     fontSize="12px"
                                     value={generatedPassword}
                                 />
-                                <p onClick={() => generatePassword()}>Generate again</p>
+                                <p onClick={() => setGeneratedPassword(generator())}>Generate again</p>
                             </div>
                         </Form.Item>
                     )}

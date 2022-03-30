@@ -34,12 +34,7 @@ function Users() {
     };
 
     const removeUser = async (username) => {
-        try {
-            await httpRequest('DELETE', ApiEndpoints.REMOVE_UER, {
-                username: username
-            });
-            setUsersList(userList.filter((item) => item.username !== username));
-        } catch (error) {}
+        setUsersList(userList.filter((item) => item.username !== username));
     };
 
     const closeModal = (userData) => {

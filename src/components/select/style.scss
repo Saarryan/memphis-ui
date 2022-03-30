@@ -38,7 +38,7 @@
     background-color: var(--white);
     border-radius: 5px;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
-    z-index: 2;
+    z-index: 9999;
     position: absolute;
     text-transform: capitalize;
     .ant-select-item-option-content {

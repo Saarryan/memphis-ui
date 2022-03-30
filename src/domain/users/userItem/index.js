@@ -2,6 +2,8 @@ import './style.scss';
 
 import React, { useEffect, useState } from 'react';
 import UserType from './userType';
+import { httpRequest } from '../../../services/http';
+import { ApiEndpoints } from '../../../const/apiEndpoints';
 
 function UserItem(props) {
     const defaultBotId = 1;
@@ -13,6 +15,15 @@ function UserItem(props) {
 
     const setBotImage = (botId) => {
         SetBotUrl(require(`../../../assets/images/bots/${botId}.svg`));
+    };
+
+    const removeUser = async (username) => {
+        try {
+            await httpRequest('DELETE', ApiEndpoints.REMOVE_UER, {
+                username: username
+            });
+            props.removeUser();
+        } catch (error) {}
     };
     return (
         <div className="users-item">
@@ -28,7 +39,7 @@ function UserItem(props) {
             {props.content?.user_type !== 'root' && (
                 <div className="user-actions">
                     {/* <p>Generate password</p> */}
-                    <p onClick={() => props.removeUser()}>Delete user</p>
+                    <p onClick={() => removeUser()}>Delete user</p>
                 </div>
             )}
         </div>
