@@ -19,6 +19,7 @@ import Logo from '../../assets/images/logo.png';
 import { Context } from '../../hooks/store';
 import pathControllers from '../../router';
 import { logout } from '../../services/auth';
+import { LOCAL_STORAGE_AVATAR_ID, LOCAL_STORAGE_USER_NAME } from '../../const/localStorageConsts';
 
 const { SubMenu } = Menu;
 
@@ -30,12 +31,11 @@ const Desktop = ({ children }) => {
 function SideBar() {
     const [state, dispatch] = useContext(Context);
     const history = useHistory();
-    const botId = 1;
     const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'));
 
     useEffect(() => {
-        setBotImage(botId);
-    }, []);
+        setBotImage(state?.userData?.avatar_id || localStorage.getItem(LOCAL_STORAGE_AVATAR_ID));
+    }, [state]);
 
     const setBotImage = (botId) => {
         SetBotUrl(require(`../../assets/images/bots/${botId}.svg`));
@@ -123,7 +123,7 @@ function SideBar() {
                                         <div className="company-logo">
                                             <img src={Logo} width="20" height="20" className="logoimg" alt="companyLogo" />
                                         </div>
-                                        <p>Tali Pink</p>
+                                        <p>{localStorage.getItem(LOCAL_STORAGE_USER_NAME)}</p>
                                     </div>
                                 }
                             >
