@@ -6,11 +6,11 @@ import React from 'react';
 import { getFontColor } from '../../utils/styleTemplates';
 
 const AntTabs = withStyles({
-    root: {
-        borderBottom: '1px solid #e8e8e8'
-    },
+    // root: {
+    //     // borderBottom: '1px solid #e8e8e8'
+    // },
     indicator: {
-        backgroundColor: getFontColor('black')
+        backgroundColor: getFontColor('purple')
     }
 })(Tabs);
 
@@ -19,8 +19,10 @@ const AntTab = withStyles((theme) => ({
         textTransform: 'none',
         fontSize: '14px',
         minWidth: 12,
-        maxWidth: 100,
+        maxWidth: 120,
         fontWeight: 600,
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
         marginRight: theme.spacing(3),
         fontFamily: ['Inter'].join(','),
         '&:hover': {
@@ -29,10 +31,10 @@ const AntTab = withStyles((theme) => ({
         },
         '&$selected': {
             color: getFontColor('navy'),
-            fontWeight: theme.typography.fontWeightBold
+            fontWeight: theme.typography.fontWeightBold,
         },
         '&:focus': {
-            color: getFontColor('navy')
+            color: getFontColor('navy'),
         }
     },
     selected: {}
