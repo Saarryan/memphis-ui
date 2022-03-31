@@ -1,18 +1,24 @@
 import './style.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InputNumber } from 'antd';
 
-import RadioButton from '../../../components/radioButton';
-import Input from '../../../components/Input';
+import RadioButton from '../radioButton';
+import Input from '../Input';
+import Select from '../select'
+import { httpRequest } from '../../services/http';
+import { ApiEndpoints } from '../../const/apiEndpoints';
 
-const CreateStationDetails = () => {
+
+const CreateStationDetails = (props) => {
+    const [factoryNames, setFactoryNames] = useState(null)
     const [formFields, setFormFields] = useState({
         name: '',
         retention_type: 0,
         retention_value: '',
         throughput_type: 0,
-        throughput_value: ''
+        throughput_value: '',
+        factory: ''
     });
     const retanionOptions = [
         {
@@ -59,6 +65,23 @@ const CreateStationDetails = () => {
     const handleThroughputChange = (e) => {
         setFormFields({ ...formFields, throughput_value: e.target.value });
     };
+
+    const getAllFactories = async () => {
+        try {
+            const data = await httpRequest('GET', ApiEndpoints.GEL_ALL_FACTORIES);
+            if (data) {
+                const factories = data.map(factory => factory.name)
+                setFactoryNames(factories)
+            }
+        } catch (error) { }
+    };
+
+
+    useEffect(() => {
+        if (props.addFactory) {
+            getAllFactories()
+        }
+    }, [props]);
 
     return (
         <div className="create-station-form">
@@ -144,6 +167,21 @@ const CreateStationDetails = () => {
                     {formFields.throughput_type === 1 && <p>/Mb</p>}
                 </div>
             </div>
+            {factoryNames && <div className="factory-name">
+                <p>Factory name</p>
+                <Select
+                    value={factoryNames[0]}
+                    colorType="navy"
+                    backgroundColorType="none"
+                    borderColorType="gray"
+                    radiusType="semi-round"
+                    width="500px"
+                    height="40px"
+                    options={factoryNames}
+                    onChange={(e) => console.log(e)}
+                    dropdownClassName="select-optionsld"
+                />
+            </div>}
         </div>
     );
 };
