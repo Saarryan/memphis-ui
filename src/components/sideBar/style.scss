@@ -13,7 +13,7 @@
         .item-wrapper {
             p {
                 font-size: 10px;
-                color: #d8d8d8;
+                color: var(--gray);
                 font-weight: 600;
             }
             .name-checked {
@@ -97,7 +97,7 @@
     .company-logo {
         width: 30px;
         height: 30px;
-        border: 1px solid #d8d8d8;
+        border: 1px solid var(--gray);
         border-radius: 20px;
         position: relative;
         align-items: center;
@@ -121,7 +121,7 @@
 
 .ant-menu-submenu > .ant-menu {
     border-radius: 8px;
-    border: 1px solid #d8d8d8;
+    border: 1px solid var(--gray);
     width: 12vw;
     min-width: 220px;
 }

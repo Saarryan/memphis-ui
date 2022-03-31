@@ -34,6 +34,38 @@ const StationBoxOverview = (props) => {
             <HubMarketplace open={functionModalIsOpen} closeModal={() => functionModalFlip(false)} />
             <div className="station-overview-header">
                 <div className="info-fields">
+                    <div className="field-wrapper">
+                        <h3>Name: </h3>
+                        <p>{props.station.name}</p>
+                    </div>
+                    <div className="field-wrapper">
+                        <h3>Retention: </h3>
+                        <p>{props.station.retention_value}</p>
+                    </div>
+                    <div className="field-wrapper">
+                        <h3>Replicas: </h3>
+                        <p>{props.station.replicas}</p>
+                    </div>
+                    {/* <div className="field-wrapper">
+                        <h3>Max throughput: </h3>
+                        <p>{props.station.max_throughput || 'not detected'}</p>
+                    </div> */}
+                </div>
+                <div className="actions-side">
+                    <div
+                        className="action overview"
+                        onClick={() => {
+                            history.push(`${window.location.pathname}/${props.station.name}`);
+                        }}
+                    >
+                        <p>Overview </p>
+                    </div>
+                    <div className="action edit">
+                        <p onClick={() => functionModalFlip(true)}>Add functions</p>
+                    </div>
+                    {/* <div className="action">
+                        <HealthyBadge status={props.station.status || 'healthy'} />
+                    </div> */}
                     <div className="action station-menu">
                         <MoreVertIcon
                             aria-controls="long-button"
@@ -56,37 +88,9 @@ const StationBoxOverview = (props) => {
                             </MenuItem>
                         </Popover>
                     </div>
-                    <div className="field-wrapper">
-                        <h3>Name: </h3>
-                        <p>{props.station.name}</p>
-                    </div>
-                    <div className="field-wrapper">
-                        <h3>Retention: </h3>
-                        <p>{props.station.retention}</p>
-                    </div>
-                    <div className="field-wrapper">
-                        <h3>Max throughput: </h3>
-                        <p>{props.station.max_throughput}</p>
-                    </div>
-                </div>
-                <div className="actions-side">
-                    <div
-                        className="action overview"
-                        onClick={() => {
-                            history.push(`${pathContainers.factoriesList}/${props.station._id}/1`);
-                        }}
-                    >
-                        <p>Overview </p>
-                    </div>
-                    <div className="action edit">
-                        <p onClick={() => functionModalFlip(true)}>Edit functions</p>
-                    </div>
-                    <div className="action">
-                        <HealthyBadge status={props.station.status} />
-                    </div>
                 </div>
             </div>
-            {props.station.functions && (
+            {props.station.functions.length !== 0 && (
                 <div className="functions-overview">
                     <FunctionsOverview functions={props.station.functions} horizontal={true} editable={false}></FunctionsOverview>
                 </div>

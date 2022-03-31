@@ -21,7 +21,7 @@
                 width: 60px;
                 height: 38px;
                 border-radius: 4px;
-                border: 1px solid #d8d8d8;
+                border: 1px solid var(--gray);
             }
             .ant-input-number-input {
                 height: 38px;
@@ -46,7 +46,7 @@
             font-size: 14px;
             font-weight: bold;
             line-height: 23px;
-            color: #d8d8d8;
+            color: var(--gray);
         }
     }
     .size-value {

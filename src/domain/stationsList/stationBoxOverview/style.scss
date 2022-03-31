@@ -24,16 +24,11 @@
                 h3 {
                     font-weight: 600;
                     padding-right: 3px;
+                    font-size: 14px;
                 }
                 p {
                     font-weight: 400;
-                }
-            }
-            .station-menu {
-                padding-right: 15px;
-                .threedots-menu {
-                    color: #a9a9a9;
-                    margin-top: 0px;
+                    font-size: 14px;
                 }
             }
         }
@@ -51,6 +46,13 @@
                 font-weight: 600;
                 font-size: 12px;
                 cursor: pointer;
+            }
+            .station-menu {
+                .threedots-menu {
+                    color: #a9a9a9;
+                    margin-top: 0px;
+                    margin-left: 10px;
+                }
             }
         }
     }

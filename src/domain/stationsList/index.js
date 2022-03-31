@@ -3,6 +3,7 @@ import './style.scss';
 import React, { useEffect, useContext, useState, useRef } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import EditOutlined from '@material-ui/icons/EditOutlined';
 import { InboxOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
@@ -10,10 +11,9 @@ import { message } from 'antd';
 import CreateStationDetails from './createStationDetails';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import Tooltip from '../../components/tooltip/tooltip';
+import StationBoxOverview from './stationBoxOverview';
 import loading from '../../assets/images/strech.gif';
 import { httpRequest } from '../../services/http';
-import edit from '../../assets/images/edit.svg';
-import StationBoxOverview from './stationBoxOverview';
 import Button from '../../components/button';
 import { Context } from '../../hooks/store';
 import Modal from '../../components/modal';
@@ -21,74 +21,18 @@ import pathContainers from '../../router';
 
 const StationsList = () => {
     const [state, dispatch] = useContext(Context);
-    const [stationsList, setStationsList] = useState([
-        {
-            _id: 1,
-            name: 'Strech',
-            retention: '3 days',
-            max_throughput: '1000 message',
-            status: 'healthy',
-            functions: [
-                {
-                    _id: 1,
-                    name: 'sveta',
-                    type: 'blabl'
-                },
-                {
-                    _id: 2,
-                    name: 'sveta2',
-                    type: 'blabl'
-                },
-                {
-                    _id: 3,
-                    name: 'sveta3',
-                    type: 'blabl'
-                }
-            ]
-        },
-        {
-            _id: 2,
-            name: 'Strech',
-            retention: '3 hours',
-            max_throughput: '15 Mb/s',
-            status: 'unhealthy'
-        },
-        {
-            _id: 3,
-            name: 'Strech',
-            retention: 'station',
-            max_throughput: 'default',
-            status: 'healthy'
-        },
-        {
-            _id: 4,
-            name: 'Strech',
-            retention: 'station',
-            max_throughput: 'default',
-            status: 'unhealthy'
-        },
-        {
-            _id: 5,
-            name: 'Strech',
-            retention: 'station',
-            max_throughput: 'default',
-            status: 'healthy'
-        }
-    ]);
     const [editName, seteditName] = useState(false);
     const [editDescription, seteditDescription] = useState(false);
     const [modalIsOpen, modalFlip] = useState(false);
-    const [factoryDetails, setFactoryDetails] = useState({
-        id: 1,
-        name: 'test',
-        description: 'desc'
-    });
+    const [factoryDetails, setFactoryDetails] = useState();
+    const [factoryName, setFactoryName] = useState('');
+    const [factoryDescription, setFactoryDescription] = useState('');
     const [isLoading, setisLoading] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'factories' });
-        //getFactoryDetails();
+        getFactoryDetails();
     }, []);
 
     const getFactoryDetails = async () => {
@@ -96,28 +40,14 @@ const StationsList = () => {
         const factoryName = url.split('factories/')[1].split('/')[0];
         setisLoading(true);
         try {
-            const data = await httpRequest('GET', `${ApiEndpoints.GET_USER_USECASE_BY_ID}?factoryName=${factoryName}`);
-            setFactoryDetails({
-                ...factoryDetails,
-                id: 1,
-                name: 'data.name',
-                description: 'data.description'
-            });
-            dispatch({ type: 'UPDATE_USECASES_NAME', payload: data });
-            getStations(data._id);
+            const data = await httpRequest('GET', `${ApiEndpoints.GEL_FACTORIES}?factory_name=${factoryName}`);
+            setFactoryDetails(data);
+            setFactoryName(data.name);
+            setFactoryDescription(data.description);
+            setisLoading(false);
         } catch (err) {
             return;
         }
-    };
-
-    const getStations = async (factoryName) => {
-        try {
-            const data = await httpRequest('GET', `${ApiEndpoints.GET_USECASE_PIPELINES}?factoryName=${factoryName || state.factoryName?._id}`);
-            // setTimeout(() => {
-            setisLoading(false);
-            setStationsList(data);
-            // }, 1000);
-        } catch (err) {}
     };
 
     const handleEditName = () => {
@@ -129,62 +59,47 @@ const StationsList = () => {
     };
 
     const handleEditNameBlur = async (e) => {
-        if (e.target.value === undefined) {
+        if (!e.target.value) {
             seteditName(false);
         } else {
             try {
-                const data = await httpRequest('PUT', ApiEndpoints.CHANGE_USECASE_NAME, {
-                    name: e.target.value,
-                    applicationId: state.useCaseBuilder?._id
+                await httpRequest('PUT', ApiEndpoints.EDIT_FACTORY, {
+                    factory_name: factoryDetails.name,
+                    factory_new_name: e.target.value,
+                    factory_new_description: factoryDetails.description
                 });
-                dispatch({ type: 'UPDATE_USECASES_NAME', payload: data });
                 setFactoryDetails({ ...factoryDetails, name: e.target.value });
                 seteditName(false);
-            } catch (err) {}
+            } catch (err) {
+                setFactoryName(factoryDetails.name);
+            }
         }
     };
 
     const handleEditNameChange = (e) => {
-        setFactoryDetails({ ...factoryDetails, name: e.target.value });
+        setFactoryName(e.target.value);
     };
 
     const handleEditDescriptionBlur = async (e) => {
-        if (e.target.value === undefined) {
+        if (!e.target.value) {
             seteditDescription(false);
         } else {
             try {
-                const data = await httpRequest('PUT', ApiEndpoints.CHANGE_USECASE_DESCRIPTION, { description: e.target.value, applicationId: state.useCaseBuilder?._id });
-                dispatch({ type: 'UPDATE_USECASES_DESCRIPTION', payload: data });
-                setFactoryDetails({
-                    ...factoryDetails,
-                    description: e.target.value
+                await httpRequest('PUT', ApiEndpoints.EDIT_FACTORY, {
+                    factory_name: factoryDetails.name,
+                    factory_new_name: factoryDetails.name,
+                    factory_new_description: e.target.value
                 });
+                setFactoryDetails({ ...factoryDetails, description: e.target.value });
                 seteditDescription(false);
-            } catch (err) {}
+            } catch (err) {
+                setFactoryDescription(factoryDetails.description);
+            }
         }
     };
 
     const handleEditDescriptionChange = (e) => {
-        setFactoryDetails({ ...factoryDetails, description: e.target.value });
-    };
-
-    const popupMessage = (content) => {
-        message.success({
-            key: 'strechSuccessMessage',
-            content: content,
-            duration: 3,
-            style: { cursor: 'pointer' },
-            onClick: () => message.destroy('strechSuccessMessage')
-        });
-    };
-
-    const removeApplication = async () => {
-        try {
-            await httpRequest('DELETE', `${ApiEndpoints.REMOVE_USECASE}?applicationId=${state.application?._id}`);
-            history.push(pathContainers.factoriesList);
-        } catch (err) {
-            modalFlip(true);
-        }
+        setFactoryDescription(e.target.value);
     };
 
     const handleCreateStation = () => {};
@@ -195,37 +110,32 @@ const StationsList = () => {
                 <div className="left-side">
                     {!editName && (
                         <h1 className="main-header-h1">
-                            {!isLoading ? factoryDetails.name || 'Inser Factory name' : <CircularProgress className="circular-progress" size={18} />}
-                            <img src={edit} width="20" height="20" alt="edit" className="edit-icon" onClick={() => handleEditName()} />
+                            {!isLoading ? factoryName || 'Inser Factory name' : <CircularProgress className="circular-progress" size={18} />}
+                            <EditOutlined className="edit-icon" onClick={() => handleEditName()} />
                         </h1>
                     )}
                     {editName && (
                         <ClickAwayListener onClickAway={handleEditNameBlur}>
                             <div className="edit-input-name">
-                                <input onBlur={handleEditNameBlur} onChange={handleEditNameChange} value={factoryDetails?.name} />
+                                <input onBlur={handleEditNameBlur} onChange={handleEditNameChange} value={factoryName} />
                             </div>
                         </ClickAwayListener>
                     )}
                     {!editDescription && (
                         <div className="description">
-                            {!isLoading ? (
-                                <p>{state.useCaseBuilder?.description || factoryDetails.description || 'Insert your description...'}</p>
-                            ) : (
-                                <CircularProgress className="circular-progress" size={12} />
-                            )}
-
-                            <img src={edit} width="15" height="15" alt="edit" className="edit-icon" onClick={() => handleEditDescription()} />
+                            {!isLoading ? <p>{factoryDescription || 'Insert your description...'}</p> : <CircularProgress className="circular-progress" size={12} />}
+                            <EditOutlined className="edit-icon" onClick={() => handleEditDescription()} />
                         </div>
                     )}
                     {editDescription && (
                         <ClickAwayListener onClickAway={handleEditDescriptionBlur}>
                             <div>
-                                <textarea onBlur={handleEditDescriptionBlur} onChange={handleEditDescriptionChange} value={factoryDetails.description} />
+                                <textarea onBlur={handleEditDescriptionBlur} onChange={handleEditDescriptionChange} value={factoryDescription} />
                             </div>
                         </ClickAwayListener>
                     )}
                     <div className="factories-length">
-                        <h1>Stations ({stationsList?.length})</h1>
+                        <h1>Stations ({factoryDetails?.stations?.length})</h1>
                     </div>
                 </div>
                 <div className="right-side">
@@ -252,8 +162,8 @@ const StationsList = () => {
                         <img src={loading} alt="loading"></img>
                     </div>
                 )}
-                {stationsList?.length > 0 && stationsList?.map((station) => <StationBoxOverview key={station._id} station={station} />)}
-                {!isLoading && stationsList.length === 0 && (
+                {factoryDetails?.stations?.length > 0 && factoryDetails?.stations?.map((station, key) => <StationBoxOverview key={station.id} station={station} />)}
+                {!isLoading && factoryDetails?.stations.length === 0 && (
                     <div className="no-station-to-display">
                         <InboxOutlined style={{ fontSize: '40px', color: '#6557FF' }} theme="outlined" />
                         <p className="nodata">No factories to display</p>

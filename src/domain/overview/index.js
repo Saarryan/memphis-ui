@@ -43,7 +43,7 @@ function OverView() {
                         </div>
                         <div className="dynamic-sentences">
                             <h1>Welcome Back, {localStorage.getItem(LOCAL_STORAGE_USER_NAME)}</h1>
-                            <p className="ok-status">You’re a memphis superhero! All looking good!</p>
+                            <p className="ok-status">You’re a memphis superhero! All looks good!</p>
                         </div>
                     </div>
                     <div className="overview-components">

@@ -13,5 +13,7 @@ export const ApiEndpoints = {
     //Factory
     CREATE_FACTORY: '/factories/createFactory',
     GEL_ALL_FACTORIES: '/factories/getAllFactories',
+    GEL_FACTORIES: '/factories/getFactory',
+    EDIT_FACTORY: '/factories/editFactory',
     REMOVE_FACTORY: '/factories/removeFactory'
 };
