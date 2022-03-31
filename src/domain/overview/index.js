@@ -9,6 +9,9 @@ import Throughput from './throughput';
 import Resources from './resources';
 import { useMediaQuery } from 'react-responsive';
 import { Context } from '../../hooks/store';
+import Button from '../../components/button';
+import CreateStationDetails from '../../components/createStationDetails'
+import Modal from '../../components/modal'
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -21,6 +24,7 @@ const Mobile = ({ children }) => {
 
 function OverView() {
     const [state, dispatch] = useContext(Context);
+    const [open, modalFlip] = useState(false);
     const botId = 1;
     const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'));
     useEffect(() => {
@@ -36,14 +40,48 @@ function OverView() {
         <div className="overview-container">
             <Desktop>
                 <div className="overview-wrapper">
+                    <Modal
+                        header="Your station details"
+                        height="640px"
+                        minWidth="550px"
+                        rBtnText="Add"
+                        lBtnText="Cancel"
+                        closeAction={() => modalFlip(false)}
+                        lBtnClick={() => {
+                            modalFlip(false);
+                        }}
+                        clickOutside={() => modalFlip(false)}
+                        rBtnClick={() => {
+                            modalFlip(false);
+                            // history.push(`${pathContainers.factoriesList}/${factoryDetails._id}/1`);
+                        }}
+                        open={open}
+                    >
+                        <CreateStationDetails addFactory />
+                    </Modal>
                     <div className="header">
-                        <div className="bot-wrapper">
-                            <img src={botUrl} width={40} height={40} alt="bot"></img>
+                        <div className="header-welcome">
+                            <div className="bot-wrapper">
+                                <img src={botUrl} width={40} height={40} alt="bot"></img>
+                            </div>
+                            <div className="dynamic-sentences">
+                                <h1>Welcome Back, Alex</h1>
+                                <p className="ok-status">You’re a memphis superhero! All looking good!</p>
+                            </div>
                         </div>
-                        <div className="dynamic-sentences">
-                            <h1>Welcome Back, Alex</h1>
-                            <p className="ok-status">You’re a memphis superhero! All looking good!</p>
-                        </div>
+                        <Button
+                            className="modal-btn"
+                            width="160px"
+                            height="36px"
+                            placeholder={'Create new station'}
+                            colorType="lightPurple"
+                            radiusType="circle"
+                            backgroundColorType="darkPurple"
+                            fontSize="14px"
+                            fontWeight="600"
+                            aria-haspopup="true"
+                            onClick={() => modalFlip(true)}
+                        />
                     </div>
                     <div className="overview-components">
                         <div className="left-side">
