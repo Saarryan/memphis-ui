@@ -9,9 +9,11 @@ import Throughput from './throughput';
 import Resources from './resources';
 import { useMediaQuery } from 'react-responsive';
 import { Context } from '../../hooks/store';
+
 import Button from '../../components/button';
 import CreateStationDetails from '../../components/createStationDetails'
 import Modal from '../../components/modal'
+import { LOCAL_STORAGE_AVATAR_ID, LOCAL_STORAGE_USER_NAME } from '../../const/localStorageConsts';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -29,7 +31,7 @@ function OverView() {
     const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'));
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'overview' });
-        setBotImage(botId);
+        setBotImage(state?.userData?.avatar_id || localStorage.getItem(LOCAL_STORAGE_AVATAR_ID));
     }, []);
 
     const setBotImage = (botId) => {
@@ -65,7 +67,7 @@ function OverView() {
                                 <img src={botUrl} width={40} height={40} alt="bot"></img>
                             </div>
                             <div className="dynamic-sentences">
-                                <h1>Welcome Back, Alex</h1>
+                                <h1>Welcome Back, {localStorage.getItem(LOCAL_STORAGE_USER_NAME)}</h1>
                                 <p className="ok-status">You’re a memphis superhero! All looking good!</p>
                             </div>
                         </div>

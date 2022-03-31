@@ -32,21 +32,22 @@
                         margin-bottom: 5px;
                     }
                 }
-                .dynamic-sentences {
-                    h1 {
-                        font-size: 24px;
-                        font-weight: 600;
-                        color: #1d1d1d;
-                        margin: 0;
-                    }
-                    p {
-                        font-size: 14px;
-                        font-weight: 600;
-                        margin: 0;
-                    }
-                    .ok-status {
-                        color: #2ed47a;
-                    }
+            }
+            .dynamic-sentences {
+                h1 {
+                    font-size: 24px;
+                    font-weight: 600;
+                    color: #1d1d1d;
+                    margin: 0;
+                    text-transform: capitalize;
+                }
+                p {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin: 0;
+                }
+                .ok-status {
+                    color: #2ed47a;
                 }
             }
         }
