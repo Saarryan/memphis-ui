@@ -8,7 +8,7 @@ import { InboxOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
 
-import CreateStationDetails from './createStationDetails';
+import CreateStationDetails from '../../components/createStationDetails';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import Tooltip from '../../components/tooltip/tooltip';
 import StationBoxOverview from './stationBoxOverview';
