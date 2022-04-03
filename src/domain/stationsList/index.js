@@ -148,7 +148,7 @@ const StationsList = () => {
                         width="150px"
                         height="36px"
                         placeholder="Create a station"
-                        colorType="purple"
+                        colorType="white"
                         radiusType="circle"
                         backgroundColorType="purple"
                         fontSize="14px"

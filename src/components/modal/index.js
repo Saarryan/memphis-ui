@@ -96,7 +96,7 @@ const TransitionsModal = (props) => {
                         width="83px"
                         height="32px"
                         placeholder="Close"
-                        colorType="purple"
+                        colorType="white"
                         radiusType="circle"
                         backgroundColorType={warning ? 'orange' : 'purple'}
                         fontSize="12px"
@@ -154,7 +154,7 @@ const TransitionsModal = (props) => {
                         height="32px"
                         placeholder={progress ? <CircularProgress size={20} className={classes.buttonLoader} /> : rBtnText}
                         disabled={rBtnDisabled}
-                        colorType="purple"
+                        colorType="white"
                         radiusType="circle"
                         backgroundColorType={warning ? 'orange' : 'purple'}
                         fontSize="12px"

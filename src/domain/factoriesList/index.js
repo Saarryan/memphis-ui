@@ -51,7 +51,7 @@ function FactoriesList() {
                             width="160px"
                             height="36px"
                             placeholder={'Create new factory'}
-                            colorType="purple"
+                            colorType="white"
                             radiusType="circle"
                             backgroundColorType="purple"
                             fontSize="14px"

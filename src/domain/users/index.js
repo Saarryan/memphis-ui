@@ -87,7 +87,7 @@ function Users() {
                     width="160px"
                     height="36px"
                     placeholder={'Add new user'}
-                    colorType="purple"
+                    colorType="white"
                     radiusType="circle"
                     backgroundColorType="purple"
                     fontSize="14px"
