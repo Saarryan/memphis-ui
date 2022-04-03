@@ -28,12 +28,12 @@ const ConnectionDetails = () => {
                         width="180px"
                         height="43px"
                         placeholder="SDK"
-                        colorType="darkPurple"
+                        colorType="purple"
                         radiusType="circle"
                         backgroundColorType="none"
                         fontSize="16px"
                         fontWeight="bold"
-                        border="darkPurple"
+                        border="purple"
                         onClick={() => openSdkModal()}
                     />
                 </div>

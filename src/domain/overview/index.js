@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 
 import FailedFactories from './failedFactories';
 import GenericDetails from './genericDetails';
@@ -11,8 +11,8 @@ import { useMediaQuery } from 'react-responsive';
 import { Context } from '../../hooks/store';
 
 import Button from '../../components/button';
-import CreateStationDetails from '../../components/createStationDetails'
-import Modal from '../../components/modal'
+import CreateStationDetails from '../../components/createStationDetails';
+import Modal from '../../components/modal';
 import { LOCAL_STORAGE_AVATAR_ID, LOCAL_STORAGE_USER_NAME } from '../../const/localStorageConsts';
 
 const Desktop = ({ children }) => {
@@ -27,7 +27,7 @@ const Mobile = ({ children }) => {
 function OverView() {
     const [state, dispatch] = useContext(Context);
     const [open, modalFlip] = useState(false);
-    const botId = 1;
+    const createStationRef = useRef(null);
     const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'));
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'overview' });
@@ -54,12 +54,11 @@ function OverView() {
                         }}
                         clickOutside={() => modalFlip(false)}
                         rBtnClick={() => {
-                            modalFlip(false);
-                            // history.push(`${pathContainers.factoriesList}/${factoryDetails._id}/1`);
+                            createStationRef.current();
                         }}
                         open={open}
                     >
-                        <CreateStationDetails addFactory />
+                        <CreateStationDetails chooseFactoryField={true} createStationRef={createStationRef} />
                     </Modal>
                     <div className="header">
                         <div className="header-welcome">
@@ -68,7 +67,7 @@ function OverView() {
                             </div>
                             <div className="dynamic-sentences">
                                 <h1>Welcome Back, {localStorage.getItem(LOCAL_STORAGE_USER_NAME)}</h1>
-                                <p className="ok-status">You’re a memphis superhero! All looking good!</p>
+                                <p className="ok-status">You’re a memphis superhero! All looks good!</p>
                             </div>
                         </div>
                         <Button
@@ -76,9 +75,9 @@ function OverView() {
                             width="160px"
                             height="36px"
                             placeholder={'Create new station'}
-                            colorType="lightPurple"
+                            colorType="purple"
                             radiusType="circle"
-                            backgroundColorType="darkPurple"
+                            backgroundColorType="purple"
                             fontSize="14px"
                             fontWeight="600"
                             aria-haspopup="true"

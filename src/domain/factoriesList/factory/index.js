@@ -3,12 +3,12 @@ import './style.scss';
 import React, { useState, useContext, useEffect } from 'react';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import { Link, Redirect } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import { InboxOutlined } from '@ant-design/icons';
 import Popover from '@material-ui/core/Popover';
-import EditIcon from '@material-ui/icons/Edit';
+import EditOutlined from '@material-ui/icons/EditOutlined';
 import { Divider } from '@material-ui/core';
 
 import OverflowTip from '../../../components/tooltip/overflowtip';
@@ -97,7 +97,7 @@ const Factory = (props) => {
                                 handleCloseMenu();
                             }}
                         >
-                            <EditIcon style={{ fontSize: 14 }} className="menu-item-icon" />
+                            <EditOutlined className="menu-item-icon" />
                             <label className="menu-item-label">Edit</label>
                         </MenuItem>
                     </Link>
@@ -108,7 +108,7 @@ const Factory = (props) => {
                             handleCloseMenu();
                         }}
                     >
-                        <DeleteIcon style={{ fontSize: 14 }} className="menu-item-icon" />
+                        <DeleteOutline className="menu-item-icon" />
                         <label className="menu-item-label">Remove</label>
                     </MenuItem>
                 </Popover>

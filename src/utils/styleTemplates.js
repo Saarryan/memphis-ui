@@ -26,12 +26,12 @@ export function getFontColor(colorType) {
             return 'transparent';
         case 'black':
             return '#2b2e3f';
-        case 'lightPurple':
-            return '#F0F1F7';
+        case 'purple':
+            return '#6557FF';
         case 'navy':
             return '#2b2e3f';
         case 'gray':
-            return '#5E5E68';
+            return '#A9A9A9';
         case 'white':
             return '#f7f7f7';
         default:
@@ -41,16 +41,10 @@ export function getFontColor(colorType) {
 
 export function getBackgroundColor(backgroundColor) {
     switch (backgroundColor) {
-        case 'lightPurple':
-            return '#F0F1F7';
-        case 'loginPurple':
-            return '#8277D9';
-        case 'white':
-            return '#F7F7F7';
-        case 'white-login':
-            return '#F9F9F9';
-        case 'darkPurple':
+        case 'purple':
             return '#6557FF';
+        case 'white':
+            return '#FFFFFF';
         case 'orange':
             return '#fbbd71';
         case 'red':

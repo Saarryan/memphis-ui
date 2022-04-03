@@ -9,7 +9,7 @@ import {
     LOCAL_STORAGE_USER_NAME,
     LOCAL_STORAGE_USER_TYPE
 } from '../const/localStorageConsts';
-import pathContainers from '../router';
+import pathDomains from '../router';
 import { httpRequest } from './http';
 
 export const saveToLocalStorage = (userData) => {
@@ -31,7 +31,7 @@ export const logout = async () => {
         await httpRequest('POST', ApiEndpoints.LOGOUT);
     }
     localStorage.clear();
-    window.location.assign(pathContainers.login);
+    window.location.assign(pathDomains.login);
 };
 
 export const isValidToken = () => {

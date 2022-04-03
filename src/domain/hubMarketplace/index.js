@@ -158,7 +158,7 @@ function HubMarketplace(props) {
                         width="90px"
                         height="32px"
                         placeholder={'Cancel'}
-                        colorType="darkPurple"
+                        colorType="purple"
                         radiusType="circle"
                         backgroundColorType={'none'}
                         fontSize="14px"
@@ -171,9 +171,9 @@ function HubMarketplace(props) {
                         width="90px"
                         height="32px"
                         placeholder={'Add'}
-                        colorType="lightPurple"
+                        colorType="purple"
                         radiusType="circle"
-                        backgroundColorType={'darkPurple'}
+                        backgroundColorType={'purple'}
                         fontSize="14px"
                         fontWeight="bold"
                         aria-haspopup="true"

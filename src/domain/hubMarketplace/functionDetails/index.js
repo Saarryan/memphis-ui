@@ -45,9 +45,9 @@ function FunctionDetails(props) {
                         width="90px"
                         height="32px"
                         placeholder={isInstalled ? 'Uninstall' : 'Install'}
-                        colorType={isInstalled ? 'darkPurple' : 'lightPurple'}
-                        backgroundColorType={isInstalled ? 'none' : 'darkPurple'}
-                        border={isInstalled ? 'darkPurple' : null}
+                        colorType={isInstalled ? 'purple' : 'purple'}
+                        backgroundColorType={isInstalled ? 'none' : 'purple'}
+                        border={isInstalled ? 'purple' : null}
                         radiusType="circle"
                         fontSize="14px"
                         fontWeight="bold"
@@ -59,9 +59,9 @@ function FunctionDetails(props) {
                         width="90px"
                         height="32px"
                         placeholder={'Use'}
-                        colorType="lightPurple"
+                        colorType="purple"
                         radiusType="circle"
-                        backgroundColorType={'darkPurple'}
+                        backgroundColorType={'purple'}
                         fontSize="14px"
                         fontWeight="bold"
                         aria-haspopup="true"

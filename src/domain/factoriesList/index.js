@@ -10,7 +10,7 @@ import Modal from '../../components/modal';
 import pathControllers from '../../router';
 import Factory from './factory';
 import CreateFactoryDetails from './createFactoryDetails';
-import pathContainers from '../../router';
+import pathDomains from '../../router';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import { httpRequest } from '../../services/http';
 
@@ -51,9 +51,9 @@ function FactoriesList() {
                             width="160px"
                             height="36px"
                             placeholder={'Create new factory'}
-                            colorType="lightPurple"
+                            colorType="purple"
                             radiusType="circle"
-                            backgroundColorType="darkPurple"
+                            backgroundColorType="purple"
                             fontSize="14px"
                             fontWeight="600"
                             aria-haspopup="true"
@@ -96,7 +96,7 @@ function FactoriesList() {
                 </div>
             </div>
             <Modal
-                header="Create new factory"
+                header="Create factory"
                 height="475px"
                 minWidth="440px"
                 rBtnText="Create"

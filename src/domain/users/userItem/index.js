@@ -4,10 +4,12 @@ import React, { useEffect, useState } from 'react';
 import UserType from './userType';
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
+import Modal from '../../../components/modal';
 
 function UserItem(props) {
     const defaultBotId = 1;
     const [botUrl, SetBotUrl] = useState(1);
+    const [open, modalFlip] = useState(false);
 
     useEffect(() => {
         setBotImage(props.content?.avatar_id || defaultBotId);
@@ -19,7 +21,7 @@ function UserItem(props) {
 
     const removeUser = async (username) => {
         try {
-            await httpRequest('DELETE', ApiEndpoints.REMOVE_UER, {
+            await httpRequest('DELETE', ApiEndpoints.REMOVE_USER, {
                 username: username
             });
             props.removeUser();
@@ -39,9 +41,26 @@ function UserItem(props) {
             {props.content?.user_type !== 'root' && (
                 <div className="user-actions">
                     {/* <p>Generate password</p> */}
-                    <p onClick={() => removeUser()}>Delete user</p>
+                    <p onClick={() => modalFlip(true)}>Delete user</p>
                 </div>
             )}
+            <Modal
+                header="Remove user"
+                height="220px"
+                minWidth="440px"
+                rBtnText="Cancel"
+                lBtnText="Remove"
+                closeAction={() => modalFlip(false)}
+                lBtnClick={() => {
+                    removeUser(props.content?.username);
+                }}
+                clickOutside={() => modalFlip(false)}
+                rBtnClick={() => modalFlip(false)}
+                open={open}
+            >
+                <label>Are you sure you want to delete {props.content?.username}?</label>
+                <br />
+            </Modal>
         </div>
     );
 }

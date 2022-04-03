@@ -7,9 +7,10 @@ import Input from '../../../components/Input';
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
 import { useHistory } from 'react-router-dom';
-import pathContainers from '../../../router';
+import pathDomains from '../../../router';
 
-const CreateFactoryDetails = ({ createFactoryRef }) => {
+const CreateFactoryDetails = (props) => {
+    const { createFactoryRef } = props;
     const [creationForm] = Form.useForm();
     const [formFields, setFormFields] = useState({
         name: '',
@@ -37,7 +38,7 @@ const CreateFactoryDetails = ({ createFactoryRef }) => {
                 const bodyRequest = creationForm.getFieldsValue();
                 const data = await httpRequest('POST', ApiEndpoints.CREATE_FACTORY, bodyRequest);
                 if (data) {
-                    history.push(`${pathContainers.factoriesList}/${data.name}`);
+                    history.push(`${pathDomains.factoriesList}/${data.name}`);
                 }
             } catch (error) {}
         }

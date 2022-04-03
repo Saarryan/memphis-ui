@@ -10,33 +10,43 @@
         justify-content: space-between;
         margin-bottom: 30px;
         .left-side {
+            color: var(--blue);
+            .main-header-h1 {
+                padding: 1px;
+                margin-bottom: 5px;
+            }
             .edit-icon {
                 cursor: pointer;
                 margin-left: 6px;
+                width: 15px;
+                height: 15px;
+                color: var(--gray);
             }
-            .edit-input-name input {
-                background-color: transparent;
-                border: none;
-                font-size: 28px;
-                font-weight: 1000;
-                margin-left: 2vw;
-                margin-right: 3vw;
-                color: var(--blue);
-                padding-top: 25px;
+            .edit-input-name {
+                margin-bottom: 5px;
+                input {
+                    background-color: transparent;
+                    border: 1px solid var(--gray);
+                    border-radius: 5px;
+                    font-size: 24px;
+                    font-weight: 600;
+                    padding: 0;
+                }
             }
             .description {
                 display: flex;
-                padding-top: 10px;
+                height: 57px;
                 p {
                     max-width: 25vw;
                     overflow-y: auto;
                     overflow-x: hidden;
-                    height: 60px;
                     display: flex;
-                    font-size: 16px;
+                    font-size: 14px;
+                    font-weight: 400;
                     padding: 0;
                     margin: 2px;
                     overflow-wrap: anywhere;
+                    padding: 1px;
                 }
                 .edit-icon {
                     margin-top: 6px;
@@ -46,16 +56,14 @@
                 display: flex;
                 margin-bottom: 0.5em;
                 color: rgba(0, 0, 0, 0.85);
-                font-weight: 500;
                 background-color: transparent;
-                border: none;
-                font-size: 16px;
+                border: 1px solid var(--gray);
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: 400;
                 overflow: auto;
                 resize: none;
-                max-width: 25vw;
-                width: 500px;
-                margin-left: 2vw;
-                padding-top: 12px;
+                width: 270px;
             }
 
             .factories-length {
@@ -75,7 +83,7 @@
             place-self: end;
         }
     }
-    .Factories-content {
+    .factories-content {
         height: calc(100% - 20vh);
         padding: 2vw 0 0 3px;
         position: relative;
@@ -87,8 +95,8 @@
             flex-direction: column;
             align-items: center;
             p {
-                font-size: 26px;
-                font-weight: bold;
+                font-size: 20px;
+                font-weight: 400;
                 margin-bottom: 10px;
             }
         }

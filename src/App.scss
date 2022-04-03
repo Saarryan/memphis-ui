@@ -104,19 +104,23 @@
     width: 150px;
     margin-top: 25px;
     margin-left: 10px;
-    border-radius: 5px;
-    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+    background: #ffffff;
+    border: 1px solid #d8d8d8;
+    box-sizing: border-box;
+    border-radius: 8px;
 }
 .threedots-menu {
     margin-top: 10px;
     cursor: pointer;
 }
 .menu-item-icon {
-    color: var(--purple);
+    color: var(--gray);
+    font-size: 16px !important;
 }
 .menu-item-label {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 400;
+    color: black;
     margin-left: 10px;
 }
 .sidebar-and-containers {

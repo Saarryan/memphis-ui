@@ -109,7 +109,7 @@ function FunctionForm(props) {
                                     options={['op1', 'op2']}
                                     boxShadowsType="gray"
                                     onChange={(e) => handelChangeOutputField(e)}
-                                    dropdownClassName="select-optionsld"
+                                    dropdownClassName="select-options"
                                 />
                             </div>
                         </div>
@@ -124,9 +124,9 @@ function FunctionForm(props) {
                         width="90px"
                         height="32px"
                         placeholder={'Add'}
-                        colorType="lightPurple"
+                        colorType="purple"
                         radiusType="circle"
-                        backgroundColorType={'darkPurple'}
+                        backgroundColorType={'purple'}
                         fontSize="14px"
                         fontWeight="bold"
                         aria-haspopup="true"
