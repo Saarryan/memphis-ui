@@ -96,9 +96,9 @@ const TransitionsModal = (props) => {
                         width="83px"
                         height="32px"
                         placeholder="Close"
-                        colorType="lightPurple"
+                        colorType="purple"
                         radiusType="circle"
-                        backgroundColorType={warning ? 'orange' : 'darkPurple'}
+                        backgroundColorType={warning ? 'orange' : 'purple'}
                         fontSize="12px"
                         fontWeight="600"
                         onClick={() => {
@@ -145,10 +145,7 @@ const TransitionsModal = (props) => {
             <DialogActions>
                 <hr />
                 <div className="btnContainer">
-                    <button className="cancel-button" 
-                    disabled={lBtnDisabled}
-                    
-                     onClick={() => props.lBtnClick()}>
+                    <button className="cancel-button" disabled={lBtnDisabled} onClick={() => props.lBtnClick()}>
                         {lBtnText}
                     </button>
                     <Button
@@ -157,9 +154,9 @@ const TransitionsModal = (props) => {
                         height="32px"
                         placeholder={progress ? <CircularProgress size={20} className={classes.buttonLoader} /> : rBtnText}
                         disabled={rBtnDisabled}
-                        colorType="lightPurple"
+                        colorType="purple"
                         radiusType="circle"
-                        backgroundColorType={warning ? 'orange' : 'darkPurple'}
+                        backgroundColorType={warning ? 'orange' : 'purple'}
                         fontSize="12px"
                         fontWeight="600"
                         isLoading={isLoading}

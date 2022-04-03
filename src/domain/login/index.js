@@ -2,20 +2,21 @@ import './style.scss';
 
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import PersonIcon from '@material-ui/icons/Person';
 import { useMediaQuery } from 'react-responsive';
+import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import { Form } from 'antd';
 
-import logoGrayText from '../../assets/images/logoGrayText.png';
 import { handleRefreshTokenRequest, httpRequest } from '../../services/http';
+import { isValidToken, saveToLocalStorage } from '../../services/auth';
+import { LOCAL_STORAGE_TOKEN } from '../../const/localStorageConsts';
+import fullLogo from '../../assets/images/fullLogo.svg';
+import sharps from '../../assets/images/sharps.svg';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import Button from '../../components/button';
 import Loader from '../../components/loader';
 import { Context } from '../../hooks/store';
 import Input from '../../components/Input';
-import { isValidToken, saveToLocalStorage } from '../../services/auth';
-import { LOCAL_STORAGE_TOKEN } from '../../const/localStorageConsts';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -94,16 +95,15 @@ const Login = () => {
     return (
         <section className="loginContainers">
             {state.loading ? <Loader></Loader> : ''}
-            <div className="login-background">
-                <Desktop>
-                    <div className="desktop-login-content">
+            <Desktop>
+                <div className="desktop-container">
+                    <div className="desktop-content">
                         <div className="logoImg">
-                            <img alt="logo" src={logoGrayText}></img>
+                            <img alt="logo" src={fullLogo}></img>
                         </div>
                         <div className="title">
-                            <p>
-                                Hey <span className="change-color"> Strecher</span>, Welcome Back
-                            </p>
+                            <p>Hey Memphiser,</p>
+                            <p>Welcome Back</p>
                         </div>
                         <div className="login-form">
                             <Form
@@ -123,21 +123,22 @@ const Login = () => {
                                         }
                                     ]}
                                 >
-                                    <Input
-                                        placeholder="Username"
-                                        type="text"
-                                        radiusType="circle"
-                                        colorType="black"
-                                        backgroundColorType="white-login"
-                                        borderColorType="none"
-                                        width="19vw"
-                                        height="43px"
-                                        boxShadowsType="login-input"
-                                        iconComponent={<PersonIcon />}
-                                        onBlur={handleUserNameChange}
-                                        onChange={handleUserNameChange}
-                                        value={formFields.username}
-                                    />
+                                    <div className="field name">
+                                        <p>Username</p>
+                                        <Input
+                                            placeholder="Type username"
+                                            type="text"
+                                            radiusType="semi-round"
+                                            colorType="gray"
+                                            backgroundColorType="none"
+                                            borderColorType="gray"
+                                            width="19vw"
+                                            height="43px"
+                                            onBlur={handleUserNameChange}
+                                            onChange={handleUserNameChange}
+                                            value={formFields.username}
+                                        />
+                                    </div>
                                 </Form.Item>
                                 <Form.Item
                                     name="password"
@@ -148,32 +149,33 @@ const Login = () => {
                                         }
                                     ]}
                                 >
-                                    <Input
-                                        placeholder="Password"
-                                        type="password"
-                                        radiusType="circle"
-                                        colorType="black"
-                                        backgroundColorType="white-login"
-                                        boxShadowsType="login-input"
-                                        borderColorType="none"
-                                        width="19vw"
-                                        height="43px"
-                                        iconComponent={<LockIcon />}
-                                        onChange={handlePasswordChange}
-                                        onBlur={handlePasswordChange}
-                                        value={formFields.password}
-                                    />
+                                    <div className="field password">
+                                        <p>Password</p>
+                                        <Input
+                                            placeholder="Password"
+                                            type="password"
+                                            radiusType="semi-round"
+                                            colorType="gray"
+                                            backgroundColorType="none"
+                                            borderColorType="gray"
+                                            width="19vw"
+                                            height="43px"
+                                            onChange={handlePasswordChange}
+                                            onBlur={handlePasswordChange}
+                                            value={formFields.password}
+                                        />
+                                    </div>
                                 </Form.Item>
                                 <Form.Item {...tailLayout} className="button-container">
                                     <Button
                                         width="19vw"
                                         height="43px"
                                         placeholder="Sign in"
-                                        colorType="lightPurple"
+                                        colorType="white"
                                         radiusType="circle"
-                                        backgroundColorType="loginPurple"
-                                        fontSize="16px"
-                                        fontWeight="bold"
+                                        backgroundColorType="purple"
+                                        fontSize="12px"
+                                        fontWeight="600"
                                         onClick={handleSubmit}
                                     />
                                 </Form.Item>
@@ -191,83 +193,91 @@ const Login = () => {
                             </Form>
                         </div>
                     </div>
-                </Desktop>
-                <Mobile>
-                    <div className="mobile-login">
-                        <div className="logo-mobile">
-                            <img width="170" height="auto" alt="logo-mobile" src={logoGrayText}></img>
-                        </div>
-                        <div className="mobile-form">
-                            <Form
-                                {...layout}
-                                name="mobile-form"
-                                initialValues={{
-                                    remember: true
-                                }}
-                                form={loginForm}
+                    <div className="brand-shapes">
+                        <img alt="sharps" src={sharps}></img>
+                    </div>
+                </div>
+            </Desktop>
+            <Mobile>
+                <div className="mobile-login">
+                    <div className="logo-mobile">
+                        <img width="170" height="auto" alt="logo-mobile" src={fullLogo}></img>
+                    </div>
+                    <div className="mobile-form">
+                        <Form
+                            {...layout}
+                            name="mobile-form"
+                            initialValues={{
+                                remember: true
+                            }}
+                            form={loginForm}
+                        >
+                            <Form.Item
+                                name="username"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Username can not be empty'
+                                    }
+                                ]}
                             >
-                                <Form.Item
-                                    name="username"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Username can not be empty'
-                                        }
-                                    ]}
-                                >
+                                <div className="field name">
+                                    <p>Username</p>
                                     <Input
-                                        placeholder="Username"
-                                        type="email"
-                                        radiusType="circle"
-                                        colorType="black"
-                                        backgroundColorType="lightPurple"
-                                        borderColorType="none"
+                                        placeholder="Type username"
+                                        type="text"
+                                        radiusType="semi-round"
+                                        colorType="gray"
+                                        backgroundColorType="none"
+                                        borderColorType="gray"
                                         width="60vw"
                                         height="35px"
-                                        iconComponent={<PersonIcon />}
                                         onBlur={handleUserNameChange}
                                         onChange={handleUserNameChange}
                                         value={formFields.username}
                                     />
-                                </Form.Item>
-                                <Form.Item
-                                    name="password"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Password can not be empty'
-                                        }
-                                    ]}
-                                >
+                                </div>
+                            </Form.Item>
+                            <Form.Item
+                                name="password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Password can not be empty'
+                                    }
+                                ]}
+                            >
+                                <div className="field password">
+                                    <p>Password</p>
                                     <Input
                                         placeholder="Password"
                                         type="password"
-                                        radiusType="circle"
-                                        colorType="black"
-                                        backgroundColorType="lightPurple"
-                                        borderColorType="none"
+                                        radiusType="semi-round"
+                                        colorType="gray"
+                                        backgroundColorType="none"
+                                        borderColorType="gray"
                                         width="60vw"
                                         height="35px"
-                                        iconComponent={<LockIcon />}
                                         onChange={handlePasswordChange}
                                         onBlur={handlePasswordChange}
                                         value={formFields.password}
                                     />
-                                </Form.Item>
-                                <Form.Item className="button-container">
-                                    <Button
-                                        width="60vw"
-                                        height="35px"
-                                        placeholder="Sign in"
-                                        colorType="lightPurple"
-                                        radiusType="circle"
-                                        backgroundColorType="loginPurple"
-                                        fontSize="16px"
-                                        fontWeight="bold"
-                                        onClick={handleSubmit}
-                                    />
-                                </Form.Item>
-                                {/* {isError && timerForRetry.length === 0 && (
+                                </div>
+                            </Form.Item>
+                            <Form.Item className="button-container">
+                                <Button
+                                    width="60vw"
+                                    height="35px"
+                                    placeholder="Sign in"
+                                    colorType="white"
+                                    radiusType="circle"
+                                    backgroundColorType="purple"
+                                    fontSize="12px"
+                                    fontWeight="600"
+                                    onClick={handleSubmit}
+                                />
+                            </Form.Item>
+                            {/* {isError && timerForRetry.length === 0 && (
                                     <div className="error-message">
                                         <p>An account with that sign-in information does not exist. Try again or create a new account.</p>
                                     </div>
@@ -277,11 +287,10 @@ const Login = () => {
                                         <p>Your acount was blocked, please try again in {timerForRetry}</p>
                                     </div>
                                 )} */}
-                            </Form>
-                        </div>
+                        </Form>
                     </div>
-                </Mobile>
-            </div>
+                </div>
+            </Mobile>
         </section>
     );
 };

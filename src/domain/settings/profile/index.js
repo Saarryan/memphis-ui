@@ -121,9 +121,9 @@ function Profile() {
                     width="160px"
                     height="36px"
                     placeholder={'Remove user'}
-                    colorType="lightPurple"
+                    colorType="purple"
                     radiusType="circle"
-                    backgroundColorType="darkPurple"
+                    backgroundColorType="purple"
                     fontSize="14px"
                     fontWeight="600"
                     aria-haspopup="true"

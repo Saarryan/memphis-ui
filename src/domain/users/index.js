@@ -87,9 +87,9 @@ function Users() {
                     width="160px"
                     height="36px"
                     placeholder={'Add new user'}
-                    colorType="lightPurple"
+                    colorType="purple"
                     radiusType="circle"
-                    backgroundColorType="darkPurple"
+                    backgroundColorType="purple"
                     fontSize="14px"
                     fontWeight="600"
                     aria-haspopup="true"
