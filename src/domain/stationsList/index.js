@@ -17,7 +17,7 @@ import { httpRequest } from '../../services/http';
 import Button from '../../components/button';
 import { Context } from '../../hooks/store';
 import Modal from '../../components/modal';
-import pathContainers from '../../router';
+import pathDomains from '../../router';
 
 const StationsList = () => {
     const [state, dispatch] = useContext(Context);
@@ -29,6 +29,7 @@ const StationsList = () => {
     const [factoryDescription, setFactoryDescription] = useState('');
     const [isLoading, setisLoading] = useState(false);
     const history = useHistory();
+    const createStationRef = useRef(null);
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'factories' });
@@ -102,7 +103,10 @@ const StationsList = () => {
         setFactoryDescription(e.target.value);
     };
 
-    const handleCreateStation = () => {};
+    const removeStation = async (stationName) => {
+        const updatedStationList = factoryDetails?.stations.filter((item) => item.name !== stationName);
+        setFactoryDetails({ ...factoryDetails, stations: updatedStationList });
+    };
 
     return (
         <div className="factory-details-container">
@@ -162,7 +166,10 @@ const StationsList = () => {
                         <img src={loading} alt="loading"></img>
                     </div>
                 )}
-                {factoryDetails?.stations?.length > 0 && factoryDetails?.stations?.map((station, key) => <StationBoxOverview key={station.id} station={station} />)}
+                {factoryDetails?.stations?.length > 0 &&
+                    factoryDetails?.stations?.map((station, key) => (
+                        <StationBoxOverview key={station.id} station={station} removeStation={() => removeStation(station.name)} />
+                    ))}
                 {!isLoading && factoryDetails?.stations.length === 0 && (
                     <div className="no-station-to-display">
                         <InboxOutlined style={{ fontSize: '40px', color: '#6557FF' }} theme="outlined" />
@@ -179,7 +186,7 @@ const StationsList = () => {
                             fontWeight="bold"
                             aria-controls="usecse-menu"
                             aria-haspopup="true"
-                            onClick={() => handleCreateStation()}
+                            onClick={() => modalFlip(true)}
                         />
                     </div>
                 )}
@@ -196,12 +203,11 @@ const StationsList = () => {
                 }}
                 clickOutside={() => modalFlip(false)}
                 rBtnClick={() => {
-                    modalFlip(false);
-                    history.push(`${pathContainers.factoriesList}/${factoryDetails._id}/1`);
+                    createStationRef.current();
                 }}
                 open={modalIsOpen}
             >
-                <CreateStationDetails />
+                <CreateStationDetails createStationRef={createStationRef} factoryName={factoryName} />
             </Modal>
         </div>
     );

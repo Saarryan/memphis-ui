@@ -5,7 +5,7 @@ export const ApiEndpoints = {
     LOGOUT: '/usermgmt/logout',
     ADD_USER: '/usermgmt/addUser',
     GET_ALL_USERS: '/usermgmt/getAllUsers',
-    REMOVE_UER: '/usermgmt/removeUser',
+    REMOVE_USER: '/usermgmt/removeUser',
     REMOVE_MY_UER: '/usermgmt/removeMyUser',
     EDIT_AVATAR: '/usermgmt/editAvatar',
     EDIT_COMPANY_LOGO: '/usermgmt/editCompanyLogo',
@@ -15,5 +15,10 @@ export const ApiEndpoints = {
     GEL_ALL_FACTORIES: '/factories/getAllFactories',
     GEL_FACTORIES: '/factories/getFactory',
     EDIT_FACTORY: '/factories/editFactory',
-    REMOVE_FACTORY: '/factories/removeFactory'
+    REMOVE_FACTORY: '/factories/removeFactory',
+
+    //Station
+    CREATE_STATION: '/stations/createStation',
+    REMOVE_STATION: '/stations/removeStation',
+    GET_STATION: '/stations/getStation'
 };

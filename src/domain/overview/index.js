@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 
 import FailedFactories from './failedFactories';
 import GenericDetails from './genericDetails';
@@ -27,7 +27,7 @@ const Mobile = ({ children }) => {
 function OverView() {
     const [state, dispatch] = useContext(Context);
     const [open, modalFlip] = useState(false);
-    const botId = 1;
+    const createStationRef = useRef(null);
     const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'));
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'overview' });
@@ -54,12 +54,11 @@ function OverView() {
                         }}
                         clickOutside={() => modalFlip(false)}
                         rBtnClick={() => {
-                            modalFlip(false);
-                            // history.push(`${pathContainers.factoriesList}/${factoryDetails._id}/1`);
+                            createStationRef.current();
                         }}
                         open={open}
                     >
-                        <CreateStationDetails addFactory />
+                        <CreateStationDetails chooseFactoryField={true} createStationRef={createStationRef} />
                     </Modal>
                     <div className="header">
                         <div className="header-welcome">

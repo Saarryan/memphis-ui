@@ -86,7 +86,7 @@ function Users() {
                     className="modal-btn"
                     width="160px"
                     height="36px"
-                    placeholder={'Create new factory'}
+                    placeholder={'Add new user'}
                     colorType="lightPurple"
                     radiusType="circle"
                     backgroundColorType="darkPurple"

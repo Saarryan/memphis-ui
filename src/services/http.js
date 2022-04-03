@@ -4,7 +4,7 @@ import axios from 'axios';
 import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
 import { ApiEndpoints } from '../const/apiEndpoints';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
-import pathContainers from '../router';
+import pathDomains from '../router';
 import { isValidToken, saveToLocalStorage } from './auth';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
@@ -62,6 +62,6 @@ export async function handleRefreshTokenRequest() {
         saveToLocalStorage(results);
     } catch (err) {
         localStorage.clear();
-        window.location.assign(pathContainers.login);
+        window.location.assign(pathDomains.login);
     }
 }

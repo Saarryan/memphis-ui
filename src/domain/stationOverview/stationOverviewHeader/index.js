@@ -2,37 +2,60 @@ import './style.scss';
 
 import CloseIcon from '@material-ui/icons/Close';
 import { useHistory } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Progress } from 'antd';
 
 import HealthyBadge from '../../../components/healthyBadge';
 import { Context } from '../../../hooks/store';
+import { StationStoreContext } from '..';
+import { convertSecondsToDate } from '../../../services/dateConvertor';
+import pathDomains from '../../../router';
 
 const StationOverviewHeader = (props) => {
     const [state, dispatch] = useContext(Context);
-
+    const [stationState, stationDispatch] = useContext(StationStoreContext);
     const history = useHistory();
+    const [retentionValue, setRetentionValue] = useState('');
 
-    const ccc = () => {
-        const referer = '/factories/1';
-        history.push(referer);
+    const returnToStaionsList = () => {
+        const url = window.location.href;
+        const staionName = url.split('factories/')[1].split('/')[0];
+        history.push(`${pathDomains.factoriesList}/${staionName}`);
     };
+    useEffect(() => {
+        switch (stationState?.station?.retention_type) {
+            case 'message_age_sec':
+                setRetentionValue(convertSecondsToDate(stationState?.station?.retention_value));
+                break;
+            case 'bytes':
+                setRetentionValue(`${stationState?.station?.retention_value} bytes`);
+                break;
+            case 'messages':
+                setRetentionValue(`${stationState?.station?.retention_value} messages`);
+                break;
+            default:
+                break;
+        }
+    }, []);
 
     return (
         <div className="station-overview-header">
             <div className="title-wrapper">
-                <h1 className="station-name">Overview - {state.stationDetails.name}</h1>
-                <CloseIcon onClick={() => ccc()} style={{ cursor: 'pointer' }} />
+                <h1 className="station-name">Overview - {stationState?.station?.name}</h1>
+                <CloseIcon onClick={() => returnToStaionsList()} style={{ cursor: 'pointer' }} />
             </div>
             <div className="details">
                 <div className="main-details">
                     <p>
-                        <b>Retention:</b> {state.stationDetails.retention}
+                        <b>Retention:</b> {retentionValue}
                     </p>
                     <p>
-                        <b>Max throughput:</b> {state.stationDetails.max_throughput}
+                        <b>Replicas:</b> {stationState?.station?.replicas}
                     </p>
-                    <HealthyBadge status={state.stationDetails.healthy} />
+                    <p>
+                        <b>Storage Type:</b> {stationState?.station?.storage_type}
+                    </p>
+                    {/* <HealthyBadge status={state.stationDetails.healthy} /> */}
                 </div>
                 <div className="details-wrapper awaiting-messages">
                     <div className="icon">

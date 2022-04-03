@@ -1,4 +1,4 @@
-const pathContainers = {
+const pathDomains = {
     login: '/login',
     overview: '/overview',
     factoriesList: '/factories',
@@ -6,4 +6,4 @@ const pathContainers = {
     settings: '/settings'
 };
 
-export default pathContainers;
+export default pathDomains;

@@ -13,7 +13,7 @@ import Bot2 from '../../../assets/images/bots/2.svg';
 import Bot3 from '../../../assets/images/bots/3.svg';
 import Bot4 from '../../../assets/images/bots/4.svg';
 import Warning from '../../../assets/images/warning.svg';
-import pathContainers from '../../../router';
+import pathDomains from '../../../router';
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
 import Modal from '../../../components/modal';
@@ -34,7 +34,7 @@ function Profile() {
             await httpRequest('DELETE', `${ApiEndpoints.REMOVE_MY_UER}`);
             modalFlip(false);
             localStorage.clear();
-            window.location.assign(pathContainers.login);
+            window.location.assign(pathDomains.login);
         } catch (err) {
             return;
         }

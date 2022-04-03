@@ -2,7 +2,7 @@ import './style.scss';
 
 import React, { useState, useContext, useEffect } from 'react';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import { useHistory } from 'react-router-dom';
@@ -11,7 +11,11 @@ import FunctionsOverview from '../../../components/functionsOverview';
 import HealthyBadge from '../../../components/healthyBadge';
 import HubMarketplace from '../../hubMarketplace';
 import { Context } from '../../../hooks/store';
-import pathContainers from '../../../router';
+import pathDomains from '../../../router';
+import { convertSecondsToDate } from '../../../services/dateConvertor';
+import { ApiEndpoints } from '../../../const/apiEndpoints';
+import Modal from '../../../components/modal';
+import { httpRequest } from '../../../services/http';
 
 const StationBoxOverview = (props) => {
     const [state, dispatch] = useContext(Context);
@@ -20,6 +24,23 @@ const StationBoxOverview = (props) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const history = useHistory();
+    const [retentionValue, setRetentionValue] = useState('');
+
+    useEffect(() => {
+        switch (props.station.retention_type) {
+            case 'message_age_sec':
+                setRetentionValue(convertSecondsToDate(props.station.retention_value));
+                break;
+            case 'bytes':
+                setRetentionValue(`${props.station.retention_value} bytes`);
+                break;
+            case 'messages':
+                setRetentionValue(`${props.station.retention_value} messages`);
+                break;
+            default:
+                break;
+        }
+    }, []);
 
     const handleClickMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -27,6 +48,15 @@ const StationBoxOverview = (props) => {
 
     const handleCloseMenu = () => {
         setAnchorEl(null);
+    };
+
+    const removeStation = async (stationName) => {
+        try {
+            await httpRequest('DELETE', ApiEndpoints.REMOVE_STATION, {
+                station_name: stationName
+            });
+            props.removeStation();
+        } catch (error) {}
     };
 
     return (
@@ -40,11 +70,15 @@ const StationBoxOverview = (props) => {
                     </div>
                     <div className="field-wrapper">
                         <h3>Retention: </h3>
-                        <p>{props.station.retention_value}</p>
+                        <p>{retentionValue}</p>
                     </div>
                     <div className="field-wrapper">
                         <h3>Replicas: </h3>
                         <p>{props.station.replicas}</p>
+                    </div>
+                    <div className="field-wrapper">
+                        <h3>Storage Type: </h3>
+                        <p>{props.station.storage_type}</p>
                     </div>
                     {/* <div className="field-wrapper">
                         <h3>Max throughput: </h3>
@@ -80,10 +114,9 @@ const StationBoxOverview = (props) => {
                             <MenuItem
                                 onClick={() => {
                                     modalFlip(true);
-                                    handleCloseMenu();
                                 }}
                             >
-                                <DeleteIcon style={{ fontSize: 14 }} className="menu-item-icon" />
+                                <DeleteOutline className="menu-item-icon" />
                                 <label className="menu-item-label">Remove</label>
                             </MenuItem>
                         </Popover>
@@ -95,6 +128,23 @@ const StationBoxOverview = (props) => {
                     <FunctionsOverview functions={props.station.functions} horizontal={true} editable={false}></FunctionsOverview>
                 </div>
             )}
+            <Modal
+                header="Remove station"
+                height="220px"
+                minWidth="440px"
+                rBtnText="Cancel"
+                lBtnText="Remove"
+                closeAction={() => modalFlip(false)}
+                lBtnClick={() => {
+                    removeStation(props.station.name);
+                }}
+                clickOutside={() => modalFlip(false)}
+                rBtnClick={() => modalFlip(false)}
+                open={modalIsOpen}
+            >
+                <label>Are you sure you want to delete {props.station.name} station?</label>
+                <br />
+            </Modal>
         </div>
     );
 };
