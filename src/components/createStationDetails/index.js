@@ -76,16 +76,23 @@ const CreateStationDetails = (props) => {
         try {
             const data = await httpRequest('GET', ApiEndpoints.GEL_ALL_FACTORIES);
             if (data) {
+                if (data.length === 0) {
+                    setFormFields({ ...formFields, factory_name: 'General' });
+                } else {
+                    setFormFields({ ...formFields, factory_name: data[0].name });
+                }
                 const factories = data.map((factory) => factory.name);
                 setFactoryNames(factories);
             }
         } catch (error) {}
     };
 
+    const handleFactoryNamesChange = (e) => {
+        setFormFields({ ...formFields, factory_name: e });
+    };
     const handleStationNameChange = (e) => {
         setFormFields({ ...formFields, name: e.target.value });
     };
-
     const retentionTypeChange = (e) => {
         setFormFields({ ...formFields, retention_type: e.target.value });
     };
@@ -101,7 +108,6 @@ const CreateStationDetails = (props) => {
     const handleReplicasChange = (e) => {
         setFormFields({ ...formFields, replicas: e });
     };
-
     const handleDaysChange = (e) => {
         setTimeSeparator({ ...timeSeparator, days: e });
     };
@@ -121,7 +127,6 @@ const CreateStationDetails = (props) => {
             return;
         } else {
             let formFields = creationForm.getFieldsValue();
-            formFields['factory_name'] = factoryName;
             if (formFields.retention_type === 'message_age_sec') {
                 formFields['retention_value'] = convertDateToSeconds(formFields.days, formFields.hours, formFields.minutes, formFields.seconds);
             } else if (formFields.retention_type === 'bytes') {
@@ -132,7 +137,7 @@ const CreateStationDetails = (props) => {
             try {
                 const bodyRequest = {
                     name: formFields.name,
-                    factory_name: factoryName,
+                    factory_name: formFields.factory_name || factoryName,
                     retention_type: formFields.retention_type,
                     retention_value: formFields.retention_value,
                     storage_type: formFields.storage_type,
@@ -140,7 +145,7 @@ const CreateStationDetails = (props) => {
                 };
                 const data = await httpRequest('POST', ApiEndpoints.CREATE_STATION, bodyRequest);
                 if (data) {
-                    history.push(`${pathDomains.factoriesList}/${factoryName}/${data.name}`);
+                    history.push(`${pathDomains.factoriesList}/${bodyRequest.factory_name}/${data.name}`);
                 }
             } catch (error) {}
         }
@@ -286,18 +291,20 @@ const CreateStationDetails = (props) => {
                 {chooseFactoryField && (
                     <div className="factory-name">
                         <p className="field-title">Factory name</p>
-                        <Select
-                            value={factoryNames[0] || 'General'}
-                            colorType="navy"
-                            backgroundColorType="none"
-                            borderColorType="gray"
-                            radiusType="semi-round"
-                            width="500px"
-                            height="40px"
-                            options={factoryNames || 'General'}
-                            onChange={(e) => console.log(e)}
-                            dropdownClassName="select-options"
-                        />
+                        <Form.Item name="factory_name" initialValue={factoryNames[0] || formFields.factory_name || 'General'}>
+                            <Select
+                                value={factoryNames[0] || formFields.factory_name || 'General'}
+                                colorType="navy"
+                                backgroundColorType="none"
+                                borderColorType="gray"
+                                radiusType="semi-round"
+                                width="500px"
+                                height="40px"
+                                options={factoryNames || 'General'}
+                                onChange={(e) => handleFactoryNamesChange(e)}
+                                dropdownClassName="select-options"
+                            />
+                        </Form.Item>
                     </div>
                 )}
             </Form>
