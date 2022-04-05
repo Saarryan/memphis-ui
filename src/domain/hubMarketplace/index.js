@@ -157,10 +157,10 @@ function HubMarketplace(props) {
                         className="modal-btn"
                         width="90px"
                         height="32px"
-                        placeholder={'Cancel'}
+                        placeholder="Cancel"
                         colorType="purple"
                         radiusType="circle"
-                        backgroundColorType={'none'}
+                        backgroundColorType="none"
                         fontSize="14px"
                         fontWeight="bold"
                         aria-haspopup="true"
@@ -170,10 +170,10 @@ function HubMarketplace(props) {
                         className="modal-btn"
                         width="90px"
                         height="32px"
-                        placeholder={'Add'}
-                        colorType="purple"
+                        placeholder="Add"
+                        colorType="white"
                         radiusType="circle"
-                        backgroundColorType={'purple'}
+                        backgroundColorType="purple"
                         fontSize="14px"
                         fontWeight="bold"
                         aria-haspopup="true"

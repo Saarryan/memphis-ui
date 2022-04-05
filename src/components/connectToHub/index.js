@@ -117,7 +117,7 @@ function ConnectToHub(props) {
                             width="100%"
                             height="40px"
                             placeholder="Sign in"
-                            colorType="purple"
+                            colorType="white"
                             radiusType="circle"
                             backgroundColorType="purple"
                             fontSize="14px"

@@ -58,10 +58,10 @@ function FunctionDetails(props) {
                         className="modal-btn"
                         width="90px"
                         height="32px"
-                        placeholder={'Use'}
-                        colorType="purple"
+                        placeholder="Use"
+                        colorType="white"
                         radiusType="circle"
-                        backgroundColorType={'purple'}
+                        backgroundColorType="purple"
                         fontSize="14px"
                         fontWeight="bold"
                         aria-haspopup="true"
