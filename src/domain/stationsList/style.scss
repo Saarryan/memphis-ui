@@ -83,9 +83,9 @@
             place-self: end;
         }
     }
-    .factories-content {
-        height: calc(100% - 20vh);
-        padding: 2vw 0 0 3px;
+    .stations-content {
+        height: calc(100% - 165px);
+        padding: 3px 3px 2px 3px;
         position: relative;
         overflow: auto;
         .no-station-to-display {

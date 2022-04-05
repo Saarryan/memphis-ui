@@ -159,7 +159,7 @@ const StationsList = () => {
                     />
                 </div>
             </div>
-            <div className="factories-content">
+            <div className="stations-content">
                 {isLoading && (
                     <div className="loader-uploading">
                         <div></div>

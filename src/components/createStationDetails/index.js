@@ -5,7 +5,7 @@ import { Form, InputNumber } from 'antd';
 
 import RadioButton from '../radioButton';
 import Input from '../Input';
-import Select from '../select';
+import SelectComponent from '../select';
 import { httpRequest } from '../../services/http';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import { convertDateToSeconds } from '../../services/dateConvertor';
@@ -63,51 +63,47 @@ const CreateStationDetails = (props) => {
             label: 'Memory'
         }
     ];
-
-    useEffect(() => {
-        createStationRef.current = onFinish;
-        setFormFields({ ...formFields, factory_name: factoryName });
-        if (chooseFactoryField) {
-            getAllFactories();
-        }
-    }, []);
-
     const getAllFactories = async () => {
         try {
             const data = await httpRequest('GET', ApiEndpoints.GEL_ALL_FACTORIES);
             if (data) {
-                if (data.length === 0) {
-                    setFormFields({ ...formFields, factory_name: 'General' });
+                if (data.length !== 0) {
+                    updateFormState('factory_name', 'Melvis_factory');
+                    creationForm.setFieldsValue({ ['factory_name']: 'Melvis_factory' });
+                    creationForm.setFieldsValue({ ['factories_List']: [] });
                 } else {
-                    setFormFields({ ...formFields, factory_name: data[0].name });
+                    const factories = data.map((factory) => factory.name);
+                    setFactoryNames(factories);
+                    updateFormState('factory_name', data[0].name);
+                    creationForm.setFieldsValue({ ['factory_name']: data[0].name });
+                    creationForm.setFieldsValue({ ['factories_List']: factories });
                 }
-                const factories = data.map((factory) => factory.name);
-                setFactoryNames(factories);
             }
         } catch (error) {}
     };
 
-    const handleFactoryNamesChange = (e) => {
-        setFormFields({ ...formFields, factory_name: e });
+    useEffect(() => {
+        createStationRef.current = onFinish;
+        if (chooseFactoryField) {
+            getAllFactories();
+        } else {
+            updateFormState('factory_name', factoryName);
+        }
+    }, []);
+
+    const updateFormState = (field, value) => {
+        let updatedValue = { ...formFields };
+        updatedValue[field] = value;
+        setFormFields((formFields) => ({ ...formFields, ...updatedValue }));
     };
-    const handleStationNameChange = (e) => {
-        setFormFields({ ...formFields, name: e.target.value });
-    };
-    const retentionTypeChange = (e) => {
-        setFormFields({ ...formFields, retention_type: e.target.value });
-    };
+
     const handleRetentionSizeChange = (e) => {
         setRetentionSizeValue(e.target.value);
     };
     const handleRetentionMessagesChange = (e) => {
         setRetentionMessagesValue(e.target.value);
     };
-    const storageTypeChange = (e) => {
-        setFormFields({ ...formFields, storage_type: e.target.value });
-    };
-    const handleReplicasChange = (e) => {
-        setFormFields({ ...formFields, replicas: e });
-    };
+
     const handleDaysChange = (e) => {
         setTimeSeparator({ ...timeSeparator, days: e });
     };
@@ -122,33 +118,53 @@ const CreateStationDetails = (props) => {
     };
 
     const onFinish = async () => {
-        const fieldsError = creationForm.validateFields();
-        if (fieldsError?.errorFields) {
+        const values = await creationForm.validateFields();
+        if (values?.errorFields) {
             return;
         } else {
-            let formFields = creationForm.getFieldsValue();
-            if (formFields.retention_type === 'message_age_sec') {
-                formFields['retention_value'] = convertDateToSeconds(formFields.days, formFields.hours, formFields.minutes, formFields.seconds);
-            } else if (formFields.retention_type === 'bytes') {
-                formFields['retention_value'] = Number(formFields.retentionSizeValue);
+            if (values.retention_type === 'message_age_sec') {
+                values['retention_value'] = convertDateToSeconds(values.days, values.hours, values.minutes, values.seconds);
+            } else if (values.retention_type === 'bytes') {
+                values['retention_value'] = Number(values.retentionSizeValue);
             } else {
-                formFields['retention_value'] = Number(formFields.retentionMessagesValue);
+                values['retention_value'] = Number(values.retentionMessagesValue);
             }
             try {
                 const bodyRequest = {
-                    name: formFields.name,
-                    factory_name: formFields.factory_name || factoryName,
-                    retention_type: formFields.retention_type,
-                    retention_value: formFields.retention_value,
-                    storage_type: formFields.storage_type,
-                    replicas: formFields.replicas
+                    name: values.name,
+                    factory_name: values.factory_name,
+                    retention_type: values.retention_type,
+                    retention_value: values.retention_value,
+                    storage_type: values.storage_type,
+                    replicas: values.replicas
                 };
-                const data = await httpRequest('POST', ApiEndpoints.CREATE_STATION, bodyRequest);
-                if (data) {
-                    history.push(`${pathDomains.factoriesList}/${bodyRequest.factory_name}/${data.name}`);
+                if (creationForm.getFieldValue('factories_List').length === 0) {
+                    const result = await createNewFactory(bodyRequest.factory_name);
+                    if (result) {
+                        createStation(bodyRequest);
+                    }
+                } else {
+                    createStation(bodyRequest);
                 }
             } catch (error) {}
         }
+    };
+
+    const createStation = async (bodyRequest) => {
+        try {
+            const data = await httpRequest('POST', ApiEndpoints.CREATE_STATION, bodyRequest);
+            if (data) {
+                history.push(`${pathDomains.factoriesList}/${bodyRequest.factory_name}/${data.name}`);
+            }
+        } catch (error) {}
+    };
+
+    const createNewFactory = async (factory_name) => {
+        try {
+            await httpRequest('POST', ApiEndpoints.CREATE_FACTORY, { name: factory_name });
+            return true;
+        } catch (error) {}
+        return false;
     };
 
     return (
@@ -175,8 +191,8 @@ const CreateStationDetails = (props) => {
                             borderColorType="gray"
                             width="500px"
                             height="40px"
-                            onBlur={handleStationNameChange}
-                            onChange={handleStationNameChange}
+                            onBlur={(e) => updateFormState('name', e.target.value)}
+                            onChange={(e) => updateFormState('name', e.target.value)}
                             value={formFields.name}
                         />
                     </div>
@@ -184,7 +200,11 @@ const CreateStationDetails = (props) => {
                 <div className="retention">
                     <p className="field-title">Retention</p>
                     <Form.Item name="retention_type" initialValue={formFields.retention_type}>
-                        <RadioButton options={retanionOptions} radioValue={formFields.retention_type} onChange={(e) => retentionTypeChange(e)} />
+                        <RadioButton
+                            options={retanionOptions}
+                            radioValue={formFields.retention_type}
+                            onChange={(e) => updateFormState('retention_type', e.target.value)}
+                        />
                     </Form.Item>
                     {formFields.retention_type === 'message_age_sec' && (
                         <div className="time-value">
@@ -275,33 +295,40 @@ const CreateStationDetails = (props) => {
                 <div className="storage">
                     <p className="field-title">Storage Type</p>
                     <Form.Item name="storage_type" initialValue={formFields.storage_type}>
-                        <RadioButton options={storageOptions} radioValue={formFields.storage_type} onChange={(e) => storageTypeChange(e)} />
+                        <RadioButton options={storageOptions} radioValue={formFields.storage_type} onChange={(e) => updateFormState('storage_type', e.target.value)} />
                     </Form.Item>
                 </div>
                 <div className="replicas">
                     <p className="field-title">Replicas</p>
                     <div className="replicas-value">
                         <Form.Item name="replicas" initialValue={formFields.replicas}>
-                            <InputNumber bordered={false} min={1} max={5} keyboard={true} value={formFields.replicas} onChange={(e) => handleReplicasChange(e)} />
+                            <InputNumber
+                                bordered={false}
+                                min={1}
+                                max={5}
+                                keyboard={true}
+                                value={formFields.replicas}
+                                onChange={(e) => updateFormState('replicas', e.target.value)}
+                            />
                         </Form.Item>
                         <p>replicas</p>
                     </div>
                 </div>
                 <div className="replicas-and-storage"></div>
-                {chooseFactoryField && (
+                {factoryNames && (
                     <div className="factory-name">
                         <p className="field-title">Factory name</p>
-                        <Form.Item name="factory_name" initialValue={factoryNames[0] || formFields.factory_name || 'General'}>
-                            <Select
-                                value={factoryNames[0] || formFields.factory_name || 'General'}
+                        <Form.Item name="factory_name" initialValue={formFields.factory_name}>
+                            <SelectComponent
+                                value={formFields.factory_name}
                                 colorType="navy"
                                 backgroundColorType="none"
                                 borderColorType="gray"
                                 radiusType="semi-round"
                                 width="500px"
                                 height="40px"
-                                options={factoryNames || 'General'}
-                                onChange={(e) => handleFactoryNamesChange(e)}
+                                options={factoryNames}
+                                onChange={(e) => updateFormState('factory_name', e)}
                                 dropdownClassName="select-options"
                             />
                         </Form.Item>
