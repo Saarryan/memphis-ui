@@ -12,6 +12,36 @@ import { convertDateToSeconds } from '../../services/dateConvertor';
 import { useHistory } from 'react-router';
 import pathDomains from '../../router';
 
+const retanionOptions = [
+    {
+        id: 1,
+        value: 'message_age_sec',
+        label: 'Time'
+    },
+    {
+        id: 2,
+        value: 'bytes',
+        label: 'Size'
+    },
+    {
+        id: 3,
+        value: 'messages',
+        label: 'Messages'
+    }
+];
+const storageOptions = [
+    {
+        id: 1,
+        value: 'file',
+        label: 'File'
+    },
+    {
+        id: 2,
+        value: 'memory',
+        label: 'Memory'
+    }
+];
+
 const CreateStationDetails = (props) => {
     const { chooseFactoryField = false, createStationRef, factoryName = '' } = props;
     const [factoryNames, setFactoryNames] = useState([]);
@@ -34,40 +64,11 @@ const CreateStationDetails = (props) => {
     const [retentionMessagesValue, setRetentionMessagesValue] = useState('10');
     const [retentionSizeValue, setRetentionSizeValue] = useState('1000');
 
-    const retanionOptions = [
-        {
-            id: 1,
-            value: 'message_age_sec',
-            label: 'Time'
-        },
-        {
-            id: 2,
-            value: 'bytes',
-            label: 'Size'
-        },
-        {
-            id: 3,
-            value: 'messages',
-            label: 'Messages'
-        }
-    ];
-    const storageOptions = [
-        {
-            id: 1,
-            value: 'file',
-            label: 'File'
-        },
-        {
-            id: 2,
-            value: 'memory',
-            label: 'Memory'
-        }
-    ];
     const getAllFactories = async () => {
         try {
             const data = await httpRequest('GET', ApiEndpoints.GEL_ALL_FACTORIES);
             if (data) {
-                if (data.length !== 0) {
+                if (data.length === 0) {
                     updateFormState('factory_name', 'Melvis_factory');
                     creationForm.setFieldsValue({ ['factory_name']: 'Melvis_factory' });
                     creationForm.setFieldsValue({ ['factories_List']: [] });
