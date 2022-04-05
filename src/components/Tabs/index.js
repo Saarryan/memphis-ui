@@ -18,8 +18,8 @@ const AntTab = withStyles((theme) => ({
     root: {
         textTransform: 'none',
         fontSize: '14px',
-        minWidth: 12,
-        maxWidth: 120,
+        minWidth: 150,
+        maxWidth: 170,
         fontWeight: 600,
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3),
@@ -31,10 +31,10 @@ const AntTab = withStyles((theme) => ({
         },
         '&$selected': {
             color: getFontColor('navy'),
-            fontWeight: theme.typography.fontWeightBold,
+            fontWeight: theme.typography.fontWeightBold
         },
         '&:focus': {
-            color: getFontColor('navy'),
+            color: getFontColor('navy')
         }
     },
     selected: {}

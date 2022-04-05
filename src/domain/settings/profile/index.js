@@ -71,7 +71,7 @@ function Profile() {
                 <br />
                 <label>Please note that this action is irreversible.</label>
             </Modal>
-            <div className="profile-sections">
+            <div className="profile-sections company-logo">
                 <p>Company logo</p>
                 <ImgLoader />
             </div>

@@ -8,7 +8,9 @@ export const ApiEndpoints = {
     REMOVE_USER: '/usermgmt/removeUser',
     REMOVE_MY_UER: '/usermgmt/removeMyUser',
     EDIT_AVATAR: '/usermgmt/editAvatar',
+    GET_COMPANY_LOGO: '/usermgmt/getCompanyLogo',
     EDIT_COMPANY_LOGO: '/usermgmt/editCompanyLogo',
+    REMOVE_COMPANY_LOGO: '/usermgmt/removeCompanyLogo',
 
     //Factory
     CREATE_FACTORY: '/factories/createFactory',

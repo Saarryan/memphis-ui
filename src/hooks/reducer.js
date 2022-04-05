@@ -5,10 +5,10 @@ const Reducer = (state, action) => {
                 ...state,
                 userData: action.payload
             };
-        case 'SET_ORGANIZATION_DATA':
+        case 'SET_COMPANY_LOGO':
             return {
                 ...state,
-                organizationDetails: action.payload
+                companyLogo: action.payload
             };
         case 'SET_LOADER':
             return {
