@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Button from '../button';
 
@@ -49,6 +49,16 @@ const TransitionsModal = (props) => {
 
     const classes = useStyles();
     const [open, setOpen] = useState(props);
+
+    useEffect(() => {
+        function handleEscapeKey(event) {
+            if (event.code === 'Escape') {
+                props.clickOutside();
+            }
+        }
+        document.addEventListener('click', handleEscapeKey);
+        return () => document.removeEventListener('keydown', handleEscapeKey);
+    }, []);
 
     return confirm ? (
         <Dialog
