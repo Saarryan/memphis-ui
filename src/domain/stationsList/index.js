@@ -6,18 +6,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import EditOutlined from '@material-ui/icons/EditOutlined';
 import { InboxOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import { message } from 'antd';
 
 import CreateStationDetails from '../../components/createStationDetails';
 import { ApiEndpoints } from '../../const/apiEndpoints';
-import Tooltip from '../../components/tooltip/tooltip';
 import StationBoxOverview from './stationBoxOverview';
 import loading from '../../assets/images/strech.gif';
 import { httpRequest } from '../../services/http';
 import Button from '../../components/button';
 import { Context } from '../../hooks/store';
 import Modal from '../../components/modal';
-import pathDomains from '../../router';
 
 const StationsList = () => {
     const [state, dispatch] = useContext(Context);

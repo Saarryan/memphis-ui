@@ -2,19 +2,14 @@ import './style.scss';
 
 import React, { useState, useContext, useEffect } from 'react';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import IconButton from '@material-ui/core/IconButton';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
-import { InboxOutlined } from '@ant-design/icons';
 import Popover from '@material-ui/core/Popover';
 import EditOutlined from '@material-ui/icons/EditOutlined';
 import { Divider } from '@material-ui/core';
 
 import OverflowTip from '../../../components/tooltip/overflowtip';
-import Tooltip from '../../../components/tooltip/tooltip';
-import loading from '../../../assets/images/strech.gif';
-import Button from '../../../components/button';
 import { httpRequest } from '../../../services/http';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
 import Modal from '../../../components/modal';

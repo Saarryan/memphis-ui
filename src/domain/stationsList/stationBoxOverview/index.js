@@ -16,6 +16,7 @@ import { convertSecondsToDate } from '../../../services/dateConvertor';
 import { ApiEndpoints } from '../../../const/apiEndpoints';
 import Modal from '../../../components/modal';
 import { httpRequest } from '../../../services/http';
+import OverflowTip from '../../../components/tooltip/overflowtip';
 
 const StationBoxOverview = (props) => {
     const [state, dispatch] = useContext(Context);
@@ -66,19 +67,31 @@ const StationBoxOverview = (props) => {
                 <div className="info-fields">
                     <div className="field-wrapper">
                         <h3>Name: </h3>
-                        <p>{props.station.name}</p>
+                        {/* <p>{props.station.name}</p> */}
+                        <OverflowTip text={props.station.name} width={'150px'}>
+                            {props.station.name}
+                        </OverflowTip>
                     </div>
                     <div className="field-wrapper">
                         <h3>Retention: </h3>
-                        <p>{retentionValue}</p>
+                        <OverflowTip text={retentionValue} width={'150px'}>
+                            {retentionValue}
+                        </OverflowTip>
+                        {/* <p>{retentionValue}</p> */}
                     </div>
                     <div className="field-wrapper">
                         <h3>Replicas: </h3>
-                        <p>{props.station.replicas}</p>
+                        {/* <p>{props.station.replicas}</p> */}
+                        <OverflowTip text={props.station.replicas} width={'20px'}>
+                            {props.station.replicas}
+                        </OverflowTip>
                     </div>
                     <div className="field-wrapper">
                         <h3>Storage Type: </h3>
-                        <p>{props.station.storage_type}</p>
+                        {/* <p>{props.station.storage_type}</p> */}
+                        <OverflowTip text={props.station.storage_type} width={'50px'}>
+                            {props.station.storage_type}
+                        </OverflowTip>
                     </div>
                     {/* <div className="field-wrapper">
                         <h3>Max throughput: </h3>
@@ -86,16 +99,18 @@ const StationBoxOverview = (props) => {
                     </div> */}
                 </div>
                 <div className="actions-side">
-                    <div
-                        className="action overview"
-                        onClick={() => {
-                            history.push(`${window.location.pathname}/${props.station.name}`);
-                        }}
-                    >
-                        <p>Overview </p>
-                    </div>
-                    <div className="action edit">
-                        <p onClick={() => functionModalFlip(true)}>Add functions</p>
+                    <div className="hover-section">
+                        <div
+                            className="action overview"
+                            onClick={() => {
+                                history.push(`${window.location.pathname}/${props.station.name}`);
+                            }}
+                        >
+                            <p>Overview </p>
+                        </div>
+                        <div className="action edit">
+                            <p onClick={() => functionModalFlip(true)}>Add functions</p>
+                        </div>
                     </div>
                     {/* <div className="action">
                         <HealthyBadge status={props.station.status || 'healthy'} />

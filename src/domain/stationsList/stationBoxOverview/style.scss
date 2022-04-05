@@ -21,6 +21,7 @@
                 padding-right: 25px;
                 display: flex;
                 align-items: center;
+                width: 225px;
                 h3 {
                     font-weight: 600;
                     padding-right: 3px;
@@ -35,6 +36,10 @@
         .actions-side {
             display: flex;
             margin-right: 20px;
+            .hover-section{
+                display: flex;
+                color: transparent;
+            }
             .action {
                 display: flex;
                 align-items: center;
@@ -42,7 +47,6 @@
             }
             .overview,
             .edit {
-                color: var(--purple);
                 font-weight: 600;
                 font-size: 12px;
                 cursor: pointer;
@@ -56,4 +60,8 @@
             }
         }
     }
+}
+.station-box-container:hover .hover-section{
+    display: block;
+    color: var(--purple) !important;
 }

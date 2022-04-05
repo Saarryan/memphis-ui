@@ -68,10 +68,10 @@ const data = [
 const FailedFactories = () => {
     return (
         <div className="overview-wrapper failed-factories-container">
-            <p className="overview-components-header">Un-Healthy factories</p>
+            <p className="overview-components-header">Un-Healthy stations</p>
             <div className="factories-err-message">
                 <ErrorSharpIcon className="err-icon" theme="outlined" />
-                <p>For 5/23 factories, there may be a problem</p>
+                <p>For 5/23 stations, there may be a problem</p>
             </div>
             <div className="err-factories-list">
                 <div className="coulmns-table">
@@ -99,7 +99,7 @@ const FailedFactories = () => {
                                     </span>
                                 )}
                                 <span className="link-row" style={{ width: '100px' }}>
-                                    Go to factory
+                                    Go to station
                                 </span>
                             </div>
                         );
