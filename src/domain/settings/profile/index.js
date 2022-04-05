@@ -120,8 +120,8 @@ function Profile() {
                     className="modal-btn"
                     width="160px"
                     height="36px"
-                    placeholder={'Remove user'}
-                    colorType="purple"
+                    placeholder="Remove user"
+                    colorType="white"
                     radiusType="circle"
                     backgroundColorType="purple"
                     fontSize="14px"
