@@ -6,3 +6,4 @@ export const LOCAL_STORAGE_TOKEN = 'jwt';
 export const LOCAL_STORAGE_USER_ID = 'user_id';
 export const LOCAL_STORAGE_USER_NAME = 'user_Name';
 export const LOCAL_STORAGE_USER_TYPE = 'user_type';
+export const LOCAL_STORAGE_COMPANY_LOGO = 'company_logo';

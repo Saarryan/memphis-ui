@@ -2,14 +2,17 @@
     width: calc(100% - 70px);
     position: absolute;
     padding: 1vw;
-}
-.settings-panel-body {
-    padding-left: 2vw;
-    color: var(--blue);
-    .ant-divider {
-        margin-top: 0;
+    .settings-panel-body {
+        padding-left: 2vw;
+        color: var(--blue);
+        .ant-divider {
+            margin-top: 0;
+            position: absolute;
+            left: 0px;
+        }
     }
 }
+
 .alerts-integrations-container {
     width: 40vw;
     margin-top: 1vh;

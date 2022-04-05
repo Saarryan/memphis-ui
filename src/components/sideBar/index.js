@@ -19,7 +19,9 @@ import Logo from '../../assets/images/logo.png';
 import { Context } from '../../hooks/store';
 import pathControllers from '../../router';
 import { logout } from '../../services/auth';
-import { LOCAL_STORAGE_AVATAR_ID, LOCAL_STORAGE_USER_NAME } from '../../const/localStorageConsts';
+import { LOCAL_STORAGE_AVATAR_ID, LOCAL_STORAGE_COMPANY_LOGO, LOCAL_STORAGE_USER_NAME } from '../../const/localStorageConsts';
+import { httpRequest } from '../../services/http';
+import { ApiEndpoints } from '../../const/apiEndpoints';
 
 const { SubMenu } = Menu;
 
@@ -34,9 +36,22 @@ function SideBar() {
     const [botUrl, SetBotUrl] = useState(require('../../assets/images/bots/1.svg'));
 
     useEffect(() => {
+        getCompanyLogo();
+    }, []);
+
+    useEffect(() => {
         setBotImage(state?.userData?.avatar_id || localStorage.getItem(LOCAL_STORAGE_AVATAR_ID));
     }, [state]);
 
+    const getCompanyLogo = async () => {
+        try {
+            const data = await httpRequest('GET', ApiEndpoints.GET_COMPANY_LOGO);
+            if (data) {
+                localStorage.setItem(LOCAL_STORAGE_COMPANY_LOGO, data.image);
+                dispatch({ type: 'SET_COMPANY_LOGO', payload: data.image });
+            }
+        } catch (error) {}
+    };
     const setBotImage = (botId) => {
         SetBotUrl(require(`../../assets/images/bots/${botId}.svg`));
     };
@@ -121,7 +136,7 @@ function SideBar() {
                                 title={
                                     <div className="header-menu">
                                         <div className="company-logo">
-                                            <img src={Logo} width="20" height="20" className="logoimg" alt="companyLogo" />
+                                            <img src={state?.companyLogo || Logo} width="20" height="20" className="logoimg" alt="companyLogo" />
                                         </div>
                                         <p>{localStorage.getItem(LOCAL_STORAGE_USER_NAME)}</p>
                                     </div>
@@ -130,7 +145,7 @@ function SideBar() {
                                 <Menu.Item key={1} className="customclass">
                                     <div className="item-wrapp">
                                         <img src={accountIcon} width="15" height="15" alt="accountIcon" />
-                                        <p>My account</p>
+                                        <p>Settings</p>
                                     </div>
                                 </Menu.Item>
                                 <Menu.Item key={2}>
