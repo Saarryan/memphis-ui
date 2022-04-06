@@ -1,7 +1,6 @@
-def dockerImagesRepo = "strech-image-repo"
-def imageName = "strech-ui-staging"
-def containerName = "strech-ui"
-def gitURL = "git@github.com:Memphis-Dev-Inc/strech-ui.git"
+def imageName = "memphis-ui-staging"
+def containerName = "memphis-ui"
+def gitURL = "git@github.com:Memphis-OS/memphis-ui.git"
 def gitBranch = "staging"
 def repoUrlPrefix = "221323242847.dkr.ecr.eu-central-1.amazonaws.com"
 unique_Id = UUID.randomUUID().toString()
@@ -27,8 +26,8 @@ node {
     }
     
     stage('Push image to kubernetes') {
-	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" apply -f \"k8s-template.yaml\" -n ${k8sNamespace}"
-  	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/strech-staging-kubeconfig.yaml\" set image deployment/${containerName} ${containerName}=${repoUrlPrefix}/${imageName}:${unique_Id} -n ${k8sNamespace}"
+	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/memphis-staging-kubeconfig.yaml\" apply -f \"k8s-template.yaml\" -n ${k8sNamespace}"
+  	    sh "kubectl --kubeconfig=\"/var/lib/jenkins/.kube/memphis-staging-kubeconfig.yaml\" set image deployment/${containerName} ${containerName}=${repoUrlPrefix}/${imageName}:${unique_Id} -n ${k8sNamespace}"
     }
     notifySuccessful()
 
