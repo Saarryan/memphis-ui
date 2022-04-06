@@ -40,27 +40,29 @@ const StationOverview = () => {
 
     return (
         <StationStoreContext.Provider value={[stationState, stationDispatch]}>
-            <div className="station-overview-container">
-                <div className="overview-header">
-                    <StationOverviewHeader />
+            {!isLoading && (
+                <div className="station-overview-container">
+                    <div className="overview-header">
+                        <StationOverviewHeader />
+                    </div>
+                    <div className="overview-top">
+                        <div className="station-observability">
+                            <StationObservabilty />
+                        </div>
+                        <div className="connection-details">
+                            <ConnectionDetails />
+                        </div>
+                    </div>
+                    <div className="overview-bottom">
+                        <div className="auditing">
+                            <Auditing />
+                        </div>
+                        <div className="throughput">
+                            <Throughput />
+                        </div>
+                    </div>
                 </div>
-                <div className="overview-top">
-                    <div className="station-observability">
-                        <StationObservabilty />
-                    </div>
-                    <div className="connection-details">
-                        <ConnectionDetails />
-                    </div>
-                </div>
-                <div className="overview-bottom">
-                    <div className="auditing">
-                        <Auditing />
-                    </div>
-                    <div className="throughput">
-                        <Throughput />
-                    </div>
-                </div>
-            </div>
+            )}
         </StationStoreContext.Provider>
     );
 };
