@@ -5,4 +5,9 @@
     .thunnel-to-pub {
         width: 9vw;
     }
+    .thunnel-to-pub{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
 }
