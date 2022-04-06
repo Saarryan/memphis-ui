@@ -17,11 +17,6 @@ const StationOverviewHeader = (props) => {
     const history = useHistory();
     const [retentionValue, setRetentionValue] = useState('');
 
-    const returnToStaionsList = () => {
-        const url = window.location.href;
-        const staionName = url.split('factories/')[1].split('/')[0];
-        history.push(`${pathDomains.factoriesList}/${staionName}`);
-    };
     useEffect(() => {
         switch (stationState?.station?.retention_type) {
             case 'message_age_sec':
@@ -37,6 +32,12 @@ const StationOverviewHeader = (props) => {
                 break;
         }
     }, []);
+
+    const returnToStaionsList = () => {
+        const url = window.location.href;
+        const staionName = url.split('factories/')[1].split('/')[0];
+        history.push(`${pathDomains.factoriesList}/${staionName}`);
+    };
 
     return (
         <div className="station-overview-header">
@@ -55,14 +56,13 @@ const StationOverviewHeader = (props) => {
                     <p>
                         <b>Storage Type:</b> {stationState?.station?.storage_type}
                     </p>
-                    {/* <HealthyBadge status={state.stationDetails.healthy} /> */}
                 </div>
                 <div className="details-wrapper awaiting-messages">
                     <div className="icon">
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.stationDetails.awaiting_messages}</p>
+                        <p className="number">1000</p>
                         <span>&nbsp;</span>
                         <p className="title">Awaiting messages</p>
                     </div>
@@ -72,7 +72,7 @@ const StationOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.stationDetails.average_message_size}Mb</p>
+                        <p className="number">500Mb</p>
                         <span>&nbsp;</span>
                         <p className="title">Av. message size</p>
                     </div>
@@ -82,13 +82,8 @@ const StationOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.stationDetails.memory}Mb/80Mb</p>
-                        <Progress
-                            showInfo={false}
-                            status={(state.stationDetails.memory / 80) * 100 > 60 ? 'exception' : 'success'}
-                            percent={(state.stationDetails.memory / 80) * 100}
-                            size="small"
-                        />
+                        <p className="number">20Mb/80Mb</p>
+                        <Progress showInfo={false} status={(20 / 80) * 100 > 60 ? 'exception' : 'success'} percent={(20 / 80) * 100} size="small" />
                         <p className="title">Mem</p>
                     </div>
                 </div>
@@ -97,13 +92,8 @@ const StationOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.stationDetails.cpu}%</p>
-                        <Progress
-                            showInfo={false}
-                            status={(state.stationDetails.cpu / 100) * 100 > 60 ? 'exception' : 'success'}
-                            percent={(state.stationDetails.cpu / 100) * 100}
-                            size="small"
-                        />
+                        <p className="number">50%</p>
+                        <Progress showInfo={false} status={(35 / 100) * 100 > 60 ? 'exception' : 'success'} percent={(35 / 100) * 100} size="small" />
                         <p className="title">CPU</p>
                     </div>
                 </div>
@@ -112,13 +102,8 @@ const StationOverviewHeader = (props) => {
                         <p>icon</p>
                     </div>
                     <div className="more-details">
-                        <p className="number">{state.stationDetails.storage}Mb/100Mb</p>
-                        <Progress
-                            showInfo={false}
-                            status={(state.stationDetails.storage / 100) * 100 > 60 ? 'exception' : 'success'}
-                            percent={(state.stationDetails.storage / 100) * 100}
-                            size="small"
-                        />
+                        <p className="number">{60}Mb/100Mb</p>
+                        <Progress showInfo={false} status={(60 / 100) * 100 > 60 ? 'exception' : 'success'} percent={(60 / 100) * 100} size="small" />
                         <p className="title">Storage</p>
                     </div>
                 </div>
