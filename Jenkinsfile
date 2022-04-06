@@ -1,7 +1,7 @@
 def dockerImagesRepo = "strech-image-repo"
 def imageName = "strech-ui-staging"
 def containerName = "strech-ui"
-def gitURL = "git@github.com:STRECH-LTD/strech-ui.git"
+def gitURL = "git@github.com:Memphis-Dev-Inc/strech-ui.git"
 def gitBranch = "staging"
 def repoUrlPrefix = "221323242847.dkr.ecr.eu-central-1.amazonaws.com"
 unique_Id = UUID.randomUUID().toString()
