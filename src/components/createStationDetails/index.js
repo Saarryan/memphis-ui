@@ -1,7 +1,7 @@
 import './style.scss';
 
 import React, { useState, useEffect } from 'react';
-import { Form, InputNumber } from 'antd';
+import { Button, Form, InputNumber } from 'antd';
 
 import RadioButton from '../radioButton';
 import Input from '../Input';
@@ -29,6 +29,7 @@ const retanionOptions = [
         label: 'Messages'
     }
 ];
+
 const storageOptions = [
     {
         id: 1,
@@ -45,6 +46,8 @@ const storageOptions = [
 const CreateStationDetails = (props) => {
     const { chooseFactoryField = false, createStationRef, factoryName = '' } = props;
     const [factoryNames, setFactoryNames] = useState([]);
+    const [loading, setLoading] = useState([]);
+
     const [creationForm] = Form.useForm();
     const history = useHistory();
     const [formFields, setFormFields] = useState({
@@ -65,6 +68,7 @@ const CreateStationDetails = (props) => {
     const [retentionSizeValue, setRetentionSizeValue] = useState('1000');
 
     const getAllFactories = async () => {
+        setLoading(true);
         try {
             const data = await httpRequest('GET', ApiEndpoints.GEL_ALL_FACTORIES);
             if (data) {
@@ -81,6 +85,7 @@ const CreateStationDetails = (props) => {
                 }
             }
         } catch (error) {}
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -133,13 +138,13 @@ const CreateStationDetails = (props) => {
             try {
                 const bodyRequest = {
                     name: values.name,
-                    factory_name: values.factory_name,
+                    factory_name: factoryName || values.factory_name,
                     retention_type: values.retention_type,
                     retention_value: values.retention_value,
                     storage_type: values.storage_type,
                     replicas: values.replicas
                 };
-                if (creationForm.getFieldValue('factories_List').length === 0) {
+                if (chooseFactoryField && creationForm.getFieldValue('factories_List').length === 0) {
                     const result = await createNewFactory(bodyRequest.factory_name);
                     if (result) {
                         createStation(bodyRequest);
@@ -179,6 +184,7 @@ const CreateStationDetails = (props) => {
                             message: 'Please input station name!'
                         }
                     ]}
+                    onFinish={onFinish}
                     style={{ height: '90px', marginBottom: '0' }}
                 >
                     <div className="station-name">
@@ -316,7 +322,7 @@ const CreateStationDetails = (props) => {
                     </div>
                 </div>
                 <div className="replicas-and-storage"></div>
-                {factoryNames && (
+                {chooseFactoryField && !loading && (
                     <div className="factory-name">
                         <p className="field-title">Factory name</p>
                         <Form.Item name="factory_name" initialValue={formFields.factory_name}>

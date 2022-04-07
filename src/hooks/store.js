@@ -13,7 +13,8 @@ const initialState = {
     companyLogo: '',
     loading: false,
     error: null,
-    route: ''
+    route: '',
+    isAuthentication: false
 };
 
 const Store = ({ children }) => {

@@ -4,13 +4,13 @@ import { Route } from 'react-router-dom';
 import { isValidToken } from './services/auth';
 import { handleRefreshTokenRequest } from './services/http';
 
-function PrivateRoute(props) {
+async function PrivateRoute(props) {
     const { component: Component, ...rest } = props;
 
-    if (isValidToken()) {
+    if (await isValidToken()) {
         return <Route {...rest} render={(props) => <Component {...props} />} />;
     } else {
-        handleRefreshTokenRequest();
+        await handleRefreshTokenRequest();
         return <Route {...rest} render={(props) => <Component {...props} />} />;
     }
 }
