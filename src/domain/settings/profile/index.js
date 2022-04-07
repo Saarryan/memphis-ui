@@ -55,8 +55,8 @@ function Profile() {
         <div className="profile-container">
             <Modal
                 header="Remove user"
-                height="220px"
-                minWidth="440px"
+                height="260px"
+                minWidth="460px"
                 rBtnText="Cancel"
                 lBtnText="Remove"
                 closeAction={() => modalFlip(false)}

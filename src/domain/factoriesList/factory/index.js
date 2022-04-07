@@ -110,10 +110,10 @@ const Factory = (props) => {
             </div>
             <Modal
                 header="Remove Factory"
-                height="300px"
-                width="650px"
-                rBtnText="Confirm"
-                lBtnText="Cancel"
+                height="260px"
+                minWidth="460px"
+                rBtnText="Cancel"
+                lBtnText="Remove"
                 closeAction={() => modalFlip(false)}
                 lBtnClick={() => {
                     modalFlip(false);
@@ -125,7 +125,7 @@ const Factory = (props) => {
                 }}
                 open={modalIsOpen}
             >
-                Are you sure you want to remove this factory? This will remove all factories in this factory.
+                Are you sure you want to remove this factory? This will remove all stations in this factory.
             </Modal>
         </div>
     );

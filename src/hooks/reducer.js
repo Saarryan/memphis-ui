@@ -20,6 +20,11 @@ const Reducer = (state, action) => {
                 ...state,
                 route: action.payload
             };
+        case 'SET_AUTHENTICATION':
+            return {
+                ...state,
+                isAuthentication: action.payload
+            };
         default:
             return state;
     }
