@@ -2,7 +2,7 @@ import './App.scss';
 
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import StationOverview from './domain/stationOverview';
 import FactoriesList from './domain/factoriesList';
@@ -15,6 +15,9 @@ import pathControllers from './router';
 import Users from './domain/users';
 import Login from './domain/login';
 import { Redirect } from 'react-router-dom';
+import AuthService from './services/auth';
+import { handleRefreshTokenRequest } from './services/http';
+import { LOCAL_STORAGE_TOKEN } from './const/localStorageConsts';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -27,16 +30,22 @@ const Mobile = ({ children }) => {
 };
 
 const App = withRouter(() => {
-    useEffect(() => {});
+    const [authCheck, setAuthCheck] = useState(true);
+
+    useEffect(async () => {
+        if (localStorage.getItem(LOCAL_STORAGE_TOKEN) && !AuthService.isValidToken()) {
+            await handleRefreshTokenRequest();
+        }
+        setAuthCheck(false);
+    }, []);
+
     return (
         <div className="app-container">
             <div>
-                <Desktop>
+                {' '}
+                {!authCheck && (
                     <Switch>
                         <Route exact path={pathControllers.login} component={Login} />
-                        <PrivateRoute exact path="/">
-                            <Redirect to={pathControllers.overview} />
-                        </PrivateRoute>
                         <PrivateRoute exact path={pathControllers.overview}>
                             <AppWrapper
                                 content={
@@ -91,30 +100,20 @@ const App = withRouter(() => {
                                 }
                             ></AppWrapper>
                         </PrivateRoute>
+                        <PrivateRoute path="/">
+                            <AppWrapper
+                                content={
+                                    <div>
+                                        <Overview />
+                                    </div>
+                                }
+                            ></AppWrapper>
+                        </PrivateRoute>
                         <Route>
                             <Redirect to={pathControllers.overview} />
                         </Route>
-
-                        {/* <PrivateRoute exact path="/" component={Overview} />
-            <PrivateRoute exact path={pathControllers.overview} component={Overview} />
-            <PrivateRoute exact path={`${pathControllers.usecases}/:id`} component={UseCaseEditor} />
-            <PrivateRoute exact path={pathControllers.users} component={Users} />
-            <PrivateRoute exact path={pathControllers.account} component={Account} /> */}
-                        {/* <Route component={NotFoundPage} /> */}
                     </Switch>
-                </Desktop>
-                {/* <Mobile>
-          <Switch>
-            <Route exact path={pathControllers.login} component={Login} />
-            <PrivateRoute exact path="/" component={Overview} />
-            <PrivateRoute exact path={pathControllers.overview} component={Overview} />
-            <PrivateRoute exact path={pathControllers.usecases} component={Overview} />
-            <PrivateRoute exact path={`${pathControllers.usecases}/:id`} component={Overview} />
-            <PrivateRoute exact path={pathControllers.users} component={Overview} />
-            <PrivateRoute exact path={pathControllers.account} component={Overview} />
-            <Route component={NotFoundPage} />
-          </Switch>
-        </Mobile> */}
+                )}
             </div>
         </div>
     );

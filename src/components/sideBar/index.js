@@ -18,7 +18,7 @@ import usersIcon from '../../assets/images/usersIcon.svg';
 import Logo from '../../assets/images/logo.png';
 import { Context } from '../../hooks/store';
 import pathControllers from '../../router';
-import { logout } from '../../services/auth';
+import AuthService from '../../services/auth';
 import { LOCAL_STORAGE_AVATAR_ID, LOCAL_STORAGE_COMPANY_LOGO, LOCAL_STORAGE_USER_NAME } from '../../const/localStorageConsts';
 import { httpRequest } from '../../services/http';
 import { ApiEndpoints } from '../../const/apiEndpoints';
@@ -64,7 +64,7 @@ function SideBar() {
             case '2':
                 break;
             case '3':
-                await logout();
+                await AuthService.logout();
                 break;
             default:
                 break;
