@@ -8,7 +8,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Form } from 'antd';
 
 import { handleRefreshTokenRequest, httpRequest } from '../../services/http';
-import { isValidToken, saveToLocalStorage } from '../../services/auth';
+import AuthService from '../../services/auth';
 import { LOCAL_STORAGE_TOKEN } from '../../const/localStorageConsts';
 import fullLogo from '../../assets/images/fullLogo.svg';
 import sharps from '../../assets/images/sharps.svg';
@@ -28,7 +28,7 @@ const Mobile = ({ children }) => {
     return isMobile ? children : null;
 };
 
-const Login = () => {
+const Login = (props) => {
     const [state, dispatch] = useContext(Context);
     const history = useHistory();
     const [loginForm] = Form.useForm(); // form controller
@@ -37,13 +37,14 @@ const Login = () => {
         password: ''
     });
     const [error, setError] = useState('');
+    const referer = props?.location?.state?.referer || '/overview';
 
     useEffect(async () => {
-        if (isValidToken()) {
-            history.push('/overview');
+        if (AuthService.isValidToken()) {
+            history.push(referer);
         } else if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
             await handleRefreshTokenRequest();
-            history.push('/overview');
+            history.push(referer);
         }
     }, []);
 
@@ -65,8 +66,8 @@ const Login = () => {
                 const { username, password } = formFields;
                 const data = await httpRequest('POST', ApiEndpoints.LOGIN, { username, password }, {}, {}, false);
                 if (data) {
-                    saveToLocalStorage(data);
-                    history.push('/overview');
+                    AuthService.saveToLocalStorage(data);
+                    history.push(referer);
                     return data;
                 }
                 dispatch({ type: 'SET_USER_DATA', payload: data });

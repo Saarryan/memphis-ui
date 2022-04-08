@@ -5,11 +5,11 @@ import { SERVER_URL, SHOWABLE_ERROR_STATUS_CODE } from '../config';
 import { ApiEndpoints } from '../const/apiEndpoints';
 import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 import pathDomains from '../router';
-import { isValidToken, saveToLocalStorage } from './auth';
+import AuthService from './auth';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
     const url = window.location.href;
-    if (url.indexOf('login') === -1 && !isValidToken()) {
+    if (url.indexOf('login') === -1 && !AuthService.isValidToken()) {
         await handleRefreshTokenRequest();
     }
     if (authNeeded) {
@@ -58,10 +58,12 @@ export async function handleRefreshTokenRequest() {
     try {
         const url = `${SERVER_URL}${ApiEndpoints.REFRESH_TOKEN}`;
         const res = await HTTP({ method: 'POST', url });
-        const results = res.data;
-        saveToLocalStorage(results);
+        await AuthService.saveToLocalStorage(res.data);
+        return true;
     } catch (err) {
-        localStorage.clear();
-        window.location.assign(pathDomains.login);
+        return false;
+        //throw err.response;
+        // localStorage.clear();
+        // window.location.assign(pathDomains.login);
     }
 }

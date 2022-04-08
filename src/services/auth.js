@@ -12,33 +12,42 @@ import {
 import pathDomains from '../router';
 import { httpRequest } from './http';
 
-export const saveToLocalStorage = (userData) => {
-    const now = new Date();
-    const expiryToken = now.getTime() + userData.expires_in;
+const AuthService = (function () {
+    const saveToLocalStorage = (userData) => {
+        const now = new Date();
+        const expiryToken = now.getTime() + userData.expires_in;
 
-    localStorage.setItem(LOCAL_STORAGE_ALREADY_LOGGED_IN, userData.already_logged_in);
-    localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
-    localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
-    localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
-    localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
-    localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.username);
-    localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
-    localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiryToken);
-};
+        localStorage.setItem(LOCAL_STORAGE_ALREADY_LOGGED_IN, userData.already_logged_in);
+        localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
+        localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
+        localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
+        localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
+        localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.username);
+        localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
+        localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiryToken);
+    };
 
-export const logout = async () => {
-    if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
-        await httpRequest('POST', ApiEndpoints.LOGOUT);
-    }
-    localStorage.clear();
-    window.location.assign(pathDomains.login);
-};
+    const logout = async () => {
+        if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
+            await httpRequest('POST', ApiEndpoints.LOGOUT);
+        }
+        localStorage.clear();
+        window.location.assign(pathDomains.login);
+    };
 
-export const isValidToken = () => {
-    const tokenExpiryTime = localStorage.getItem(LOCAL_STORAGE_EXPIRED_TOKEN);
-    if (Date.now() <= tokenExpiryTime) {
-        return true;
-    } else {
-        return false;
-    }
-};
+    const isValidToken = () => {
+        const tokenExpiryTime = localStorage.getItem(LOCAL_STORAGE_EXPIRED_TOKEN);
+        if (Date.now() <= tokenExpiryTime) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    return {
+        saveToLocalStorage,
+        logout,
+        isValidToken
+    };
+})();
+export default AuthService;
