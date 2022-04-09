@@ -15,9 +15,9 @@ import pathControllers from './router';
 import Users from './domain/users';
 import Login from './domain/login';
 import { Redirect } from 'react-router-dom';
-import AuthService from './services/auth';
 import { handleRefreshTokenRequest } from './services/http';
 import { LOCAL_STORAGE_TOKEN } from './const/localStorageConsts';
+import { useLocation } from 'react-router-dom';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -31,13 +31,28 @@ const Mobile = ({ children }) => {
 
 const App = withRouter(() => {
     const [authCheck, setAuthCheck] = useState(true);
+    const location = useLocation();
 
-    useEffect(async () => {
-        if (localStorage.getItem(LOCAL_STORAGE_TOKEN) && !AuthService.isValidToken()) {
-            await handleRefreshTokenRequest();
+    useEffect(() => {
+        if (handleRefresh()) {
+            setAuthCheck(false);
         }
-        setAuthCheck(false);
+        const interval = setInterval(() => {
+            handleRefresh();
+        }, 120000);
+
+        return () => clearInterval(interval);
     }, []);
+
+    const handleRefresh = async () => {
+        if (localStorage.getItem(LOCAL_STORAGE_TOKEN) && window.location.pathname !== pathControllers.login) {
+            let handleRefresh = await handleRefreshTokenRequest();
+            if (handleRefresh) {
+                return true;
+            }
+        }
+        return <Redirect to={{ pathname: pathControllers.login, state: { referer: location } }} />;
+    };
 
     return (
         <div className="app-container">
@@ -46,69 +61,96 @@ const App = withRouter(() => {
                 {!authCheck && (
                     <Switch>
                         <Route exact path={pathControllers.login} component={Login} />
-                        <PrivateRoute exact path={pathControllers.overview}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <Overview />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
-                        <PrivateRoute exact path={pathControllers.users}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <Users />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
-                        <PrivateRoute exact path={pathControllers.settings}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <Settings />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
-                        <PrivateRoute exact path={pathControllers.factoriesList}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <FactoriesList />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
-                        <PrivateRoute exact path={`${pathControllers.factoriesList}/:id`}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <StationsList />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
-                        <PrivateRoute exact path={`${pathControllers.factoriesList}/:id/:id`}>
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <StationOverview />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
-                        <PrivateRoute path="/">
-                            <AppWrapper
-                                content={
-                                    <div>
-                                        <Overview />
-                                    </div>
-                                }
-                            ></AppWrapper>
-                        </PrivateRoute>
+                        <PrivateRoute
+                            exact
+                            path={pathControllers.overview}
+                            component={
+                                <AppWrapper
+                                    content={
+                                        <div>
+                                            <Overview />
+                                        </div>
+                                    }
+                                ></AppWrapper>
+                            }
+                        />
+                        <PrivateRoute
+                            exact
+                            path={pathControllers.users}
+                            component={
+                                <AppWrapper
+                                    content={
+                                        <div>
+                                            <Users />
+                                        </div>
+                                    }
+                                ></AppWrapper>
+                            }
+                        />
+                        <PrivateRoute
+                            exact
+                            path={pathControllers.settings}
+                            component={
+                                <AppWrapper
+                                    content={
+                                        <div>
+                                            <Settings />
+                                        </div>
+                                    }
+                                ></AppWrapper>
+                            }
+                        />
+                        <PrivateRoute
+                            exact
+                            path={pathControllers.factoriesList}
+                            component={
+                                <AppWrapper
+                                    content={
+                                        <div>
+                                            <FactoriesList />
+                                        </div>
+                                    }
+                                ></AppWrapper>
+                            }
+                        />
+                        <PrivateRoute
+                            exact
+                            path={`${pathControllers.factoriesList}/:id`}
+                            component={
+                                <AppWrapper
+                                    content={
+                                        <div>
+                                            <StationsList />
+                                        </div>
+                                    }
+                                ></AppWrapper>
+                            }
+                        />
+                        <PrivateRoute
+                            exact
+                            path={`${pathControllers.factoriesList}/:id/:id`}
+                            component={
+                                <AppWrapper
+                                    content={
+                                        <div>
+                                            <StationOverview />
+                                        </div>
+                                    }
+                                ></AppWrapper>
+                            }
+                        />
+                        <PrivateRoute
+                            path="/"
+                            component={
+                                <AppWrapper
+                                    content={
+                                        <div>
+                                            <Overview />
+                                        </div>
+                                    }
+                                ></AppWrapper>
+                            }
+                        />
                         <Route>
                             <Redirect to={pathControllers.overview} />
                         </Route>

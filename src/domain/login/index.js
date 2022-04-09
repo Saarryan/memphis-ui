@@ -42,9 +42,6 @@ const Login = (props) => {
     useEffect(async () => {
         if (AuthService.isValidToken()) {
             history.push(referer);
-        } else if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
-            await handleRefreshTokenRequest();
-            history.push(referer);
         }
     }, []);
 
