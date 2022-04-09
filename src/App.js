@@ -33,8 +33,8 @@ const App = withRouter(() => {
     const [authCheck, setAuthCheck] = useState(true);
     const location = useLocation();
 
-    useEffect(() => {
-        if (handleRefresh()) {
+    useEffect(async () => {
+        if (await handleRefresh()) {
             setAuthCheck(false);
         }
         const interval = setInterval(() => {
