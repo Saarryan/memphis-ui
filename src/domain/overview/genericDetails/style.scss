@@ -11,11 +11,26 @@
         align-items: center;
         justify-content: center;
         flex-direction: inherit;
-        img {
-            margin-right: 20px;
+        .icon-wrapper{
+            width: 49px;
+            height: 49px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;     
+        }
+        .lve-msg{
+            background: rgba(101, 87, 255, 0.1);
+        }
+        .sta-act{
+            background: rgba(79, 228, 198, 0.1);
+        }
+        .sta-idl{
+            background: rgba(255, 198, 51, 0.1);
         }
         .data-wrapper {
-            b {
+            span {
                 font-size: 14px;
                 color: #979797;
                 font-weight: 600;
@@ -27,7 +42,6 @@
                 display: flex;
                 span {
                     font-size: 12px;
-                    color: #979797;
                     margin: 14px 0px 0px 5px;
                 }
             }

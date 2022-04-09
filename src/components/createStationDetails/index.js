@@ -184,7 +184,6 @@ const CreateStationDetails = (props) => {
                             message: 'Please input station name!'
                         }
                     ]}
-                    onFinish={onFinish}
                     style={{ height: '90px', marginBottom: '0' }}
                 >
                     <div className="station-name">
