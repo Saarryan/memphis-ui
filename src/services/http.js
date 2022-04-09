@@ -7,10 +7,6 @@ import { LOCAL_STORAGE_TOKEN } from '../const/localStorageConsts.js';
 import AuthService from './auth';
 
 export async function httpRequest(method, endPointUrl, data = {}, headers = {}, queryParams = {}, authNeeded = true, timeout = 0) {
-    const url = window.location.href;
-    if (url.indexOf('login') === -1 && !AuthService.isValidToken()) {
-        await handleRefreshTokenRequest();
-    }
     if (authNeeded) {
         const token = localStorage.getItem(LOCAL_STORAGE_TOKEN);
         headers['Authorization'] = 'Bearer ' + token;
