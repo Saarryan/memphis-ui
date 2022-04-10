@@ -29,7 +29,13 @@ const AuthService = (function () {
 
     const logout = async () => {
         if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
-            await httpRequest('POST', ApiEndpoints.LOGOUT);
+            try {
+                await httpRequest('POST', ApiEndpoints.LOGOUT);
+            } catch (error) {
+                localStorage.clear();
+                window.location.assign(pathDomains.login);
+                return;
+            }
         }
         localStorage.clear();
         window.location.assign(pathDomains.login);

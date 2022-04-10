@@ -16,23 +16,23 @@ const ConnectionDetails = () => {
         <div className="connection-details-container">
             <p className="title">Connection details</p>
             <div className="connections-details">
-                <h1>
+                <h1 className="host">
                     Host:<a>{connectionDetails.host}</a>
                 </h1>
                 {/* <h1>Auth type: <p>{connectionDetails.AuthType}</p></h1> */}
-                <h1>
+                <h1 className="jwt">
                     Jwt:<p>{connectionDetails.jwt}</p>
                 </h1>
                 <div className="sdk-btn">
                     <Button
                         width="180px"
-                        height="43px"
+                        height="39px"
                         placeholder="SDK"
                         colorType="purple"
                         radiusType="circle"
                         backgroundColorType="none"
-                        fontSize="16px"
-                        fontWeight="bold"
+                        fontSize="12px"
+                        fontWeight="600"
                         border="purple"
                         onClick={() => openSdkModal()}
                     />

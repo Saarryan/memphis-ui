@@ -63,32 +63,28 @@ const StationBoxOverview = (props) => {
     return (
         <div className="station-box-container">
             <HubMarketplace open={functionModalIsOpen} closeModal={() => functionModalFlip(false)} />
-            <div className="station-overview-header">
+            <div className="station-box-header">
                 <div className="info-fields">
                     <div className="field-wrapper">
                         <h3>Name: </h3>
-                        {/* <p>{props.station.name}</p> */}
                         <OverflowTip text={props.station.name} width={'150px'}>
                             {props.station.name}
                         </OverflowTip>
                     </div>
-                    <div className="field-wrapper">
+                    <div className="field-wrapper retention">
                         <h3>Retention: </h3>
                         <OverflowTip text={retentionValue} width={'150px'}>
                             {retentionValue}
                         </OverflowTip>
-                        {/* <p>{retentionValue}</p> */}
                     </div>
-                    <div className="field-wrapper">
+                    <div className="field-wrapper replicas">
                         <h3>Replicas: </h3>
-                        {/* <p>{props.station.replicas}</p> */}
                         <OverflowTip text={props.station.replicas} width={'20px'}>
                             {props.station.replicas}
                         </OverflowTip>
                     </div>
-                    <div className="field-wrapper">
+                    <div className="field-wrapper storage">
                         <h3>Storage Type: </h3>
-                        {/* <p>{props.station.storage_type}</p> */}
                         <OverflowTip text={props.station.storage_type} width={'50px'}>
                             {props.station.storage_type}
                         </OverflowTip>
@@ -157,7 +153,9 @@ const StationBoxOverview = (props) => {
                 rBtnClick={() => modalFlip(false)}
                 open={modalIsOpen}
             >
-                <label>Are you sure you want to delete {props.station.name} station?</label>
+                <label>
+                    Are you sure you want to delete "<b>{props.station.name}</b>" station?
+                </label>
                 <br />
             </Modal>
         </div>

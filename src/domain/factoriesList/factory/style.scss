@@ -55,9 +55,6 @@
                 align-items: center;
                 justify-content: center;
                 margin-right: 10px;
-                img {
-                    margin-bottom: 3px;
-                }
             }
             .user-details {
                 p {
@@ -76,25 +73,4 @@
     }
 }
 
-.loader-uploading {
-    position: absolute;
-    max-height: calc(74%);
-    div {
-        background-color: var(--white);
-        position: fixed;
-        z-index: 3;
-        opacity: 0.5;
-        width: 92vw;
-        height: 80%;
-    }
-    img {
-        width: 16vw;
-        min-width: 200px;
-        z-index: 3;
-        position: relative;
-        top: calc(25vh);
-        transform: translateY(40%);
-        left: 50vw;
-        transform: translateX(-90%);
-    }
-}
+

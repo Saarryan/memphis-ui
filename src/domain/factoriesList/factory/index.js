@@ -46,6 +46,7 @@ const Factory = (props) => {
             await httpRequest('DELETE', ApiEndpoints.REMOVE_FACTORY, {
                 factory_name: props.content.name
             });
+            modalFlip(false);
             props.removeFactory();
         } catch (err) {}
     };
@@ -116,16 +117,15 @@ const Factory = (props) => {
                 lBtnText="Remove"
                 closeAction={() => modalFlip(false)}
                 lBtnClick={() => {
-                    modalFlip(false);
+                    removeFactory();
                 }}
                 clickOutside={() => modalFlip(false)}
                 rBtnClick={() => {
                     modalFlip(false);
-                    removeFactory();
                 }}
                 open={modalIsOpen}
             >
-                Are you sure you want to remove this factory? This will remove all stations in this factory.
+                Are you sure you want to remove "<b>{props.content.name}</b>" factory? This will remove all stations in this factory.
             </Modal>
         </div>
     );

@@ -3,11 +3,12 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 0px 4px 3px rgba(221, 221, 221, 0.3);
-    min-height: 6vh;
+    min-height: 60px;
     margin-bottom: 10px;
-    .station-overview-header {
+    overflow: auto;
+    .station-box-header {
         display: flex;
-        min-height: 6vh;
+        min-height: 60px;
         padding-left: 20px;
         justify-content: space-between;
         h3,
@@ -21,7 +22,7 @@
                 padding-right: 25px;
                 display: flex;
                 align-items: center;
-                width: 225px;
+                width: 180px;
                 h3 {
                     font-weight: 600;
                     padding-right: 3px;
@@ -31,6 +32,15 @@
                     font-weight: 400;
                     font-size: 14px;
                 }
+            }
+            .retention{
+                width: 150px;
+            }
+            .replicas{
+                width: 100px;
+            }
+            .storage{
+                width: 175px;
             }
         }
         .actions-side {
