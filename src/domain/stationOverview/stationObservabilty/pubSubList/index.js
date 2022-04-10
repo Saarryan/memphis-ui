@@ -1,37 +1,9 @@
 import './style.scss';
 
 import React from 'react';
-import { Table, Tag, Space } from 'antd';
 
 import infoIcon from '../../../../assets/images/infoIcon.svg';
-
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        className: 'column_table',
-        render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '40px' }}>{text}</div>
-    },
-    {
-        title: 'Factory type',
-        dataIndex: 'type',
-        className: 'column_table',
-        ellipsis: true,
-        render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '60px' }}>{text}</div>
-    },
-    {
-        title: '',
-        key: 'action',
-        className: 'column_table',
-        render: (text, record) => (
-            <Space size="small">
-                <a>
-                    <img src={infoIcon} />
-                </a>
-            </Space>
-        )
-    }
-];
+import OverflowTip from '../../../../components/tooltip/overflowtip';
 
 const data = [
     {
@@ -93,30 +65,28 @@ const PubSubList = (props) => {
                 <p className="title">{props.publishers ? 'Publishers' : 'Subscribers'}</p>
                 <p className="add-connector-button">{props.publishers ? 'Add publishers' : 'Add subscribers'}</p>
             </div>
-            <Table
-                className="pub-sub-table"
-                columns={columns}
-                dataSource={data}
-                size="small"
-                pagination={false}
-                tableLayout="auto"
-                scroll={{ y: 300 }}
-                onRow={(record, rowIndex) => {
-                    if (rowIndex % 2 != 0) {
-                        return {
-                            className: 'odd'
-                        };
-                    }
-                }}
-            />
-            {/* <VirtualTable
-                columns={columns}
-                dataSource={data}
-                scroll={{
-                    y: 300
-                    
-                }}
-            /> */}
+            <div className="coulmns-table">
+                <span style={{ width: '150px' }}>Name</span>
+                <span style={{ width: '200px' }}>Factory type</span>
+                <span style={{ width: '60px' }}></span>
+            </div>
+            <div className="rows-wrapper">
+                {data.map((row, index) => {
+                    return (
+                        <div className="pubSub-row" key={index}>
+                            <OverflowTip text={row.name} width={'150px'}>
+                                {row.name}
+                            </OverflowTip>
+                            <OverflowTip text={row.type} width={'200px'}>
+                                {row.type}
+                            </OverflowTip>
+                            <span className="link-row" style={{ width: '60px' }}>
+                                <img src={infoIcon} />
+                            </span>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };

@@ -1,7 +1,8 @@
 import './style.scss';
 
 import React, { useState } from 'react';
-import { Table } from 'antd';
+
+import OverflowTip from '../../../../components/tooltip/overflowtip';
 
 const GenericList = (props) => {
     const { columns, rows } = props;
@@ -15,26 +16,35 @@ const GenericList = (props) => {
     return (
         <div className="generic-list-wrapper">
             <div className="list">
-                <Table
-                    className="audit-table"
-                    columns={columns}
-                    dataSource={rows}
-                    size="small"
-                    pagination={false}
-                    tableLayout="auto"
-                    scroll={{ y: 200 }}
-                    onRow={(record, rowIndex) => {
-                        if (selectedRowIndex === rowIndex) {
-                            return { className: 'selected-row' };
-                        }
-                        return {
-                            onClick: () => onSelectedRow(rowIndex)
-                        };
-                    }}
-                />
+                <div className="coulmns-table">
+                    {columns?.map((column, index) => {
+                        return (
+                            <span key={index} style={{ width: column.width }}>
+                                {column.title}
+                            </span>
+                        );
+                    })}
+                </div>
+                <div className="rows-wrapper">
+                    {rows?.map((row, index) => {
+                        return (
+                            <div className={selectedRowIndex === index ? 'pubSub-row selected' : 'pubSub-row'} key={index} onClick={() => onSelectedRow(index)}>
+                                <OverflowTip text={row.logData || row.publisher} width={'250px'}>
+                                    {row.logData || row.publisher}
+                                </OverflowTip>
+                                <OverflowTip text={row.source || row.subscriber} width={'250px'}>
+                                    {row.source || row.subscriber}
+                                </OverflowTip>
+                                <OverflowTip text={row.date} width={'200px'}>
+                                    {row.date}
+                                </OverflowTip>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
             <div className="row-data">
-                <p>{rows[selectedRowIndex].data}</p>
+                <p>{rows[selectedRowIndex].logData || rows[selectedRowIndex].data}</p>
             </div>
         </div>
     );

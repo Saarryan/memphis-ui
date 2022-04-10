@@ -58,7 +58,9 @@ function UserItem(props) {
                 rBtnClick={() => modalFlip(false)}
                 open={open}
             >
-                <label>Are you sure you want to delete {props.content?.username}?</label>
+                <label>
+                    Are you sure you want to delete "<b>{props.content?.username}</b>"?
+                </label>
                 <br />
             </Modal>
         </div>

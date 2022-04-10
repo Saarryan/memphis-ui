@@ -11,7 +11,6 @@ import { LOCAL_STORAGE_AVATAR_ID } from '../../../const/localStorageConsts';
 import Bot1 from '../../../assets/images/bots/1.svg';
 import Bot2 from '../../../assets/images/bots/2.svg';
 import Bot3 from '../../../assets/images/bots/3.svg';
-import Bot4 from '../../../assets/images/bots/4.svg';
 import Warning from '../../../assets/images/warning.svg';
 import pathDomains from '../../../router';
 import { httpRequest } from '../../../services/http';
@@ -87,9 +86,6 @@ function Profile() {
                     <div className={avatar === '3' ? 'sub-icon-wrapper sub-icon-wrapper-border' : 'sub-icon-wrapper'} onClick={() => editAvatar(3)}>
                         <img src={Bot3} width={25} height={25} alt="bot3"></img>
                     </div>
-                    <div className={avatar === '4' ? 'sub-icon-wrapper sub-icon-wrapper-border' : 'sub-icon-wrapper'} onClick={() => editAvatar(4)}>
-                        <img src={Bot4} width={25} height={25} alt="bot4"></img>
-                    </div>
                 </div>
             </div>
             <div className="profile-sections">
@@ -110,26 +106,28 @@ function Profile() {
                     onChange={() => {}}
                 />
             </div>
-            <div className="profile-sections">
-                <p>Remove user</p>
-                <div className="warning">
-                    <img src={Warning} width={16} height={16} alt="warning"></img>
-                    <p>Please note that this action is irreversible</p>
+            {userName !== 'root' && (
+                <div className="profile-sections">
+                    <p>Remove user</p>
+                    <div className="warning">
+                        <img src={Warning} width={16} height={16} alt="warning"></img>
+                        <p>Please note that this action is irreversible</p>
+                    </div>
+                    <Button
+                        className="modal-btn"
+                        width="160px"
+                        height="36px"
+                        placeholder="Remove user"
+                        colorType="white"
+                        radiusType="circle"
+                        backgroundColorType="purple"
+                        fontSize="14px"
+                        fontWeight="600"
+                        aria-haspopup="true"
+                        onClick={() => modalFlip(true)}
+                    />
                 </div>
-                <Button
-                    className="modal-btn"
-                    width="160px"
-                    height="36px"
-                    placeholder="Remove user"
-                    colorType="white"
-                    radiusType="circle"
-                    backgroundColorType="purple"
-                    fontSize="14px"
-                    fontWeight="600"
-                    aria-haspopup="true"
-                    onClick={() => modalFlip(true)}
-                />
-            </div>
+            )}
         </div>
     );
 }

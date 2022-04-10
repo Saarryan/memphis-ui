@@ -1,4 +1,8 @@
 .station-overview-header {
+    height: 190px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
     .title-wrapper {
         display: flex;
         justify-content: space-between;
@@ -34,6 +38,7 @@
                 margin-left: 10px;
                 color: #a8a8a8;
                 width: 8vw;
+                min-width: 110px;
                 p {
                     margin: 0;
                 }
@@ -45,6 +50,9 @@
                 .title {
                     font-size: 12px;
                     line-height: 24px;
+                }
+                .ant-progress-inner {
+                    background-color: #E9E9E9;
                 }
                 .ant-progress-status-success .ant-progress-bg {
                     background-color: var(--purple);

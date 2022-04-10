@@ -17,7 +17,7 @@ import Login from './domain/login';
 import { Redirect } from 'react-router-dom';
 import { handleRefreshTokenRequest } from './services/http';
 import { LOCAL_STORAGE_TOKEN } from './const/localStorageConsts';
-import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -31,12 +31,12 @@ const Mobile = ({ children }) => {
 
 const App = withRouter(() => {
     const [authCheck, setAuthCheck] = useState(true);
-    const location = useLocation();
+    const history = useHistory();
 
     useEffect(async () => {
-        if (await handleRefresh()) {
-            setAuthCheck(false);
-        }
+        await handleRefresh();
+        setAuthCheck(false);
+
         const interval = setInterval(() => {
             handleRefresh();
         }, 120000);
@@ -45,13 +45,20 @@ const App = withRouter(() => {
     }, []);
 
     const handleRefresh = async () => {
-        if (localStorage.getItem(LOCAL_STORAGE_TOKEN) && window.location.pathname !== pathControllers.login) {
-            let handleRefresh = await handleRefreshTokenRequest();
-            if (handleRefresh) {
-                return true;
+        if (window.location.pathname === pathControllers.login) {
+            return;
+        } else if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
+            try {
+                let handleRefresh = await handleRefreshTokenRequest();
+                if (handleRefresh) {
+                    return true;
+                }
+            } catch (error) {
+                return <Redirect to={{ pathname: pathControllers.login, state: { referer: window.location.pathname } }} />;
             }
+        } else {
+            history.replace('/login');
         }
-        return <Redirect to={{ pathname: pathControllers.login, state: { referer: location } }} />;
     };
 
     return (

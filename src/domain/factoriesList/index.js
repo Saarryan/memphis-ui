@@ -1,18 +1,17 @@
 import './style.scss';
 
 import React, { useEffect, useContext, useState, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
+import CreateFactoryDetails from './createFactoryDetails';
+import emptyList from '../../assets/images/emptyList.svg';
+import { ApiEndpoints } from '../../const/apiEndpoints';
+import loading from '../../assets/images/strech.gif';
+import { httpRequest } from '../../services/http';
 import Button from '../../components/button';
 import { Context } from '../../hooks/store';
 import Modal from '../../components/modal';
-import pathControllers from '../../router';
 import Factory from './factory';
-import CreateFactoryDetails from './createFactoryDetails';
-import pathDomains from '../../router';
-import { ApiEndpoints } from '../../const/apiEndpoints';
-import { httpRequest } from '../../services/http';
 
 function FactoriesList() {
     const [state, dispatch] = useContext(Context);
@@ -20,6 +19,7 @@ function FactoriesList() {
     const [factoriesList, setFactoriesList] = useState([]);
     const [modalIsOpen, modalFlip] = useState(false);
     const createFactoryRef = useRef(null);
+    const [isLoading, setisLoading] = useState(false);
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'factories' });
@@ -27,12 +27,14 @@ function FactoriesList() {
     }, []);
 
     const getAllFactories = async () => {
+        setisLoading(true);
         try {
             const data = await httpRequest('GET', ApiEndpoints.GEL_ALL_FACTORIES);
             if (data) {
                 setFactoriesList(data);
             }
         } catch (error) {}
+        setisLoading(false);
     };
 
     const removeFactory = (id) => {
@@ -62,37 +64,36 @@ function FactoriesList() {
                     </div>
                 </div>
                 <div className="factories-list">
+                    {isLoading && (
+                        <div className="loader-uploading">
+                            <div></div>
+                            <img alt="loading" src={loading}></img>
+                        </div>
+                    )}
                     {factoriesList.map((factory) => {
                         return <Factory key={factory.id} content={factory} removeFactory={() => removeFactory(factory.id)}></Factory>;
                     })}
-                    {/* {isLoading && (
-            <div className="loader-uploading">
-              <img alt="loading" src={loading}></img>
-            </div>
-          )}
-          {!isLoading && usecases.length === 0 && (
-            <div className="no-pipline-to-display">
-              <InboxOutlined
-                style={{ fontSize: "40px", color: "#6557FF" }}
-                theme="outlined"
-              />
-              <p className="nodata">No use cases to display</p>
-              <Button
-                className="modal-btn"
-                width="240px"
-                height="36px"
-                placeholder={<Trans>Create your first use case</Trans>}
-                colorType="white"
-                radiusType="circle"
-                backgroundColorType="orange"
-                fontSize="14px"
-                fontWeight="bold"
-                aria-controls="usecse-menu"
-                aria-haspopup="true"
-                onClick={handleCreateNewUsecase}
-              />
-            </div>
-          )} */}
+                    {!isLoading && factoriesList.length === 0 && (
+                        <div className="no-factory-to-display">
+                            <img src={emptyList} width="100" height="100" alt="emptyList" />
+                            <p>There are no factories yet</p>
+                            <p className="sub-title">Get started by creating a factory</p>
+                            <Button
+                                className="modal-btn"
+                                width="240px"
+                                height="50px"
+                                placeholder="Create your first factory"
+                                colorType="white"
+                                radiusType="circle"
+                                backgroundColorType="purple"
+                                fontSize="12px"
+                                fontWeight="600"
+                                aria-controls="usecse-menu"
+                                aria-haspopup="true"
+                                onClick={() => modalFlip(true)}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
             <Modal

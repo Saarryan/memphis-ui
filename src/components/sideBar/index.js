@@ -6,11 +6,11 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 
-import overviewIconWhite from '../../assets/images/overviewIconWhite.svg';
-import useCaseIconWhite from '../../assets/images/useCaseIconWhite.svg';
-import usersIconWhite from '../../assets/images/usersIconWhite.svg';
+import overviewIconActive from '../../assets/images/overviewIconActive.svg';
+import factoriesIconActive from '../../assets/images/factoriesIconActive.svg';
+import usersIconActive from '../../assets/images/usersIconActive.svg';
 import overviewIcon from '../../assets/images/overviewIcon.svg';
-import useCaseIcon from '../../assets/images/useCaseIcon.svg';
+import factoriesIcon from '../../assets/images/factoriesIcon.svg';
 import supportIcon from '../../assets/images/supportIcon.svg';
 import accountIcon from '../../assets/images/accountIcon.svg';
 import logoutIcon from '../../assets/images/logoutIcon.svg';
@@ -83,28 +83,28 @@ function SideBar() {
                             <div className="icon">
                                 <div className={state.route === 'overview' ? 'circle-nav-item checked' : 'circle-nav-item'}>
                                     {state.route === 'overview' ? (
-                                        <img src={overviewIcon} alt="overviewIconIconWhite" width="20" height="20"></img>
+                                        <img src={overviewIconActive} alt="overviewIconActive" width="20" height="20"></img>
                                     ) : (
-                                        <img src={overviewIconWhite} alt="overviewIconIcon" width="20" height="20"></img>
+                                        <img src={overviewIcon} alt="overviewIcon" width="20" height="20"></img>
                                     )}
                                 </div>
                             </div>
                         </Link>
-                        <p className={state.route === 'overview' ? 'name-checked' : 'name'}>Overview</p>
+                        <p className={state.route === 'overview' ? 'overview-checked' : 'name'}>Overview</p>
                     </div>
                     <div className="item-wrapper">
                         <Link to={pathControllers.factoriesList}>
                             <div className="icon">
                                 <div className={state.route === 'factories' ? 'circle-nav-item checked' : 'circle-nav-item'}>
                                     {state.route === 'factories' ? (
-                                        <img src={useCaseIcon} alt="useCaseIconWhite" width="20" height="20"></img>
+                                        <img src={factoriesIconActive} alt="factoriesIconActive" width="20" height="20"></img>
                                     ) : (
-                                        <img src={useCaseIconWhite} alt="useCaseIcon" width="20" height="20"></img>
+                                        <img src={factoriesIcon} alt="factoriesIcon" width="20" height="20"></img>
                                     )}
                                 </div>
                             </div>
                         </Link>
-                        <p className={state.route === 'factories' ? 'name-checked' : 'name'}>Factories</p>
+                        <p className={state.route === 'factories' ? 'factories-checked' : 'name'}>Factories</p>
                     </div>
 
                     <div className="item-wrapper">
@@ -112,14 +112,14 @@ function SideBar() {
                             <div className="icon">
                                 <div className={state.route === 'users' ? 'circle-nav-item checked' : 'circle-nav-item'}>
                                     {state.route === 'users' ? (
-                                        <img src={usersIcon} alt="usersIconWhite" width="20" height="20"></img>
+                                        <img src={usersIconActive} alt="usersIconActive" width="20" height="20"></img>
                                     ) : (
-                                        <img src={usersIconWhite} alt="usersIcon" width="20" height="20"></img>
+                                        <img src={usersIcon} alt="usersIcon" width="20" height="20"></img>
                                     )}
                                 </div>
                             </div>
                         </Link>
-                        <p className={state.route === 'users' ? 'name-checked' : 'name'}>Users</p>
+                        <p className={state.route === 'users' ? 'users-checked' : 'name'}>Users</p>
                     </div>
                 </div>
                 <div className="bottom-icons">

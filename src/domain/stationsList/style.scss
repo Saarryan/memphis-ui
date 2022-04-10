@@ -2,7 +2,7 @@
     width: calc(100% - 70px);
     position: absolute;
     padding: 1vw;
-    min-width: 1170px;
+    min-width: 700px;
     height: 100%;
     .factory-details-header {
         height: 135px;
@@ -90,14 +90,25 @@
         overflow: auto;
         .no-station-to-display {
             position: relative;
-            top: 25%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100%;
+            justify-content: center;
+            color: #A9A9A9;
+            img {
+                margin-bottom: 30px;
+            }
             p {
-                font-size: 20px;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 22px;
+            }
+            .sub-title {
                 font-weight: 400;
-                margin-bottom: 10px;
+                font-size: 14px;
+                line-height: 17px;
+                margin-bottom: 60px;
             }
         }
     }

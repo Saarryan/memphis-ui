@@ -4,83 +4,84 @@ import React, { useState } from 'react';
 
 import CustomTabs from '../../../components/Tabs';
 import GenericList from './genericList';
+import { Divider } from 'antd';
 
 const auditColumns = [
     {
+        key: '1',
         title: 'Log message',
-        dataIndex: 'data',
-        className: 'column_table',
-        render: (text, record) => (
-            <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {text}
-            </div>
-        )
+        width: '250px'
     },
     {
-        title: 'Date',
-        dataIndex: 'date',
-        className: 'column_table',
-        ellipsis: true,
-        render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '150px' }}>{text}</div>
-    },
-    {
+        key: '2',
         title: 'Source',
-        dataIndex: 'source',
-        className: 'column_table',
-        render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '80px' }}>{text}</div>
+        width: '250px'
+    },
+    {
+        key: '3',
+        title: 'Date',
+        width: '200px'
     }
 ];
 
 const messagesColumns = [
     {
+        key: '1',
         title: 'Publisher',
-        dataIndex: 'publisher',
-        className: 'column_table',
-        render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '200px' }}>{text}</div>
+        width: '250px'
     },
     {
+        key: '2',
         title: 'Subscriber',
-        dataIndex: 'subscriber',
-        className: 'column_table',
-        ellipsis: true,
-        render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '200px' }}>{text}</div>
+        width: '250px'
     },
     {
+        key: '3',
         title: 'Date',
-        dataIndex: 'date',
-        className: 'column_table',
-        render: (text, record) => <div style={{ wordWrap: 'break-word', wordBreak: 'break-word', width: '80px' }}>{text}</div>
+        width: '200px'
     }
 ];
 
 const auditRows = [
     {
         key: '1',
-        data: 'Avraham created a project with three factories',
+        logData: 'Avraham created a project with three factories',
         date: '12/02/22',
         source: 'Logeer'
     },
     {
         key: '2',
-        data: 'Avraham updated a factory, id:"123456" ',
+        logData: 'Avraham updated a factory, id:"123456" ',
         date: '12/02/22',
         source: 'Logeer'
     },
     {
         key: '3',
-        data: 'Idan created a factory',
+        logData: 'Idan created a factory',
         date: '12/02/22',
         source: 'Logeer'
     },
     {
         key: '4',
-        data: 'Sveta created a factory',
+        logData: 'Sveta created a factory',
         date: '12/02/22',
         source: 'Logeer'
     },
     {
         key: '5',
-        data: 'Yaniv created a factory',
+        logData: 'Yaniv created a factory',
+        date: '12/02/22',
+        source: 'Logeer'
+    },
+    {
+        key: '6',
+        logData: 'Yaniv created a factory',
+        date: '12/02/22',
+        source: 'Logeer'
+    },
+    {
+        key: '7',
+        logData: 'Yaniv created a factory',
         date: '12/02/22',
         source: 'Logeer'
     }
@@ -135,6 +136,7 @@ const Auditing = () => {
     return (
         <div className="auditing-container">
             <CustomTabs value={value} onChange={handleChangeMenuItem} tabs={tabs}></CustomTabs>
+            <Divider />
             <div className="auditing-body">
                 {value === 0 && <GenericList columns={auditColumns} rows={auditRows} />}
                 {value === 1 && <GenericList columns={messagesColumns} rows={messagesRows} />}

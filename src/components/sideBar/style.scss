@@ -1,6 +1,7 @@
 .sidebar-container {
     width: 70px;
     height: 100vh;
+    min-height: 800px;
     position: relative;
     text-align: center;
     background: #fcfcfc;
@@ -12,11 +13,17 @@
         }
         .item-wrapper {
             p {
-                font-size: 10px;
+                font-size: 8px;
                 color: var(--gray);
                 font-weight: 600;
             }
-            .name-checked {
+            .overview-checked {
+                color: #61DFC6;
+            }
+            .factories-checked {
+                color: #FFC633;
+            }
+            .users-checked {
                 color: var(--purple);
             }
         }
@@ -34,9 +41,6 @@
             border-radius: 50%;
             display: flex;
             align-items: center;
-            img {
-                margin-bottom: 5px;
-            }
         }
 
         .ant-menu-vertical {

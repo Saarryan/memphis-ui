@@ -4,13 +4,13 @@ import React, { useEffect, useContext, useState, useRef } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import EditOutlined from '@material-ui/icons/EditOutlined';
-import { InboxOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
 import CreateStationDetails from '../../components/createStationDetails';
 import { ApiEndpoints } from '../../const/apiEndpoints';
 import StationBoxOverview from './stationBoxOverview';
 import loading from '../../assets/images/strech.gif';
+import emptyList from '../../assets/images/emptyList.svg';
 import { httpRequest } from '../../services/http';
 import Button from '../../components/button';
 import { Context } from '../../hooks/store';
@@ -25,7 +25,6 @@ const StationsList = () => {
     const [factoryName, setFactoryName] = useState('');
     const [factoryDescription, setFactoryDescription] = useState('');
     const [isLoading, setisLoading] = useState(false);
-    const history = useHistory();
     const createStationRef = useRef(null);
 
     useEffect(() => {
@@ -42,10 +41,8 @@ const StationsList = () => {
             setFactoryDetails(data);
             setFactoryName(data.name);
             setFactoryDescription(data.description);
-            setisLoading(false);
-        } catch (err) {
-            return;
-        }
+        } catch (err) {}
+        setisLoading(false);
     };
 
     const handleEditName = () => {
@@ -169,18 +166,19 @@ const StationsList = () => {
                     ))}
                 {!isLoading && factoryDetails?.stations.length === 0 && (
                     <div className="no-station-to-display">
-                        <InboxOutlined style={{ fontSize: '40px', color: '#6557FF' }} theme="outlined" />
-                        <p className="nodata">No factories to display</p>
+                        <img src={emptyList} width="100" height="100" alt="emptyList" />
+                        <p>There are no stations yet</p>
+                        <p className="sub-title">Get started by creating a station</p>
                         <Button
                             className="modal-btn"
                             width="240px"
-                            height="36px"
+                            height="50px"
                             placeholder="Create your first station"
                             colorType="white"
                             radiusType="circle"
-                            backgroundColorType="orange"
-                            fontSize="14px"
-                            fontWeight="bold"
+                            backgroundColorType="purple"
+                            fontSize="12px"
+                            fontWeight="600"
                             aria-controls="usecse-menu"
                             aria-haspopup="true"
                             onClick={() => modalFlip(true)}
