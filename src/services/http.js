@@ -56,6 +56,7 @@ export async function handleRefreshTokenRequest() {
         await AuthService.saveToLocalStorage(res.data);
         return true;
     } catch (err) {
+        window.location.assign('/login');
         return false;
     }
 }

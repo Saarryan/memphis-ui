@@ -27,4 +27,18 @@
             }
         }
     }
+    
+}
+.user-details-modal{
+    font-size: 14px;
+    p{
+        font-weight: 600;
+    }
+    span {
+        font-weight: 400;
+    }
+    .userName {
+     color: var(--purple);   
+    }
+
 }

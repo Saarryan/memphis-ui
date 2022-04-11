@@ -18,9 +18,7 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
         user_type: 'management'
     });
     const [passwordType, setPasswordType] = useState(0);
-
     const userTypeOptions = ['management', 'application'];
-
     const passwordOptions = [
         {
             id: 1,
@@ -33,9 +31,7 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
             label: 'Custom'
         }
     ];
-
     const [generatedPassword, setGeneratedPassword] = useState('');
-
     useEffect(() => {
         createUserRef.current = onFinish;
         setGeneratedPassword(generator());
@@ -58,12 +54,12 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
     };
 
     const onFinish = async () => {
-        const fieldsError = await creationForm.validateFields();
-        if (fieldsError?.errorFields) {
+        const fieldsValue = await creationForm.validateFields();
+        if (fieldsValue?.errorFields) {
             return;
         } else {
             try {
-                const bodyRequest = creationForm.getFieldsValue();
+                const bodyRequest = fieldsValue;
                 const data = await httpRequest('POST', ApiEndpoints.ADD_USER, bodyRequest);
                 if (data) {
                     closeModal(data);
@@ -74,7 +70,7 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
 
     return (
         <div className="create-user-form">
-            <Form name="form" form={creationForm} autoComplete="off">
+            <Form name="form" form={creationForm} autoComplete="off" onFinish={onFinish}>
                 <Form.Item
                     name="username"
                     rules={[
@@ -102,9 +98,9 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
                         />
                     </div>
                 </Form.Item>
-                <Form.Item name="user_type" initialValue={formFields.user_type}>
-                    <div className="field user-type">
-                        <p>Type</p>
+                <div className="field user-type">
+                    <p>Type</p>
+                    <Form.Item name="user_type" initialValue={formFields.user_type}>
                         <SelectComponent
                             value={formFields.user_type}
                             colorType="black"
@@ -117,95 +113,97 @@ const CreateUserDetails = ({ createUserRef, closeModal }) => {
                             onChange={(e) => handleSelectUserType(e)}
                             dropdownClassName="select-options"
                         />
-                    </div>
-                </Form.Item>
-                <div className="password-section">
-                    <p>Password</p>
-                    <RadioButton options={passwordOptions} radioValue={passwordType} onChange={(e) => passwordTypeChange(e)} />
-
-                    {passwordType === 0 && (
-                        <Form.Item name="password" initialValue={generatedPassword}>
-                            <div className="field password">
-                                <Input
-                                    type="text"
-                                    disabled
-                                    radiusType="semi-round"
-                                    colorType="black"
-                                    backgroundColorType="none"
-                                    borderColorType="gray"
-                                    width="508px"
-                                    height="40px"
-                                    fontSize="12px"
-                                    value={generatedPassword}
-                                />
-                                <p onClick={() => setGeneratedPassword(generator())}>Generate again</p>
-                            </div>
-                        </Form.Item>
-                    )}
-                    {passwordType === 1 && (
-                        <div>
-                            <div className="field password">
-                                <p>Type password</p>
-                                <Form.Item
-                                    name="password"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Password can not be empty'
-                                        }
-                                    ]}
-                                >
-                                    <Input
-                                        placeholder="Type Password"
-                                        type="password"
-                                        radiusType="semi-round"
-                                        colorType="black"
-                                        backgroundColorType="none"
-                                        borderColorType="gray"
-                                        width="508px"
-                                        height="40px"
-                                        fontSize="12px"
-                                    />
-                                </Form.Item>
-                            </div>
-                            <div className="field description">
-                                <p>Confirm Password</p>
-                                <Form.Item
-                                    name="confirm"
-                                    validateTrigger="onChange"
-                                    dependencies={['password']}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Confirm password can not be empty'
-                                        },
-                                        ({ getFieldValue }) => ({
-                                            validator(rule, value) {
-                                                if (!value || getFieldValue('password') === value) {
-                                                    handlePasswordChange(value);
-                                                    return Promise.resolve();
-                                                }
-                                                return Promise.reject('Passwords do not match');
-                                            }
-                                        })
-                                    ]}
-                                >
-                                    <Input
-                                        placeholder="Type Password"
-                                        type="password"
-                                        radiusType="semi-round"
-                                        colorType="black"
-                                        backgroundColorType="none"
-                                        borderColorType="gray"
-                                        width="508px"
-                                        height="40px"
-                                        fontSize="12px"
-                                    />
-                                </Form.Item>
-                            </div>
-                        </div>
-                    )}
+                    </Form.Item>
                 </div>
+                {formFields.user_type === 'management' && (
+                    <div className="password-section">
+                        <p>Password</p>
+                        <RadioButton options={passwordOptions} radioValue={passwordType} onChange={(e) => passwordTypeChange(e)} />
+
+                        {passwordType === 0 && (
+                            <Form.Item name="password" initialValue={generatedPassword}>
+                                <div className="field password">
+                                    <Input
+                                        type="text"
+                                        disabled
+                                        radiusType="semi-round"
+                                        colorType="black"
+                                        backgroundColorType="none"
+                                        borderColorType="gray"
+                                        width="508px"
+                                        height="40px"
+                                        fontSize="12px"
+                                        value={generatedPassword}
+                                    />
+                                    <p onClick={() => setGeneratedPassword(generator())}>Generate again</p>
+                                </div>
+                            </Form.Item>
+                        )}
+                        {passwordType === 1 && (
+                            <div>
+                                <div className="field password">
+                                    <p>Type password</p>
+                                    <Form.Item
+                                        name="password"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Password can not be empty'
+                                            }
+                                        ]}
+                                    >
+                                        <Input
+                                            placeholder="Type Password"
+                                            type="password"
+                                            radiusType="semi-round"
+                                            colorType="black"
+                                            backgroundColorType="none"
+                                            borderColorType="gray"
+                                            width="508px"
+                                            height="40px"
+                                            fontSize="12px"
+                                        />
+                                    </Form.Item>
+                                </div>
+                                <div className="field description">
+                                    <p>Confirm Password</p>
+                                    <Form.Item
+                                        name="confirm"
+                                        validateTrigger="onChange"
+                                        dependencies={['password']}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Confirm password can not be empty'
+                                            },
+                                            ({ getFieldValue }) => ({
+                                                validator(rule, value) {
+                                                    if (!value || getFieldValue('password') === value) {
+                                                        handlePasswordChange(value);
+                                                        return Promise.resolve();
+                                                    }
+                                                    return Promise.reject('Passwords do not match');
+                                                }
+                                            })
+                                        ]}
+                                    >
+                                        <Input
+                                            placeholder="Type Password"
+                                            type="password"
+                                            radiusType="semi-round"
+                                            colorType="black"
+                                            backgroundColorType="none"
+                                            borderColorType="gray"
+                                            width="508px"
+                                            height="40px"
+                                            fontSize="12px"
+                                        />
+                                    </Form.Item>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
             </Form>
         </div>
     );
