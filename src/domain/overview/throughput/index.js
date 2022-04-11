@@ -77,7 +77,9 @@ const Throughput = () => {
                 <AntTab label="Publishers" />
             </AntTabs>
             <p className="overview-components-header">Throughput</p>
-            <ApexChart />
+            <div className="throughput-chart">
+                <ApexChart />
+            </div>
         </div>
     );
 };

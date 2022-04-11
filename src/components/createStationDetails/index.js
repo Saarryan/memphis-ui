@@ -195,7 +195,7 @@ const CreateStationDetails = (props) => {
                             colorType="black"
                             backgroundColorType="none"
                             borderColorType="gray"
-                            width="500px"
+                            width="450px"
                             height="40px"
                             onBlur={(e) => updateFormState('name', e.target.value)}
                             onChange={(e) => updateFormState('name', e.target.value)}
@@ -331,7 +331,7 @@ const CreateStationDetails = (props) => {
                                 backgroundColorType="none"
                                 borderColorType="gray"
                                 radiusType="semi-round"
-                                width="500px"
+                                width="450px"
                                 height="40px"
                                 options={factoryNames}
                                 onChange={(e) => updateFormState('factory_name', e)}

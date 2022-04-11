@@ -3,6 +3,8 @@
     position: absolute;
     padding: 1vw;
     min-width: 700px;
+    height: 100%;
+    overflow: auto;
 
     .one-edge-shadow {
         height: 100px !important;

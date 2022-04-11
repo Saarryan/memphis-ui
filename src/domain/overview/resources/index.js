@@ -13,15 +13,17 @@ const Resources = () => {
     return (
         <div className="overview-wrapper resources-container">
             <p className="overview-components-header">Resources</p>
-            {resourcesTotal &&
-                resourcesTotal.map((res) => {
-                    return (
-                        <div className="resource" key={res.resource}>
-                            <ApexChart data={res} />
-                            <p>{`${res.usage}${res.units}/${res.total}${res.units}`}</p>
-                        </div>
-                    );
-                })}
+            <div className="charts-wrapper">
+                {resourcesTotal &&
+                    resourcesTotal.map((res) => {
+                        return (
+                            <div className="resource" key={res.resource}>
+                                <ApexChart data={res} className="chart" />
+                                <p className="chart-data">{`${res.usage}${res.units}/${res.total}${res.units}`}</p>
+                            </div>
+                        );
+                    })}
+            </div>
         </div>
     );
 };
