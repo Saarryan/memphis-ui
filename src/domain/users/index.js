@@ -17,6 +17,7 @@ function Users() {
     const [userList, setUsersList] = useState([]);
     const [copyOfUserList, setCopyOfUserList] = useState([]);
     const [addUserModalIsOpen, addUserModalFlip] = useState(false);
+    const [userDetailsModal, setUserDetailsModal] = useState(false);
     const createUserRef = useRef(null);
     const [searchInput, setSearchInput] = useState('');
 
@@ -63,6 +64,9 @@ function Users() {
         setUsersList(newUserList);
         setCopyOfUserList(newUserList);
         addUserModalFlip(false);
+        if (userData.user_type === 'application') {
+            setUserDetailsModal(true);
+        }
     };
 
     return (
@@ -109,7 +113,7 @@ function Users() {
             </div>
             <Modal
                 header="Add new user"
-                height="700px"
+                minHeight="600px"
                 minWidth="564px"
                 rBtnText="Add"
                 lBtnText="Cancel"
@@ -124,6 +128,28 @@ function Users() {
                 open={addUserModalIsOpen}
             >
                 <CreateUserDetails createUserRef={createUserRef} closeModal={(userData) => closeModal(userData)} />
+            </Modal>
+            <Modal
+                header="User connection details"
+                height="320px"
+                minWidth="440px"
+                rBtnText="Close"
+                closeAction={() => setUserDetailsModal(false)}
+                clickOutside={() => setUserDetailsModal(false)}
+                rBtnClick={() => {
+                    setUserDetailsModal(false);
+                }}
+                open={userDetailsModal}
+            >
+                <div className="user-details-modal">
+                    <p className="userName">
+                        Username: <span>{userList[userList.length - 1]?.username}</span>
+                    </p>
+                    <p className="creds">
+                        Broker token: <span>{userList[userList.length - 1]?.broker_connection_creds}</span>
+                    </p>
+                    <p className="note">Please note that when you close this modal, you will not be able to restore your user details!!</p>
+                </div>
             </Modal>
         </div>
     );

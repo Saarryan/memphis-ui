@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import { Divider } from 'antd';
 
@@ -8,12 +8,16 @@ import Integrations from './integrations';
 import CustomTabs from '../../components/Tabs';
 import Profile from './profile';
 import Alerts from './alerts';
+import { Context } from '../../hooks/store';
 
 function Users() {
     const [value, setValue] = useState(0);
     // const tabs = ['Profile', 'Integrations', 'Alerts'];
     const tabs = ['Profile'];
-
+    const [state, dispatch] = useContext(Context);
+    useEffect(() => {
+        dispatch({ type: 'SET_ROUTE', payload: '' });
+    }, []);
     const handleChangeMenuItem = (_, newValue) => {
         setValue(newValue);
     };
