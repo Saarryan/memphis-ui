@@ -44,8 +44,8 @@ function OverView() {
                 <div className="overview-wrapper">
                     <Modal
                         header="Your station details"
-                        height="640px"
-                        minWidth="550px"
+                        minHeight="590px"
+                        minWidth="500px"
                         rBtnText="Add"
                         lBtnText="Cancel"
                         closeAction={() => modalFlip(false)}

@@ -1,7 +1,6 @@
 .sidebar-container {
     width: 70px;
     height: 100vh;
-    min-height: 800px;
     position: relative;
     text-align: center;
     background: #fcfcfc;
@@ -13,17 +12,11 @@
         }
         .item-wrapper {
             p {
-                font-size: 8px;
+                font-size: 80%;
                 color: var(--gray);
                 font-weight: 600;
             }
-            .overview-checked {
-                color: #61DFC6;
-            }
-            .factories-checked {
-                color: #FFC633;
-            }
-            .users-checked {
+            .checked {
                 color: var(--purple);
             }
         }

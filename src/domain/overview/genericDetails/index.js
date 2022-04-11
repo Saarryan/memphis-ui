@@ -11,7 +11,7 @@ const GenericDetails = () => {
         <div className="generic-container">
             <div className="overview-wrapper data-box">
                 <div className="icon-wrapper lve-msg">
-                    <img src={liveMessagesIcon} width={21} height={21} alt="liveMessagesIcon" />
+                    <img src={liveMessagesIcon} width={35} height={26} alt="liveMessagesIcon" />
                 </div>
                 <div className="data-wrapper">
                     <span>Live messages</span>
@@ -20,7 +20,7 @@ const GenericDetails = () => {
             </div>
             <div className="overview-wrapper data-box">
                 <div className="icon-wrapper sta-act">
-                    <img src={stationActionIcon} width={21} height={21} alt="stationActionIcon" />
+                    <img src={stationActionIcon} width={35} height={27} alt="stationActionIcon" />
                 </div>
                 <div className="data-wrapper">
                     <span>Total stations</span>
@@ -31,7 +31,7 @@ const GenericDetails = () => {
             </div>
             <div className="overview-wrapper data-box">
                 <div className="icon-wrapper sta-idl">
-                    <img src={stationIdleIcon} width={21} height={21} alt="stationIdleIcon" />
+                    <img src={stationIdleIcon} width={35} height={27} alt="stationIdleIcon" />
                 </div>
                 <div className="data-wrapper">
                     <span>Total stations</span>
