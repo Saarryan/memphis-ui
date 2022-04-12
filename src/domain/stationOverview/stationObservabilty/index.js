@@ -34,13 +34,13 @@ const StationObservabilty = () => {
                 <PubSubList publishers={true} />
             </div>
             <div className="thunnel-from-sub">
-                <div style={{ height: '9vw', width: '9vw' }} ref={anime}></div>
+                <div style={{ height: '8vw', width: '8vw' }} ref={anime}></div>
             </div>
             <div className="functions-box-overview">
                 <FunctionsBox />
             </div>
             <div className="thunnel-to-pub">
-                <div style={{ height: '9vw', width: '9vw' }} ref={anime1}></div>
+                <div style={{ height: '8vw', width: '8vw' }} ref={anime1}></div>
             </div>
             <div className="sub-list">
                 <PubSubList publishers={false} />

@@ -2,6 +2,7 @@ import './style.scss';
 
 import React, { useState } from 'react';
 import ApexChart from './apexChart';
+import comingSoonBox from '../../../assets/images/comingSoonBox.svg';
 
 const Resources = () => {
     const [resourcesTotal, setResources] = useState([
@@ -12,6 +13,10 @@ const Resources = () => {
 
     return (
         <div className="overview-wrapper resources-container">
+            <div className="coming-soon-wrapper">
+                <img src={comingSoonBox} width={40} height={70} />
+                <p>Coming soon</p>
+            </div>
             <p className="overview-components-header">Resources</p>
             <div className="charts-wrapper">
                 {resourcesTotal &&

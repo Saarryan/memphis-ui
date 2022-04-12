@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import CustomTabs from '../../../components/Tabs';
 import GenericList from './genericList';
 import { Divider } from 'antd';
+import comingSoonBox from '../../../assets/images/comingSoonBox.svg';
 
 const auditColumns = [
     {
@@ -47,43 +48,25 @@ const auditRows = [
         key: '1',
         logData: 'Avraham created a project with three factories',
         date: '12/02/22',
-        source: 'Logeer'
+        source: 'Loger'
     },
     {
         key: '2',
         logData: 'Avraham updated a factory, id:"123456" ',
         date: '12/02/22',
-        source: 'Logeer'
+        source: 'Loger'
     },
     {
         key: '3',
         logData: 'Idan created a factory',
         date: '12/02/22',
-        source: 'Logeer'
+        source: 'Loger'
     },
     {
         key: '4',
         logData: 'Sveta created a factory',
         date: '12/02/22',
-        source: 'Logeer'
-    },
-    {
-        key: '5',
-        logData: 'Yaniv created a factory',
-        date: '12/02/22',
-        source: 'Logeer'
-    },
-    {
-        key: '6',
-        logData: 'Yaniv created a factory',
-        date: '12/02/22',
-        source: 'Logeer'
-    },
-    {
-        key: '7',
-        logData: 'Yaniv created a factory',
-        date: '12/02/22',
-        source: 'Logeer'
+        source: 'Loger'
     }
 ];
 
@@ -115,13 +98,6 @@ const messagesRows = [
         subscriber: 'kafka connector',
         date: '12/02/22',
         data: '{"type":"message","subtype":"message_changed","hidden":true,"factory":"C2147483705","ts":"1358878755.000001"}'
-    },
-    {
-        key: '5',
-        publisher: 'external apllication',
-        subscriber: 'kafka connector',
-        date: '12/02/22',
-        data: '{"type":"message","subtype":"message_changed","hidden":true,"factory":"C2147483705","ts":"1358878755.000001"}'
     }
 ];
 
@@ -135,6 +111,10 @@ const Auditing = () => {
 
     return (
         <div className="auditing-container">
+            <div className="coming-soon-wrapper">
+                <img src={comingSoonBox} width={40} height={70} />
+                <p>Coming soon</p>
+            </div>
             <CustomTabs value={value} onChange={handleChangeMenuItem} tabs={tabs}></CustomTabs>
             <Divider />
             <div className="auditing-body">

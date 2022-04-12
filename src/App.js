@@ -18,6 +18,7 @@ import { Redirect } from 'react-router-dom';
 import { handleRefreshTokenRequest } from './services/http';
 import { LOCAL_STORAGE_TOKEN } from './const/localStorageConsts';
 import { useHistory } from 'react-router-dom';
+import { HANDLE_REFRESH_INTERVAL } from './config';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 850 });
@@ -39,7 +40,7 @@ const App = withRouter(() => {
 
         const interval = setInterval(() => {
             handleRefresh();
-        }, 120000);
+        }, HANDLE_REFRESH_INTERVAL);
 
         return () => clearInterval(interval);
     }, []);
@@ -48,13 +49,9 @@ const App = withRouter(() => {
         if (window.location.pathname === pathControllers.login) {
             return;
         } else if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
-            try {
-                let handleRefresh = await handleRefreshTokenRequest();
-                if (handleRefresh) {
-                    return true;
-                }
-            } catch (error) {
-                return <Redirect to={{ pathname: pathControllers.login, state: { referer: window.location.pathname } }} />;
+            const handleRefreshStatus = await handleRefreshTokenRequest();
+            if (handleRefreshStatus) {
+                return true;
             }
         } else {
             history.replace('/login');

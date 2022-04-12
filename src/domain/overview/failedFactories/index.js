@@ -2,72 +2,47 @@ import './style.scss';
 
 import ErrorSharpIcon from '@material-ui/icons/ErrorSharp';
 import React, { useState } from 'react';
+import comingSoonBox from '../../../assets/images/comingSoonBox.svg';
 
 const data = [
     {
         key: '1',
-        name: 'xxx',
-        factoryName: 'Externl factory',
+        name: 'Memphis_Collector',
+        factoryName: 'Memphis_sys',
         status: 1
     },
     {
         key: '2',
-        name: 'xxx',
-        factoryName: 'Kafka connector',
+        name: 'S3_Enrichment',
+        factoryName: 'Image_connector',
         status: 2
     },
     {
         key: '3',
-        name: 'xxx',
-        factoryName: 'SalesForce connector',
+        name: 'Event_Processing',
+        factoryName: 'EntryFace',
         status: 2
     },
     {
         key: '4',
-        name: 'xxx',
-        factoryName: 'Externl factory',
+        name: 'Api_To_BigQuery',
+        factoryName: 'Collector',
         status: 1
     },
     {
         key: '5',
-        name: 'xxx',
-        factoryName: 'SalesForce connector',
-        status: 1
-    },
-    {
-        key: '6',
-        name: 'xxx',
-        factoryName: 'Externl factory',
-        status: 1
-    },
-    {
-        key: '7',
-        name: 'xxx',
-        factoryName: 'Externl factory',
-        status: 1
-    },
-    {
-        key: '8',
-        name: 'xxx',
-        factoryName: 'Kafka connector',
-        status: 1
-    },
-    {
-        key: '9',
-        name: 'xxx',
-        factoryName: 'Externl factory',
-        status: 1
-    },
-    {
-        key: '10',
-        name: 'xxx',
-        factoryName: 'Externl factory',
+        name: 'Logs',
+        factoryName: 'Users_Journey',
         status: 1
     }
 ];
 const FailedFactories = () => {
     return (
         <div className="overview-wrapper failed-factories-container">
+            <div className="coming-soon-wrapper">
+                <img src={comingSoonBox} width={40} height={70} />
+                <p>Coming soon</p>
+            </div>
             <p className="overview-components-header">Un-Healthy stations</p>
             <div className="factories-err-message">
                 <ErrorSharpIcon className="err-icon" theme="outlined" />

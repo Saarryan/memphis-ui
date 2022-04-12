@@ -2,8 +2,9 @@ import './style.scss';
 
 import React from 'react';
 
-import infoIcon from '../../../../assets/images/infoIcon.svg';
 import OverflowTip from '../../../../components/tooltip/overflowtip';
+import comingSoonBox from '../../../../assets/images/comingSoonBox.svg';
+import infoIcon from '../../../../assets/images/infoIcon.svg';
 
 const data = [
     {
@@ -61,6 +62,10 @@ const data = [
 const PubSubList = (props) => {
     return (
         <div className="pubSub-list-container">
+            <div className="coming-soon-wrapper">
+                <img src={comingSoonBox} width={40} height={70} />
+                <p>Coming soon</p>
+            </div>
             <div className="header">
                 <p className="title">{props.publishers ? 'Publishers' : 'Subscribers'}</p>
                 <p className="add-connector-button">{props.publishers ? 'Add publishers' : 'Add subscribers'}</p>

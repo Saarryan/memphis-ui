@@ -10,6 +10,11 @@ import { Context } from '../../../hooks/store';
 import { StationStoreContext } from '..';
 import { convertSecondsToDate } from '../../../services/dateConvertor';
 import pathDomains from '../../../router';
+import awaitingIcon from '../../../assets/images/awaitingIcon.svg';
+import averageMesIcon from '../../../assets/images/averageMesIcon.svg';
+import cpuIcon from '../../../assets/images/cpuIcon.svg';
+import memoryIcon from '../../../assets/images/memoryIcon.svg';
+import storageIcon from '../../../assets/images/storageIcon.svg';
 
 const StationOverviewHeader = (props) => {
     const [state, dispatch] = useContext(Context);
@@ -57,9 +62,9 @@ const StationOverviewHeader = (props) => {
                         <b>Storage Type:</b> {stationState?.station?.storage_type}
                     </p>
                 </div>
-                <div className="details-wrapper awaiting-messages">
+                <div className="details-wrapper">
                     <div className="icon">
-                        <p>icon</p>
+                        <img src={awaitingIcon} width={22} height={44} />
                     </div>
                     <div className="more-details">
                         <p className="number">1000</p>
@@ -67,9 +72,9 @@ const StationOverviewHeader = (props) => {
                         <p className="title">Awaiting messages</p>
                     </div>
                 </div>
-                <div className="details-wrapper awaiting-messages">
+                <div className="details-wrapper">
                     <div className="icon">
-                        <p>icon</p>
+                        <img src={averageMesIcon} width={24} height={24} />
                     </div>
                     <div className="more-details">
                         <p className="number">500Mb</p>
@@ -77,9 +82,9 @@ const StationOverviewHeader = (props) => {
                         <p className="title">Av. message size</p>
                     </div>
                 </div>
-                <div className="details-wrapper awaiting-messages">
+                <div className="details-wrapper">
                     <div className="icon">
-                        <p>icon</p>
+                        <img src={memoryIcon} width={24} height={24} />
                     </div>
                     <div className="more-details">
                         <p className="number">20Mb/80Mb</p>
@@ -87,9 +92,9 @@ const StationOverviewHeader = (props) => {
                         <p className="title">Mem</p>
                     </div>
                 </div>
-                <div className="details-wrapper awaiting-messages">
+                <div className="details-wrapper">
                     <div className="icon">
-                        <p>icon</p>
+                        <img src={cpuIcon} width={22} height={22} />
                     </div>
                     <div className="more-details">
                         <p className="number">50%</p>
@@ -97,9 +102,9 @@ const StationOverviewHeader = (props) => {
                         <p className="title">CPU</p>
                     </div>
                 </div>
-                <div className="details-wrapper awaiting-messages">
+                <div className="details-wrapper">
                     <div className="icon">
-                        <p>icon</p>
+                        <img src={storageIcon} width={30} height={30} />
                     </div>
                     <div className="more-details">
                         <p className="number">{60}Mb/100Mb</p>
