@@ -6,10 +6,10 @@
     height: 100%;
     overflow: auto;
     .factory-details-header {
-        height: 135px;
+        height: 160px;
         display: flex;
         justify-content: space-between;
-        margin-bottom: 30px;
+        margin-bottom: 35px;
         .left-side {
             color: var(--blue);
             .main-header-h1 {
@@ -78,10 +78,39 @@
                     margin: 0;
                 }
             }
+            .factory-owner {
+                height: 60px;
+                display: flex;
+                align-items: center;
+
+                .user-avatar {
+                    width: 35px;
+                    height: 35px;
+                    background: #ffffff;
+                    box-shadow: 0px 0px 2px 1px rgba(170, 170, 170, 0.25);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 10px;
+                }
+                .user-details {
+                    p {
+                        font-weight: 400;
+                        font-size: 14px;
+                        margin: 0;
+                        text-transform: capitalize;
+                    }
+                    span {
+                        font-weight: 400;
+                        font-size: 12px;
+                        color: #a9a9a9;
+                    }
+                }
+            }
         }
         .right-side {
             margin-right: 2vw;
-            place-self: end;
         }
     }
     .stations-content {

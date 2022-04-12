@@ -26,11 +26,18 @@ const StationsList = () => {
     const [factoryDescription, setFactoryDescription] = useState('');
     const [isLoading, setisLoading] = useState(false);
     const createStationRef = useRef(null);
+    const [parseDate, setParseDate] = useState(new Date().toLocaleDateString());
+    const botId = 1;
+    const [botUrl, SetBotUrl] = useState('');
 
     useEffect(() => {
         dispatch({ type: 'SET_ROUTE', payload: 'factories' });
         getFactoryDetails();
     }, []);
+
+    const setBotImage = (botId) => {
+        SetBotUrl(require(`../../assets/images/bots/${botId}.svg`));
+    };
 
     const getFactoryDetails = async () => {
         const url = window.location.href;
@@ -38,6 +45,8 @@ const StationsList = () => {
         setisLoading(true);
         try {
             const data = await httpRequest('GET', `${ApiEndpoints.GEL_FACTORIES}?factory_name=${factoryName}`);
+            setBotImage(data.user_avatar_id || botId);
+            setParseDate(new Date(data.creation_date).toLocaleDateString());
             setFactoryDetails(data);
             setFactoryName(data.name);
             setFactoryDescription(data.description);
@@ -132,8 +141,22 @@ const StationsList = () => {
                             </div>
                         </ClickAwayListener>
                     )}
+                    {!isLoading ? (
+                        <div className="factory-owner">
+                            <div className="user-avatar">
+                                <img src={botUrl} width={25} height={25} alt="bot"></img>
+                            </div>
+                            <div className="user-details">
+                                <p>{factoryDetails?.created_by_user}</p>
+                                <span>{parseDate}</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <CircularProgress className="circular-progress" size={18} />
+                    )}
+
                     <div className="factories-length">
-                        <h1>Stations ({factoryDetails?.stations?.length})</h1>
+                        <h1>Stations ({factoryDetails?.stations?.length || 0})</h1>
                     </div>
                 </div>
                 <div className="right-side">
