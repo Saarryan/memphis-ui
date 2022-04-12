@@ -87,7 +87,7 @@ const Factory = (props) => {
                     </div>
                 </div>
                 <Popover id="long-menu" classes={{ paper: 'Menu' }} anchorEl={anchorEl} onClose={handleCloseMenu} open={open}>
-                    <Link to={`${pathControllers.factoriesList}/${props.content._id}`}>
+                    <Link to={`${pathControllers.factoriesList}/${props.content.name}`}>
                         <MenuItem
                             onClick={() => {
                                 handleCloseMenu();
