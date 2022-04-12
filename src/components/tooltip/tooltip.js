@@ -11,7 +11,7 @@ const TooltipComponent = (props) => {
       fontSize: "14px",
       fontWeight: 800,
       margin: "5px",
-      fontFamily: "Avenir-Next",
+      fontFamily: "Inter",
       // textAlign: "center",
       boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
       whiteSpace: "pre-line",

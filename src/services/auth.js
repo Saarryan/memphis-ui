@@ -1,74 +1,59 @@
+import { ApiEndpoints } from '../const/apiEndpoints';
+import {
+    LOCAL_STORAGE_ALREADY_LOGGED_IN,
+    LOCAL_STORAGE_AVATAR_ID,
+    LOCAL_STORAGE_CREATION_DATE,
+    LOCAL_STORAGE_TOKEN,
+    LOCAL_STORAGE_EXPIRED_TOKEN,
+    LOCAL_STORAGE_USER_ID,
+    LOCAL_STORAGE_USER_NAME,
+    LOCAL_STORAGE_USER_TYPE
+} from '../const/localStorageConsts';
+import pathDomains from '../router';
+import { httpRequest } from './http';
 
-import config from '../config/config.json'
-import { handleRefreshTokenRequest } from './http'
-import { ApiEndpoint } from '../apiEndpoints.model'
+const AuthService = (function () {
+    const saveToLocalStorage = (userData) => {
+        const now = new Date();
+        const expiryToken = now.getTime() + userData.expires_in;
 
+        localStorage.setItem(LOCAL_STORAGE_ALREADY_LOGGED_IN, userData.already_logged_in);
+        localStorage.setItem(LOCAL_STORAGE_AVATAR_ID, userData.avatar_id);
+        localStorage.setItem(LOCAL_STORAGE_CREATION_DATE, userData.creation_date);
+        localStorage.setItem(LOCAL_STORAGE_TOKEN, userData.jwt);
+        localStorage.setItem(LOCAL_STORAGE_USER_ID, userData.user_id);
+        localStorage.setItem(LOCAL_STORAGE_USER_NAME, userData.username);
+        localStorage.setItem(LOCAL_STORAGE_USER_TYPE, userData.user_type);
+        localStorage.setItem(LOCAL_STORAGE_EXPIRED_TOKEN, expiryToken);
+    };
 
-const LocalStorageService = (function () {
-
-    let _token = localStorage.getItem(config.LOCAL_STORAGE_TOKEN);
-
-    const saveTokenDataInLocalStorage = (token, expiryToken) => {
-        if (!token) {
-            return null;
+    const logout = async () => {
+        if (localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
+            try {
+                await httpRequest('POST', ApiEndpoints.LOGOUT);
+            } catch (error) {
+                localStorage.clear();
+                window.location.assign(pathDomains.login);
+                return;
+            }
         }
-        const now = new Date()
-        const expiry = now.getTime() + expiryToken;
-        localStorage.setItem(config.LOCAL_STORAGE_TOKEN, token)
-        localStorage.setItem(config.LOCAL_STORAGE_EXPIRED_TOKEN, expiry)
-    }
+        localStorage.clear();
+        window.location.assign(pathDomains.login);
+    };
 
     const isValidToken = () => {
-        let expiry = localStorage.getItem(config.LOCAL_STORAGE_EXPIRED_TOKEN)
-        if (!expiry) {
+        const tokenExpiryTime = localStorage.getItem(LOCAL_STORAGE_EXPIRED_TOKEN);
+        if (Date.now() <= tokenExpiryTime) {
+            return true;
+        } else {
             return false;
         }
-        return Date.now() <= expiry;
-    };
-
-    const handleRefreshToken = () => {
-        let UserId = Number(localStorage.getItem(config.LOCAL_STORAGE_USER_ID))
-        if (isValidToken()) {
-            return true;
-        }
-        else if (_token && UserId) {
-            try {
-                const data = handleRefreshTokenRequest(ApiEndpoint.REFRESH_TOCKEN, UserId);
-                if (data && data.token !== undefined) {
-                    saveTokenDataInLocalStorage(data.token, data.expiresIn);
-                    return true;
-                }
-                else
-                    return false;
-            }
-            catch (err) {
-                return false;
-
-            }
-        }
-        else
-            return false
-    };
-
-    const logOut = () => {
-        localStorage.clear();
-    }
-
-    const isAuthentication = () => {
-        let checkIsExpired = isValidToken();
-        if (!checkIsExpired && _token) {
-            return true;
-        }
-        else
-            return false
     };
 
     return {
-        saveTokenDataInLocalStorage,
-        isValidToken,
-        handleRefreshToken,
-        logOut,
-        isAuthentication,
-    }
+        saveToLocalStorage,
+        logout,
+        isValidToken
+    };
 })();
-export default LocalStorageService;
+export default AuthService;

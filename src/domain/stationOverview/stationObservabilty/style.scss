@@ -1,0 +1,13 @@
+.station-observabilty-container {
+    display: flex;
+    justify-content: space-between;
+    .thunnel-from-sub,
+    .thunnel-to-pub {
+        width: 8.5vw;
+    }
+    .thunnel-to-pub{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}

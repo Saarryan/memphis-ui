@@ -1,14 +1,9 @@
-const pathContainers = {
-    login: '/signin',
-    initialLogin: '/verifyemail',
+const pathDomains = {
+    login: '/login',
     overview: '/overview',
-    usecases: '/usecases',
-    visualizations: '/visualizations',
+    factoriesList: '/factories',
     users: '/users',
-    marketplace: '/marketplace',
-    account: '/account',
-    recoverPassword: '/recoverPassword'
-}
+    settings: '/settings'
+};
 
-
-export default pathContainers
+export default pathDomains;
