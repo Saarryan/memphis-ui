@@ -13,7 +13,9 @@ const Throughput = () => {
                 <p>Coming soon</p>
             </div>
             <p className="title">Throughput</p>
-            <ApexChart />
+            <div className="throughput-chart">
+                <ApexChart />
+            </div>
         </div>
     );
 };

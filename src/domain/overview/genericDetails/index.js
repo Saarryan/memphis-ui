@@ -12,7 +12,7 @@ const GenericDetails = () => {
         <div className="generic-container">
             <div className="overview-wrapper data-box">
                 <div className="coming-soon-small">
-                    <img src={comingSoonBox} width={20} height={40} />
+                    <img src={comingSoonBox} width={25} height={45} />
                     <p>Coming soon</p>
                 </div>
                 <div className="icon-wrapper lve-msg">
@@ -25,7 +25,7 @@ const GenericDetails = () => {
             </div>
             <div className="overview-wrapper data-box">
                 <div className="coming-soon-small">
-                    <img src={comingSoonBox} width={20} height={40} />
+                    <img src={comingSoonBox} width={25} height={45} />
                     <p>Coming soon</p>
                 </div>
                 <div className="icon-wrapper sta-act">
@@ -40,7 +40,7 @@ const GenericDetails = () => {
             </div>
             <div className="overview-wrapper data-box">
                 <div className="coming-soon-small">
-                    <img src={comingSoonBox} width={20} height={40} />
+                    <img src={comingSoonBox} width={25} height={45} />
                     <p>Coming soon</p>
                 </div>
                 <div className="icon-wrapper sta-idl">

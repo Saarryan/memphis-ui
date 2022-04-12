@@ -12,8 +12,23 @@ import React, { useEffect, useState } from 'react';
 import Button from '../button';
 
 const TransitionsModal = (props) => {
-    const { height, width, rBtnText, lBtnText, rBtnDisabled, lBtnDisabled, btnPosition, header, confirm, minHeight, minWidth, progress, isLoading, warning, border } =
-        props;
+    const {
+        height,
+        width,
+        rBtnText,
+        lBtnText,
+        rBtnDisabled,
+        lBtnDisabled,
+        header,
+        confirm,
+        minHeight,
+        minWidth,
+        progress,
+        isLoading,
+        warning,
+        border,
+        hr = true
+    } = props;
 
     const useStyles = makeStyles((theme) => ({
         dialogPaper: {
@@ -153,7 +168,7 @@ const TransitionsModal = (props) => {
                 {props.children}
             </DialogContent>
             <DialogActions>
-                <hr />
+                {hr && <hr />}
                 <div className="btnContainer">
                     <button className="cancel-button" disabled={lBtnDisabled} onClick={() => props.lBtnClick()}>
                         {lBtnText}
