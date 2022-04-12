@@ -27,13 +27,18 @@ const StationOverview = () => {
 
     const getStaionDetails = async () => {
         const url = window.location.href;
-        const staionName = url.split('factories/')[1].split('/')[1];
+        const stationName = url.split('factories/')[1].split('/')[1];
         setisLoading(true);
         try {
-            const data = await httpRequest('GET', `${ApiEndpoints.GET_STATION}?station_name=${staionName}`);
+            let data = await httpRequest('GET', `${ApiEndpoints.GET_STATION}?station_name=${stationName}`);
+            const consumers = await httpRequest('GET', `${ApiEndpoints.GET_ALL_CONSUMERS_BY_STATION}?station_name=${stationName}`);
+            const producers = await httpRequest('GET', `${ApiEndpoints.GET_ALL_PRODUCERS_BY_STATION}?station_name=${stationName}`);
+            data['consumers'] = consumers;
+            data['producers'] = producers;
             stationDispatch({ type: 'SET_STATION_DATA', payload: data });
             setisLoading(false);
         } catch (err) {
+            setisLoading(false);
             return;
         }
     };

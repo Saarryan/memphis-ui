@@ -7,7 +7,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import { Form } from 'antd';
 
-import { handleRefreshTokenRequest, httpRequest } from '../../services/http';
+import { httpRequest } from '../../services/http';
 import AuthService from '../../services/auth';
 import { LOCAL_STORAGE_TOKEN } from '../../const/localStorageConsts';
 import fullLogo from '../../assets/images/fullLogo.svg';

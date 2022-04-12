@@ -31,7 +31,7 @@ const StationObservabilty = () => {
     return (
         <div className="station-observabilty-container">
             <div className="pub-list">
-                <PubSubList publishers={true} />
+                <PubSubList producer={true} />
             </div>
             <div className="thunnel-from-sub">
                 <div style={{ height: '8vw', width: '8vw' }} ref={anime}></div>
@@ -43,7 +43,7 @@ const StationObservabilty = () => {
                 <div style={{ height: '8vw', width: '8vw' }} ref={anime1}></div>
             </div>
             <div className="sub-list">
-                <PubSubList publishers={false} />
+                <PubSubList producer={false} />
             </div>
         </div>
     );

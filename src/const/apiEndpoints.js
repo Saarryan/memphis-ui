@@ -22,5 +22,10 @@ export const ApiEndpoints = {
     //Station
     CREATE_STATION: '/stations/createStation',
     REMOVE_STATION: '/stations/removeStation',
-    GET_STATION: '/stations/getStation'
+    GET_STATION: '/stations/getStation',
+
+    //Producers
+    GET_ALL_PRODUCERS_BY_STATION: '/producers/getAllProducersByStation',
+    //Consumers
+    GET_ALL_CONSUMERS_BY_STATION: '/consumers/getAllConsumersByStation'
 };

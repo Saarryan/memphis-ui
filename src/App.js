@@ -54,7 +54,7 @@ const App = withRouter(() => {
                 return true;
             }
         } else {
-            history.replace('/login');
+            history.push('/login');
         }
     };
 

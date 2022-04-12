@@ -54,7 +54,7 @@
     font-weight: 400;
     .installation{
         .install-copy{
-            border: 1px solid #D8D8D8;
+            border: 1px solid var(--gray);
             box-sizing: border-box;
             border-radius: 4px;
             height: 50px;
@@ -69,7 +69,7 @@
     }
     .code-example {
         .code-content {
-            border: 1px solid #D8D8D8;
+            border: 1px solid var(--gray);
             box-sizing: border-box;
             border-radius: 4px;
             height: 320px;

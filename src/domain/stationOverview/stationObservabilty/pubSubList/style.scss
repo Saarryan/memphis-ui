@@ -1,7 +1,7 @@
 .pubSub-list-container{
     background: white;
     position: relative;
-    width: 17vw;
+    width: 19vw;
     height: 36vh;
     min-height: 200px;
     min-width: 230px;
@@ -58,6 +58,20 @@
         .pubSub-row:hover .link-row img {
             display: block;
             cursor: pointer;
+        }
+        .empty-pub-sub{
+            display: flex;
+            width: 95%;
+            height: 100%;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            p{
+                margin: 0;
+                color: var(--gray);
+                font-weight: 600;
+                font-size: 16px;
+            }
         }
     }
 }
