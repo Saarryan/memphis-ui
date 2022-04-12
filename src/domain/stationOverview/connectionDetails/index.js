@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Button from '../../../components/button';
 import Modal from '../../../components/modal';
 import SelectComponent from '../../../components/select';
-import { CopyBlock, github } from 'react-code-blocks';
+import { CopyBlock, atomOneLight } from 'react-code-blocks';
 
 const ConnectionDetails = () => {
     const connectionDetails = {
@@ -70,7 +70,7 @@ const ConnectionDetails = () => {
                     <div className="code-example">
                         <p>which should output something like</p>
                         <div className="code-content">
-                            <CopyBlock language={'jsx'} text={value} showLineNumbers={true} theme={github} wrapLines={true} codeBlock />
+                            <CopyBlock language={'jsx'} text={value} showLineNumbers={true} theme={atomOneLight} wrapLines={true} codeBlock />
                         </div>
                     </div>
                 </div>
