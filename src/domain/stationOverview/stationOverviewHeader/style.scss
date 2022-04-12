@@ -1,6 +1,5 @@
 .station-overview-header {
-    height: 190px;
-    width: 100%;
+    width: calc(100% - 1vw);
     align-items: center;
     justify-content: space-between;
     .title-wrapper {
@@ -26,13 +25,12 @@
             .icon {
                 width: 50px;
                 height: 50px;
-                background: white;
+                background: rgba(101, 87, 255, 0.1);
                 box-shadow: 0px 0px 4px 3px rgba(204, 204, 204, 0.19);
                 border-radius: 50px;
-                text-align: center;
-                p {
-                    margin-top: 13px;
-                }
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .more-details {
                 margin-left: 10px;

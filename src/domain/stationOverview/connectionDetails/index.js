@@ -19,10 +19,7 @@ const ConnectionDetails = () => {
                 <h1 className="host">
                     Host:<a>{connectionDetails.host}</a>
                 </h1>
-                {/* <h1>Auth type: <p>{connectionDetails.AuthType}</p></h1> */}
-                <h1 className="jwt">
-                    Jwt:<p>{connectionDetails.jwt}</p>
-                </h1>
+
                 <div className="sdk-btn">
                     <Button
                         width="180px"

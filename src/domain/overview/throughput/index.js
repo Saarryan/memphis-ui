@@ -1,11 +1,12 @@
 import './style.scss';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import React, { useState } from 'react';
 
 import { getFontColor } from '../../../utils/styleTemplates';
+import comingSoonBox from '../../../assets/images/comingSoonBox.svg';
 import ApexChart from './areaChart';
 
 const AntTabs = withStyles({
@@ -43,26 +44,6 @@ const AntTab = withStyles((theme) => ({
     selected: {}
 }))((props) => <Tab disableRipple {...props} />);
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1
-    },
-    dialogPaper: {
-        height: '100vh',
-        width: '100vw',
-        borderRadius: '10px',
-        minWidth: '1400px',
-        overflowX: 'hidden',
-        overflowY: 'scroll',
-        position: 'relative'
-    },
-    dialogContent: {
-        width: '100%',
-        height: '100%',
-        padding: '0px'
-    }
-}));
-
 const Throughput = () => {
     const [value, setValue] = useState(0);
 
@@ -72,6 +53,10 @@ const Throughput = () => {
 
     return (
         <div className="overview-wrapper throughput-overview-container">
+            <div className="coming-soon-wrapper">
+                <img src={comingSoonBox} width={40} height={70} />
+                <p>Coming soon</p>
+            </div>
             <AntTabs value={value} onChange={handleChangeMenuItem}>
                 <AntTab label="Subscribers" />
                 <AntTab label="Publishers" />

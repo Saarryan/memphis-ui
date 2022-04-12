@@ -3,41 +3,27 @@ import './style.scss';
 import React from 'react';
 
 import FunctionsOverview from '../../../../components/functionsOverview';
+import comingSoonBox from '../../../../assets/images/comingSoonBox.svg';
 
 const functions = [
     {
         _id: 1,
-        name: 'sveta sveta sveta sveta sveta sveta sveta sveta',
+        name: 'Sentiment Analysis',
         type: 'blabl'
     },
     {
         _id: 2,
-        name: 'sveta2',
+        name: 'Clustering',
         type: 'blabl'
     },
     {
         _id: 3,
-        name: 'sveta3',
+        name: 'Anomaly Detection',
         type: 'blabl'
     },
     {
-        _id: 4,
-        name: 'sveta2',
-        type: 'blabl'
-    },
-    {
-        _id: 5,
-        name: 'sveta3',
-        type: 'blabl'
-    },
-    {
-        _id: 6,
-        name: 'sveta2',
-        type: 'blabl'
-    },
-    {
-        _id: 7,
-        name: 'sveta3',
+        _id: 3,
+        name: 'Regression',
         type: 'blabl'
     }
 ];
@@ -45,6 +31,10 @@ const functions = [
 const FunctionsBox = () => {
     return (
         <div className="functions-box-container">
+            <div className="coming-soon-wrapper">
+                <img src={comingSoonBox} width={40} height={70} />
+                <p>Coming soon</p>
+            </div>
             <div className="header">
                 <p className="title">Factory</p>
                 <p className="add-functions-button">Add functions</p>
