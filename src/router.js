@@ -1,10 +1,9 @@
-const pathContainers = {
+const pathDomains = {
     login: '/login',
     overview: '/overview',
-    applicationList: '/applications',
+    factoriesList: '/factories',
     users: '/users',
-    settings: '/settings',
-}
+    settings: '/settings'
+};
 
-
-export default pathContainers
+export default pathDomains;

@@ -1,0 +1,47 @@
+.connection-details-container {
+    width: 15vw;
+    height: 26vh;
+    min-height: 250px;
+    min-width: 210px;
+    box-shadow: 0px 0px 4px 3px rgba(204, 204, 204, 0.19);
+    border-radius: 8px;
+    padding: 20px;
+    padding-right: 1px;
+    background: white;
+    .title {
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .connections-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 90%;
+        justify-content: space-around;
+        overflow: auto;
+        h1 {
+            font-size: 12px;
+            font-weight: 600;
+            display: grid;
+        }
+        p,
+        a {
+            font-size: 12px;
+            cursor: default;
+            font-weight: 400;
+            overflow-wrap: anywhere;
+            overflow: auto;
+            min-height: 75px;
+            width: 100%;
+        }
+        a {
+            color: var(--purple);
+        }
+        .host{
+            color: var(--purple);
+        }
+        .sdk-btn {
+            text-align: -webkit-center;
+        }
+    }
+}

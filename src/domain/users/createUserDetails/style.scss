@@ -1,0 +1,20 @@
+.create-user-form {
+    .field {
+        p {
+            font-size: 12px;
+            font-weight: 400;
+        }
+    }
+    .password {
+        margin-top: 20px;
+        p {
+            margin-top: 20px;
+            color: var(--purple);
+            font-weight: 600;
+            cursor: pointer;
+        }
+    }
+    .password-section {
+        margin-top: 50px;
+    }
+}

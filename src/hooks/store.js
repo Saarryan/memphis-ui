@@ -1,78 +1,26 @@
-import React, { createContext, useReducer } from "react";
-import Reducer from './reducer'
+import React, { createContext, useReducer } from 'react';
 
+import Reducer from './reducer';
 
 const initialState = {
     userData: {
-        id: "",
-        first_name: "",
-        last_name: "",
-        mail: "",
-        password: "",
-        organization_id: "",
-        role: "",
-        group_id: "",
-        is_active: false,
-        last_login: "",
-        last_ip: "",
-        pending_profile_activation: true,
-        already_create_usecase_flag: false,
-        already_saw_schema_page_flag: false,
-        organization_name: "",
-        plan_id: "",
-        register_date: "",
-        want_hear_new_feature: false,
+        user_id: '',
+        already_logged_in: false,
+        creation_date: '',
+        user_type: '',
+        avatar_id: 1
     },
-    organizationDetails: {
-        id: 0,
-        name: "",
-        contact_phone_number: "",
-        root_user_id: "",
-        plan_id: "",
-        profile_pic_url: "",
-        sub_domain: ""
-    },
-    queueDetails: {
-        name: "temporary name",
-        retention: "3 days",
-        max_throughput: "1500s",
-        healthy: true,
-        awaiting_messages: 10,
-        average_message_size: 15,
-        memory: 50,
-        cpu: 20,
-        storage: 15,
-        functions: [
-            {
-                "_id": 1,
-                "name": "sveta",
-                "type": "blabl"
-            },
-            {
-                "_id": 2,
-                "name": "sveta2",
-                "type": "blabl"
-            },
-            {
-                "_id": 3,
-                "name": "sveta3",
-                "type": "blabl"
-            }
-        ]
-    },
+    companyLogo: '',
     loading: false,
     error: null,
-    isAuthentication: false,
-    route: ""
+    route: '',
+    isAuthentication: false
 };
 
 const Store = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, initialState);
-    return (
-        <Context.Provider value={[state, dispatch]}>
-            {children}
-        </Context.Provider>
-    )
+
+    return <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>;
 };
 
 export const Context = createContext(initialState);
