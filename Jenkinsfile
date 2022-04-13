@@ -22,7 +22,6 @@ node {
         sh "docker buildx build --push -t ${dockerImagesRepo}/${imageName}:${versionTag} --platform linux/amd64,linux/arm/v7,linux/arm64 ."
     }    
 
-  }
     notifySuccessful()
 
   } catch (e) {
